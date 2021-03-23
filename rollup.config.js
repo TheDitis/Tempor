@@ -1,6 +1,7 @@
 import svelte from 'rollup-plugin-svelte';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
+import multiInput from 'rollup-plugin-multi-input';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
@@ -29,14 +30,25 @@ function serve() {
 }
 
 export default {
-	input: 'src/svelte.js',
-	output: {
-		sourcemap: true,
-		format: 'iife',
-		name: 'app',
-		file: 'public/build/bundle.js'
-	},
+	input: [{appMain: 'src/svelteMain/appMain.js', appControls: 'src/svelteMain/controlsMain.js'}],
+	output: [
+		{
+			sourcemap: true,
+			format: 'esm',
+			name: 'appControls',
+			dir: 'public/build/'
+		},
+		{
+			sourcemap: true,
+			format: 'esm',
+			name: 'app',
+			dir: 'public/build/'
+		},
+
+	],
 	plugins: [
+		multiInput(),
+
 		svelte({
 			compilerOptions: {
 				// enable run-time checks when not in production
