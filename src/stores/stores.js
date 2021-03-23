@@ -1,8 +1,4 @@
 import {readable, derived, writable} from "svelte/store";
-import fs from "fs";
-fs.watch("./state.json", (event, filename) => {
-    console.log("event: ", event)
-})
 
 
 const time = readable(Date.now(), (set) => {

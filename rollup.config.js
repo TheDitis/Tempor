@@ -30,24 +30,15 @@ function serve() {
 }
 
 export default {
-	input: [{appMain: 'src/svelteMain/appMain.js', appControls: 'src/svelteMain/controlsMain.js'}],
-	output: [
-		{
-			sourcemap: true,
-			format: 'esm',
-			name: 'appControls',
-			dir: 'public/build/'
-		},
-		{
-			sourcemap: true,
-			format: 'esm',
-			name: 'app',
-			dir: 'public/build/'
-		},
-
-	],
+	input: 'src/svelte.js',
+	output: {
+		sourcemap: true,
+		format: 'iife',
+		name: 'app',
+		file: 'public/build/bundle.js'
+	},
 	plugins: [
-		multiInput(),
+		// multiInput(),
 
 		svelte({
 			compilerOptions: {
