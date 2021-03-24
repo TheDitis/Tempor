@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 const path = require('path');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -18,25 +18,32 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    transparent: true,
+    frame: false,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false
+    },
+
   });
 
-  const controlsWindow = new BrowserWindow({
-    width: 200,
-    height: 200,
+  // mainWindow.setMenu(null);
+  Menu.setApplicationMenu(null);
+
+  ipcMain.on("resize", (event, arg) => {
+    mainWindow.setSize(200, 200)
   })
 
-  // mainWindow.setMenu(null);
-  Menu.setApplicationMenu(null)
 
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, '../public/index.html'));
 
-  controlsWindow.loadFile(path.join(__dirname, '../public/indexControls.html'));
-
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 };
+
+
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

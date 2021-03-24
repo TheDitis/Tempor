@@ -3,6 +3,7 @@ html {
     margin: 0;
     /*::-webkit-scorllbar {*/
     /*}*/
+    background: transparent;
 }
 
 html::-webkit-scrollbar {
@@ -12,4 +13,5 @@ html::-webkit-scrollbar {
 body {
     padding: 0;
     margin: 0;
+    background: transparent;
 }

@@ -6,6 +6,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "concurrently \"npm:svelte-dev\" \"electron-forge start\" \"node fileHandler.js\"",
+    "electron": "run-s build pure-electron",
+    "pure-electron": "electron .",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",

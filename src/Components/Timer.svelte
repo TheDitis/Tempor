@@ -1,9 +1,6 @@
 <script>
     import partialCircle from "svg-partial-circle"
-    import {remainingTime, circleAngle, start, duration} from "../stores/stores";
-    // const fs = require("fs")
-
-
+    import {remainingTime, circleAngle, start, duration} from "./stores";
 
     export let width = 200;
     export let height = 200;
@@ -28,14 +25,12 @@
 
 
 <svg width={width} height={height}>
-    <path d={`${path}`} stroke-width={thickness} stroke="rgb(0, 190, 255)" fill="transparent"/>
-<!--    <circle r={(width / 2) - thickness} cx="50%" cy="50%" fill="transparent" stroke-width="20" stroke="rgb(0, 190, 255)"></circle>-->
+<!--    <circle r={(width / 2) - thickness} cx="50%" cy="50%" fill="transparent" stroke-width={thickness} stroke="rgba(0, 120, 220, 0.5)"></circle>-->
+    <path d={`${path}`} stroke-width={thickness} stroke="rgb(0, 190, 255)" stroke-linecap="round" fill="transparent"/>
 </svg>
 <h1>{$circleAngle}</h1>
 <h2>{$start}</h2>
 <h2>{$duration}</h2>
-<button>START</button>
-
 
 
 <style>

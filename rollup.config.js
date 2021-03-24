@@ -1,10 +1,11 @@
 import svelte from 'rollup-plugin-svelte';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
-import multiInput from 'rollup-plugin-multi-input';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
+import * as electron from "electron";
+
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -31,6 +32,11 @@ function serve() {
 
 export default {
 	input: 'src/svelte.js',
+	// globals: {
+	// 	electron: electron,
+	// 	fs: "fs"
+	// },
+	external: ['electron', 'fs'],
 	output: {
 		sourcemap: true,
 		format: 'iife',
@@ -55,11 +61,13 @@ export default {
 		// some cases you'll need additional configuration -
 		// consult the documentation for details:
 		// https://github.com/rollup/plugins/tree/master/packages/commonjs
-		resolve({
-			browser: true,
-			dedupe: ['svelte']
-		}),
-		commonjs(),
+		resolve(),
+		commonjs(
+			// dynamicRequireTargets: [
+			// 	'node_modules/electron/electron.d.ts'
+			// ],
+			// transformMixedEsModules: true,
+		),
 
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated
