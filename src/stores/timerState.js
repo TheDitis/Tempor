@@ -44,13 +44,15 @@ export const remainingTime = derived(
 // sets the duration, start time, and run-state of the timer
 export const start = () => {
     const tempDur = get(tempDuration);
-    startTime.set(Date.now())
-    duration.set(tempDur);
-    tempDuration.set(0);
-    focused.set(false);
-    runState.set("running");
-    const sound = new Audio("file://" + __dirname + "/sounds/startSound.wav");
-    sound.play();
+    if (tempDur !== 0) {
+        startTime.set(Date.now())
+        duration.set(tempDur);
+        // tempDuration.set(0);
+        focused.set(false);
+        runState.set("running");
+        const sound = new Audio("file://" + __dirname + "/sounds/startSound.wav");
+        sound.play();
+    }
 }
 
 // gets the current remaining time and sets the state to 'paused'
@@ -73,6 +75,8 @@ export const handleEnd = () => {
     runState.set("finished");
     const sound = new Audio("file://" + __dirname + "/sounds/endSound.wav");
     sound.play();
+    // tempDuration.set()
+    focused.set(true)
 }
 
 

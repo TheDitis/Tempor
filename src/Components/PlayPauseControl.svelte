@@ -4,12 +4,6 @@
     import {faPlay, faPause, faStop} from '@fortawesome/free-solid-svg-icons'
 
 
-    const startTimer = () => {
-        start()
-        const sound = new Audio("file://" + __dirname + "/sounds/startSound.wav");
-        sound.play();
-    }
-
     $: getRunStateItem = (stoppedResult, runningResult, pausedResult) => {
         switch ($runState) {
             case "running":
@@ -23,7 +17,6 @@
                 return stoppedResult;
         }
     }
-
 
     const handleKeyDown = (e) => {
         const key = e.key;
@@ -44,9 +37,11 @@
                     focused.set(false);
                 }
                 break;
-            // case "Tab":
-            //     if (!$focused) focused.set(true);
-            //     break;
+            case "Tab":
+                if (!$focused) {
+                    focused.set(true);
+                }
+                break;
             default:
                 break;
         }
@@ -54,34 +49,28 @@
 
 </script>
 
-<div class="PlayPauseControl"
->
     <button
-            class="playPauseButton"
+            class="PlayPauseButton"
             on:click={getRunStateItem(start, pause, resume)}
     >
         <Fa icon={getRunStateItem(faPlay, faPause, faPlay)}/>
     </button>
-</div>
-<!--{#if !$focused}-->
 <svelte:window on:keydown={handleKeyDown}/>
-<!--{/if}-->
+
 <style>
-    .PlayPauseControl {
+    .PlayPauseButton {
         position: absolute;
         bottom: calc(var(--size) * 0.25 * 1px);
-    }
-    .playPauseButton {
         background: transparent;
         border: none;
         font-size: 20px;
         color: var(--color);
     }
-    .playPauseButton:focus {
+    .PlayPauseButton:focus {
         border: none;
         outline: none;
     }
-    .playPauseButton:hover {
+    .PlayPauseButton:hover {
         transform: scale(1.05);
     }
 </style>

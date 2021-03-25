@@ -1,5 +1,5 @@
 
-(function(l, r) { if (l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (window.location.host || 'localhost').split(':')[0] + ':35730/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(window.document);
+(function(l, r) { if (l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (window.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(window.document);
 var app = (function () {
     'use strict';
 
@@ -586,13 +586,15 @@ var app = (function () {
     // sets the duration, start time, and run-state of the timer
     const start = () => {
         const tempDur = get_store_value(tempDuration);
-        startTime.set(Date.now());
-        duration.set(tempDur);
-        tempDuration.set(0);
-        focused.set(false);
-        runState.set("running");
-        const sound = new Audio("file://" + __dirname + "/sounds/startSound.wav");
-        sound.play();
+        if (tempDur !== 0) {
+            startTime.set(Date.now());
+            duration.set(tempDur);
+            // tempDuration.set(0);
+            focused.set(false);
+            runState.set("running");
+            const sound = new Audio("file://" + __dirname + "/sounds/startSound.wav");
+            sound.play();
+        }
     };
 
     // gets the current remaining time and sets the state to 'paused'
@@ -615,6 +617,8 @@ var app = (function () {
         runState.set("finished");
         const sound = new Audio("file://" + __dirname + "/sounds/endSound.wav");
         sound.play();
+        // tempDuration.set()
+        focused.set(true);
     };
 
     // these aren't really private, but nor are they really useful to document
@@ -7684,10 +7688,7 @@ var app = (function () {
       }
     }
 
-    const formatTimeMs = (msTime) => {
-        if (msTime <= 0) {
-            return "00:00:00";
-        }
+    const msToHrsMinsSecs = (msTime) => {
         let duration = Duration.fromObject({
             hours: 0,
             minutes: 0,
@@ -7695,6 +7696,14 @@ var app = (function () {
             milliseconds: msTime
         }).normalize();
         duration = duration.toObject();
+        return duration
+    };
+
+    const formatTimeMs = (msTime) => {
+        if (msTime <= 0) {
+            return "00:00:00";
+        }
+        const duration = msToHrsMinsSecs(msTime);
         return formatTime(duration.hours, duration.minutes, duration.seconds)
     };
 
@@ -24935,12 +24944,12 @@ var app = (function () {
     			t1 = space();
     			input_1 = element("input");
     			attr_dev(h1, "class", "svelte-7yhoto");
-    			add_location(h1, file$5, 51, 0, 1656);
+    			add_location(h1, file$5, 60, 0, 1965);
     			attr_dev(input_1, "class", "hiddenInput svelte-7yhoto");
     			attr_dev(input_1, "type", "text");
-    			add_location(input_1, file$5, 52, 0, 1674);
+    			add_location(input_1, file$5, 61, 0, 1983);
     			attr_dev(div, "class", "TimeInput svelte-7yhoto");
-    			add_location(div, file$5, 48, 0, 1440);
+    			add_location(div, file$5, 57, 0, 1749);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -24994,6 +25003,12 @@ var app = (function () {
 
     function instance$5($$self, $$props, $$invalidate) {
     	let value;
+    	let $tempDuration;
+    	let $runState;
+    	validate_store(tempDuration, "tempDuration");
+    	component_subscribe($$self, tempDuration, $$value => $$invalidate(10, $tempDuration = $$value));
+    	validate_store(runState, "runState");
+    	component_subscribe($$self, runState, $$value => $$invalidate(11, $runState = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("TimeInput", slots, []);
     	let hours = 0;
@@ -25004,12 +25019,30 @@ var app = (function () {
 
     	onMount(() => {
     		input.focus();
+
+    		if ($tempDuration !== 0 && $runState !== "running") {
+    			$$invalidate(0, numbers = formatTimeMs($tempDuration).replaceAll(":", ""));
+    			numsStrToHrsMinsSecs();
+    		}
     	});
 
     	const updateTempDuration = () => {
     		const duration = Duration.fromObject({ hours, minutes, seconds });
     		console.log(duration.toMillis());
     		tempDuration.set(duration.toMillis());
+    	};
+
+    	const numsStrToHrsMinsSecs = () => {
+    		/// create 6 digit string, split into pairs (hr, min, sec) and parse each into integers
+    		let sixNums = lodash.padStart(numbers, 6, "0");
+
+    		sixNums = sixNums.match(/.{1,2}/g).map(strNum => parseInt(strNum));
+
+    		// assign time values
+    		$$invalidate(4, hours = sixNums[0]);
+
+    		$$invalidate(5, minutes = sixNums[1]);
+    		$$invalidate(6, seconds = sixNums[2]);
     	};
 
     	const handleChange = e => {
@@ -25023,16 +25056,7 @@ var app = (function () {
     			$$invalidate(0, numbers = numbers.substring(0, 6));
     		}
 
-    		/// create 6 digit string, split into pairs (hr, min, sec) and parse each into integers
-    		let sixNums = lodash.padStart(numbers, 6, "0");
-
-    		sixNums = sixNums.match(/.{1,2}/g).map(strNum => parseInt(strNum));
-
-    		// assign time values
-    		$$invalidate(4, hours = sixNums[0]);
-
-    		$$invalidate(5, minutes = sixNums[1]);
-    		$$invalidate(6, seconds = sixNums[2]);
+    		numsStrToHrsMinsSecs();
     		updateTempDuration();
     	};
 
@@ -25059,7 +25083,10 @@ var app = (function () {
     	$$self.$capture_state = () => ({
     		onMount,
     		formatTime,
+    		msToHrsMinsSecs,
+    		formatTimeMs,
     		tempDuration,
+    		runState,
     		Duration,
     		_: lodash,
     		hours,
@@ -25068,8 +25095,11 @@ var app = (function () {
     		numbers,
     		input,
     		updateTempDuration,
+    		numsStrToHrsMinsSecs,
     		handleChange,
-    		value
+    		value,
+    		$tempDuration,
+    		$runState
     	});
 
     	$$self.$inject_state = $$props => {
@@ -28182,7 +28212,6 @@ var app = (function () {
     const file$2 = "src\\Components\\PlayPauseControl.svelte";
 
     function create_fragment$2(ctx) {
-    	let div;
     	let button;
     	let fa;
     	let current;
@@ -28198,20 +28227,16 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
-    			div = element("div");
     			button = element("button");
     			create_component(fa.$$.fragment);
-    			attr_dev(button, "class", "playPauseButton svelte-s12xpb");
-    			add_location(button, file$2, 58, 4, 1675);
-    			attr_dev(div, "class", "PlayPauseControl svelte-s12xpb");
-    			add_location(div, file$2, 56, 0, 1637);
+    			attr_dev(button, "class", "PlayPauseButton svelte-1q870d2");
+    			add_location(button, file$2, 51, 4, 1507);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-    			append_dev(div, button);
+    			insert_dev(target, button, anchor);
     			mount_component(fa, button, null);
     			current = true;
 
@@ -28249,7 +28274,7 @@ var app = (function () {
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
+    			if (detaching) detach_dev(button);
     			destroy_component(fa);
     			mounted = false;
     			run_all(dispose);
@@ -28281,12 +28306,6 @@ var app = (function () {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("PlayPauseControl", slots, []);
 
-    	const startTimer = () => {
-    		start();
-    		const sound = new Audio("file://" + __dirname + "/sounds/startSound.wav");
-    		sound.play();
-    	};
-
     	const handleKeyDown = e => {
     		const key = e.key;
 
@@ -28304,6 +28323,11 @@ var app = (function () {
     			case "Escape":
     				if ($focused) {
     					focused.set(false);
+    				}
+    				break;
+    			case "Tab":
+    				if (!$focused) {
+    					focused.set(true);
     				}
     				break;
     		}
@@ -28326,7 +28350,6 @@ var app = (function () {
     		faPlay,
     		faPause,
     		faStop,
-    		startTimer,
     		handleKeyDown,
     		getRunStateItem,
     		$runState,

@@ -1,7 +1,7 @@
 <script>
     import {onMount} from "svelte";
-    import {formatTime} from "../../utils/utils";
-    import {tempDuration} from "../../stores/timerState";
+    import {formatTime, msToHrsMinsSecs, formatTimeMs} from "../../utils/utils";
+    import {tempDuration, runState} from "../../stores/timerState";
     import {Duration} from "luxon";
     import _ from "lodash";
     // let text = "00:00:00";
@@ -14,12 +14,27 @@
 
     onMount(() => {
         input.focus();
+        if ($tempDuration !== 0 && $runState !== "running") {
+            numbers = formatTimeMs($tempDuration).replaceAll(":", "")
+            numsStrToHrsMinsSecs();
+        }
     })
 
     const updateTempDuration = () => {
         const duration = Duration.fromObject({hours, minutes, seconds})
         console.log(duration.toMillis());
         tempDuration.set(duration.toMillis());
+    }
+
+    const numsStrToHrsMinsSecs = () => {
+        /// create 6 digit string, split into pairs (hr, min, sec) and parse each into integers
+        let sixNums = _.padStart(numbers, 6, "0");
+        sixNums = sixNums.match(/.{1,2}/g).map(strNum => parseInt(strNum))
+
+        // assign time values
+        hours = sixNums[0];
+        minutes = sixNums[1];
+        seconds = sixNums[2];
     }
 
 
@@ -33,14 +48,8 @@
             numbers = numbers.substring(0, 6)
         }
 
-        /// create 6 digit string, split into pairs (hr, min, sec) and parse each into integers
-        let sixNums = _.padStart(numbers, 6, "0");
-        sixNums = sixNums.match(/.{1,2}/g).map(strNum => parseInt(strNum))
+        numsStrToHrsMinsSecs();
 
-        // assign time values
-        hours = sixNums[0];
-        minutes = sixNums[1];
-        seconds = sixNums[2];
         updateTempDuration();
     }
 </script>

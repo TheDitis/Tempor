@@ -1,9 +1,6 @@
 import {Duration} from "luxon";
 
-export const formatTimeMs = (msTime) => {
-    if (msTime <= 0) {
-        return "00:00:00";
-    }
+export const msToHrsMinsSecs = (msTime) => {
     let duration = Duration.fromObject({
         hours: 0,
         minutes: 0,
@@ -11,6 +8,14 @@ export const formatTimeMs = (msTime) => {
         milliseconds: msTime
     }).normalize();
     duration = duration.toObject()
+    return duration
+}
+
+export const formatTimeMs = (msTime) => {
+    if (msTime <= 0) {
+        return "00:00:00";
+    }
+    const duration = msToHrsMinsSecs(msTime)
     return formatTime(duration.hours, duration.minutes, duration.seconds)
 }
 
