@@ -1,6 +1,6 @@
 import {readable, derived, writable, get} from "svelte/store";
 
-
+export const focused = writable(false);
 
 // then current time, updated every 10 milliseconds
 export const time = readable(Date.now(), (set) => {

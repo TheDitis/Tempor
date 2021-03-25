@@ -1,7 +1,7 @@
 <script>
     import partialCircle from "svg-partial-circle"
-    import TimeIndicatorInput from "./TimeIndicatorInput.svelte"
-    import {remainingTime, duration} from "../stores/timerState";
+    import TimeIndicatorInput from "./TimeIndicator/TimeIndicator.svelte"
+    import {remainingTime, duration, focused} from "../stores/timerState";
     import {color, size} from "../stores/appState";
     import Controls from "./Controls.svelte";
 
@@ -31,7 +31,7 @@
 
 <div
     class="Timer"
-
+    on:click={() => focused.set(false)}
 >
     <svg class="circle" width={$size} height={$size}>
         <circle r={($size / 2) - thickness} cx="50%" cy="50%" fill="transparent" stroke-width={thickness}
@@ -49,7 +49,6 @@
         color: rgb(0, 190, 255)
     }
     .circle {
-
         /*filter: blur(5px);*/
     }
 
