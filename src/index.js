@@ -31,9 +31,9 @@ const createWindow = () => {
   // mainWindow.setMenu(null);
   Menu.setApplicationMenu(null);
 
-  ipcMain.on("resize", (event, size) => {
-    console.log("size: ", size)
-    mainWindow.setSize(size, size + 50)
+  ipcMain.on("resize", (event, width, height) => {
+    console.log("size: ", [width, height])
+    mainWindow.setSize(width, height + 20) // add 20 for the draggable bar
   })
 
   // ipcMain.on("start", (event, args) => {

@@ -1,5 +1,5 @@
 <script>
-    import {remainingTime} from "./stores";
+    import {remainingTime} from "../stores/timerState";
 
     const formatTime = (msTime) => {
         if (msTime <= 0) {

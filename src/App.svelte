@@ -1,16 +1,21 @@
 <script>
+	import {onMount} from "svelte";
 	import Timer from "./Components/Timer.svelte";
 	import Controls from "./Components/Controls.svelte";
 	const {ipcRenderer} = require("electron");
-	import Color from "color";
+	import {size, height} from "./stores/appState"
+
+	onMount(() => {
+		ipcRenderer.send("resize", $size, $size)
+	})
 
 	let i = 0;
 	let sizes = [100, 150, 200, 250, 300, 350, 400, 450, 500];
 
-	let hue = 180
-	let color = Color("rgb(255, 0, 0)").rotate(hue);
+	// let hue = 180
+	// let color = Color("rgb(255, 0, 0)").rotate(hue);
 
-	$: color.rotate(hue)
+	// $: color.rotate(hue)
 
 	export let windowWidth = 300;
 
@@ -22,17 +27,6 @@
 	}
 
 
-
-
-	// let styles = {
-	// 	"width": `${width}px`,
-	// 	"height": `${height}px`,
-	// }
-
-	// $: cssVars = Object.entries(styles)
-	// 		.map(([key, value]) => `--${key}:${value}`)
-	// 		.join(";");
-
 </script>
 
 <main>
@@ -41,10 +35,8 @@
 		class="background"
 	>
 
-		<Timer size={windowWidth} color={color}/>
+		<Timer/>
 		<Controls/>
-
-		<button on:click={resize}>resize</button>
 	</div>
 
 
@@ -68,6 +60,10 @@
 		width: 100vw;
 		-webkit-app-region: drag;
 	}
+	.draggableArea:hover {
+		background-color: rgba(255, 255, 255, 0.5);
+	}
+
 	.background {
 		/*height: var(--height);*/
 		/*width: var(--width);*/

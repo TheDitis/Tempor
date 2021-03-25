@@ -1,5 +1,5 @@
 <script>
-    import {start, pause, resume, runState} from "./stores";
+    import {start, pause, resume, runState} from "../stores/timerState";
 
 
     const startTimer = () => {
@@ -9,8 +9,22 @@
         const sound = new Audio("file://" + __dirname + "/sounds/startSound.wav");
         sound.play();
     }
+
+    $: getRunStateItem = (stoppedResult, runningResult, pausedResult) => {
+        switch ($runState) {
+            case "running":
+                return runningResult;
+            case "paused":
+                return pausedResult;
+            case "stopped":
+                return stoppedResult;
+        }
+    }
+
 </script>
 
-<button on:click={$runState === "paused" ? resume : $runState === "running" ? pause : startTimer}>
-    {$runState === "paused" ? "RESUME" : $runState === "running" ? "PAUSE" : "START"}
+<button
+    on:click={getRunStateItem(startTimer, pause, resume)}
+>
+    {getRunStateItem("START", "PAUSE", "RESUME")}
 </button>

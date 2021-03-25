@@ -57,6 +57,7 @@
     "play-sound": "^1.1.3",
     "sirv": "^1.0.11",
     "sound-play": "^1.1.0",
+    "svelte-fa": "^2.2.0",
     "svg-partial-circle": "^1.0.0"
   },
   "devDependencies": {

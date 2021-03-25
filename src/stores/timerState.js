@@ -1,4 +1,5 @@
 import {readable, derived, writable, get} from "svelte/store";
+import Color from "color";
 const fs = require("fs");
 const path = require("path");
 
@@ -15,6 +16,10 @@ const path = require("path");
 //         play:
 //     }
 // }
+// const startColor =
+
+
+
 
 
 const time = readable(Date.now(), (set) => {
