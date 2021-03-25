@@ -3,8 +3,6 @@
     import TimeInput from "./TimeInput.svelte";
     import {formatTimeMs} from "../../utils/utils";
 
-    // let focused = false;
-    // $: focused = ($runState !== "paused") ? false : focused;
 
 
 
@@ -16,7 +14,7 @@
     ) : 1
 
     const handleFocus = (e) => {
-        if ($runState === "paused") focused.set(true);
+        focused.set(true);
     }
 
 </script>

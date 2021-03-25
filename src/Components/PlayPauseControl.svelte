@@ -26,8 +26,6 @@
 
 
     const handleKeyDown = (e) => {
-        // console.log("code: ", e.key)
-        // console.log("code === ' ': ", e.key === ' ')
         const key = e.key;
         switch (key) {
             case " ":
@@ -56,11 +54,11 @@
 
 </script>
 
-<div class="Controls"
+<div class="PlayPauseControl"
 >
     <button
             class="playPauseButton"
-            on:click={getRunStateItem(startTimer, pause, resume)}
+            on:click={getRunStateItem(start, pause, resume)}
     >
         <Fa icon={getRunStateItem(faPlay, faPause, faPlay)}/>
     </button>
@@ -69,7 +67,7 @@
 <svelte:window on:keydown={handleKeyDown}/>
 <!--{/if}-->
 <style>
-    .Controls {
+    .PlayPauseControl {
         position: absolute;
         bottom: calc(var(--size) * 0.25 * 1px);
     }

@@ -3,7 +3,7 @@
     import TimeIndicatorInput from "./TimeIndicator/TimeIndicator.svelte"
     import {remainingTime, duration, runState, focused} from "../stores/timerState";
     import {color, size} from "../stores/appState";
-    import Controls from "./Controls.svelte";
+    import PlayPauseControl from "./PlayPauseControl.svelte";
 
     // thickness of the line
     $: thickness = $size / 20;
@@ -45,7 +45,7 @@
               fill="transparent"/>
     </svg>
     <TimeIndicatorInput/>
-    <Controls/>
+    <PlayPauseControl/>
 </div>
 
 

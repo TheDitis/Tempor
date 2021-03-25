@@ -1,7 +1,7 @@
 <script>
 	import {onMount} from "svelte";
 	import Timer from "./Components/Timer.svelte";
-	import Controls from "./Components/Controls.svelte";
+	import Controls from "./Components/PlayPauseControl.svelte";
 	const {ipcRenderer} = require("electron");
 	import {size, height, color, settings} from "./stores/appState"
 

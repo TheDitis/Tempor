@@ -2,7 +2,7 @@
     import {onMount} from "svelte";
     import {formatTime} from "../../utils/utils";
     import {tempDuration} from "../../stores/timerState";
-    import {DateTime, Duration} from "luxon";
+    import {Duration} from "luxon";
     import _ from "lodash";
     // let text = "00:00:00";
     let hours = 0;

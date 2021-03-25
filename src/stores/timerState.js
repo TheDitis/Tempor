@@ -32,7 +32,7 @@ export const remainingTime = derived(
     ([$time, $duration, $start, $runState, $pausedRemainingTime]) => {
         if ($runState === "running") {
             const remTime = $duration - ($time - $start);
-            if (remTime <= 0) runState.set("finished")
+            if (remTime <= 0) handleEnd()
             return remTime;
         }
         else if ($runState === "paused") return $pausedRemainingTime;
@@ -42,13 +42,15 @@ export const remainingTime = derived(
 
 
 // sets the duration, start time, and run-state of the timer
-export const start = async () => {
+export const start = () => {
     const tempDur = get(tempDuration);
     startTime.set(Date.now())
     duration.set(tempDur);
     tempDuration.set(0);
     focused.set(false);
     runState.set("running");
+    const sound = new Audio("file://" + __dirname + "/sounds/startSound.wav");
+    sound.play();
 }
 
 // gets the current remaining time and sets the state to 'paused'
@@ -66,8 +68,12 @@ export const resume = () => {
     runState.set("running");
 }
 
-
-
+// runs when the time runs out
+export const handleEnd = () => {
+    runState.set("finished");
+    const sound = new Audio("file://" + __dirname + "/sounds/endSound.wav");
+    sound.play();
+}
 
 
 
