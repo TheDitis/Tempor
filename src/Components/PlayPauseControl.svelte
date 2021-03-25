@@ -18,35 +18,6 @@
         }
     }
 
-    const handleKeyDown = (e) => {
-        const key = e.key;
-        switch (key) {
-            case " ":
-                console.log("Space pressed!");
-                if ($runState === "running") pause();
-                else if ($runState === "paused") resume();
-                break;
-            case "Enter":
-                if ($focused && $tempDuration) {
-                    console.log("starting")
-                    start();
-                }
-                break;
-            case "Escape":
-                if ($focused) {
-                    focused.set(false);
-                }
-                break;
-            case "Tab":
-                if (!$focused) {
-                    focused.set(true);
-                }
-                break;
-            default:
-                break;
-        }
-    }
-
 </script>
 
     <button
@@ -55,15 +26,15 @@
     >
         <Fa icon={getRunStateItem(faPlay, faPause, faPlay)}/>
     </button>
-<svelte:window on:keydown={handleKeyDown}/>
+
 
 <style>
     .PlayPauseButton {
         position: absolute;
-        bottom: calc(var(--size) * 0.25 * 1px);
+        bottom: calc(var(--size) * 0.20 * 1px);
         background: transparent;
         border: none;
-        font-size: 20px;
+        font-size: 25px;
         color: var(--color);
     }
     .PlayPauseButton:focus {

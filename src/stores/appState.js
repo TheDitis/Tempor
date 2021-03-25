@@ -15,14 +15,13 @@ export const color = derived(
 )
 
 
-
 /// WINDOW SIZE ITEMS
 export const size = writable(300)
 
 export const settingsHeight = writable(200);
 export const settingsOpen = writable(false);
 
-export const width = writable(300)
+export const width = size;
 export const height = derived(
     [settingsHeight, settingsOpen, size],
     ([$settingsHeight, $settingsOpen, $size]) => {
@@ -30,7 +29,6 @@ export const height = derived(
         else return $size;
     }
 )
-
 
 
 // read settings file:

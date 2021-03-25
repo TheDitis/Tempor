@@ -47,7 +47,6 @@ export const start = () => {
     if (tempDur !== 0) {
         startTime.set(Date.now())
         duration.set(tempDur);
-        // tempDuration.set(0);
         focused.set(false);
         runState.set("running");
         const sound = new Audio("file://" + __dirname + "/sounds/startSound.wav");
@@ -75,7 +74,6 @@ export const handleEnd = () => {
     runState.set("finished");
     const sound = new Audio("file://" + __dirname + "/sounds/endSound.wav");
     sound.play();
-    // tempDuration.set()
     focused.set(true)
 }
 

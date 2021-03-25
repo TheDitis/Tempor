@@ -1,7 +1,7 @@
 <script>
     import partialCircle from "svg-partial-circle"
     import TimeIndicatorInput from "./TimeIndicator/TimeIndicator.svelte"
-    import {remainingTime, duration, runState, focused} from "../stores/timerState";
+    import {remainingTime, duration, runState, focused, pause, resume, tempDuration, start} from "../stores/timerState";
     import {color, size} from "../stores/appState";
     import PlayPauseControl from "./PlayPauseControl.svelte";
 
@@ -33,6 +33,7 @@
 
 
 </script>
+
 
 <div
     class="Timer"
