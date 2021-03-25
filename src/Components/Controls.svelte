@@ -1,6 +1,5 @@
 <script>
     import {start, pause, resume, runState} from "../stores/timerState";
-    import {size} from "../stores/appState";
     import Fa from "svelte-fa"
     import {faPlay, faPause, faStop} from '@fortawesome/free-solid-svg-icons'
 
@@ -19,7 +18,32 @@
                 return pausedResult;
             case "stopped":
                 return stoppedResult;
+            // case "finished":
+            default:
+                return stoppedResult;
         }
+    }
+
+    const keyTypes = {
+        32: "space",
+        12: "enter",
+        16: "shift",
+        17: "ctrl"
+    }
+
+    const handleKeyDown = (e) => {
+        // console.log("code: ", e.key)
+        // console.log("code === ' ': ", e.key === ' ')
+        const key = e.key;
+        switch (key) {
+            case " ":
+                console.log("Space pressed!");
+                if ($runState === "running") pause();
+                else if ($runState === "paused") resume();
+            default:
+                break;
+        }
+        // const key = keyTypes[]
     }
 
 </script>
@@ -33,6 +57,7 @@
         <Fa icon={getRunStateItem(faPlay, faPause, faPlay)}/>
     </button>
 </div>
+<svelte:window on:keydown={handleKeyDown}/>
 
 <style>
     .Controls {

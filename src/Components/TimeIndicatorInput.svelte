@@ -1,5 +1,5 @@
 <script>
-    import {remainingTime} from "../stores/timerState";
+    import {remainingTime, runState, time} from "../stores/timerState";
 
     const formatTime = (msTime) => {
         if (msTime <= 0) {
@@ -15,21 +15,31 @@
         return `${hoursStr}${minutesStr}:${secondsStr}`;
     }
 
+    const blinkInterval = 1000  // one second blinks
+    $: opacity = $runState === "paused" ? (
+        $time % blinkInterval > blinkInterval / 3 ?
+            1 : 0
+    ) : 1
+
+
+
 
 </script>
 
-<h1 class="time">{formatTime($remainingTime)}</h1>
-
+<div class="TimeIndicatorInput" style="--opacity: {opacity}">
+    <h1 class="time">{formatTime($remainingTime)}</h1>
+</div>
 
 <style>
-    .timeBlurred {
-
+    .TimeIndicatorInput {
+        position: absolute;
     }
     .time {
-        position: absolute;
+        /*position: absolute;*/
         color: var(--color);
         font-size: var(--fontSize);
         font-family: var(--fontFamily);
+        opacity: var(--opacity);
         /*filter: blur(1px);*/
     }
 </style>

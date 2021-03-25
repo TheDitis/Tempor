@@ -3,7 +3,7 @@ import {readable, derived, writable, get} from "svelte/store";
 
 
 // then current time, updated every 10 milliseconds
-const time = readable(Date.now(), (set) => {
+export const time = readable(Date.now(), (set) => {
     const interval = setInterval(() => {
         set(Date.now());
     }, 10);
