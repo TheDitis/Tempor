@@ -1,6 +1,6 @@
 import {readable, derived, writable, get} from "svelte/store";
 
-export const focused = writable(false);
+export const focused = writable(true);
 
 // then current time, updated every 10 milliseconds
 export const time = readable(Date.now(), (set) => {
@@ -15,7 +15,7 @@ export const time = readable(Date.now(), (set) => {
 export const pausedRemainingTime = writable(10000);
 
 // running, paused, stopped, finished
-export const runState = writable("running");
+export const runState = writable("finished");
 
 // set to the time that the counter starts counting down
 export const startTime = writable(Date.now());
@@ -24,7 +24,7 @@ export const startTime = writable(Date.now());
 export const tempDuration = writable(0);
 
 // the desired duration of the timer
-export const duration = writable(120000);
+export const duration = writable(0);
 
 // calculates the amount of time left if running, the time remaining when paused if paused, or 0 otherwise
 export const remainingTime = derived(
@@ -42,9 +42,12 @@ export const remainingTime = derived(
 
 
 // sets the duration, start time, and run-state of the timer
-export const start = (dur) => {
+export const start = async () => {
+    const tempDur = get(tempDuration);
     startTime.set(Date.now())
-    duration.set(dur);
+    duration.set(tempDur);
+    tempDuration.set(0);
+    focused.set(false);
     runState.set("running");
 }
 

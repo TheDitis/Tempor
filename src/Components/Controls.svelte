@@ -1,11 +1,11 @@
 <script>
-    import {start, pause, resume, runState, focused} from "../stores/timerState";
+    import {start, pause, resume, runState, focused, tempDuration} from "../stores/timerState";
     import Fa from "svelte-fa"
     import {faPlay, faPause, faStop} from '@fortawesome/free-solid-svg-icons'
 
 
     const startTimer = () => {
-        start(10000)
+        start()
         const sound = new Audio("file://" + __dirname + "/sounds/startSound.wav");
         sound.play();
     }
@@ -24,12 +24,6 @@
         }
     }
 
-    const keyTypes = {
-        32: "space",
-        12: "enter",
-        16: "shift",
-        17: "ctrl"
-    }
 
     const handleKeyDown = (e) => {
         // console.log("code: ", e.key)
@@ -40,10 +34,24 @@
                 console.log("Space pressed!");
                 if ($runState === "running") pause();
                 else if ($runState === "paused") resume();
+                break;
+            case "Enter":
+                if ($focused && $tempDuration) {
+                    console.log("starting")
+                    start();
+                }
+                break;
+            case "Escape":
+                if ($focused) {
+                    focused.set(false);
+                }
+                break;
+            // case "Tab":
+            //     if (!$focused) focused.set(true);
+            //     break;
             default:
                 break;
         }
-        // const key = keyTypes[]
     }
 
 </script>
@@ -58,7 +66,7 @@
     </button>
 </div>
 <!--{#if !$focused}-->
-<!--    <svelte:window on:keydown={handleKeyDown}/>-->
+<svelte:window on:keydown={handleKeyDown}/>
 <!--{/if}-->
 <style>
     .Controls {

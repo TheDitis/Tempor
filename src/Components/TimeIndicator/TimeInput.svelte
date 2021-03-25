@@ -1,6 +1,8 @@
 <script>
     import {onMount} from "svelte";
     import {formatTime} from "../../utils/utils";
+    import {tempDuration} from "../../stores/timerState";
+    import {DateTime, Duration} from "luxon";
     import _ from "lodash";
     // let text = "00:00:00";
     let hours = 0;
@@ -14,8 +16,10 @@
         input.focus();
     })
 
-    const filterChars = () => {
-
+    const updateTempDuration = () => {
+        const duration = Duration.fromObject({hours, minutes, seconds})
+        console.log(duration.toMillis());
+        tempDuration.set(duration.toMillis());
     }
 
 
@@ -37,6 +41,7 @@
         hours = sixNums[0];
         minutes = sixNums[1];
         seconds = sixNums[2];
+        updateTempDuration();
     }
 </script>
 

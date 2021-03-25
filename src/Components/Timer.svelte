@@ -1,7 +1,7 @@
 <script>
     import partialCircle from "svg-partial-circle"
     import TimeIndicatorInput from "./TimeIndicator/TimeIndicator.svelte"
-    import {remainingTime, duration, focused} from "../stores/timerState";
+    import {remainingTime, duration, runState, focused} from "../stores/timerState";
     import {color, size} from "../stores/appState";
     import Controls from "./Controls.svelte";
 
@@ -9,7 +9,12 @@
     $: thickness = $size / 20;
 
     // calculates the the angle of the count down progress circle based on the ratio of remainingTime to duration
-    $: circleAngle = $remainingTime > 0 ? ($remainingTime * 360 / $duration) % 360 : 0
+    const calculateAngle = (remtime) => {
+        if ($runState === "finished") return 359;
+        if ($remainingTime > 0) return $remainingTime * 359 / $duration;
+        else return 0;
+    }
+    $: circleAngle = calculateAngle($remainingTime);
 
 
     const degToRad = (deg) => (deg * Math.PI / 180) // π
