@@ -1,20 +1,15 @@
 <script>
-    import {color, size} from "../../stores/appState";
-    const maxSize = Math.min(window.screen.height, window.screen.width);
+    import {createEventDispatcher} from "svelte";
+    import {color, size, maxSize} from "../../stores/appState";
+
     import {faPlus, faMinus} from "@fortawesome/free-solid-svg-icons";
     import Fa from "svelte-fa";
 
-    const makeSmaller = () => {
-        if ($size > 100) {
-            size.update(v => v - 50);
-        }
-    }
+    const dispatch = createEventDispatcher();
 
-    const makeBigger = () => {
-        if ($size < maxSize) {
-            size.update(v => v + 50)
-        }
-    }
+    const sizeUp = () => dispatch("sizeUp")
+    const sizeDown = () => dispatch("sizeDown")
+
 </script>
 
 
@@ -22,15 +17,15 @@
     <button
         class="minusButton"
         disabled={$size <= 100}
-        on:click={makeSmaller}
+        on:click={sizeDown}
     >
         <Fa icon={faMinus}/>
     </button>
 
     <button
         class="plusButton"
-        disabled={$size >= maxSize}
-        on:click={makeBigger}
+        disabled={$size >= $maxSize}
+        on:click={sizeUp}
     >
         <Fa icon={faPlus}/>
     </button>

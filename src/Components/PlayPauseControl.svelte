@@ -34,7 +34,7 @@
         bottom: calc(var(--size) * 0.20 * 1px);
         background: transparent;
         border: none;
-        font-size: 25px;
+        font-size: calc(var(--size) * 0.10 * 1px);
         color: var(--color);
     }
     .PlayPauseButton:focus {

@@ -116,6 +116,20 @@ var app = (function () {
     function onMount(fn) {
         get_current_component().$$.on_mount.push(fn);
     }
+    function createEventDispatcher() {
+        const component = get_current_component();
+        return (type, detail) => {
+            const callbacks = component.$$.callbacks[type];
+            if (callbacks) {
+                // TODO are there situations where events could be dispatched
+                // in a server (non-DOM) environment?
+                const event = custom_event(type, detail);
+                callbacks.slice().forEach(fn => {
+                    fn.call(component, event);
+                });
+            }
+        };
+    }
 
     const dirty_components = [];
     const binding_callbacks = [];
@@ -27523,6 +27537,8 @@ var app = (function () {
     /// WINDOW SIZE ITEMS
     const size = writable(300);
 
+    const maxSize = readable(Math.min(window.screen.height, window.screen.width));
+
     const settingsHeight = writable(200);
     const settingsOpen = writable(false);
     const height = derived(
@@ -28237,7 +28253,7 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			create_component(fa.$$.fragment);
-    			attr_dev(button, "class", "PlayPauseButton svelte-q0wml0");
+    			attr_dev(button, "class", "PlayPauseButton svelte-1hxukiw");
     			add_location(button, file$3, 22, 4, 661);
     		},
     		l: function claim(nodes) {
@@ -28636,14 +28652,14 @@ var app = (function () {
     			button1 = element("button");
     			create_component(fa1.$$.fragment);
     			attr_dev(button0, "class", "minusButton svelte-zf2htt");
-    			button0.disabled = button0_disabled_value = /*$size*/ ctx[0] <= 100;
-    			add_location(button0, file$1, 21, 4, 590);
+    			button0.disabled = button0_disabled_value = /*$size*/ ctx[1] <= 100;
+    			add_location(button0, file$1, 16, 4, 483);
     			attr_dev(button1, "class", "plusButton svelte-zf2htt");
-    			button1.disabled = button1_disabled_value = /*$size*/ ctx[0] >= /*maxSize*/ ctx[2];
-    			add_location(button1, file$1, 29, 4, 751);
+    			button1.disabled = button1_disabled_value = /*$size*/ ctx[1] >= /*$maxSize*/ ctx[2];
+    			add_location(button1, file$1, 24, 4, 641);
     			attr_dev(div, "class", "ResizeControl svelte-zf2htt");
-    			set_style(div, "--buttonBg", /*$color*/ ctx[1].alpha(0.2).hsl().string());
-    			add_location(div, file$1, 20, 0, 502);
+    			set_style(div, "--buttonBg", /*$color*/ ctx[0].alpha(0.2).hsl().string());
+    			add_location(div, file$1, 15, 0, 395);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -28659,24 +28675,24 @@ var app = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(button0, "click", /*makeSmaller*/ ctx[3], false, false, false),
-    					listen_dev(button1, "click", /*makeBigger*/ ctx[4], false, false, false)
+    					listen_dev(button0, "click", /*sizeDown*/ ctx[4], false, false, false),
+    					listen_dev(button1, "click", /*sizeUp*/ ctx[3], false, false, false)
     				];
 
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if (!current || dirty & /*$size*/ 1 && button0_disabled_value !== (button0_disabled_value = /*$size*/ ctx[0] <= 100)) {
+    			if (!current || dirty & /*$size*/ 2 && button0_disabled_value !== (button0_disabled_value = /*$size*/ ctx[1] <= 100)) {
     				prop_dev(button0, "disabled", button0_disabled_value);
     			}
 
-    			if (!current || dirty & /*$size*/ 1 && button1_disabled_value !== (button1_disabled_value = /*$size*/ ctx[0] >= /*maxSize*/ ctx[2])) {
+    			if (!current || dirty & /*$size, $maxSize*/ 6 && button1_disabled_value !== (button1_disabled_value = /*$size*/ ctx[1] >= /*$maxSize*/ ctx[2])) {
     				prop_dev(button1, "disabled", button1_disabled_value);
     			}
 
-    			if (!current || dirty & /*$color*/ 2) {
-    				set_style(div, "--buttonBg", /*$color*/ ctx[1].alpha(0.2).hsl().string());
+    			if (!current || dirty & /*$color*/ 1) {
+    				set_style(div, "--buttonBg", /*$color*/ ctx[0].alpha(0.2).hsl().string());
     			}
     		},
     		i: function intro(local) {
@@ -28711,28 +28727,20 @@ var app = (function () {
     }
 
     function instance$1($$self, $$props, $$invalidate) {
-    	let $size;
     	let $color;
-    	validate_store(size, "size");
-    	component_subscribe($$self, size, $$value => $$invalidate(0, $size = $$value));
+    	let $size;
+    	let $maxSize;
     	validate_store(color, "color");
-    	component_subscribe($$self, color, $$value => $$invalidate(1, $color = $$value));
+    	component_subscribe($$self, color, $$value => $$invalidate(0, $color = $$value));
+    	validate_store(size, "size");
+    	component_subscribe($$self, size, $$value => $$invalidate(1, $size = $$value));
+    	validate_store(maxSize, "maxSize");
+    	component_subscribe($$self, maxSize, $$value => $$invalidate(2, $maxSize = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("ResizeControl", slots, []);
-    	const maxSize = Math.min(window.screen.height, window.screen.width);
-
-    	const makeSmaller = () => {
-    		if ($size > 100) {
-    			size.update(v => v - 50);
-    		}
-    	};
-
-    	const makeBigger = () => {
-    		if ($size < maxSize) {
-    			size.update(v => v + 50);
-    		}
-    	};
-
+    	const dispatch = createEventDispatcher();
+    	const sizeUp = () => dispatch("sizeUp");
+    	const sizeDown = () => dispatch("sizeDown");
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
@@ -28740,19 +28748,22 @@ var app = (function () {
     	});
 
     	$$self.$capture_state = () => ({
+    		createEventDispatcher,
     		color,
     		size,
     		maxSize,
     		faPlus,
     		faMinus,
     		Fa,
-    		makeSmaller,
-    		makeBigger,
+    		dispatch,
+    		sizeUp,
+    		sizeDown,
+    		$color,
     		$size,
-    		$color
+    		$maxSize
     	});
 
-    	return [$size, $color, maxSize, makeSmaller, makeBigger];
+    	return [$color, $size, $maxSize, sizeUp, sizeDown];
     }
 
     class ResizeControl extends SvelteComponentDev {
@@ -28786,6 +28797,8 @@ var app = (function () {
     	let mounted;
     	let dispose;
     	resizecontrol = new ResizeControl({ $$inline: true });
+    	resizecontrol.$on("sizeUp", /*makeBigger*/ ctx[4]);
+    	resizecontrol.$on("sizeDown", /*makeSmaller*/ ctx[3]);
     	timer = new Timer({ $$inline: true });
 
     	const block = {
@@ -28798,15 +28811,15 @@ var app = (function () {
     			t1 = space();
     			create_component(timer.$$.fragment);
     			attr_dev(div0, "class", "draggableArea svelte-1ixbf8t");
-    			add_location(div0, file, 54, 1, 1227);
+    			add_location(div0, file, 72, 1, 1516);
     			attr_dev(div1, "class", "main svelte-1ixbf8t");
     			set_style(div1, "--size", /*$size*/ ctx[0]);
     			set_style(div1, "--color", /*$color*/ ctx[1].hsl().string());
     			set_style(div1, "--fontSize", /*$size*/ ctx[0] / 6 + "px");
     			set_style(div1, "--fontFamily", "Roboto " + /*$settings*/ ctx[2].fontWeight + "\n\t\t");
-    			add_location(div1, file, 56, 1, 1263);
+    			add_location(div1, file, 74, 1, 1552);
     			attr_dev(main, "class", "svelte-1ixbf8t");
-    			add_location(main, file, 53, 0, 1219);
+    			add_location(main, file, 71, 0, 1508);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -28822,7 +28835,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(window, "keydown", /*handleKeyDown*/ ctx[3], false, false, false);
+    				dispose = listen_dev(window, "keydown", /*handleKeyDown*/ ctx[5], false, false, false);
     				mounted = true;
     			}
     		},
@@ -28877,6 +28890,7 @@ var app = (function () {
     function instance($$self, $$props, $$invalidate) {
     	let $size;
     	let $height;
+    	let $maxSize;
     	let $runState;
     	let $focused;
     	let $tempDuration;
@@ -28885,13 +28899,15 @@ var app = (function () {
     	validate_store(size, "size");
     	component_subscribe($$self, size, $$value => $$invalidate(0, $size = $$value));
     	validate_store(height, "height");
-    	component_subscribe($$self, height, $$value => $$invalidate(4, $height = $$value));
+    	component_subscribe($$self, height, $$value => $$invalidate(6, $height = $$value));
+    	validate_store(maxSize, "maxSize");
+    	component_subscribe($$self, maxSize, $$value => $$invalidate(7, $maxSize = $$value));
     	validate_store(runState, "runState");
-    	component_subscribe($$self, runState, $$value => $$invalidate(5, $runState = $$value));
+    	component_subscribe($$self, runState, $$value => $$invalidate(8, $runState = $$value));
     	validate_store(focused, "focused");
-    	component_subscribe($$self, focused, $$value => $$invalidate(6, $focused = $$value));
+    	component_subscribe($$self, focused, $$value => $$invalidate(9, $focused = $$value));
     	validate_store(tempDuration, "tempDuration");
-    	component_subscribe($$self, tempDuration, $$value => $$invalidate(7, $tempDuration = $$value));
+    	component_subscribe($$self, tempDuration, $$value => $$invalidate(10, $tempDuration = $$value));
     	validate_store(color, "color");
     	component_subscribe($$self, color, $$value => $$invalidate(1, $color = $$value));
     	validate_store(settings, "settings");
@@ -28908,8 +28924,21 @@ var app = (function () {
     		ipcRenderer.send("resize", $size, $height);
     	};
 
+    	const makeSmaller = () => {
+    		if ($size > 100) {
+    			size.update(v => v - 50);
+    		}
+    	};
+
+    	const makeBigger = () => {
+    		if ($size < $maxSize) {
+    			size.update(v => v + 50);
+    		}
+    	};
+
     	const handleKeyDown = e => {
     		const key = e.key;
+    		console.log(key);
 
     		switch (key) {
     			case " ":
@@ -28932,6 +28961,12 @@ var app = (function () {
     					focused.set(true);
     				}
     				break;
+    			case "-":
+    				makeSmaller();
+    				break;
+    			case "=":
+    				makeBigger();
+    				break;
     		}
     	};
 
@@ -28950,6 +28985,7 @@ var app = (function () {
     		height,
     		color,
     		settings,
+    		maxSize,
     		focused,
     		pause,
     		resume,
@@ -28958,9 +28994,12 @@ var app = (function () {
     		tempDuration,
     		ResizeControl,
     		resizeWindow,
+    		makeSmaller,
+    		makeBigger,
     		handleKeyDown,
     		$size,
     		$height,
+    		$maxSize,
     		$runState,
     		$focused,
     		$tempDuration,
@@ -28969,13 +29008,13 @@ var app = (function () {
     	});
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*$size, $height*/ 17) {
+    		if ($$self.$$.dirty & /*$size, $height*/ 65) {
     			// any time the window size changes, send the signal to electron
     			resizeWindow();
     		}
     	};
 
-    	return [$size, $color, $settings, handleKeyDown, $height];
+    	return [$size, $color, $settings, makeSmaller, makeBigger, handleKeyDown, $height];
     }
 
     class App extends SvelteComponentDev {

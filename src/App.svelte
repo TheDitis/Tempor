@@ -4,7 +4,7 @@
 	import Controls from "./Components/PlayPauseControl.svelte";
 
 	const {ipcRenderer} = require("electron");
-	import {size, height, color, settings} from "./stores/appState"
+	import {size, height, color, settings, maxSize} from "./stores/appState"
 	import {focused, pause, resume, runState, start, tempDuration} from "./stores/timerState";
 	import ResizeControl from "./Components/ResizeControl/ResizeControl.svelte";
 
@@ -19,9 +19,21 @@
 	// any time the window size changes, send the signal to electron
 	$: resizeWindow([$size, $height])
 
+	const makeSmaller = () => {
+		if ($size > 100) {
+			size.update(v => v - 50);
+		}
+	}
+
+	const makeBigger = () => {
+		if ($size < $maxSize) {
+			size.update(v => v + 50)
+		}
+	}
 
 	const handleKeyDown = (e) => {
 		const key = e.key;
+		console.log(key)
 		switch (key) {
 			case " ":
 				console.log("Space pressed!");
@@ -44,6 +56,12 @@
 					focused.set(true);
 				}
 				break;
+			case "-":
+				makeSmaller();
+				break;
+			case "=":
+				makeBigger();
+				break;
 			default:
 				break;
 		}
@@ -63,7 +81,7 @@
 			--fontFamily: {'Roboto ' + $settings.fontWeight}
 		"
 	>
-		<ResizeControl/>
+		<ResizeControl on:sizeUp={makeBigger} on:sizeDown={makeSmaller}/>
 		<Timer/>
 	</div>
 

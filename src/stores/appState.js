@@ -1,4 +1,4 @@
-import {writable, derived} from "svelte/store";
+import {writable, derived, readable} from "svelte/store";
 import Color from "color";
 const fs = require("fs");
 const path = require("path");
@@ -16,7 +16,9 @@ export const color = derived(
 
 
 /// WINDOW SIZE ITEMS
-export const size = writable(300)
+export const size = writable(300);
+
+export const maxSize = readable(Math.min(window.screen.height, window.screen.width))
 
 export const settingsHeight = writable(200);
 export const settingsOpen = writable(false);
