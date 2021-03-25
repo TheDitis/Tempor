@@ -1,5 +1,5 @@
 <script>
-    import {start, pause, resume, runState} from "../stores/timerState";
+    import {start, pause, resume, runState, focused} from "../stores/timerState";
     import Fa from "svelte-fa"
     import {faPlay, faPause, faStop} from '@fortawesome/free-solid-svg-icons'
 
@@ -57,8 +57,9 @@
         <Fa icon={getRunStateItem(faPlay, faPause, faPlay)}/>
     </button>
 </div>
-<svelte:window on:keydown={handleKeyDown}/>
-
+<!--{#if !$focused}-->
+<!--    <svelte:window on:keydown={handleKeyDown}/>-->
+<!--{/if}-->
 <style>
     .Controls {
         position: absolute;

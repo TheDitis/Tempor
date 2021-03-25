@@ -1,23 +1,12 @@
 <script>
     import {remainingTime, runState, time, focused} from "../../stores/timerState";
     import TimeInput from "./TimeInput.svelte";
+    import {formatTimeMs} from "../../utils/utils";
 
     // let focused = false;
     // $: focused = ($runState !== "paused") ? false : focused;
 
-    const formatTime = (msTime) => {
-        if (msTime <= 0) {
-            return "00:00";
-        }
-        const date = new Date(msTime);
-        const hours = date.getHours();
-        const minutes = date.getMinutes();
-        const seconds = date.getSeconds();
-        const hoursStr = hours > 0 ? hours.toString() + ":" : "";
-        const minutesStr = minutes < 10 ? `0${minutes}` : minutes;
-        const secondsStr = seconds < 10 ? `0${seconds}` : seconds;
-        return `${hoursStr}${minutesStr}:${secondsStr}`;
-    }
+
 
     /// this makes the timer blink when paused
     const blinkInterval = 1000  // one second blinks
@@ -27,7 +16,6 @@
     ) : 1
 
     const handleFocus = (e) => {
-        e.stopPropagation();
         if ($runState === "paused") focused.set(true);
     }
 
@@ -35,11 +23,15 @@
 
 
 
-<div class="TimeIndicator" style="--opacity: {opacity}" on:click={handleFocus}>
+<div
+    class="TimeIndicator"
+    style="--opacity: {opacity}"
+    on:click|stopPropagation={handleFocus}
+>
     {#if $focused}
         <TimeInput />
     {:else}
-        <h1 class="time">{formatTime($remainingTime)}</h1>
+        <h1 class="time">{formatTimeMs($remainingTime)}</h1>
     {/if}
 </div>
 

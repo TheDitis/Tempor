@@ -20,6 +20,9 @@ export const runState = writable("running");
 // set to the time that the counter starts counting down
 export const startTime = writable(Date.now());
 
+// this is set when a new time value is entered, so that it is ready to go when play is hit
+export const tempDuration = writable(0);
+
 // the desired duration of the timer
 export const duration = writable(120000);
 
