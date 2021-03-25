@@ -38,7 +38,9 @@ export const remainingTime = derived(
     [time, duration, startTime, runState, pausedRemainingTime],
     ([$time, $duration, $start, $runState, $pausedRemainingTime]) => {
         if ($runState === "running") {
-            return $duration - ($time - $start);
+            const remTime = $duration - ($time - $start);
+            if (remTime <= 0) runState.set("done")
+            return remTime;
         }
         else if ($runState === "paused") return $pausedRemainingTime;
         else return 0;
@@ -68,9 +70,9 @@ export const resume = () => {
 
 
 
-pause()
-
-resume()
+// pause()
+//
+// resume()
 
 
 // export const playing = derived(

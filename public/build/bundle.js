@@ -547,12 +547,21 @@ var app = (function () {
         [time, duration, startTime, runState, pausedRemainingTime],
         ([$time, $duration, $start, $runState, $pausedRemainingTime]) => {
             if ($runState === "running") {
-                return $duration - ($time - $start);
+                const remTime = $duration - ($time - $start);
+                if (remTime <= 0) runState.set("done");
+                return remTime;
             }
             else if ($runState === "paused") return $pausedRemainingTime;
             else return 0;
         }
     );
+
+
+    const start = (dur) => {
+        startTime.set(Date.now());
+        duration.set(dur);
+        runState.set("running");
+    };
 
 
     const pause = () => {
@@ -570,9 +579,9 @@ var app = (function () {
 
 
 
-    pause();
-
-    resume();
+    // pause()
+    //
+    // resume()
 
 
     // export const playing = derived(
@@ -936,27 +945,58 @@ var app = (function () {
 
     function create_fragment$1(ctx) {
     	let button;
+
+    	let t_value = (/*$runState*/ ctx[0] === "paused"
+    	? "RESUME"
+    	: /*$runState*/ ctx[0] === "running" ? "PAUSE" : "START") + "";
+
+    	let t;
     	let mounted;
     	let dispose;
 
     	const block = {
     		c: function create() {
     			button = element("button");
-    			button.textContent = "START";
-    			add_location(button, file$1, 12, 0, 290);
+    			t = text(t_value);
+    			add_location(button, file$1, 13, 0, 329);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
+    			append_dev(button, t);
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*startTimer*/ ctx[0], false, false, false);
+    				dispose = listen_dev(
+    					button,
+    					"click",
+    					function () {
+    						if (is_function(/*$runState*/ ctx[0] === "paused"
+    						? resume
+    						: /*$runState*/ ctx[0] === "running"
+    							? pause
+    							: /*startTimer*/ ctx[1])) (/*$runState*/ ctx[0] === "paused"
+    						? resume
+    						: /*$runState*/ ctx[0] === "running"
+    							? pause
+    							: /*startTimer*/ ctx[1]).apply(this, arguments);
+    					},
+    					false,
+    					false,
+    					false
+    				);
+
     				mounted = true;
     			}
     		},
-    		p: noop,
+    		p: function update(new_ctx, [dirty]) {
+    			ctx = new_ctx;
+
+    			if (dirty & /*$runState*/ 1 && t_value !== (t_value = (/*$runState*/ ctx[0] === "paused"
+    			? "RESUME"
+    			: /*$runState*/ ctx[0] === "running" ? "PAUSE" : "START") + "")) set_data_dev(t, t_value);
+    		},
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
@@ -978,12 +1018,17 @@ var app = (function () {
     }
 
     function instance$1($$self, $$props, $$invalidate) {
+    	let $runState;
+    	validate_store(runState, "runState");
+    	component_subscribe($$self, runState, $$value => $$invalidate(0, $runState = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("Controls", slots, []);
 
     	const startTimer = () => {
-    		startTime.set(Date.now());
-    		duration.set(10000);
+    		// startTime.set(Date.now());
+    		// duration.set(10000);
+    		start(10000);
+
     		const sound = new Audio("file://" + __dirname + "/sounds/startSound.wav");
     		sound.play();
     	};
@@ -994,8 +1039,16 @@ var app = (function () {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Controls> was created with unknown prop '${key}'`);
     	});
 
-    	$$self.$capture_state = () => ({ startTime, duration, startTimer });
-    	return [startTimer];
+    	$$self.$capture_state = () => ({
+    		start,
+    		pause,
+    		resume,
+    		runState,
+    		startTimer,
+    		$runState
+    	});
+
+    	return [$runState, startTimer];
     }
 
     class Controls extends SvelteComponentDev {
