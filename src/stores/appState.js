@@ -1,5 +1,7 @@
 import {writable, derived} from "svelte/store";
 import Color from "color";
+const fs = require("fs");
+const path = require("path");
 
 
 /// COLOR STATE ITEMS
@@ -29,3 +31,9 @@ export const height = derived(
     }
 )
 
+
+
+// read settings file:
+const settingsData = JSON.parse(fs.readFileSync(path.join(__dirname, "./settings.json")))
+console.log("settingsData: ", settingsData)
+export const settings = writable(settingsData)

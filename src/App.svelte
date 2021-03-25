@@ -3,28 +3,12 @@
 	import Timer from "./Components/Timer.svelte";
 	import Controls from "./Components/Controls.svelte";
 	const {ipcRenderer} = require("electron");
-	import {size, height} from "./stores/appState"
+	import {size, height, color, settings} from "./stores/appState"
 
 	onMount(() => {
 		ipcRenderer.send("resize", $size, $size)
 	})
 
-	let i = 0;
-	let sizes = [100, 150, 200, 250, 300, 350, 400, 450, 500];
-
-	// let hue = 180
-	// let color = Color("rgb(255, 0, 0)").rotate(hue);
-
-	// $: color.rotate(hue)
-
-	export let windowWidth = 300;
-
-	const resize = () => {
-		ipcRenderer.send("resize", sizes[i]);
-		windowWidth = sizes[i];
-		i = (i + 1) % sizes.length;
-		console.log("resize called");
-	}
 
 
 </script>
@@ -32,11 +16,17 @@
 <main>
 	<div class="draggableArea"></div>
 	<div
-		class="background"
+		class="main"
+		style="
+			--size: {$size};
+			--color: {$color.hsl().string()};
+			--fontSize: {$size / 6}px;
+			--fontFamily: {'Roboto ' + $settings.fontWeight}
+		"
 	>
 
 		<Timer/>
-		<Controls/>
+<!--		<Controls/>-->
 	</div>
 
 
@@ -64,11 +54,8 @@
 		background-color: rgba(255, 255, 255, 0.5);
 	}
 
-	.background {
-		/*height: var(--height);*/
-		/*width: var(--width);*/
+	.main {
 		width: 100vw;
-		/*background: rgb(255, 128, 0);*/
 		margin: 0;
 		box-sizing: border-box;
 		position: absolute;

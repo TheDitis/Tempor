@@ -21,12 +21,15 @@
 <h1 class="time">{formatTime($remainingTime)}</h1>
 
 
-
 <style>
+    .timeBlurred {
+
+    }
     .time {
         position: absolute;
         color: var(--color);
         font-size: var(--fontSize);
         font-family: var(--fontFamily);
+        /*filter: blur(1px);*/
     }
 </style>

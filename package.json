@@ -5,7 +5,7 @@
   "description": "My Electron application description",
   "main": "src/index.js",
   "scripts": {
-    "start": "concurrently \"npm:svelte-dev\" \"electron-forge start\" \"node fileHandler.js\"",
+    "start": "concurrently \"npm:svelte-dev\" \"electron-forge start\"",
     "electron": "run-s build pure-electron",
     "pure-electron": "electron .",
     "package": "electron-forge package",
@@ -50,14 +50,18 @@
     }
   },
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "color": "^3.1.3",
     "concurrently": "^6.0.0",
     "electron-reload": "^1.5.0",
     "electron-squirrel-startup": "^1.0.0",
+    "fontawesome": "^5.6.3",
+    "node-sass": "^5.0.0",
     "play-sound": "^1.1.3",
     "sirv": "^1.0.11",
     "sound-play": "^1.1.0",
     "svelte-fa": "^2.2.0",
+    "svelte-preprocess": "^4.6.9",
     "svg-partial-circle": "^1.0.0"
   },
   "devDependencies": {
