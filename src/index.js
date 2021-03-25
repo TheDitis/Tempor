@@ -1,5 +1,6 @@
 const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 const path = require('path');
+const sound = require('sound-play');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -16,8 +17,8 @@ require('electron-reload')(__dirname, {
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 300,
+    height: 400,
     transparent: true,
     frame: false,
     webPreferences: {
@@ -30,20 +31,40 @@ const createWindow = () => {
   // mainWindow.setMenu(null);
   Menu.setApplicationMenu(null);
 
-  ipcMain.on("resize", (event, arg) => {
-    mainWindow.setSize(200, 200)
+  ipcMain.on("resize", (event, size) => {
+    console.log("size: ", size)
+    mainWindow.setSize(size, size + 50)
   })
 
+  // ipcMain.on("start", (event, args) => {
+  //   sound.play("./endSound.wav", 1)
+  // })
 
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, '../public/index.html'));
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
+
+
+  const devtools = new BrowserWindow();
+  mainWindow.webContents.setDevToolsWebContents(devtools.webContents);
+  mainWindow.webContents.openDevTools({ mode: 'detach' });
+  mainWindow.webContents.once('did-finish-load', function () {
+    var windowBounds = mainWindow.getBounds();
+    devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
+    devtools.setSize(windowBounds.width/2, windowBounds.height);
+  });
+  mainWindow.on('move', function () {
+    var windowBounds = mainWindow.getBounds();
+    devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
+  });
+
 };
 
-
+// make sound playable
+app.commandLine.appendSwitch ('-autoplay-policy', 'no-user-gesture-required')
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
