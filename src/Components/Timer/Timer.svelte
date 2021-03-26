@@ -1,8 +1,8 @@
 <script>
     import partialCircle from "svg-partial-circle"
     import TimeIndicatorInput from "./TimeIndicator/TimeIndicator.svelte"
-    import {remainingTime, duration, runState, focused, pause, resume, tempDuration, start} from "../stores/timerState";
-    import {color, size} from "../stores/appState";
+    import {remainingTime, duration, runState, focused, pause, resume, tempDuration, start} from "../../stores/timerState";
+    import {color, size} from "../../stores/appState";
     import PlayPauseControl from "./PlayPauseControl.svelte";
 
     // thickness of the line

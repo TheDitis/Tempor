@@ -1,7 +1,7 @@
 <script>
-    import {remainingTime, runState, time, focused} from "../../stores/timerState";
+    import {remainingTime, runState, time, focused} from "../../../stores/timerState";
     import TimeInput from "./TimeInput.svelte";
-    import {formatTimeMs} from "../../utils/utils";
+    import {formatTimeMs} from "../../../utils/utils";
 
 
 

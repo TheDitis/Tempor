@@ -1,6 +1,6 @@
 <script>
 	import {onMount} from "svelte";
-	import Timer from "./Components/Timer.svelte";
+	import Timer from "./Components/Timer/Timer.svelte";
 	const {ipcRenderer} = require("electron");
 	import {size, width, height, color, blur, settings, maxSize, settingsOpen, loadSettings} from "./stores/appState"
 	import {focused, pause, resume, runState, start, tempDuration} from "./stores/timerState";
@@ -70,14 +70,16 @@
 		}
 	}
 
+	$: scaledBlur = $blur * ($size / 300)
+
 </script>
 
 <main
 	style="
 		--size: {$size};
 		--color: {$color.hsl().string()};
-		--blur: {$blur};
-		--textBlur: {$blur * 0.15};
+		--blur: {scaledBlur};
+		--textBlur: {scaledBlur * 0.2};
 		--fontSize: {$size / 6}px;
 		--fontFamily: {'Roboto ' + $settings.fontWeight};
 		--buttonBg: {$color.alpha(0.2).hsl().string()};

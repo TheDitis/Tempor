@@ -1,7 +1,7 @@
 <script>
     import {onMount} from "svelte";
-    import {formatTime, msToHrsMinsSecs, formatTimeMs} from "../../utils/utils";
-    import {tempDuration, runState} from "../../stores/timerState";
+    import {formatTime, msToHrsMinsSecs, formatTimeMs} from "../../../utils/utils";
+    import {tempDuration, runState} from "../../../stores/timerState";
     import {Duration} from "luxon";
     import _ from "lodash";
     // let text = "00:00:00";

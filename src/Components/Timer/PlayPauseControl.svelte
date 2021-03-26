@@ -1,5 +1,5 @@
 <script>
-    import {start, pause, resume, runState, focused, tempDuration} from "../stores/timerState";
+    import {start, pause, resume, runState, focused, tempDuration} from "../../stores/timerState";
     import Fa from "svelte-fa"
     import {faPlay, faPause, faStop} from '@fortawesome/free-solid-svg-icons'
 
