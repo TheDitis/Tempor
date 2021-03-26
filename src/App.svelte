@@ -2,10 +2,10 @@
 	import {onMount} from "svelte";
 	import Timer from "./Components/Timer/Timer.svelte";
 	const {ipcRenderer} = require("electron");
-	import {size, width, height, color, blur, settings, maxSize, settingsOpen, loadSettings} from "./stores/appState"
+	import {size, width, height, color, blur, stayOnTop, scaledBlur, settings, maxSize, settingsOpen, loadSettings} from "./stores/appState"
 	import {focused, pause, resume, runState, start, tempDuration} from "./stores/timerState";
 	import ResizeControl from "./Components/ResizeControl/ResizeControl.svelte";
-	import SettingsButton from "./Components/Settings/SettingsButton.svelte";
+	import OpenSettingsButton from "./Components/Settings/OpenSettingsButton.svelte";
 	import Settings from "./Components/Settings/Settings.svelte";
 
 
@@ -15,12 +15,19 @@
 		ipcRenderer.send("resize", $width, $size)
 	})
 
-	const resizeWindow = (listenTo) => {
+	const changeStayOnTop = (deps) => {
+		console.log("stayOnTop: ", $stayOnTop)
+		ipcRenderer.send("stayontop", $stayOnTop);
+	}
+
+	const resizeWindow = (deps) => {
 		ipcRenderer.send("resize", $width, $height)
 	}
 
 	// any time the window size changes, send the signal to electron
 	$: resizeWindow([$size, $height])
+
+	$: changeStayOnTop([$stayOnTop])
 
 	const makeSmaller = () => {
 		if ($size > 100) {
@@ -70,7 +77,7 @@
 		}
 	}
 
-	$: scaledBlur = $blur * ($size / 300)
+	// $: scaledBlur = $blur * ($size / 300)
 
 </script>
 
@@ -78,11 +85,12 @@
 	style="
 		--size: {$size};
 		--color: {$color.hsl().string()};
-		--blur: {scaledBlur};
-		--textBlur: {scaledBlur * 0.2};
+		--blur: {$scaledBlur};
+		--textBlur: {$scaledBlur * 0.2};
 		--fontSize: {$size / 6}px;
 		--fontFamily: {'Roboto ' + $settings.fontWeight};
 		--buttonBg: {$color.alpha(0.2).hsl().string()};
+		--activeButtonBg: {$color.alpha(0.6).hsl().string()}
 	"
 >
 	<div class="draggableArea"></div>
@@ -93,7 +101,7 @@
 	>
 		<Timer/>
 		<ResizeControl on:sizeUp={makeBigger} on:sizeDown={makeSmaller}/>
-		<SettingsButton/>
+		<OpenSettingsButton/>
 	</div>
 
 	{#if $settingsOpen}

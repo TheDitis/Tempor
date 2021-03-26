@@ -14,11 +14,16 @@ export const color = derived(
     }
 )
 
-export const blur = writable(0);
-
-
-/// WINDOW SIZE ITEMS
+/// Timer Size
 export const size = writable(300);
+
+export const blur = writable(0);
+// so that the blur stays consistent in style when the window is resized:
+export const scaledBlur = derived(
+    [blur, size],
+    ([$blur, $size]) => $blur * ($size / 300)
+);
+
 
 export const maxSize = readable(Math.min(window.screen.height, window.screen.width))
 
@@ -31,6 +36,8 @@ export const width = derived(
         return $size + ($blur * 5)
     }
 );
+
+
 export const height = derived(
     [settingsHeight, settingsOpen, size, blur],
     ([$settingsHeight, $settingsOpen, $size, $blur]) => {
@@ -38,6 +45,10 @@ export const height = derived(
         else return $size + ($blur * 5);
     }
 )
+
+
+
+
 
 
 
@@ -52,3 +63,5 @@ export const loadSettings = () => {
     blur.set(settingsData.blur);
 
 }
+
+export const stayOnTop = derived(settings, $settings => $settings.alwaysOnTop);

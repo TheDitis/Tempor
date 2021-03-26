@@ -8,13 +8,13 @@
     }
 </script>
 
-<button class="SettingsButton" on:click={toggleSettings}>
+<button class="OpenSettingsButton" on:click={toggleSettings}>
     <Fa icon={faCog}/>
 </button>
 
 
 <style>
-    .SettingsButton {
+    .OpenSettingsButton {
         position: absolute;
         bottom: 5px;
         left: 5px;
@@ -34,7 +34,7 @@
         transition-duration: 700ms;
         transition-delay: 500ms;
     }
-    .SettingsButton:hover {
+    .OpenSettingsButton:hover {
         opacity: 1;
         transition-duration: 200ms;
         transition-delay: 0ms;

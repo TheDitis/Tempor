@@ -31,11 +31,18 @@ const createWindow = () => {
   // mainWindow.setMenu(null);
   Menu.setApplicationMenu(null);
 
+  /// custom listeners
   ipcMain.on("resize", (event, width, height) => {
-    console.log("size: ", [width, height])
     mainWindow.setSize(width, height + 20) // add 20 for the draggable bar
   })
 
+  ipcMain.on('stayontop', (e, value) => {
+    console.log("stayOnTop event heard. value: ", value)
+    if (typeof value === "boolean") {
+      console.log("setting stayOnTop to ", value);
+      mainWindow.setAlwaysOnTop(value);
+    }
+  })
   // ipcMain.on("start", (event, args) => {
   //   sound.play("./endSound.wav", 1)
   // })
@@ -47,6 +54,8 @@ const createWindow = () => {
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
 
+  // mainWindow.setAlwaysOnTop(true)
+
 
   const devtools = new BrowserWindow();
   mainWindow.webContents.setDevToolsWebContents(devtools.webContents);
@@ -56,10 +65,11 @@ const createWindow = () => {
     devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
     devtools.setSize(windowBounds.width/2, windowBounds.height);
   });
-  mainWindow.on('move', function () {
+  mainWindow.on('move', () => {
     var windowBounds = mainWindow.getBounds();
     devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
   });
+
 
 };
 

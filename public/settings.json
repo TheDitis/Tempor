@@ -2,5 +2,6 @@
   "hue": 90,
   "size": 300,
   "blur": 10,
-  "fontWeight": "Regular"
+  "fontWeight": "Regular",
+  "alwaysOnTop": false
 }

@@ -2,8 +2,8 @@
     // import {onMount}
     import {settingsOpen, settingsHeight, settings, hue, color, blur} from "../../stores/appState";
     import SettingsSlider from "./SettingsSlider.svelte";
-
-    console.log("settings opened!")
+    import SettingsOptionButton from "./SettingsOptionButton.svelte";
+    import {faLayerGroup} from "@fortawesome/free-solid-svg-icons";
 </script>
 
 
@@ -16,6 +16,7 @@
 >
     <SettingsSlider label="Color" bind:value={$hue} min="0" max="360"/>
     <SettingsSlider label="Blur" bind:value={$blur} min="0" max="10"/>
+    <SettingsOptionButton icon={faLayerGroup} option="alwaysOnTop" label="Stay on top"/>
 </div>
 
 
