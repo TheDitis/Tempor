@@ -1,12 +1,26 @@
 <script>
 	import {onMount} from "svelte";
 	import Timer from "./Components/Timer/Timer.svelte";
+
 	const {ipcRenderer} = require("electron");
-	import {size, width, height, color, blur, stayOnTop, scaledBlur, settings, maxSize, settingsOpen, loadSettings} from "./stores/appState"
+	import {
+		size,
+		width,
+		height,
+		color,
+		blur,
+		stayOnTop,
+		scaledBlur,
+		settings,
+		maxSize,
+		settingsOpen,
+		loadSettings
+	} from "./stores/appState"
 	import {focused, pause, resume, runState, start, tempDuration} from "./stores/timerState";
 	import ResizeControl from "./Components/ResizeControl/ResizeControl.svelte";
 	import OpenSettingsButton from "./Components/Settings/OpenSettingsButton.svelte";
 	import Settings from "./Components/Settings/Settings.svelte";
+	import ThemeCycleButton from "./Components/Settings/ThemeCycleButton.svelte";
 
 
 	onMount(() => {
@@ -90,7 +104,7 @@
 		else return "white";
 	}
 
-	$: appBg = calcAppBg($settings);
+	$: appBg = themes[$settings.theme];
 
 </script>
 
@@ -117,6 +131,7 @@
 		<Timer/>
 		<ResizeControl on:sizeUp={makeBigger} on:sizeDown={makeSmaller}/>
 		<OpenSettingsButton/>
+		<ThemeCycleButton/>
 	</div>
 
 	{#if $settingsOpen}
