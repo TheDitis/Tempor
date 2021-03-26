@@ -21,6 +21,7 @@
 	import OpenSettingsButton from "./Components/Settings/OpenSettingsButton.svelte";
 	import Settings from "./Components/Settings/Settings.svelte";
 	import ThemeCycleButton from "./Components/Settings/ThemeCycleButton.svelte";
+	import IntervalModeButton from "./Components/Settings/IntervalModeButton.svelte";
 
 
 	onMount(() => {
@@ -132,6 +133,7 @@
 		<ResizeControl on:sizeUp={makeBigger} on:sizeDown={makeSmaller}/>
 		<OpenSettingsButton/>
 		<ThemeCycleButton/>
+		<IntervalModeButton/>
 	</div>
 
 	{#if $settingsOpen}
