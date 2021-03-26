@@ -27,13 +27,17 @@
 <style>
     .Settings {
         position: relative;
-        width: calc(var(--size) * 1px);
-        height: var(--settingsHeight);
+        width: calc(var(--width) * 1px);
+        height: calc(var(--settingsHeight) * 1px);
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        /*box-shadow: 0 0 10px var(--color);*/
+        padding-bottom: 20px;
+        /*border: 2px solid red;*/
+        box-sizing: border-box;
+        padding-top: 0;
+        /*box-shadow: 15px 0 15px -15px var(--color);*/
     }
 
     .buttonSection {

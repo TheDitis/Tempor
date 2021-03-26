@@ -8,7 +8,7 @@
 
 <div class="SettingsSlider">
     <p>{label}</p>
-    <input type="range" bind:value={value} {min} {max}/>
+    <input type="range" bind:value={value} {min} {max} step={0.1}/>
 </div>
 
 <style>
@@ -16,6 +16,8 @@
         width: 90%;
         display: flex;
         flex-direction: column;
+        /*border: 2px solid var(--color);*/
+        margin: 0;
     }
 
     p {
@@ -32,18 +34,18 @@
         outline: none;
         border: none;
         background: transparent; /* Otherwise white in Chrome */
-        height: 30px;
+        height: calc(var(--size) / 10 * 1px);
     }
 
     input[type=range]::-webkit-slider-thumb {
         -webkit-appearance: none;
         background: var(--color);
         outline: none;
-        width: 20px;
-        height: 20px;
+        width: calc(var(--size) / 15 * 1px);
+        height: calc(var(--size) / 15 * 1px);
         border-radius: 20px;
 
-        margin-top: -5.5px;
+        margin-top:calc(var(--size) / -54.5 * 1px);;
     }
 
     /*input[type=range]:focus {*/

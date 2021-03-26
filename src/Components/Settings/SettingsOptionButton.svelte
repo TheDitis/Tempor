@@ -29,7 +29,10 @@
         position: relative;
         height: calc(var(--size) / 7 * 1px);
         width: calc(var(--size) / 7 * 1px);
-        font-size: calc(var(--size) / 17 * 1px);
+        /*min-height: 50px;*/
+        /*min-width: 50px;*/
+        /*min-font-size: 25px;*/
+        font-size: calc(var(--size) / 14 * 1px);
         outline: none;
         border: none;
         background: var(--buttonBg);
@@ -40,6 +43,14 @@
         text-align: center;
         border-radius: 100px;
         box-shadow: none;
+    }
+
+    @media (max-width: 200px) {
+        button {
+            width: 35px;
+            height: 35px;
+            font-size: 18px;
+        }
     }
     .off {
         box-shadow: none;

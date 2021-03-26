@@ -9,10 +9,9 @@
 	import Settings from "./Components/Settings/Settings.svelte";
 
 
-
 	onMount(() => {
 		loadSettings();
-		ipcRenderer.send("resize", $width, $size)
+		ipcRenderer.send("resize", $width, $height)
 	})
 
 	const changeStayOnTop = (deps) => {
@@ -21,6 +20,8 @@
 	}
 
 	const resizeWindow = (deps) => {
+		console.log("$width: ", $width);
+		console.log("$height: ", $height);
 		ipcRenderer.send("resize", $width, $height)
 	}
 
@@ -77,20 +78,28 @@
 		}
 	}
 
-	// $: scaledBlur = $blur * ($size / 300)
+	const calcAppBg = (deps) => {
+		if ($settings.transparent) return "transparent";
+		if ($settings.theme === "dark") return "rgb(33, 33, 33)";
+		else return "white";
+	}
+
+	$: appBg = calcAppBg($settings);
 
 </script>
 
 <main
 	style="
 		--size: {$size};
+		--width: {$width};
 		--color: {$color.hsl().string()};
 		--blur: {$scaledBlur};
 		--textBlur: {$scaledBlur * 0.2};
 		--fontSize: {$size / 6}px;
 		--fontFamily: {'Roboto ' + $settings.fontWeight};
 		--buttonBg: {$color.alpha(0.2).hsl().string()};
-		--activeButtonBg: {$color.alpha(0.6).hsl().string()}
+		--activeButtonBg: {$color.alpha(0.6).hsl().string()};
+		--appBg: {appBg};
 	"
 >
 	<div class="draggableArea"></div>
@@ -116,29 +125,27 @@
 	main {
 		margin: 0;
 		padding: 0;
-		/*display: flex;*/
-		/*flex-direction: column;*/
-		/*align-items: center;*/
+		background: var(--appBg);
+		border-radius: 20px;
 	}
 
-	h1 {
-		color: #ff3eff;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
 
 	.draggableArea {
 		height: 20px;
 		width: 100vw;
+		margin: 0;
+		padding: 0;
 		-webkit-app-region: drag;
 	}
 
 	.timerSection {
 		width: 100vw;
 		margin: 0;
+		padding-bottom: 15px;
 		box-sizing: border-box;
 		position: relative;
-
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 </style>

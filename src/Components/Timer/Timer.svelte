@@ -51,13 +51,6 @@
 
 
 <style>
-    h1 {
-        color: rgb(0, 190, 255)
-    }
-    .circle {
-        filter: blur(calc(var(--blur) * 1px));
-    }
-
     .Timer {
         width: var(--size);
         height: var(--size);
@@ -65,7 +58,13 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 0;
+        margin: 0;
     }
-
+    .circle {
+        filter: blur(calc(var(--blur) * 1px));
+        margin: 0;
+        padding: 0;
+    }
 
 </style>

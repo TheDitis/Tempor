@@ -30,7 +30,21 @@
         color: var(--color);
 
         position: absolute;
-        right: 5px;
-        bottom: 5px;
+        right: 8px;
+        bottom: 8px;
+
+        transition-duration: 300ms;
+    }
+
+    .SaveButton:hover {
+        filter: hue-rotate(-35deg);
+    }
+
+    @media (max-width: 200px) {
+        .SaveButton {
+            width: 35px;
+            height: 35px;
+            font-size: 18px;
+        }
     }
 </style>

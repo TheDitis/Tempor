@@ -27563,27 +27563,29 @@ var app = (function () {
 
     const maxSize = readable(Math.min(window.screen.height, window.screen.width));
 
-    const settingsHeight = writable(200);
+    const settingsHeight = derived([size], $size => {
+        if ($size >= 200) return Math.round($size / 1.2);
+        else return Math.round(150)
+    });
     const settingsOpen = writable(false);
 
     const width = derived(
-        [size, blur],
-        ([$size, $blur]) => {
-            return $size + ($blur * 5)
+        [size, scaledBlur],
+        ([$size, $scaledBlur]) => {
+            return Math.round($size + ($scaledBlur * 7))
         }
     );
 
 
     const height = derived(
-        [settingsHeight, settingsOpen, size, blur],
-        ([$settingsHeight, $settingsOpen, $size, $blur]) => {
-            if ($settingsOpen) return $size + $settingsHeight  + ($blur * 5);
-            else return $size + ($blur * 5);
+        [settingsHeight, settingsOpen, size, scaledBlur],
+        ([$settingsHeight, $settingsOpen, $size, $scaledBlur]) => {
+            // main area height is size + blur + draggable-bar
+            const mainSectionSize = Math.round($size + ($scaledBlur * 7)) + 20;
+            if ($settingsOpen) return mainSectionSize + $settingsHeight + 20;
+            else return mainSectionSize
         }
     );
-
-
-
 
 
 
@@ -28315,7 +28317,7 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			create_component(fa.$$.fragment);
-    			attr_dev(button, "class", "PlayPauseButton svelte-u4nnd1");
+    			attr_dev(button, "class", "PlayPauseButton svelte-eqxfyc");
     			add_location(button, file$8, 21, 4, 631);
     		},
     		l: function claim(nodes) {
@@ -28490,11 +28492,11 @@ var app = (function () {
     			attr_dev(path_1, "stroke-linecap", "round");
     			attr_dev(path_1, "fill", "transparent");
     			add_location(path_1, file$7, 44, 8, 1531);
-    			attr_dev(svg, "class", "circle svelte-mpgef2");
+    			attr_dev(svg, "class", "circle svelte-14fxcpi");
     			attr_dev(svg, "width", /*$size*/ ctx[1]);
     			attr_dev(svg, "height", /*$size*/ ctx[1]);
     			add_location(svg, file$7, 41, 4, 1295);
-    			attr_dev(div, "class", "Timer svelte-mpgef2");
+    			attr_dev(div, "class", "Timer svelte-14fxcpi");
     			add_location(div, file$7, 37, 0, 1222);
     		},
     		l: function claim(nodes) {
@@ -28945,14 +28947,15 @@ var app = (function () {
     			t0 = text(/*label*/ ctx[3]);
     			t1 = space();
     			input = element("input");
-    			attr_dev(p, "class", "svelte-1wezfao");
+    			attr_dev(p, "class", "svelte-le8alh");
     			add_location(p, file$4, 9, 4, 147);
     			attr_dev(input, "type", "range");
     			attr_dev(input, "min", /*min*/ ctx[1]);
     			attr_dev(input, "max", /*max*/ ctx[2]);
-    			attr_dev(input, "class", "svelte-1wezfao");
+    			attr_dev(input, "step", 0.1);
+    			attr_dev(input, "class", "svelte-le8alh");
     			add_location(input, file$4, 10, 4, 167);
-    			attr_dev(div, "class", "SettingsSlider svelte-1wezfao");
+    			attr_dev(div, "class", "SettingsSlider svelte-le8alh");
     			add_location(div, file$4, 8, 0, 113);
     		},
     		l: function claim(nodes) {
@@ -29137,7 +29140,7 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			create_component(fa.$$.fragment);
-    			attr_dev(button, "class", "svelte-oo73hu");
+    			attr_dev(button, "class", "svelte-1ggjxpw");
     			toggle_class(button, "on", /*$settings*/ ctx[2][/*option*/ ctx[1]]);
     			toggle_class(button, "off", !/*$settings*/ ctx[2][/*option*/ ctx[1]]);
     			add_location(button, file$3, 16, 0, 358);
@@ -29316,7 +29319,7 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			create_component(fa.$$.fragment);
-    			attr_dev(button, "class", "SaveButton svelte-q7xfi8");
+    			attr_dev(button, "class", "SaveButton svelte-1hr6vml");
     			add_location(button, file$2, 5, 0, 119);
     		},
     		l: function claim(nodes) {
@@ -29454,9 +29457,9 @@ var app = (function () {
     			create_component(settingsoptionbutton.$$.fragment);
     			t2 = space();
     			create_component(savebutton.$$.fragment);
-    			attr_dev(div0, "class", "buttonSection svelte-osd3t6");
+    			attr_dev(div0, "class", "buttonSection svelte-u8ou9i");
     			add_location(div0, file$1, 19, 4, 701);
-    			attr_dev(div1, "class", "Settings svelte-osd3t6");
+    			attr_dev(div1, "class", "Settings svelte-u8ou9i");
     			set_style(div1, "--settingsHeight", /*$settingsHeight*/ ctx[0]);
     			set_style(div1, "--color2", /*$color*/ ctx[1].alpha(0.5).hsl().string() + "\r\n    ");
     			add_location(div1, file$1, 10, 0, 401);
@@ -29616,7 +29619,7 @@ var app = (function () {
     const { console: console_1 } = globals;
     const file = "src\\App.svelte";
 
-    // (107:1) {#if $settingsOpen}
+    // (116:1) {#if $settingsOpen}
     function create_if_block(ctx) {
     	let settings_1;
     	let current;
@@ -29648,7 +29651,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(107:1) {#if $settingsOpen}",
+    		source: "(116:1) {#if $settingsOpen}",
     		ctx
     	});
 
@@ -29671,10 +29674,10 @@ var app = (function () {
     	let dispose;
     	timer = new Timer({ $$inline: true });
     	resizecontrol = new ResizeControl({ $$inline: true });
-    	resizecontrol.$on("sizeUp", /*makeBigger*/ ctx[6]);
-    	resizecontrol.$on("sizeDown", /*makeSmaller*/ ctx[5]);
+    	resizecontrol.$on("sizeUp", /*makeBigger*/ ctx[8]);
+    	resizecontrol.$on("sizeDown", /*makeSmaller*/ ctx[7]);
     	opensettingsbutton = new OpenSettingsButton({ $$inline: true });
-    	let if_block = /*$settingsOpen*/ ctx[4] && create_if_block(ctx);
+    	let if_block = /*$settingsOpen*/ ctx[6] && create_if_block(ctx);
 
     	const block = {
     		c: function create() {
@@ -29689,20 +29692,22 @@ var app = (function () {
     			create_component(opensettingsbutton.$$.fragment);
     			t3 = space();
     			if (if_block) if_block.c();
-    			attr_dev(div0, "class", "draggableArea svelte-1wddko3");
-    			add_location(div0, file, 95, 1, 2206);
-    			attr_dev(div1, "class", "timerSection svelte-1wddko3");
-    			add_location(div1, file, 97, 1, 2242);
+    			attr_dev(div0, "class", "draggableArea svelte-1pc89fo");
+    			add_location(div0, file, 104, 1, 2482);
+    			attr_dev(div1, "class", "timerSection svelte-1pc89fo");
+    			add_location(div1, file, 106, 1, 2518);
     			set_style(main, "--size", /*$size*/ ctx[0]);
-    			set_style(main, "--color", /*$color*/ ctx[1].hsl().string());
-    			set_style(main, "--blur", /*$scaledBlur*/ ctx[2]);
-    			set_style(main, "--textBlur", /*$scaledBlur*/ ctx[2] * 0.2);
+    			set_style(main, "--width", /*$width*/ ctx[2]);
+    			set_style(main, "--color", /*$color*/ ctx[4].hsl().string());
+    			set_style(main, "--blur", /*$scaledBlur*/ ctx[5]);
+    			set_style(main, "--textBlur", /*$scaledBlur*/ ctx[5] * 0.2);
     			set_style(main, "--fontSize", /*$size*/ ctx[0] / 6 + "px");
-    			set_style(main, "--fontFamily", "Roboto " + /*$settings*/ ctx[3].fontWeight);
-    			set_style(main, "--buttonBg", /*$color*/ ctx[1].alpha(0.2).hsl().string());
-    			set_style(main, "--activeButtonBg", /*$color*/ ctx[1].alpha(0.6).hsl().string() + "\n\t");
-    			attr_dev(main, "class", "svelte-1wddko3");
-    			add_location(main, file, 83, 0, 1884);
+    			set_style(main, "--fontFamily", "Roboto " + /*$settings*/ ctx[1].fontWeight);
+    			set_style(main, "--buttonBg", /*$color*/ ctx[4].alpha(0.2).hsl().string());
+    			set_style(main, "--activeButtonBg", /*$color*/ ctx[4].alpha(0.6).hsl().string());
+    			set_style(main, "--appBg", /*appBg*/ ctx[3]);
+    			attr_dev(main, "class", "svelte-1pc89fo");
+    			add_location(main, file, 90, 0, 2118);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -29722,14 +29727,14 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(window, "keydown", /*handleKeyDown*/ ctx[7], false, false, false);
+    				dispose = listen_dev(window, "keydown", /*handleKeyDown*/ ctx[9], false, false, false);
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if (/*$settingsOpen*/ ctx[4]) {
+    			if (/*$settingsOpen*/ ctx[6]) {
     				if (if_block) {
-    					if (dirty & /*$settingsOpen*/ 16) {
+    					if (dirty & /*$settingsOpen*/ 64) {
     						transition_in(if_block, 1);
     					}
     				} else {
@@ -29752,32 +29757,40 @@ var app = (function () {
     				set_style(main, "--size", /*$size*/ ctx[0]);
     			}
 
-    			if (!current || dirty & /*$color*/ 2) {
-    				set_style(main, "--color", /*$color*/ ctx[1].hsl().string());
+    			if (!current || dirty & /*$width*/ 4) {
+    				set_style(main, "--width", /*$width*/ ctx[2]);
     			}
 
-    			if (!current || dirty & /*$scaledBlur*/ 4) {
-    				set_style(main, "--blur", /*$scaledBlur*/ ctx[2]);
+    			if (!current || dirty & /*$color*/ 16) {
+    				set_style(main, "--color", /*$color*/ ctx[4].hsl().string());
     			}
 
-    			if (!current || dirty & /*$scaledBlur*/ 4) {
-    				set_style(main, "--textBlur", /*$scaledBlur*/ ctx[2] * 0.2);
+    			if (!current || dirty & /*$scaledBlur*/ 32) {
+    				set_style(main, "--blur", /*$scaledBlur*/ ctx[5]);
+    			}
+
+    			if (!current || dirty & /*$scaledBlur*/ 32) {
+    				set_style(main, "--textBlur", /*$scaledBlur*/ ctx[5] * 0.2);
     			}
 
     			if (!current || dirty & /*$size*/ 1) {
     				set_style(main, "--fontSize", /*$size*/ ctx[0] / 6 + "px");
     			}
 
-    			if (!current || dirty & /*$settings*/ 8) {
-    				set_style(main, "--fontFamily", "Roboto " + /*$settings*/ ctx[3].fontWeight);
+    			if (!current || dirty & /*$settings*/ 2) {
+    				set_style(main, "--fontFamily", "Roboto " + /*$settings*/ ctx[1].fontWeight);
     			}
 
-    			if (!current || dirty & /*$color*/ 2) {
-    				set_style(main, "--buttonBg", /*$color*/ ctx[1].alpha(0.2).hsl().string());
+    			if (!current || dirty & /*$color*/ 16) {
+    				set_style(main, "--buttonBg", /*$color*/ ctx[4].alpha(0.2).hsl().string());
     			}
 
-    			if (!current || dirty & /*$color*/ 2) {
-    				set_style(main, "--activeButtonBg", /*$color*/ ctx[1].alpha(0.6).hsl().string() + "\n\t");
+    			if (!current || dirty & /*$color*/ 16) {
+    				set_style(main, "--activeButtonBg", /*$color*/ ctx[4].alpha(0.6).hsl().string());
+    			}
+
+    			if (!current || dirty & /*appBg*/ 8) {
+    				set_style(main, "--appBg", /*appBg*/ ctx[3]);
     			}
     		},
     		i: function intro(local) {
@@ -29818,49 +29831,50 @@ var app = (function () {
     }
 
     function instance($$self, $$props, $$invalidate) {
+    	let appBg;
     	let $width;
-    	let $size;
-    	let $stayOnTop;
     	let $height;
+    	let $stayOnTop;
+    	let $size;
     	let $maxSize;
     	let $runState;
     	let $focused;
     	let $tempDuration;
+    	let $settings;
     	let $color;
     	let $scaledBlur;
-    	let $settings;
     	let $settingsOpen;
     	validate_store(width, "width");
-    	component_subscribe($$self, width, $$value => $$invalidate(10, $width = $$value));
+    	component_subscribe($$self, width, $$value => $$invalidate(2, $width = $$value));
+    	validate_store(height, "height");
+    	component_subscribe($$self, height, $$value => $$invalidate(10, $height = $$value));
+    	validate_store(stayOnTop, "stayOnTop");
+    	component_subscribe($$self, stayOnTop, $$value => $$invalidate(11, $stayOnTop = $$value));
     	validate_store(size, "size");
     	component_subscribe($$self, size, $$value => $$invalidate(0, $size = $$value));
-    	validate_store(stayOnTop, "stayOnTop");
-    	component_subscribe($$self, stayOnTop, $$value => $$invalidate(8, $stayOnTop = $$value));
-    	validate_store(height, "height");
-    	component_subscribe($$self, height, $$value => $$invalidate(9, $height = $$value));
     	validate_store(maxSize, "maxSize");
-    	component_subscribe($$self, maxSize, $$value => $$invalidate(11, $maxSize = $$value));
+    	component_subscribe($$self, maxSize, $$value => $$invalidate(12, $maxSize = $$value));
     	validate_store(runState, "runState");
-    	component_subscribe($$self, runState, $$value => $$invalidate(12, $runState = $$value));
+    	component_subscribe($$self, runState, $$value => $$invalidate(13, $runState = $$value));
     	validate_store(focused, "focused");
-    	component_subscribe($$self, focused, $$value => $$invalidate(13, $focused = $$value));
+    	component_subscribe($$self, focused, $$value => $$invalidate(14, $focused = $$value));
     	validate_store(tempDuration, "tempDuration");
-    	component_subscribe($$self, tempDuration, $$value => $$invalidate(14, $tempDuration = $$value));
-    	validate_store(color, "color");
-    	component_subscribe($$self, color, $$value => $$invalidate(1, $color = $$value));
-    	validate_store(scaledBlur, "scaledBlur");
-    	component_subscribe($$self, scaledBlur, $$value => $$invalidate(2, $scaledBlur = $$value));
+    	component_subscribe($$self, tempDuration, $$value => $$invalidate(15, $tempDuration = $$value));
     	validate_store(settings, "settings");
-    	component_subscribe($$self, settings, $$value => $$invalidate(3, $settings = $$value));
+    	component_subscribe($$self, settings, $$value => $$invalidate(1, $settings = $$value));
+    	validate_store(color, "color");
+    	component_subscribe($$self, color, $$value => $$invalidate(4, $color = $$value));
+    	validate_store(scaledBlur, "scaledBlur");
+    	component_subscribe($$self, scaledBlur, $$value => $$invalidate(5, $scaledBlur = $$value));
     	validate_store(settingsOpen, "settingsOpen");
-    	component_subscribe($$self, settingsOpen, $$value => $$invalidate(4, $settingsOpen = $$value));
+    	component_subscribe($$self, settingsOpen, $$value => $$invalidate(6, $settingsOpen = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("App", slots, []);
     	const { ipcRenderer } = require("electron");
 
     	onMount(() => {
     		loadSettings();
-    		ipcRenderer.send("resize", $width, $size);
+    		ipcRenderer.send("resize", $width, $height);
     	});
 
     	const changeStayOnTop = deps => {
@@ -29869,6 +29883,8 @@ var app = (function () {
     	};
 
     	const resizeWindow = deps => {
+    		console.log("$width: ", $width);
+    		console.log("$height: ", $height);
     		ipcRenderer.send("resize", $width, $height);
     	};
 
@@ -29918,6 +29934,11 @@ var app = (function () {
     		}
     	};
 
+    	const calcAppBg = deps => {
+    		if ($settings.transparent) return "transparent";
+    		if ($settings.theme === "dark") return "rgb(33, 33, 33)"; else return "white";
+    	};
+
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
@@ -29953,42 +29974,58 @@ var app = (function () {
     		makeSmaller,
     		makeBigger,
     		handleKeyDown,
+    		calcAppBg,
     		$width,
-    		$size,
-    		$stayOnTop,
     		$height,
+    		$stayOnTop,
+    		$size,
     		$maxSize,
     		$runState,
     		$focused,
     		$tempDuration,
+    		$settings,
+    		appBg,
     		$color,
     		$scaledBlur,
-    		$settings,
     		$settingsOpen
     	});
 
+    	$$self.$inject_state = $$props => {
+    		if ("appBg" in $$props) $$invalidate(3, appBg = $$props.appBg);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*$size, $height*/ 513) {
+    		if ($$self.$$.dirty & /*$size, $height*/ 1025) {
     			// any time the window size changes, send the signal to electron
     			resizeWindow();
     		}
 
-    		if ($$self.$$.dirty & /*$stayOnTop*/ 256) {
+    		if ($$self.$$.dirty & /*$stayOnTop*/ 2048) {
     			changeStayOnTop();
+    		}
+
+    		if ($$self.$$.dirty & /*$settings*/ 2) {
+    			$$invalidate(3, appBg = calcAppBg());
     		}
     	};
 
     	return [
     		$size,
+    		$settings,
+    		$width,
+    		appBg,
     		$color,
     		$scaledBlur,
-    		$settings,
     		$settingsOpen,
     		makeSmaller,
     		makeBigger,
     		handleKeyDown,
-    		$stayOnTop,
-    		$height
+    		$height,
+    		$stayOnTop
     	];
     }
 

@@ -27,27 +27,29 @@ export const scaledBlur = derived(
 
 export const maxSize = readable(Math.min(window.screen.height, window.screen.width))
 
-export const settingsHeight = writable(200);
+export const settingsHeight = derived([size], $size => {
+    if ($size >= 200) return Math.round($size / 1.2);
+    else return Math.round(150)
+});
 export const settingsOpen = writable(false);
 
 export const width = derived(
-    [size, blur],
-    ([$size, $blur]) => {
-        return $size + ($blur * 5)
+    [size, scaledBlur],
+    ([$size, $scaledBlur]) => {
+        return Math.round($size + ($scaledBlur * 7))
     }
 );
 
 
 export const height = derived(
-    [settingsHeight, settingsOpen, size, blur],
-    ([$settingsHeight, $settingsOpen, $size, $blur]) => {
-        if ($settingsOpen) return $size + $settingsHeight  + ($blur * 5);
-        else return $size + ($blur * 5);
+    [settingsHeight, settingsOpen, size, scaledBlur],
+    ([$settingsHeight, $settingsOpen, $size, $scaledBlur]) => {
+        // main area height is size + blur + draggable-bar
+        const mainSectionSize = Math.round($size + ($scaledBlur * 7)) + 20;
+        if ($settingsOpen) return mainSectionSize + $settingsHeight + 20;
+        else return mainSectionSize
     }
 )
-
-
-
 
 
 
