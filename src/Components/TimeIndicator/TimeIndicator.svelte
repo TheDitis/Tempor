@@ -38,6 +38,7 @@
 <style>
     .TimeIndicator {
         position: absolute;
+        filter: blur(calc(var(--textBlur) * 1px))
     }
     h1 {
         color: var(--color);

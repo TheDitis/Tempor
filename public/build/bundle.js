@@ -89,6 +89,9 @@ var app = (function () {
         else if (node.getAttribute(attribute) !== value)
             node.setAttribute(attribute, value);
     }
+    function to_number(value) {
+        return value === '' ? null : +value;
+    }
     function children(element) {
         return Array.from(element.childNodes);
     }
@@ -145,6 +148,9 @@ var app = (function () {
     }
     function add_render_callback(fn) {
         render_callbacks.push(fn);
+    }
+    function add_flush_callback(fn) {
+        flush_callbacks.push(fn);
     }
     let flushing = false;
     const seen_callbacks = new Set();
@@ -237,6 +243,14 @@ var app = (function () {
         : typeof globalThis !== 'undefined'
             ? globalThis
             : global);
+
+    function bind(component, name, callback) {
+        const index = component.$$.props[name];
+        if (index !== undefined) {
+            component.$$.bound[index] = callback;
+            callback(component.$$.ctx[index]);
+        }
+    }
     function create_component(block) {
         block && block.c();
     }
@@ -2329,7 +2343,7 @@ var app = (function () {
     /**
      * Settings contains static getters and setters that control Luxon's overall behavior. Luxon is a simple library with few options, but the ones it does have live here.
      */
-    class Settings {
+    class Settings$1 {
       /**
        * Get the callback for returning the current timestamp.
        * @type {function}
@@ -2354,7 +2368,7 @@ var app = (function () {
        * @type {string}
        */
       static get defaultZoneName() {
-        return Settings.defaultZone.name;
+        return Settings$1.defaultZone.name;
       }
 
       /**
@@ -2740,11 +2754,11 @@ var app = (function () {
       }
 
       static create(locale, numberingSystem, outputCalendar, defaultToEN = false) {
-        const specifiedLocale = locale || Settings.defaultLocale,
+        const specifiedLocale = locale || Settings$1.defaultLocale,
           // the system locale is useful for human readable strings but annoying for parsing/formatting known formats
           localeR = specifiedLocale || (defaultToEN ? "en-US" : systemLocale()),
-          numberingSystemR = numberingSystem || Settings.defaultNumberingSystem,
-          outputCalendarR = outputCalendar || Settings.defaultOutputCalendar;
+          numberingSystemR = numberingSystem || Settings$1.defaultNumberingSystem,
+          outputCalendarR = outputCalendar || Settings$1.defaultOutputCalendar;
         return new Locale(localeR, numberingSystemR, outputCalendarR, specifiedLocale);
       }
 
@@ -3542,7 +3556,7 @@ var app = (function () {
 
         const invalid = reason instanceof Invalid ? reason : new Invalid(reason, explanation);
 
-        if (Settings.throwOnInvalid) {
+        if (Settings$1.throwOnInvalid) {
           throw new InvalidDurationError(invalid);
         } else {
           return new Duration({ invalid });
@@ -4173,7 +4187,7 @@ var app = (function () {
 
         const invalid = reason instanceof Invalid ? reason : new Invalid(reason, explanation);
 
-        if (Settings.throwOnInvalid) {
+        if (Settings$1.throwOnInvalid) {
           throw new InvalidIntervalError(invalid);
         } else {
           return new Interval({ invalid });
@@ -4712,7 +4726,7 @@ var app = (function () {
        * @param {string|Zone} [zone='local'] - Zone to check. Defaults to the environment's local zone.
        * @return {boolean}
        */
-      static hasDST(zone = Settings.defaultZone) {
+      static hasDST(zone = Settings$1.defaultZone) {
         const proto = DateTime.now()
           .setZone(zone)
           .set({ month: 12 });
@@ -4744,7 +4758,7 @@ var app = (function () {
        * @return {Zone}
        */
       static normalizeZone(input) {
-        return normalizeZone(input, Settings.defaultZone);
+        return normalizeZone(input, Settings$1.defaultZone);
       }
 
       /**
@@ -5879,7 +5893,7 @@ var app = (function () {
         return DateTime.invalid(invalid);
       }
 
-      const tsNow = Settings.now(),
+      const tsNow = Settings$1.now(),
         offsetProvis = zone.offset(tsNow),
         [ts, o] = objToTS(obj, offsetProvis, zone);
 
@@ -5948,7 +5962,7 @@ var app = (function () {
        * @access private
        */
       constructor(config) {
-        const zone = config.zone || Settings.defaultZone;
+        const zone = config.zone || Settings$1.defaultZone;
 
         let invalid =
           config.invalid ||
@@ -5957,7 +5971,7 @@ var app = (function () {
         /**
          * @access private
          */
-        this.ts = isUndefined(config.ts) ? Settings.now() : config.ts;
+        this.ts = isUndefined(config.ts) ? Settings$1.now() : config.ts;
 
         let c = null,
           o = null;
@@ -6051,7 +6065,7 @@ var app = (function () {
               second,
               millisecond
             },
-            Settings.defaultZone
+            Settings$1.defaultZone
           );
         }
       }
@@ -6078,7 +6092,7 @@ var app = (function () {
       static utc(year, month, day, hour, minute, second, millisecond) {
         if (isUndefined(year)) {
           return new DateTime({
-            ts: Settings.now(),
+            ts: Settings$1.now(),
             zone: FixedOffsetZone.utcInstance
           });
         } else {
@@ -6110,7 +6124,7 @@ var app = (function () {
           return DateTime.invalid("invalid input");
         }
 
-        const zoneToUse = normalizeZone(options.zone, Settings.defaultZone);
+        const zoneToUse = normalizeZone(options.zone, Settings$1.defaultZone);
         if (!zoneToUse.isValid) {
           return DateTime.invalid(unsupportedZone(zoneToUse));
         }
@@ -6143,7 +6157,7 @@ var app = (function () {
         } else {
           return new DateTime({
             ts: milliseconds,
-            zone: normalizeZone(options.zone, Settings.defaultZone),
+            zone: normalizeZone(options.zone, Settings$1.defaultZone),
             loc: Locale.fromObject(options)
           });
         }
@@ -6165,7 +6179,7 @@ var app = (function () {
         } else {
           return new DateTime({
             ts: seconds * 1000,
-            zone: normalizeZone(options.zone, Settings.defaultZone),
+            zone: normalizeZone(options.zone, Settings$1.defaultZone),
             loc: Locale.fromObject(options)
           });
         }
@@ -6199,12 +6213,12 @@ var app = (function () {
        * @return {DateTime}
        */
       static fromObject(obj) {
-        const zoneToUse = normalizeZone(obj.zone, Settings.defaultZone);
+        const zoneToUse = normalizeZone(obj.zone, Settings$1.defaultZone);
         if (!zoneToUse.isValid) {
           return DateTime.invalid(unsupportedZone(zoneToUse));
         }
 
-        const tsNow = Settings.now(),
+        const tsNow = Settings$1.now(),
           offsetProvis = zoneToUse.offset(tsNow),
           normalized = normalizeObject(obj, normalizeUnit, [
             "zone",
@@ -6442,7 +6456,7 @@ var app = (function () {
 
         const invalid = reason instanceof Invalid ? reason : new Invalid(reason, explanation);
 
-        if (Settings.throwOnInvalid) {
+        if (Settings$1.throwOnInvalid) {
           throw new InvalidDateTimeError(invalid);
         } else {
           return new DateTime({ invalid });
@@ -6832,7 +6846,7 @@ var app = (function () {
        * @return {DateTime}
        */
       toLocal() {
-        return this.setZone(Settings.defaultZone);
+        return this.setZone(Settings$1.defaultZone);
       }
 
       /**
@@ -6845,7 +6859,7 @@ var app = (function () {
        * @return {DateTime}
        */
       setZone(zone, { keepLocalTime = false, keepCalendarTime = false } = {}) {
-        zone = normalizeZone(zone, Settings.defaultZone);
+        zone = normalizeZone(zone, Settings$1.defaultZone);
         if (zone.equals(this.zone)) {
           return this;
         } else if (!zone.isValid) {
@@ -24940,10 +24954,10 @@ var app = (function () {
 
     /* src\Components\TimeIndicator\TimeInput.svelte generated by Svelte v3.35.0 */
 
-    const { console: console_1$1 } = globals;
-    const file$6 = "src\\Components\\TimeIndicator\\TimeInput.svelte";
+    const { console: console_1$2 } = globals;
+    const file$9 = "src\\Components\\TimeIndicator\\TimeInput.svelte";
 
-    function create_fragment$6(ctx) {
+    function create_fragment$9(ctx) {
     	let div;
     	let h1;
     	let t0;
@@ -24960,12 +24974,12 @@ var app = (function () {
     			t1 = space();
     			input_1 = element("input");
     			attr_dev(h1, "class", "svelte-7yhoto");
-    			add_location(h1, file$6, 60, 0, 1965);
+    			add_location(h1, file$9, 60, 0, 1965);
     			attr_dev(input_1, "class", "hiddenInput svelte-7yhoto");
     			attr_dev(input_1, "type", "text");
-    			add_location(input_1, file$6, 61, 0, 1983);
+    			add_location(input_1, file$9, 61, 0, 1983);
     			attr_dev(div, "class", "TimeInput svelte-7yhoto");
-    			add_location(div, file$6, 57, 0, 1749);
+    			add_location(div, file$9, 57, 0, 1749);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -25008,7 +25022,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$6.name,
+    		id: create_fragment$9.name,
     		type: "component",
     		source: "",
     		ctx
@@ -25017,7 +25031,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$6($$self, $$props, $$invalidate) {
+    function instance$9($$self, $$props, $$invalidate) {
     	let value;
     	let $tempDuration;
     	let $runState;
@@ -25079,7 +25093,7 @@ var app = (function () {
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console_1$1.warn(`<TimeInput> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console_1$2.warn(`<TimeInput> was created with unknown prop '${key}'`);
     	});
 
     	function input_1_binding($$value) {
@@ -25154,19 +25168,19 @@ var app = (function () {
     class TimeInput extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$6, create_fragment$6, safe_not_equal, {});
+    		init(this, options, instance$9, create_fragment$9, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "TimeInput",
     			options,
-    			id: create_fragment$6.name
+    			id: create_fragment$9.name
     		});
     	}
     }
 
     /* src\Components\TimeIndicator\TimeIndicator.svelte generated by Svelte v3.35.0 */
-    const file$5 = "src\\Components\\TimeIndicator\\TimeIndicator.svelte";
+    const file$8 = "src\\Components\\TimeIndicator\\TimeIndicator.svelte";
 
     // (31:4) {:else}
     function create_else_block$1(ctx) {
@@ -25178,8 +25192,8 @@ var app = (function () {
     		c: function create() {
     			h1 = element("h1");
     			t = text(t_value);
-    			attr_dev(h1, "class", "time svelte-1jrooj6");
-    			add_location(h1, file$5, 31, 8, 703);
+    			attr_dev(h1, "class", "time svelte-fjpmnp");
+    			add_location(h1, file$8, 31, 8, 703);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h1, anchor);
@@ -25207,7 +25221,7 @@ var app = (function () {
     }
 
     // (29:4) {#if $focused}
-    function create_if_block$1(ctx) {
+    function create_if_block$2(ctx) {
     	let timeinput;
     	let current;
     	timeinput = new TimeInput({ $$inline: true });
@@ -25237,7 +25251,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$1.name,
+    		id: create_if_block$2.name,
     		type: "if",
     		source: "(29:4) {#if $focused}",
     		ctx
@@ -25246,14 +25260,14 @@ var app = (function () {
     	return block;
     }
 
-    function create_fragment$5(ctx) {
+    function create_fragment$8(ctx) {
     	let div;
     	let current_block_type_index;
     	let if_block;
     	let current;
     	let mounted;
     	let dispose;
-    	const if_block_creators = [create_if_block$1, create_else_block$1];
+    	const if_block_creators = [create_if_block$2, create_else_block$1];
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
@@ -25268,9 +25282,9 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			if_block.c();
-    			attr_dev(div, "class", "TimeIndicator svelte-1jrooj6");
+    			attr_dev(div, "class", "TimeIndicator svelte-fjpmnp");
     			set_style(div, "--opacity", /*opacity*/ ctx[0]);
-    			add_location(div, file$5, 23, 0, 525);
+    			add_location(div, file$8, 23, 0, 525);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -25335,7 +25349,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$5.name,
+    		id: create_fragment$8.name,
     		type: "component",
     		source: "",
     		ctx
@@ -25346,7 +25360,7 @@ var app = (function () {
 
     const blinkInterval = 1000; // one second blinks
 
-    function instance$5($$self, $$props, $$invalidate) {
+    function instance$8($$self, $$props, $$invalidate) {
     	let opacity;
     	let $runState;
     	let $time;
@@ -25411,13 +25425,13 @@ var app = (function () {
     class TimeIndicator extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$5, create_fragment$5, safe_not_equal, {});
+    		init(this, options, instance$8, create_fragment$8, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "TimeIndicator",
     			options,
-    			id: create_fragment$5.name
+    			id: create_fragment$8.name
     		});
     	}
     }
@@ -27533,6 +27547,8 @@ var app = (function () {
         }
     );
 
+    const blur = writable(0);
+
 
     /// WINDOW SIZE ITEMS
     const size = writable(300);
@@ -27541,26 +27557,41 @@ var app = (function () {
 
     const settingsHeight = writable(200);
     const settingsOpen = writable(false);
+
+    const width = derived(
+        [size, blur],
+        ([$size, $blur]) => {
+            return $size + ($blur * 5)
+        }
+    );
     const height = derived(
-        [settingsHeight, settingsOpen, size],
-        ([$settingsHeight, $settingsOpen, $size]) => {
-            if ($settingsOpen) return $size + $settingsHeight;
-            else return $size;
+        [settingsHeight, settingsOpen, size, blur],
+        ([$settingsHeight, $settingsOpen, $size, $blur]) => {
+            if ($settingsOpen) return $size + $settingsHeight  + ($blur * 5);
+            else return $size + ($blur * 5);
         }
     );
 
 
-    // read settings file:
-    const settingsData = JSON.parse(fs.readFileSync(path.join(__dirname, "./settings.json")));
-    console.log("settingsData: ", settingsData);
-    const settings = writable(settingsData);
+
+    const settings = writable({});
+
+    const loadSettings = () => {
+        // read settings file:
+        const settingsData = JSON.parse(fs.readFileSync(path.join(__dirname, "./settings.json")));
+        settings.set(settingsData);
+        hue.set(settingsData.hue);
+        size.set(settingsData.size);
+        blur.set(settingsData.blur);
+
+    };
 
     /* node_modules\svelte-fa\src\fa.svelte generated by Svelte v3.35.0 */
 
-    const file$4 = "node_modules\\svelte-fa\\src\\fa.svelte";
+    const file$7 = "node_modules\\svelte-fa\\src\\fa.svelte";
 
     // (104:0) {#if i[4]}
-    function create_if_block(ctx) {
+    function create_if_block$1(ctx) {
     	let svg;
     	let g1;
     	let g0;
@@ -27581,9 +27612,9 @@ var app = (function () {
     			g0 = svg_element("g");
     			if_block.c();
     			attr_dev(g0, "transform", /*transform*/ ctx[10]);
-    			add_location(g0, file$4, 116, 6, 2052);
+    			add_location(g0, file$7, 116, 6, 2052);
     			attr_dev(g1, "transform", "translate(256 256)");
-    			add_location(g1, file$4, 113, 4, 2000);
+    			add_location(g1, file$7, 113, 4, 2000);
     			attr_dev(svg, "id", /*id*/ ctx[1]);
     			attr_dev(svg, "class", /*clazz*/ ctx[0]);
     			attr_dev(svg, "style", /*s*/ ctx[9]);
@@ -27591,7 +27622,7 @@ var app = (function () {
     			attr_dev(svg, "aria-hidden", "true");
     			attr_dev(svg, "role", "img");
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
-    			add_location(svg, file$4, 104, 2, 1830);
+    			add_location(svg, file$7, 104, 2, 1830);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, svg, anchor);
@@ -27640,7 +27671,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block.name,
+    		id: create_if_block$1.name,
     		type: "if",
     		source: "(104:0) {#if i[4]}",
     		ctx
@@ -27672,7 +27703,7 @@ var app = (function () {
     			: /*secondaryOpacity*/ ctx[6]);
 
     			attr_dev(path0, "transform", "translate(-256 -256)");
-    			add_location(path0, file$4, 124, 10, 2286);
+    			add_location(path0, file$7, 124, 10, 2286);
     			attr_dev(path1, "d", path1_d_value = /*i*/ ctx[8][4][1]);
     			attr_dev(path1, "fill", path1_fill_value = /*primaryColor*/ ctx[3] || /*color*/ ctx[2] || "currentColor");
 
@@ -27681,7 +27712,7 @@ var app = (function () {
     			: /*primaryOpacity*/ ctx[5]);
 
     			attr_dev(path1, "transform", "translate(-256 -256)");
-    			add_location(path1, file$4, 130, 10, 2529);
+    			add_location(path1, file$7, 130, 10, 2529);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, path0, anchor);
@@ -27745,7 +27776,7 @@ var app = (function () {
     			attr_dev(path, "d", path_d_value = /*i*/ ctx[8][4]);
     			attr_dev(path, "fill", path_fill_value = /*color*/ ctx[2] || /*primaryColor*/ ctx[3] || "currentColor");
     			attr_dev(path, "transform", "translate(-256 -256)");
-    			add_location(path, file$4, 118, 10, 2116);
+    			add_location(path, file$7, 118, 10, 2116);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, path, anchor);
@@ -27775,9 +27806,9 @@ var app = (function () {
     	return block;
     }
 
-    function create_fragment$4(ctx) {
+    function create_fragment$7(ctx) {
     	let if_block_anchor;
-    	let if_block = /*i*/ ctx[8][4] && create_if_block(ctx);
+    	let if_block = /*i*/ ctx[8][4] && create_if_block$1(ctx);
 
     	const block = {
     		c: function create() {
@@ -27796,7 +27827,7 @@ var app = (function () {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block(ctx);
+    					if_block = create_if_block$1(ctx);
     					if_block.c();
     					if_block.m(if_block_anchor.parentNode, if_block_anchor);
     				}
@@ -27815,7 +27846,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$4.name,
+    		id: create_fragment$7.name,
     		type: "component",
     		source: "",
     		ctx
@@ -27824,7 +27855,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$4($$self, $$props, $$invalidate) {
+    function instance$7($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("Fa", slots, []);
     	let { class: clazz = "" } = $$props;
@@ -28048,7 +28079,7 @@ var app = (function () {
     	constructor(options) {
     		super(options);
 
-    		init(this, options, instance$4, create_fragment$4, safe_not_equal, {
+    		init(this, options, instance$7, create_fragment$7, safe_not_equal, {
     			class: 0,
     			id: 1,
     			style: 11,
@@ -28070,7 +28101,7 @@ var app = (function () {
     			component: this,
     			tagName: "Fa",
     			options,
-    			id: create_fragment$4.name
+    			id: create_fragment$7.name
     		});
 
     		const { ctx } = this.$$;
@@ -28206,6 +28237,11 @@ var app = (function () {
      * Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com
      * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
      */
+    var faCog = {
+      prefix: 'fas',
+      iconName: 'cog',
+      icon: [512, 512, [], "f013", "M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"]
+    };
     var faMinus = {
       prefix: 'fas',
       iconName: 'minus',
@@ -28233,9 +28269,9 @@ var app = (function () {
     };
 
     /* src\Components\PlayPauseControl.svelte generated by Svelte v3.35.0 */
-    const file$3 = "src\\Components\\PlayPauseControl.svelte";
+    const file$6 = "src\\Components\\PlayPauseControl.svelte";
 
-    function create_fragment$3(ctx) {
+    function create_fragment$6(ctx) {
     	let button;
     	let fa;
     	let current;
@@ -28253,8 +28289,8 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			create_component(fa.$$.fragment);
-    			attr_dev(button, "class", "PlayPauseButton svelte-1hxukiw");
-    			add_location(button, file$3, 22, 4, 661);
+    			attr_dev(button, "class", "PlayPauseButton svelte-u4nnd1");
+    			add_location(button, file$6, 21, 4, 628);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -28304,7 +28340,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$3.name,
+    		id: create_fragment$6.name,
     		type: "component",
     		source: "",
     		ctx
@@ -28313,7 +28349,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$3($$self, $$props, $$invalidate) {
+    function instance$6($$self, $$props, $$invalidate) {
     	let getRunStateItem;
     	let $runState;
     	validate_store(runState, "runState");
@@ -28372,21 +28408,21 @@ var app = (function () {
     class PlayPauseControl extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$3, create_fragment$3, safe_not_equal, {});
+    		init(this, options, instance$6, create_fragment$6, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "PlayPauseControl",
     			options,
-    			id: create_fragment$3.name
+    			id: create_fragment$6.name
     		});
     	}
     }
 
     /* src\Components\Timer.svelte generated by Svelte v3.35.0 */
-    const file$2 = "src\\Components\\Timer.svelte";
+    const file$5 = "src\\Components\\Timer.svelte";
 
-    function create_fragment$2(ctx) {
+    function create_fragment$5(ctx) {
     	let div;
     	let svg;
     	let circle;
@@ -28421,19 +28457,19 @@ var app = (function () {
     			attr_dev(circle, "fill", "transparent");
     			attr_dev(circle, "stroke-width", /*thickness*/ ctx[0]);
     			attr_dev(circle, "stroke", circle_stroke_value = /*$color*/ ctx[3].alpha(0.08).hsl().string());
-    			add_location(circle, file$2, 42, 8, 1348);
+    			add_location(circle, file$5, 42, 8, 1348);
     			attr_dev(path_1, "d", path_1_d_value = `${/*path*/ ctx[2]}`);
     			attr_dev(path_1, "stroke-width", /*thickness*/ ctx[0]);
     			attr_dev(path_1, "stroke", path_1_stroke_value = /*$color*/ ctx[3].hsl().string());
     			attr_dev(path_1, "stroke-linecap", "round");
     			attr_dev(path_1, "fill", "transparent");
-    			add_location(path_1, file$2, 44, 8, 1525);
-    			attr_dev(svg, "class", "circle svelte-17w66ud");
+    			add_location(path_1, file$5, 44, 8, 1525);
+    			attr_dev(svg, "class", "circle svelte-mpgef2");
     			attr_dev(svg, "width", /*$size*/ ctx[1]);
     			attr_dev(svg, "height", /*$size*/ ctx[1]);
-    			add_location(svg, file$2, 41, 4, 1289);
-    			attr_dev(div, "class", "Timer svelte-17w66ud");
-    			add_location(div, file$2, 37, 0, 1216);
+    			add_location(svg, file$5, 41, 4, 1289);
+    			attr_dev(div, "class", "Timer svelte-mpgef2");
+    			add_location(div, file$5, 37, 0, 1216);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -28509,7 +28545,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$2.name,
+    		id: create_fragment$5.name,
     		type: "component",
     		source: "",
     		ctx
@@ -28518,7 +28554,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$2($$self, $$props, $$invalidate) {
+    function instance$5($$self, $$props, $$invalidate) {
     	let thickness;
     	let circleAngle;
     	let path;
@@ -28614,21 +28650,21 @@ var app = (function () {
     class Timer extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$2, create_fragment$2, safe_not_equal, {});
+    		init(this, options, instance$5, create_fragment$5, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Timer",
     			options,
-    			id: create_fragment$2.name
+    			id: create_fragment$5.name
     		});
     	}
     }
 
     /* src\Components\ResizeControl\ResizeControl.svelte generated by Svelte v3.35.0 */
-    const file$1 = "src\\Components\\ResizeControl\\ResizeControl.svelte";
+    const file$4 = "src\\Components\\ResizeControl\\ResizeControl.svelte";
 
-    function create_fragment$1(ctx) {
+    function create_fragment$4(ctx) {
     	let div;
     	let button0;
     	let fa0;
@@ -28651,15 +28687,14 @@ var app = (function () {
     			t = space();
     			button1 = element("button");
     			create_component(fa1.$$.fragment);
-    			attr_dev(button0, "class", "minusButton svelte-zf2htt");
-    			button0.disabled = button0_disabled_value = /*$size*/ ctx[1] <= 100;
-    			add_location(button0, file$1, 16, 4, 483);
-    			attr_dev(button1, "class", "plusButton svelte-zf2htt");
-    			button1.disabled = button1_disabled_value = /*$size*/ ctx[1] >= /*$maxSize*/ ctx[2];
-    			add_location(button1, file$1, 24, 4, 641);
-    			attr_dev(div, "class", "ResizeControl svelte-zf2htt");
-    			set_style(div, "--buttonBg", /*$color*/ ctx[0].alpha(0.2).hsl().string());
-    			add_location(div, file$1, 15, 0, 395);
+    			attr_dev(button0, "class", "minusButton svelte-uumq2b");
+    			button0.disabled = button0_disabled_value = /*$size*/ ctx[0] <= 100;
+    			add_location(button0, file$4, 16, 4, 428);
+    			attr_dev(button1, "class", "plusButton svelte-uumq2b");
+    			button1.disabled = button1_disabled_value = /*$size*/ ctx[0] >= /*$maxSize*/ ctx[1];
+    			add_location(button1, file$4, 24, 4, 586);
+    			attr_dev(div, "class", "ResizeControl svelte-uumq2b");
+    			add_location(div, file$4, 15, 0, 395);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -28675,24 +28710,20 @@ var app = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(button0, "click", /*sizeDown*/ ctx[4], false, false, false),
-    					listen_dev(button1, "click", /*sizeUp*/ ctx[3], false, false, false)
+    					listen_dev(button0, "click", /*sizeDown*/ ctx[3], false, false, false),
+    					listen_dev(button1, "click", /*sizeUp*/ ctx[2], false, false, false)
     				];
 
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if (!current || dirty & /*$size*/ 2 && button0_disabled_value !== (button0_disabled_value = /*$size*/ ctx[1] <= 100)) {
+    			if (!current || dirty & /*$size*/ 1 && button0_disabled_value !== (button0_disabled_value = /*$size*/ ctx[0] <= 100)) {
     				prop_dev(button0, "disabled", button0_disabled_value);
     			}
 
-    			if (!current || dirty & /*$size, $maxSize*/ 6 && button1_disabled_value !== (button1_disabled_value = /*$size*/ ctx[1] >= /*$maxSize*/ ctx[2])) {
+    			if (!current || dirty & /*$size, $maxSize*/ 3 && button1_disabled_value !== (button1_disabled_value = /*$size*/ ctx[0] >= /*$maxSize*/ ctx[1])) {
     				prop_dev(button1, "disabled", button1_disabled_value);
-    			}
-
-    			if (!current || dirty & /*$color*/ 1) {
-    				set_style(div, "--buttonBg", /*$color*/ ctx[0].alpha(0.2).hsl().string());
     			}
     		},
     		i: function intro(local) {
@@ -28717,7 +28748,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$1.name,
+    		id: create_fragment$4.name,
     		type: "component",
     		source: "",
     		ctx
@@ -28726,16 +28757,13 @@ var app = (function () {
     	return block;
     }
 
-    function instance$1($$self, $$props, $$invalidate) {
-    	let $color;
+    function instance$4($$self, $$props, $$invalidate) {
     	let $size;
     	let $maxSize;
-    	validate_store(color, "color");
-    	component_subscribe($$self, color, $$value => $$invalidate(0, $color = $$value));
     	validate_store(size, "size");
-    	component_subscribe($$self, size, $$value => $$invalidate(1, $size = $$value));
+    	component_subscribe($$self, size, $$value => $$invalidate(0, $size = $$value));
     	validate_store(maxSize, "maxSize");
-    	component_subscribe($$self, maxSize, $$value => $$invalidate(2, $maxSize = $$value));
+    	component_subscribe($$self, maxSize, $$value => $$invalidate(1, $maxSize = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("ResizeControl", slots, []);
     	const dispatch = createEventDispatcher();
@@ -28758,22 +28786,500 @@ var app = (function () {
     		dispatch,
     		sizeUp,
     		sizeDown,
-    		$color,
     		$size,
     		$maxSize
     	});
 
-    	return [$color, $size, $maxSize, sizeUp, sizeDown];
+    	return [$size, $maxSize, sizeUp, sizeDown];
     }
 
     class ResizeControl extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$4, create_fragment$4, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "ResizeControl",
+    			options,
+    			id: create_fragment$4.name
+    		});
+    	}
+    }
+
+    /* src\Components\Settings\SettingsButton.svelte generated by Svelte v3.35.0 */
+    const file$3 = "src\\Components\\Settings\\SettingsButton.svelte";
+
+    function create_fragment$3(ctx) {
+    	let button;
+    	let fa;
+    	let current;
+    	let mounted;
+    	let dispose;
+    	fa = new Fa({ props: { icon: faCog }, $$inline: true });
+
+    	const block = {
+    		c: function create() {
+    			button = element("button");
+    			create_component(fa.$$.fragment);
+    			attr_dev(button, "class", "SettingsButton svelte-1y5ucx2");
+    			add_location(button, file$3, 10, 0, 268);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, button, anchor);
+    			mount_component(fa, button, null);
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", /*toggleSettings*/ ctx[0], false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(fa.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(fa.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(button);
+    			destroy_component(fa);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$3.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$3($$self, $$props, $$invalidate) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots("SettingsButton", slots, []);
+
+    	const toggleSettings = () => {
+    		settingsOpen.update(isOpen => !isOpen);
+    	};
+
+    	const writable_props = [];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<SettingsButton> was created with unknown prop '${key}'`);
+    	});
+
+    	$$self.$capture_state = () => ({ settingsOpen, faCog, Fa, toggleSettings });
+    	return [toggleSettings];
+    }
+
+    class SettingsButton extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$3, create_fragment$3, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "SettingsButton",
+    			options,
+    			id: create_fragment$3.name
+    		});
+    	}
+    }
+
+    /* src\Components\Settings\SettingsSlider.svelte generated by Svelte v3.35.0 */
+
+    const file$2 = "src\\Components\\Settings\\SettingsSlider.svelte";
+
+    function create_fragment$2(ctx) {
+    	let div;
+    	let p;
+    	let t0;
+    	let t1;
+    	let input;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			p = element("p");
+    			t0 = text(/*label*/ ctx[3]);
+    			t1 = space();
+    			input = element("input");
+    			attr_dev(p, "class", "svelte-1wezfao");
+    			add_location(p, file$2, 9, 4, 147);
+    			attr_dev(input, "type", "range");
+    			attr_dev(input, "min", /*min*/ ctx[1]);
+    			attr_dev(input, "max", /*max*/ ctx[2]);
+    			attr_dev(input, "class", "svelte-1wezfao");
+    			add_location(input, file$2, 10, 4, 167);
+    			attr_dev(div, "class", "SettingsSlider svelte-1wezfao");
+    			add_location(div, file$2, 8, 0, 113);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, p);
+    			append_dev(p, t0);
+    			append_dev(div, t1);
+    			append_dev(div, input);
+    			set_input_value(input, /*value*/ ctx[0]);
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(input, "change", /*input_change_input_handler*/ ctx[4]),
+    					listen_dev(input, "input", /*input_change_input_handler*/ ctx[4])
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (dirty & /*label*/ 8) set_data_dev(t0, /*label*/ ctx[3]);
+
+    			if (dirty & /*min*/ 2) {
+    				attr_dev(input, "min", /*min*/ ctx[1]);
+    			}
+
+    			if (dirty & /*max*/ 4) {
+    				attr_dev(input, "max", /*max*/ ctx[2]);
+    			}
+
+    			if (dirty & /*value*/ 1) {
+    				set_input_value(input, /*value*/ ctx[0]);
+    			}
+    		},
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$2.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$2($$self, $$props, $$invalidate) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots("SettingsSlider", slots, []);
+    	let { value } = $$props;
+    	let { min } = $$props;
+    	let { max } = $$props;
+    	let { label } = $$props;
+    	const writable_props = ["value", "min", "max", "label"];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<SettingsSlider> was created with unknown prop '${key}'`);
+    	});
+
+    	function input_change_input_handler() {
+    		value = to_number(this.value);
+    		$$invalidate(0, value);
+    	}
+
+    	$$self.$$set = $$props => {
+    		if ("value" in $$props) $$invalidate(0, value = $$props.value);
+    		if ("min" in $$props) $$invalidate(1, min = $$props.min);
+    		if ("max" in $$props) $$invalidate(2, max = $$props.max);
+    		if ("label" in $$props) $$invalidate(3, label = $$props.label);
+    	};
+
+    	$$self.$capture_state = () => ({ value, min, max, label });
+
+    	$$self.$inject_state = $$props => {
+    		if ("value" in $$props) $$invalidate(0, value = $$props.value);
+    		if ("min" in $$props) $$invalidate(1, min = $$props.min);
+    		if ("max" in $$props) $$invalidate(2, max = $$props.max);
+    		if ("label" in $$props) $$invalidate(3, label = $$props.label);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [value, min, max, label, input_change_input_handler];
+    }
+
+    class SettingsSlider extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$2, create_fragment$2, safe_not_equal, { value: 0, min: 1, max: 2, label: 3 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "SettingsSlider",
+    			options,
+    			id: create_fragment$2.name
+    		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || {};
+
+    		if (/*value*/ ctx[0] === undefined && !("value" in props)) {
+    			console.warn("<SettingsSlider> was created without expected prop 'value'");
+    		}
+
+    		if (/*min*/ ctx[1] === undefined && !("min" in props)) {
+    			console.warn("<SettingsSlider> was created without expected prop 'min'");
+    		}
+
+    		if (/*max*/ ctx[2] === undefined && !("max" in props)) {
+    			console.warn("<SettingsSlider> was created without expected prop 'max'");
+    		}
+
+    		if (/*label*/ ctx[3] === undefined && !("label" in props)) {
+    			console.warn("<SettingsSlider> was created without expected prop 'label'");
+    		}
+    	}
+
+    	get value() {
+    		throw new Error("<SettingsSlider>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set value(value) {
+    		throw new Error("<SettingsSlider>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get min() {
+    		throw new Error("<SettingsSlider>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set min(value) {
+    		throw new Error("<SettingsSlider>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get max() {
+    		throw new Error("<SettingsSlider>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set max(value) {
+    		throw new Error("<SettingsSlider>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get label() {
+    		throw new Error("<SettingsSlider>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set label(value) {
+    		throw new Error("<SettingsSlider>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* src\Components\Settings\Settings.svelte generated by Svelte v3.35.0 */
+
+    const { console: console_1$1 } = globals;
+    const file$1 = "src\\Components\\Settings\\Settings.svelte";
+
+    function create_fragment$1(ctx) {
+    	let div;
+    	let settingsslider0;
+    	let updating_value;
+    	let t;
+    	let settingsslider1;
+    	let updating_value_1;
+    	let current;
+
+    	function settingsslider0_value_binding(value) {
+    		/*settingsslider0_value_binding*/ ctx[4](value);
+    	}
+
+    	let settingsslider0_props = { label: "Color", min: "0", max: "360" };
+
+    	if (/*$hue*/ ctx[2] !== void 0) {
+    		settingsslider0_props.value = /*$hue*/ ctx[2];
+    	}
+
+    	settingsslider0 = new SettingsSlider({
+    			props: settingsslider0_props,
+    			$$inline: true
+    		});
+
+    	binding_callbacks.push(() => bind(settingsslider0, "value", settingsslider0_value_binding));
+
+    	function settingsslider1_value_binding(value) {
+    		/*settingsslider1_value_binding*/ ctx[5](value);
+    	}
+
+    	let settingsslider1_props = { label: "Blur", min: "0", max: "10" };
+
+    	if (/*$blur*/ ctx[3] !== void 0) {
+    		settingsslider1_props.value = /*$blur*/ ctx[3];
+    	}
+
+    	settingsslider1 = new SettingsSlider({
+    			props: settingsslider1_props,
+    			$$inline: true
+    		});
+
+    	binding_callbacks.push(() => bind(settingsslider1, "value", settingsslider1_value_binding));
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			create_component(settingsslider0.$$.fragment);
+    			t = space();
+    			create_component(settingsslider1.$$.fragment);
+    			attr_dev(div, "class", "Settings svelte-4powbn");
+    			set_style(div, "--settingsHeight", /*$settingsHeight*/ ctx[0]);
+    			set_style(div, "--color2", /*$color*/ ctx[1].alpha(0.5).hsl().string() + "\r\n    ");
+    			add_location(div, file$1, 9, 0, 249);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			mount_component(settingsslider0, div, null);
+    			append_dev(div, t);
+    			mount_component(settingsslider1, div, null);
+    			current = true;
+    		},
+    		p: function update(ctx, [dirty]) {
+    			const settingsslider0_changes = {};
+
+    			if (!updating_value && dirty & /*$hue*/ 4) {
+    				updating_value = true;
+    				settingsslider0_changes.value = /*$hue*/ ctx[2];
+    				add_flush_callback(() => updating_value = false);
+    			}
+
+    			settingsslider0.$set(settingsslider0_changes);
+    			const settingsslider1_changes = {};
+
+    			if (!updating_value_1 && dirty & /*$blur*/ 8) {
+    				updating_value_1 = true;
+    				settingsslider1_changes.value = /*$blur*/ ctx[3];
+    				add_flush_callback(() => updating_value_1 = false);
+    			}
+
+    			settingsslider1.$set(settingsslider1_changes);
+
+    			if (!current || dirty & /*$settingsHeight*/ 1) {
+    				set_style(div, "--settingsHeight", /*$settingsHeight*/ ctx[0]);
+    			}
+
+    			if (!current || dirty & /*$color*/ 2) {
+    				set_style(div, "--color2", /*$color*/ ctx[1].alpha(0.5).hsl().string() + "\r\n    ");
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(settingsslider0.$$.fragment, local);
+    			transition_in(settingsslider1.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(settingsslider0.$$.fragment, local);
+    			transition_out(settingsslider1.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			destroy_component(settingsslider0);
+    			destroy_component(settingsslider1);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$1.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$1($$self, $$props, $$invalidate) {
+    	let $settingsHeight;
+    	let $color;
+    	let $hue;
+    	let $blur;
+    	validate_store(settingsHeight, "settingsHeight");
+    	component_subscribe($$self, settingsHeight, $$value => $$invalidate(0, $settingsHeight = $$value));
+    	validate_store(color, "color");
+    	component_subscribe($$self, color, $$value => $$invalidate(1, $color = $$value));
+    	validate_store(hue, "hue");
+    	component_subscribe($$self, hue, $$value => $$invalidate(2, $hue = $$value));
+    	validate_store(blur, "blur");
+    	component_subscribe($$self, blur, $$value => $$invalidate(3, $blur = $$value));
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots("Settings", slots, []);
+    	console.log("settings opened!");
+    	const writable_props = [];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console_1$1.warn(`<Settings> was created with unknown prop '${key}'`);
+    	});
+
+    	function settingsslider0_value_binding(value) {
+    		$hue = value;
+    		hue.set($hue);
+    	}
+
+    	function settingsslider1_value_binding(value) {
+    		$blur = value;
+    		blur.set($blur);
+    	}
+
+    	$$self.$capture_state = () => ({
+    		settingsOpen,
+    		settingsHeight,
+    		settings,
+    		hue,
+    		color,
+    		blur,
+    		SettingsSlider,
+    		$settingsHeight,
+    		$color,
+    		$hue,
+    		$blur
+    	});
+
+    	return [
+    		$settingsHeight,
+    		$color,
+    		$hue,
+    		$blur,
+    		settingsslider0_value_binding,
+    		settingsslider1_value_binding
+    	];
+    }
+
+    class Settings extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
     		init(this, options, instance$1, create_fragment$1, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
-    			tagName: "ResizeControl",
+    			tagName: "Settings",
     			options,
     			id: create_fragment$1.name
     		});
@@ -28785,21 +29291,65 @@ var app = (function () {
     const { console: console_1 } = globals;
     const file = "src\\App.svelte";
 
+    // (97:1) {#if $settingsOpen}
+    function create_if_block(ctx) {
+    	let settings_1;
+    	let current;
+    	settings_1 = new Settings({ $$inline: true });
+
+    	const block = {
+    		c: function create() {
+    			create_component(settings_1.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(settings_1, target, anchor);
+    			current = true;
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(settings_1.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(settings_1.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(settings_1, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block.name,
+    		type: "if",
+    		source: "(97:1) {#if $settingsOpen}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
     function create_fragment(ctx) {
     	let main;
     	let div0;
     	let t0;
     	let div1;
-    	let resizecontrol;
-    	let t1;
     	let timer;
+    	let t1;
+    	let resizecontrol;
+    	let t2;
+    	let settingsbutton;
+    	let t3;
     	let current;
     	let mounted;
     	let dispose;
-    	resizecontrol = new ResizeControl({ $$inline: true });
-    	resizecontrol.$on("sizeUp", /*makeBigger*/ ctx[4]);
-    	resizecontrol.$on("sizeDown", /*makeSmaller*/ ctx[3]);
     	timer = new Timer({ $$inline: true });
+    	resizecontrol = new ResizeControl({ $$inline: true });
+    	resizecontrol.$on("sizeUp", /*makeBigger*/ ctx[6]);
+    	resizecontrol.$on("sizeDown", /*makeSmaller*/ ctx[5]);
+    	settingsbutton = new SettingsButton({ $$inline: true });
+    	let if_block = /*$settingsOpen*/ ctx[4] && create_if_block(ctx);
 
     	const block = {
     		c: function create() {
@@ -28807,19 +29357,26 @@ var app = (function () {
     			div0 = element("div");
     			t0 = space();
     			div1 = element("div");
-    			create_component(resizecontrol.$$.fragment);
-    			t1 = space();
     			create_component(timer.$$.fragment);
-    			attr_dev(div0, "class", "draggableArea svelte-1ixbf8t");
-    			add_location(div0, file, 72, 1, 1516);
-    			attr_dev(div1, "class", "main svelte-1ixbf8t");
-    			set_style(div1, "--size", /*$size*/ ctx[0]);
-    			set_style(div1, "--color", /*$color*/ ctx[1].hsl().string());
-    			set_style(div1, "--fontSize", /*$size*/ ctx[0] / 6 + "px");
-    			set_style(div1, "--fontFamily", "Roboto " + /*$settings*/ ctx[2].fontWeight + "\n\t\t");
-    			add_location(div1, file, 74, 1, 1552);
-    			attr_dev(main, "class", "svelte-1ixbf8t");
-    			add_location(main, file, 71, 0, 1508);
+    			t1 = space();
+    			create_component(resizecontrol.$$.fragment);
+    			t2 = space();
+    			create_component(settingsbutton.$$.fragment);
+    			t3 = space();
+    			if (if_block) if_block.c();
+    			attr_dev(div0, "class", "draggableArea svelte-1wddko3");
+    			add_location(div0, file, 85, 1, 1902);
+    			attr_dev(div1, "class", "timerSection svelte-1wddko3");
+    			add_location(div1, file, 87, 1, 1938);
+    			set_style(main, "--size", /*$size*/ ctx[0]);
+    			set_style(main, "--color", /*$color*/ ctx[1].hsl().string());
+    			set_style(main, "--blur", /*$blur*/ ctx[2]);
+    			set_style(main, "--textBlur", /*$blur*/ ctx[2] * 0.15);
+    			set_style(main, "--fontSize", /*$size*/ ctx[0] / 6 + "px");
+    			set_style(main, "--fontFamily", "Roboto " + /*$settings*/ ctx[3].fontWeight);
+    			set_style(main, "--buttonBg", /*$color*/ ctx[1].alpha(0.2).hsl().string());
+    			attr_dev(main, "class", "svelte-1wddko3");
+    			add_location(main, file, 74, 0, 1646);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -28829,48 +29386,91 @@ var app = (function () {
     			append_dev(main, div0);
     			append_dev(main, t0);
     			append_dev(main, div1);
-    			mount_component(resizecontrol, div1, null);
-    			append_dev(div1, t1);
     			mount_component(timer, div1, null);
+    			append_dev(div1, t1);
+    			mount_component(resizecontrol, div1, null);
+    			append_dev(div1, t2);
+    			mount_component(settingsbutton, div1, null);
+    			append_dev(main, t3);
+    			if (if_block) if_block.m(main, null);
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(window, "keydown", /*handleKeyDown*/ ctx[5], false, false, false);
+    				dispose = listen_dev(window, "keydown", /*handleKeyDown*/ ctx[7], false, false, false);
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
+    			if (/*$settingsOpen*/ ctx[4]) {
+    				if (if_block) {
+    					if (dirty & /*$settingsOpen*/ 16) {
+    						transition_in(if_block, 1);
+    					}
+    				} else {
+    					if_block = create_if_block(ctx);
+    					if_block.c();
+    					transition_in(if_block, 1);
+    					if_block.m(main, null);
+    				}
+    			} else if (if_block) {
+    				group_outros();
+
+    				transition_out(if_block, 1, 1, () => {
+    					if_block = null;
+    				});
+
+    				check_outros();
+    			}
+
     			if (!current || dirty & /*$size*/ 1) {
-    				set_style(div1, "--size", /*$size*/ ctx[0]);
+    				set_style(main, "--size", /*$size*/ ctx[0]);
     			}
 
     			if (!current || dirty & /*$color*/ 2) {
-    				set_style(div1, "--color", /*$color*/ ctx[1].hsl().string());
+    				set_style(main, "--color", /*$color*/ ctx[1].hsl().string());
+    			}
+
+    			if (!current || dirty & /*$blur*/ 4) {
+    				set_style(main, "--blur", /*$blur*/ ctx[2]);
+    			}
+
+    			if (!current || dirty & /*$blur*/ 4) {
+    				set_style(main, "--textBlur", /*$blur*/ ctx[2] * 0.15);
     			}
 
     			if (!current || dirty & /*$size*/ 1) {
-    				set_style(div1, "--fontSize", /*$size*/ ctx[0] / 6 + "px");
+    				set_style(main, "--fontSize", /*$size*/ ctx[0] / 6 + "px");
     			}
 
-    			if (!current || dirty & /*$settings*/ 4) {
-    				set_style(div1, "--fontFamily", "Roboto " + /*$settings*/ ctx[2].fontWeight + "\n\t\t");
+    			if (!current || dirty & /*$settings*/ 8) {
+    				set_style(main, "--fontFamily", "Roboto " + /*$settings*/ ctx[3].fontWeight);
+    			}
+
+    			if (!current || dirty & /*$color*/ 2) {
+    				set_style(main, "--buttonBg", /*$color*/ ctx[1].alpha(0.2).hsl().string());
     			}
     		},
     		i: function intro(local) {
     			if (current) return;
-    			transition_in(resizecontrol.$$.fragment, local);
     			transition_in(timer.$$.fragment, local);
+    			transition_in(resizecontrol.$$.fragment, local);
+    			transition_in(settingsbutton.$$.fragment, local);
+    			transition_in(if_block);
     			current = true;
     		},
     		o: function outro(local) {
-    			transition_out(resizecontrol.$$.fragment, local);
     			transition_out(timer.$$.fragment, local);
+    			transition_out(resizecontrol.$$.fragment, local);
+    			transition_out(settingsbutton.$$.fragment, local);
+    			transition_out(if_block);
     			current = false;
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(main);
-    			destroy_component(resizecontrol);
     			destroy_component(timer);
+    			destroy_component(resizecontrol);
+    			destroy_component(settingsbutton);
+    			if (if_block) if_block.d();
     			mounted = false;
     			dispose();
     		}
@@ -28888,6 +29488,7 @@ var app = (function () {
     }
 
     function instance($$self, $$props, $$invalidate) {
+    	let $width;
     	let $size;
     	let $height;
     	let $maxSize;
@@ -28895,33 +29496,42 @@ var app = (function () {
     	let $focused;
     	let $tempDuration;
     	let $color;
+    	let $blur;
     	let $settings;
+    	let $settingsOpen;
+    	validate_store(width, "width");
+    	component_subscribe($$self, width, $$value => $$invalidate(9, $width = $$value));
     	validate_store(size, "size");
     	component_subscribe($$self, size, $$value => $$invalidate(0, $size = $$value));
     	validate_store(height, "height");
-    	component_subscribe($$self, height, $$value => $$invalidate(6, $height = $$value));
+    	component_subscribe($$self, height, $$value => $$invalidate(8, $height = $$value));
     	validate_store(maxSize, "maxSize");
-    	component_subscribe($$self, maxSize, $$value => $$invalidate(7, $maxSize = $$value));
+    	component_subscribe($$self, maxSize, $$value => $$invalidate(10, $maxSize = $$value));
     	validate_store(runState, "runState");
-    	component_subscribe($$self, runState, $$value => $$invalidate(8, $runState = $$value));
+    	component_subscribe($$self, runState, $$value => $$invalidate(11, $runState = $$value));
     	validate_store(focused, "focused");
-    	component_subscribe($$self, focused, $$value => $$invalidate(9, $focused = $$value));
+    	component_subscribe($$self, focused, $$value => $$invalidate(12, $focused = $$value));
     	validate_store(tempDuration, "tempDuration");
-    	component_subscribe($$self, tempDuration, $$value => $$invalidate(10, $tempDuration = $$value));
+    	component_subscribe($$self, tempDuration, $$value => $$invalidate(13, $tempDuration = $$value));
     	validate_store(color, "color");
     	component_subscribe($$self, color, $$value => $$invalidate(1, $color = $$value));
+    	validate_store(blur, "blur");
+    	component_subscribe($$self, blur, $$value => $$invalidate(2, $blur = $$value));
     	validate_store(settings, "settings");
-    	component_subscribe($$self, settings, $$value => $$invalidate(2, $settings = $$value));
+    	component_subscribe($$self, settings, $$value => $$invalidate(3, $settings = $$value));
+    	validate_store(settingsOpen, "settingsOpen");
+    	component_subscribe($$self, settingsOpen, $$value => $$invalidate(4, $settingsOpen = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("App", slots, []);
     	const { ipcRenderer } = require("electron");
 
     	onMount(() => {
-    		ipcRenderer.send("resize", $size, $size);
+    		loadSettings();
+    		ipcRenderer.send("resize", $width, $size);
     	});
 
     	const resizeWindow = listenTo => {
-    		ipcRenderer.send("resize", $size, $height);
+    		ipcRenderer.send("resize", $width, $height);
     	};
 
     	const makeSmaller = () => {
@@ -28979,13 +29589,16 @@ var app = (function () {
     	$$self.$capture_state = () => ({
     		onMount,
     		Timer,
-    		Controls: PlayPauseControl,
     		ipcRenderer,
     		size,
+    		width,
     		height,
     		color,
+    		blur,
     		settings,
     		maxSize,
+    		settingsOpen,
+    		loadSettings,
     		focused,
     		pause,
     		resume,
@@ -28993,10 +29606,13 @@ var app = (function () {
     		start,
     		tempDuration,
     		ResizeControl,
+    		SettingsButton,
+    		Settings,
     		resizeWindow,
     		makeSmaller,
     		makeBigger,
     		handleKeyDown,
+    		$width,
     		$size,
     		$height,
     		$maxSize,
@@ -29004,17 +29620,29 @@ var app = (function () {
     		$focused,
     		$tempDuration,
     		$color,
-    		$settings
+    		$blur,
+    		$settings,
+    		$settingsOpen
     	});
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*$size, $height*/ 65) {
+    		if ($$self.$$.dirty & /*$size, $height*/ 257) {
     			// any time the window size changes, send the signal to electron
     			resizeWindow();
     		}
     	};
 
-    	return [$size, $color, $settings, makeSmaller, makeBigger, handleKeyDown, $height];
+    	return [
+    		$size,
+    		$color,
+    		$blur,
+    		$settings,
+    		$settingsOpen,
+    		makeSmaller,
+    		makeBigger,
+    		handleKeyDown,
+    		$height
+    	];
     }
 
     class App extends SvelteComponentDev {

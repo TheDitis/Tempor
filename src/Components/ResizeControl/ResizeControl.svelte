@@ -13,7 +13,7 @@
 </script>
 
 
-<div class="ResizeControl" style="--buttonBg: {$color.alpha(0.2).hsl().string()}">
+<div class="ResizeControl">
     <button
         class="minusButton"
         disabled={$size <= 100}
@@ -40,22 +40,25 @@
         display: flex;
         justify-content: center;
         opacity: 0;
+        transition-duration: 700ms;
+        transition-delay: 500ms;
     }
     .ResizeControl:hover {
         opacity: 1;
+        transition-duration: 200ms;
+        transition-delay: 0ms;
     }
 
     button {
-        /*height: 20px;*/
         height: calc(var(--size) / 10 * 1px);
-        /*width: 30px;*/
         width: calc(var(--size) / 10 * 1px);
-
         outline: none;
         border: none;
         font-size: calc(var(--size) / 17 * 1px);
         background: var(--buttonBg);
         color: white;
+        display: flex;
+        align-items: center;
     }
 
     button:disabled {

@@ -1,4 +1,6 @@
 {
-  "hue": 180,
+  "hue": 90,
+  "size": 300,
+  "blur": 10,
   "fontWeight": "Regular"
 }

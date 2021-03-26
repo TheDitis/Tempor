@@ -1,19 +1,22 @@
 <script>
 	import {onMount} from "svelte";
 	import Timer from "./Components/Timer.svelte";
-	import Controls from "./Components/PlayPauseControl.svelte";
-
 	const {ipcRenderer} = require("electron");
-	import {size, height, color, settings, maxSize} from "./stores/appState"
+	import {size, width, height, color, blur, settings, maxSize, settingsOpen, loadSettings} from "./stores/appState"
 	import {focused, pause, resume, runState, start, tempDuration} from "./stores/timerState";
 	import ResizeControl from "./Components/ResizeControl/ResizeControl.svelte";
+	import SettingsButton from "./Components/Settings/SettingsButton.svelte";
+	import Settings from "./Components/Settings/Settings.svelte";
+
+
 
 	onMount(() => {
-		ipcRenderer.send("resize", $size, $size)
+		loadSettings();
+		ipcRenderer.send("resize", $width, $size)
 	})
 
 	const resizeWindow = (listenTo) => {
-		ipcRenderer.send("resize", $size, $height)
+		ipcRenderer.send("resize", $width, $height)
 	}
 
 	// any time the window size changes, send the signal to electron
@@ -69,21 +72,31 @@
 
 </script>
 
-<main>
+<main
+	style="
+		--size: {$size};
+		--color: {$color.hsl().string()};
+		--blur: {$blur};
+		--textBlur: {$blur * 0.15};
+		--fontSize: {$size / 6}px;
+		--fontFamily: {'Roboto ' + $settings.fontWeight};
+		--buttonBg: {$color.alpha(0.2).hsl().string()};
+	"
+>
 	<div class="draggableArea"></div>
 
 	<div
-		class="main"
-		style="
-			--size: {$size};
-			--color: {$color.hsl().string()};
-			--fontSize: {$size / 6}px;
-			--fontFamily: {'Roboto ' + $settings.fontWeight}
-		"
+		class="timerSection"
+
 	>
-		<ResizeControl on:sizeUp={makeBigger} on:sizeDown={makeSmaller}/>
 		<Timer/>
+		<ResizeControl on:sizeUp={makeBigger} on:sizeDown={makeSmaller}/>
+		<SettingsButton/>
 	</div>
+
+	{#if $settingsOpen}
+		<Settings/>
+	{/if}
 
 
 </main>
@@ -93,7 +106,9 @@
 	main {
 		margin: 0;
 		padding: 0;
-		position: relative;
+		/*display: flex;*/
+		/*flex-direction: column;*/
+		/*align-items: center;*/
 	}
 
 	h1 {
@@ -109,11 +124,11 @@
 		-webkit-app-region: drag;
 	}
 
-	.main {
+	.timerSection {
 		width: 100vw;
 		margin: 0;
 		box-sizing: border-box;
-		position: absolute;
+		position: relative;
 
 	}
 </style>

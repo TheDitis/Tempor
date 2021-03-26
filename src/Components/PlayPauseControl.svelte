@@ -12,7 +12,6 @@
                 return pausedResult;
             case "stopped":
                 return stoppedResult;
-            // case "finished":
             default:
                 return stoppedResult;
         }
@@ -21,8 +20,8 @@
 </script>
 
     <button
-            class="PlayPauseButton"
-            on:click={getRunStateItem(start, pause, resume)}
+        class="PlayPauseButton"
+        on:click={getRunStateItem(start, pause, resume)}
     >
         <Fa icon={getRunStateItem(faPlay, faPause, faPlay)}/>
     </button>
@@ -36,6 +35,7 @@
         border: none;
         font-size: calc(var(--size) * 0.10 * 1px);
         color: var(--color);
+        filter: blur(calc(var(--textBlur) * 1px))
     }
     .PlayPauseButton:focus {
         border: none;

@@ -55,7 +55,7 @@
         color: rgb(0, 190, 255)
     }
     .circle {
-        /*filter: blur(5px);*/
+        filter: blur(calc(var(--blur) * 1px));
     }
 
     .Timer {
