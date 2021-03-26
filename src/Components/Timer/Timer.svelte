@@ -1,9 +1,19 @@
 <script>
-    import partialCircle from "svg-partial-circle"
+    import partialCircle from "svg-partial-circle";
     import TimeIndicatorInput from "./TimeIndicator/TimeIndicator.svelte"
-    import {remainingTime, duration, runState, focused, pause, resume, tempDuration, start} from "../../stores/timerState";
-    import {color, size} from "../../stores/appState";
+    import {
+        remainingTime,
+        duration,
+        runState,
+        focused,
+        pause,
+        resume,
+        tempDuration,
+        start
+    } from "../../stores/timerState";
+    import {color, size, settings, showFavorites} from "../../stores/appState";
     import PlayPauseControl from "./PlayPauseControl.svelte";
+    import Favorites from "./Favorites/Favorites.svelte";
 
     // thickness of the line
     $: thickness = $size / 20;
@@ -45,6 +55,10 @@
         <path d={`${path}`} stroke-width={thickness} stroke={$color.hsl().string()} stroke-linecap="round"
               fill="transparent"/>
     </svg>
+    {#if $showFavorites && $settings.favorites}
+        <Favorites/>
+    {/if}
+
     <TimeIndicatorInput/>
     <PlayPauseControl/>
 </div>

@@ -1,9 +1,16 @@
 {
-  "hue": 277.3,
-  "size": 300,
+  "hue": 38.7,
+  "size": 350,
   "blur": 3.4,
   "fontWeight": "Regular",
   "alwaysOnTop": true,
   "transparent": false,
-  "theme": "light"
+  "theme": "dark",
+  "favorites": [
+    2200,
+    6200,
+    null,
+    null,
+    null
+  ]
 }

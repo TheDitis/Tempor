@@ -14,6 +14,7 @@
 		settings,
 		maxSize,
 		settingsOpen,
+		showFavorites,
 		loadSettings
 	} from "./stores/appState"
 	import {focused, pause, resume, runState, start, tempDuration} from "./stores/timerState";
@@ -77,6 +78,9 @@
 					focused.set(false);
 				}
 				break;
+			case "Shift":
+				showFavorites.set(true);
+				break;
 			case "Tab":
 				if (!$focused) {
 					focused.set(true);
@@ -91,6 +95,18 @@
 			default:
 				break;
 		}
+	}
+
+	const handleKeyUp = (e) => {
+		const key = e.key;
+		switch (key) {
+			case "Shift":
+				showFavorites.set(false);
+				break;
+			default:
+				break;
+		}
+
 	}
 
 	const themes = {
@@ -142,7 +158,7 @@
 
 
 </main>
-<svelte:window on:keydown={handleKeyDown}/>
+<svelte:window on:keydown={handleKeyDown} on:keyup={handleKeyUp}/>
 
 <style>
 	main {

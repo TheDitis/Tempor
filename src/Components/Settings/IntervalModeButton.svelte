@@ -29,6 +29,7 @@
         opacity: 0;
         transition-duration: 700ms;
         transition-delay: 500ms;
+        overflow: hidden;
     }
     .ThemeCycleButton:hover {
         opacity: 1;

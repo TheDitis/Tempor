@@ -4,6 +4,9 @@ const fs = require("fs");
 const path = require("path");
 
 
+export const showFavorites = writable(false);
+
+
 /// COLOR STATE ITEMS
 export const hue = writable(180);
 
@@ -58,10 +61,13 @@ export const settings = writable({})
 
 export const stayOnTop = derived(settings, $settings => $settings.alwaysOnTop);
 
+export const currentFavInd = writable(null);
+
 export const loadSettings = () => {
     // read settings file:
     const settingsData = JSON.parse(fs.readFileSync(path.join(__dirname, "./settings.json")));
     settings.set(settingsData);
+    console.log("favs: ", settingsData.favorites)
     hue.set(settingsData.hue);
     size.set(settingsData.size);
     blur.set(settingsData.blur);
@@ -77,3 +83,4 @@ export const saveSettings = () => {
     tempSettings = JSON.stringify(tempSettings, null, 2);
     fs.writeFileSync(path.join(__dirname, "./settings.json"), tempSettings)
 }
+
