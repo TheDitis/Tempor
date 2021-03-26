@@ -4,6 +4,7 @@
     import SettingsSlider from "./SettingsSlider.svelte";
     import SettingsOptionButton from "./SettingsOptionButton.svelte";
     import {faLayerGroup} from "@fortawesome/free-solid-svg-icons";
+    import SaveButton from "./SaveButton.svelte";
 </script>
 
 
@@ -16,7 +17,10 @@
 >
     <SettingsSlider label="Color" bind:value={$hue} min="0" max="360"/>
     <SettingsSlider label="Blur" bind:value={$blur} min="0" max="10"/>
-    <SettingsOptionButton icon={faLayerGroup} option="alwaysOnTop" label="Stay on top"/>
+    <div class="buttonSection">
+        <SettingsOptionButton icon={faLayerGroup} option="alwaysOnTop" label="Stay on top"/>
+    </div>
+    <SaveButton/>
 </div>
 
 
@@ -29,6 +33,13 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        /*box-shadow: 0 0 10px var(--color);*/
     }
 
+    .buttonSection {
+        margin-top: 15px;
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+    }
 </style>
