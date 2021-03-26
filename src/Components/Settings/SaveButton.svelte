@@ -1,10 +1,14 @@
 <script>
     import Fa from "svelte-fa";
     import {faSave} from "@fortawesome/free-solid-svg-icons";
+    import {saveSettings} from "../../stores/appState";
+
+
 </script>
 
 <button
     class="SaveButton"
+    on:click={saveSettings}
 >
     <Fa icon={faSave}/>
 </button>

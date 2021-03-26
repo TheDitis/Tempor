@@ -78,6 +78,12 @@
 		}
 	}
 
+	const themes = {
+		"transparent": "transparent",
+		"dark": "rgb(33, 33, 33)",
+		"light": "white",
+	}
+
 	const calcAppBg = (deps) => {
 		if ($settings.transparent) return "transparent";
 		if ($settings.theme === "dark") return "rgb(33, 33, 33)";
@@ -97,7 +103,7 @@
 		--textBlur: {$scaledBlur * 0.2};
 		--fontSize: {$size / 6}px;
 		--fontFamily: {'Roboto ' + $settings.fontWeight};
-		--buttonBg: {$color.alpha(0.2).hsl().string()};
+		--buttonBg: {$color.alpha(0.5).hsl().string()};
 		--activeButtonBg: {$color.alpha(0.6).hsl().string()};
 		--appBg: {appBg};
 	"

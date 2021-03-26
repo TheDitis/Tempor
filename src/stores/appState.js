@@ -1,4 +1,4 @@
-import {writable, derived, readable} from "svelte/store";
+import {writable, derived, readable, get} from "svelte/store";
 import Color from "color";
 const fs = require("fs");
 const path = require("path");
@@ -56,6 +56,8 @@ export const height = derived(
 
 export const settings = writable({})
 
+export const stayOnTop = derived(settings, $settings => $settings.alwaysOnTop);
+
 export const loadSettings = () => {
     // read settings file:
     const settingsData = JSON.parse(fs.readFileSync(path.join(__dirname, "./settings.json")));
@@ -63,7 +65,15 @@ export const loadSettings = () => {
     hue.set(settingsData.hue);
     size.set(settingsData.size);
     blur.set(settingsData.blur);
-
 }
 
-export const stayOnTop = derived(settings, $settings => $settings.alwaysOnTop);
+
+export const saveSettings = () => {
+    const tempHue = get(hue);
+    const tempSize = get(size);
+    const tempBlur = get(blur);
+    let tempSettings = get(settings)
+    tempSettings = {...tempSettings, hue: tempHue, size: tempSize, blur: tempBlur}
+    tempSettings = JSON.stringify(tempSettings, null, 2);
+    fs.writeFileSync(path.join(__dirname, "./settings.json"), tempSettings)
+}

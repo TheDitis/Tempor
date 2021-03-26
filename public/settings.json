@@ -1,9 +1,9 @@
 {
-  "hue": 90,
+  "hue": 98.6,
   "size": 300,
-  "blur": 0,
+  "blur": 9.6,
   "fontWeight": "Regular",
-  "alwaysOnTop": false,
+  "alwaysOnTop": true,
   "transparent": false,
   "theme": "dark"
 }
