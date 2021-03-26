@@ -43,9 +43,6 @@ const createWindow = () => {
       mainWindow.setAlwaysOnTop(value);
     }
   })
-  // ipcMain.on("start", (event, args) => {
-  //   sound.play("./endSound.wav", 1)
-  // })
 
 
   // and load the index.html of the app.

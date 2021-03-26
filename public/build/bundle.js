@@ -225,6 +225,9 @@ var app = (function () {
     function onMount(fn) {
         get_current_component().$$.on_mount.push(fn);
     }
+    function afterUpdate(fn) {
+        get_current_component().$$.after_update.push(fn);
+    }
     function createEventDispatcher() {
         const component = get_current_component();
         return (type, detail) => {
@@ -899,16 +902,6 @@ var app = (function () {
         sound.play();
         focused.set(true);
     };
-
-    function fade(node, { delay = 0, duration = 400, easing = identity } = {}) {
-        const o = +getComputedStyle(node).opacity;
-        return {
-            delay,
-            duration,
-            easing,
-            css: t => `opacity: ${t * o}`
-        };
-    }
 
     // these aren't really private, but nor are they really useful to document
 
@@ -10170,7 +10163,7 @@ var app = (function () {
 
     const stayOnTop = derived(settings, $settings => $settings.alwaysOnTop);
 
-    const currentFavInd = writable(1);
+    const currentFavInd = writable(null);
 
     const loadSettings = () => {
         // read settings file:
@@ -27410,16 +27403,17 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			h1 = element("h1");
-    			t0 = text(/*value*/ ctx[2]);
+    			t0 = text(/*readableTime*/ ctx[2]);
     			t1 = space();
     			input_1 = element("input");
-    			attr_dev(h1, "class", "svelte-7yhoto");
-    			add_location(h1, file$f, 66, 0, 2276);
-    			attr_dev(input_1, "class", "hiddenInput svelte-7yhoto");
+    			attr_dev(h1, "class", "svelte-190qjsj");
+    			add_location(h1, file$f, 87, 0, 2573);
+    			attr_dev(input_1, "class", "hiddenInput svelte-190qjsj");
     			attr_dev(input_1, "type", "text");
-    			add_location(input_1, file$f, 67, 0, 2294);
-    			attr_dev(div, "class", "TimeInput svelte-7yhoto");
-    			add_location(div, file$f, 63, 0, 2060);
+    			input_1.autofocus = true;
+    			add_location(input_1, file$f, 88, 0, 2598);
+    			attr_dev(div, "class", "TimeInput svelte-190qjsj");
+    			add_location(div, file$f, 86, 0, 2517);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -27430,21 +27424,22 @@ var app = (function () {
     			append_dev(h1, t0);
     			append_dev(div, t1);
     			append_dev(div, input_1);
-    			/*input_1_binding*/ ctx[7](input_1);
+    			/*input_1_binding*/ ctx[8](input_1);
     			set_input_value(input_1, /*numbers*/ ctx[0]);
+    			input_1.focus();
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(input_1, "input", /*input_1_input_handler*/ ctx[8]),
+    					listen_dev(input_1, "input", /*input_1_input_handler*/ ctx[9]),
     					listen_dev(input_1, "input", /*handleChange*/ ctx[3], false, false, false),
-    					listen_dev(div, "click", /*click_handler*/ ctx[9], false, false, false)
+    					listen_dev(div, "click", /*click_handler*/ ctx[10], false, false, false)
     				];
 
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*value*/ 4) set_data_dev(t0, /*value*/ ctx[2]);
+    			if (dirty & /*readableTime*/ 4) set_data_dev(t0, /*readableTime*/ ctx[2]);
 
     			if (dirty & /*numbers*/ 1 && input_1.value !== /*numbers*/ ctx[0]) {
     				set_input_value(input_1, /*numbers*/ ctx[0]);
@@ -27454,7 +27449,7 @@ var app = (function () {
     		o: noop,
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
-    			/*input_1_binding*/ ctx[7](null);
+    			/*input_1_binding*/ ctx[8](null);
     			mounted = false;
     			run_all(dispose);
     		}
@@ -27472,17 +27467,17 @@ var app = (function () {
     }
 
     function instance$f($$self, $$props, $$invalidate) {
-    	let value;
+    	let readableTime;
     	let $tempDuration;
     	let $runState;
     	let $currentFavInd;
     	let $settings;
     	validate_store(tempDuration, "tempDuration");
-    	component_subscribe($$self, tempDuration, $$value => $$invalidate(10, $tempDuration = $$value));
+    	component_subscribe($$self, tempDuration, $$value => $$invalidate(11, $tempDuration = $$value));
     	validate_store(runState, "runState");
-    	component_subscribe($$self, runState, $$value => $$invalidate(11, $runState = $$value));
+    	component_subscribe($$self, runState, $$value => $$invalidate(12, $runState = $$value));
     	validate_store(currentFavInd, "currentFavInd");
-    	component_subscribe($$self, currentFavInd, $$value => $$invalidate(12, $currentFavInd = $$value));
+    	component_subscribe($$self, currentFavInd, $$value => $$invalidate(7, $currentFavInd = $$value));
     	validate_store(settings, "settings");
     	component_subscribe($$self, settings, $$value => $$invalidate(13, $settings = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
@@ -27494,16 +27489,29 @@ var app = (function () {
     	let input;
 
     	onMount(() => {
-    		input.focus();
+    		console.log("mounting input");
 
     		if ($tempDuration !== 0 && $runState !== "running") {
     			$$invalidate(0, numbers = formatTimeMs($tempDuration).replaceAll(":", ""));
     			numsStrToHrsMinsSecs();
     		}
+    	}); // input.focus();
 
-    		console.log("loading input");
+    	afterUpdate(() => {
+    		setTimeout(input.focus, 200);
+    		console.log("update called");
     	});
 
+    	const onFavUpdate = deps => {
+    		if ($tempDuration !== 0 && $runState !== "running") {
+    			$$invalidate(0, numbers = formatTimeMs($tempDuration).replaceAll(":", ""));
+    			numsStrToHrsMinsSecs();
+    		}
+    	}; // if (input) input.focus();
+
+    	// $: {
+    	//     if ($focused && input) input.focus();
+    	// }
     	const updateTempDuration = () => {
     		const duration = Duration.fromObject({ hours, minutes, seconds });
     		console.log(duration.toMillis());
@@ -27564,12 +27572,12 @@ var app = (function () {
 
     	$$self.$capture_state = () => ({
     		onMount,
-    		fade,
+    		afterUpdate,
     		formatTime,
-    		msToHrsMinsSecs,
     		formatTimeMs,
     		tempDuration,
     		runState,
+    		focused,
     		currentFavInd,
     		settings,
     		Duration,
@@ -27579,13 +27587,14 @@ var app = (function () {
     		seconds,
     		numbers,
     		input,
+    		onFavUpdate,
     		updateTempDuration,
     		numsStrToHrsMinsSecs,
     		handleChange,
-    		value,
     		$tempDuration,
     		$runState,
     		$currentFavInd,
+    		readableTime,
     		$settings
     	});
 
@@ -27595,7 +27604,7 @@ var app = (function () {
     		if ("seconds" in $$props) $$invalidate(6, seconds = $$props.seconds);
     		if ("numbers" in $$props) $$invalidate(0, numbers = $$props.numbers);
     		if ("input" in $$props) $$invalidate(1, input = $$props.input);
-    		if ("value" in $$props) $$invalidate(2, value = $$props.value);
+    		if ("readableTime" in $$props) $$invalidate(2, readableTime = $$props.readableTime);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -27603,19 +27612,26 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*$currentFavInd*/ 128) {
+    			{
+    				onFavUpdate();
+    			}
+    		}
+
     		if ($$self.$$.dirty & /*hours, minutes, seconds*/ 112) {
-    			$$invalidate(2, value = formatTime(hours, minutes, seconds));
+    			$$invalidate(2, readableTime = formatTime(hours, minutes, seconds));
     		}
     	};
 
     	return [
     		numbers,
     		input,
-    		value,
+    		readableTime,
     		handleChange,
     		hours,
     		minutes,
     		seconds,
+    		$currentFavInd,
     		input_1_binding,
     		input_1_input_handler,
     		click_handler
@@ -27634,6 +27650,16 @@ var app = (function () {
     			id: create_fragment$f.name
     		});
     	}
+    }
+
+    function fade(node, { delay = 0, duration = 400, easing = identity } = {}) {
+        const o = +getComputedStyle(node).opacity;
+        return {
+            delay,
+            duration,
+            easing,
+            css: t => `opacity: ${t * o}`
+        };
     }
 
     /* src\Components\Timer\TimeIndicator\TimeIndicator.svelte generated by Svelte v3.35.0 */
@@ -30531,7 +30557,7 @@ var app = (function () {
     const { console: console_1 } = globals;
     const file = "src\\App.svelte";
 
-    // (189:1) {#if $settingsOpen}
+    // (214:1) {#if $settingsOpen}
     function create_if_block(ctx) {
     	let settings_1;
     	let current;
@@ -30563,7 +30589,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(189:1) {#if $settingsOpen}",
+    		source: "(214:1) {#if $settingsOpen}",
     		ctx
     	});
 
@@ -30615,9 +30641,9 @@ var app = (function () {
     			t5 = space();
     			if (if_block) if_block.c();
     			attr_dev(div0, "class", "draggableArea svelte-18abru");
-    			add_location(div0, file, 175, 1, 3548);
+    			add_location(div0, file, 200, 1, 4238);
     			attr_dev(div1, "class", "timerSection svelte-18abru");
-    			add_location(div1, file, 177, 1, 3584);
+    			add_location(div1, file, 202, 1, 4274);
     			set_style(main, "--size", /*$size*/ ctx[1]);
     			set_style(main, "--width", /*$width*/ ctx[0]);
     			set_style(main, "--color", /*$color*/ ctx[5].hsl().string());
@@ -30630,7 +30656,7 @@ var app = (function () {
     			set_style(main, "--appBg", /*appBg*/ ctx[3]);
     			set_style(main, "--frameRadius", /*borderRadius*/ ctx[4]);
     			attr_dev(main, "class", "svelte-18abru");
-    			add_location(main, file, 160, 0, 3151);
+    			add_location(main, file, 185, 0, 3841);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -30820,13 +30846,10 @@ var app = (function () {
     	});
 
     	const changeStayOnTop = deps => {
-    		console.log("stayOnTop: ", $stayOnTop);
     		ipcRenderer.send("stayontop", $stayOnTop);
     	};
 
     	const resizeWindow = deps => {
-    		console.log("$width: ", $width);
-    		console.log("$height: ", $height);
     		ipcRenderer.send("resize", $width, $height);
     	};
 
@@ -30848,26 +30871,45 @@ var app = (function () {
     	};
 
     	const setFavorite = key => {
-    		if ($focused && $tempDuration) {
+    		if ($focused) {
+    			console.log("setting favorite: ", favKeyMap.set[key], " to ", $tempDuration);
     			const tempFavorites = $settings.favorites;
-    			tempFavorites[favKeyMap.set[key]] = $tempDuration;
-    			settings.set({ ...$settings, favorites: tempFavorites });
-    			currentFavInd.set(favKeyMap.set[key]);
+
+    			// if this value isn't already in a favorite slot
+    			if (!tempFavorites.includes($tempDuration)) {
+    				tempFavorites[favKeyMap.set[key]] = $tempDuration > 0 ? $tempDuration : null;
+    				settings.set({ ...$settings, favorites: tempFavorites });
+    				currentFavInd.set(favKeyMap.set[key]);
+    			}
+    		}
+    	};
+
+    	const loadFavorite = key => {
+    		const favInd = favKeyMap.load[key];
+    		const setting = $settings.favorites[favInd];
+
+    		if (!!setting) {
+    			if ($runState === "running") {
+    				pause();
+    			}
+
+    			focused.set(true);
+    			tempDuration.set(setting);
+    			currentFavInd.set(favInd);
     		}
     	};
 
     	const handleKeyDown = e => {
     		const key = e.key;
+    		if (e.repeat) return;
     		console.log(key);
 
     		switch (key) {
     			case " ":
-    				console.log("Space pressed!");
-    				if ($runState === "running") pause(); else if ($runState === "paused") resume();
+    				if ($runState === "running") pause(); else if ($runState === "paused") resume(); else if ($runState === "finished" && $tempDuration) start();
     				break;
     			case "Enter":
     				if ($focused && $tempDuration) {
-    					console.log("starting");
     					start();
     				}
     				break;
@@ -30875,6 +30917,12 @@ var app = (function () {
     				if ($focused) {
     					focused.set(false);
     				}
+    				break;
+    			case "Tab":
+    				// prevents focus being shifted away from the input as soon as it renders
+    				e.preventDefault();
+    				e.stopPropagation();
+    				focused.set(!$focused);
     				break;
     			case "Shift":
     				showFavorites.set(true);
@@ -30886,10 +30934,12 @@ var app = (function () {
     			case "T":
     				setFavorite(key);
     				break;
-    			case "Tab":
-    				if (!$focused) {
-    					focused.set(true);
-    				}
+    			case "!":
+    			case "@":
+    			case "#":
+    			case "$":
+    			case "%":
+    				loadFavorite(key);
     				break;
     			case "-":
     				makeSmaller();
@@ -30956,6 +31006,7 @@ var app = (function () {
     		makeBigger,
     		favKeyMap,
     		setFavorite,
+    		loadFavorite,
     		handleKeyDown,
     		handleKeyUp,
     		themes,

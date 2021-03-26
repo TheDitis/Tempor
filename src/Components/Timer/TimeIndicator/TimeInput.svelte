@@ -1,27 +1,50 @@
 <script>
-    import {onMount} from "svelte";
-    import {fade} from "svelte/transition";
-    import {formatTime, msToHrsMinsSecs, formatTimeMs} from "../../../utils/utils";
-    import {tempDuration, runState} from "../../../stores/timerState";
+    import {onMount, afterUpdate} from "svelte";
+    import {formatTime, formatTimeMs} from "../../../utils/utils";
+    import {tempDuration, runState, focused} from "../../../stores/timerState";
     import {currentFavInd, settings} from "../../../stores/appState";
     import {Duration} from "luxon";
     import _ from "lodash";
-    // let text = "00:00:00";
+
     let hours = 0;
     let minutes = 0;
     let seconds = 0;
-    $: value = formatTime(hours, minutes, seconds)
+
     let numbers = ""
     let input;
 
     onMount(() => {
-        input.focus();
+        console.log("mounting input")
+
         if ($tempDuration !== 0 && $runState !== "running") {
             numbers = formatTimeMs($tempDuration).replaceAll(":", "")
             numsStrToHrsMinsSecs();
         }
-        console.log("loading input")
+        // input.focus();
     })
+
+    afterUpdate(() => {
+        setTimeout(input.focus, 200)
+        console.log("update called")
+    })
+
+    const onFavUpdate = (deps) => {
+        if ($tempDuration !== 0 && $runState !== "running") {
+            numbers = formatTimeMs($tempDuration).replaceAll(":", "")
+            numsStrToHrsMinsSecs();
+        }
+        // if (input) input.focus();
+    }
+
+    $: {
+        onFavUpdate($currentFavInd);
+    }
+    $: readableTime = formatTime(hours, minutes, seconds)
+
+    // $: {
+    //     if ($focused && input) input.focus();
+    // }
+
 
     const updateTempDuration = () => {
         const duration = Duration.fromObject({hours, minutes, seconds})
@@ -62,10 +85,8 @@
 
 
 <div class="TimeInput" on:click={() => input.focus()}>
-<!--    <input class="textInput" bind:value={value} on:input={handleChange}/>-->
-<!--    <h1 bind:this={input} contenteditable bind:innerHTML={text}></h1>-->
-<h1>{value}</h1>
-<input bind:this={input} class="hiddenInput" type="text" bind:value={numbers} on:input={handleChange}/>
+<h1>{readableTime}</h1>
+<input bind:this={input} class="hiddenInput" type="text" bind:value={numbers} on:input={handleChange} autofocus/>
 </div>
 
 
@@ -85,12 +106,9 @@
 
     .hiddenInput {
         position: absolute;
+        /*visibility: hidden;*/
         opacity: 0;
+        /*width: 0;*/
+        /*height: 0;*/
     }
-
-    /*input::-webkit-outer-spin-button,*/
-    /*input::-webkit-inner-spin-button {*/
-    /*    -webkit-appearance: none;*/
-    /*    margin: 0;*/
-    /*}*/
 </style>

@@ -32,13 +32,10 @@
 	})
 
 	const changeStayOnTop = (deps) => {
-		console.log("stayOnTop: ", $stayOnTop)
 		ipcRenderer.send("stayontop", $stayOnTop);
 	}
 
 	const resizeWindow = (deps) => {
-		console.log("$width: ", $width);
-		console.log("$height: ", $height);
 		ipcRenderer.send("resize", $width, $height)
 	}
 
@@ -77,27 +74,44 @@
 	}
 
 	const setFavorite = (key) => {
-		if ($focused && $tempDuration) {
+		if ($focused) {
+			console.log("setting favorite: ", favKeyMap.set[key], " to ", $tempDuration)
 			const tempFavorites = $settings.favorites;
-			tempFavorites[favKeyMap.set[key]] = $tempDuration;
-			settings.set({...$settings, favorites: tempFavorites})
-			currentFavInd.set(favKeyMap.set[key]);
+			// if this value isn't already in a favorite slot
+			if (!tempFavorites.includes($tempDuration)) {
+				tempFavorites[favKeyMap.set[key]] = $tempDuration > 0 ? $tempDuration : null;
+				settings.set({...$settings, favorites: tempFavorites})
+				currentFavInd.set(favKeyMap.set[key]);
+			}
+		}
+	}
+
+	const loadFavorite = (key) => {
+		const favInd = favKeyMap.load[key];
+		const setting = $settings.favorites[favInd]
+		if (!!setting) {
+			if ($runState === "running") {
+				pause();
+			}
+			focused.set(true);
+			tempDuration.set(setting);
+			currentFavInd.set(favInd);
 		}
 	}
 
 	const handleKeyDown = (e) => {
 		const key = e.key;
+		if (e.repeat) return;
 		console.log(key)
 		switch (key) {
 			/// MAIN PAUSE/PLAY CONTROLS
 			case " ":
-				console.log("Space pressed!");
 				if ($runState === "running") pause();
 				else if ($runState === "paused") resume();
+				else if ($runState === "finished" && $tempDuration) start();
 				break;
 			case "Enter":
 				if ($focused && $tempDuration) {
-					console.log("starting")
 					start();
 				}
 				break;
@@ -106,11 +120,18 @@
 					focused.set(false);
 				}
 				break;
+			case "Tab":
+				// prevents focus being shifted away from the input as soon as it renders
+				e.preventDefault();
+				e.stopPropagation();
+				focused.set(!$focused);
+				break;
 
 			/// FAVORITES CONTROLS:
 			case "Shift":
 				showFavorites.set(true);
 				break;
+			// keys for setting favorites
 			case "Q":
 			case "W":
 			case "E":
@@ -118,12 +139,16 @@
 			case "T":
 				setFavorite(key);
 				break;
-
-			case "Tab":
-				if (!$focused) {
-					focused.set(true);
-				}
+			// keys for loading favorites
+			case "!":
+			case "@":
+			case "#":
+			case "$":
+			case "%":
+				loadFavorite(key);
 				break;
+
+			/// WINDOW SIZING CONTROLS:
 			case "-":
 				makeSmaller();
 				break;
