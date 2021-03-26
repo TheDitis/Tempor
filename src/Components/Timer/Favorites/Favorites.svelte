@@ -33,14 +33,19 @@
         opacity: 0.3;
         margin: 0;
         padding: 0;
-        border: 2px solid var(--color);
-        height: calc(var(--size) * 0.08 * 1px);
-        width: calc(var(--size) * 0.08 * 1px);
+        height: calc(var(--size) * 0.09 * 1px);
+        width: calc(var(--size) * 0.09 * 1px);
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
         border-radius: 1000px;
+        box-sizing: border-box;
+    }
+
+    .selected {
+        border: 2px solid var(--color);
+        box-shadow: 0 0 6px var(--color);
     }
 
     .used {

@@ -1,7 +1,9 @@
 <script>
     import {onMount} from "svelte";
+    import {fade} from "svelte/transition";
     import {formatTime, msToHrsMinsSecs, formatTimeMs} from "../../../utils/utils";
     import {tempDuration, runState} from "../../../stores/timerState";
+    import {currentFavInd, settings} from "../../../stores/appState";
     import {Duration} from "luxon";
     import _ from "lodash";
     // let text = "00:00:00";
@@ -18,12 +20,16 @@
             numbers = formatTimeMs($tempDuration).replaceAll(":", "")
             numsStrToHrsMinsSecs();
         }
+        console.log("loading input")
     })
 
     const updateTempDuration = () => {
         const duration = Duration.fromObject({hours, minutes, seconds})
         console.log(duration.toMillis());
         tempDuration.set(duration.toMillis());
+        if ($currentFavInd !== null && $settings.favorites[$currentFavInd] !== duration.toMillis()) {
+            currentFavInd.set(null)
+        }
     }
 
     const numsStrToHrsMinsSecs = () => {

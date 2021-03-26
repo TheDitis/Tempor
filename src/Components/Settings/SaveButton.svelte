@@ -34,7 +34,7 @@
         color: var(--color);
 
         position: absolute;
-        right: 8px;
+        /*right: 8px;*/
         bottom: 8px;
 
         transition-duration: 300ms;

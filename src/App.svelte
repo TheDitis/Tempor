@@ -15,6 +15,7 @@
 		maxSize,
 		settingsOpen,
 		showFavorites,
+		currentFavInd,
 		loadSettings
 	} from "./stores/appState"
 	import {focused, pause, resume, runState, start, tempDuration} from "./stores/timerState";
@@ -58,10 +59,37 @@
 		}
 	}
 
+	const favKeyMap = {
+		set: {
+			Q: 0,
+			W: 1,
+			E: 2,
+			R: 3,
+			T: 4
+		},
+		load: {
+			"!": 0,
+			"@": 1,
+			"#": 2,
+			"$": 3,
+			"%": 4
+		}
+	}
+
+	const setFavorite = (key) => {
+		if ($focused && $tempDuration) {
+			const tempFavorites = $settings.favorites;
+			tempFavorites[favKeyMap.set[key]] = $tempDuration;
+			settings.set({...$settings, favorites: tempFavorites})
+			currentFavInd.set(favKeyMap.set[key]);
+		}
+	}
+
 	const handleKeyDown = (e) => {
 		const key = e.key;
 		console.log(key)
 		switch (key) {
+			/// MAIN PAUSE/PLAY CONTROLS
 			case " ":
 				console.log("Space pressed!");
 				if ($runState === "running") pause();
@@ -78,9 +106,19 @@
 					focused.set(false);
 				}
 				break;
+
+			/// FAVORITES CONTROLS:
 			case "Shift":
 				showFavorites.set(true);
 				break;
+			case "Q":
+			case "W":
+			case "E":
+			case "R":
+			case "T":
+				setFavorite(key);
+				break;
+
 			case "Tab":
 				if (!$focused) {
 					focused.set(true);
@@ -115,13 +153,8 @@
 		"light": "white",
 	}
 
-	const calcAppBg = (deps) => {
-		if ($settings.transparent) return "transparent";
-		if ($settings.theme === "dark") return "rgb(33, 33, 33)";
-		else return "white";
-	}
-
 	$: appBg = themes[$settings.theme];
+	$: borderRadius = ($settings.frame === "round") ? `${$width}px` : "40px"
 
 </script>
 
@@ -137,6 +170,7 @@
 		--buttonBg: {$color.alpha(0.5).hsl().string()};
 		--activeButtonBg: {$color.alpha(0.6).hsl().string()};
 		--appBg: {appBg};
+		--frameRadius: {borderRadius};
 	"
 >
 	<div class="draggableArea"></div>
@@ -165,7 +199,10 @@
 		margin: 0;
 		padding: 0;
 		background: var(--appBg);
-		border-radius: 20px;
+		/*border-radius: 40px;*/
+		/*border*/
+		/*border-radius: calc(var(--width) * 1px);*/
+		border-radius: var(--frameRadius);
 	}
 
 

@@ -6,6 +6,7 @@
   "alwaysOnTop": true,
   "transparent": false,
   "theme": "dark",
+  "frame": "square",
   "favorites": [
     2200,
     6200,

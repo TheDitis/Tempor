@@ -66,6 +66,7 @@ export const resume = () => {
     const dur = get(duration);
     const remTime = get(pausedRemainingTime)
     startTime.set(Date.now() - (dur - remTime));
+    focused.set(false);
     runState.set("running");
 }
 

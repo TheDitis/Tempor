@@ -61,7 +61,7 @@ export const settings = writable({})
 
 export const stayOnTop = derived(settings, $settings => $settings.alwaysOnTop);
 
-export const currentFavInd = writable(null);
+export const currentFavInd = writable(1);
 
 export const loadSettings = () => {
     // read settings file:

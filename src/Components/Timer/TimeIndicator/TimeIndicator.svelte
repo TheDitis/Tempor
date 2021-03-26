@@ -2,7 +2,7 @@
     import {remainingTime, runState, time, focused} from "../../../stores/timerState";
     import TimeInput from "./TimeInput.svelte";
     import {formatTimeMs} from "../../../utils/utils";
-
+    import {fade} from "svelte/transition";
 
 
 
@@ -10,7 +10,7 @@
     const blinkInterval = 1000  // one second blinks
     $: opacity = $runState === "paused" ? (
         $time % blinkInterval > blinkInterval / 3 ?
-            1 : 0
+            1 : 0.3
     ) : 1
 
     const handleFocus = (e) => {
@@ -27,7 +27,7 @@
     on:click|stopPropagation={handleFocus}
 >
     {#if $focused}
-        <TimeInput />
+        <TimeInput/>
     {:else}
         <h1 class="time">{formatTimeMs($remainingTime)}</h1>
     {/if}
