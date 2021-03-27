@@ -8,22 +8,28 @@
 		width,
 		height,
 		color,
-		blur,
 		stayOnTop,
 		scaledBlur,
 		settings,
 		maxSize,
 		settingsOpen,
-		showFavorites,
-		currentFavInd,
-		loadSettings
-	} from "./stores/appState"
-	import {focused, pause, resume, runState, start, tempDuration, duration} from "./stores/timerState";
+		loadSettings, intervalMode
+	} from "./stores/appState";
 	import ResizeControl from "./Components/Controls/ResizeControl.svelte";
 	import OpenSettingsButton from "./Components/Settings/OpenSettingsButton.svelte";
 	import Settings from "./Components/Settings/Settings.svelte";
 	import ThemeCycleButton from "./Components/Settings/ThemeCycleButton.svelte";
 	import IntervalModeButton from "./Components/Controls/IntervalModeButton.svelte";
+	import MasterControls from "./Components/Controls/MasterControls.svelte";
+	import {
+		duration,
+		focused,
+		intervalDurations,
+		intervalIndex, pausedRemainingTime, remainingTime,
+		runState,
+		startTime,
+		tempDuration
+	} from "./stores/timerState";
 
 
 	onMount(() => {
@@ -44,6 +50,40 @@
 
 	$: changeStayOnTop([$stayOnTop])
 
+
+	// sets the duration, start time, and run-state of the timer
+	export const start = () => {
+		let tempDur;
+		if (!$intervalMode) {
+			tempDur = $tempDuration;
+		}
+		else {
+			tempDur = $intervalDurations[$intervalIndex];
+		}
+		if (tempDur !== 0) {
+			startTime.set(Date.now())
+			duration.set(tempDur);
+			focused.set(false);
+			runState.set("running");
+			const sound = new Audio("file://" + __dirname + "/sounds/startSound.wav");
+			sound.play();
+		}
+	}
+
+	// gets the current remaining time and sets the state to 'paused'
+	export const pause = () => {
+		pausedRemainingTime.set($remainingTime);
+		runState.set("paused");
+	}
+
+	// calculates the new relative start-time based on how much time is remaining and sets the state back to running
+	export const resume = () => {
+		startTime.set(Date.now() - ($duration - $pausedRemainingTime));
+		focused.set(false);
+		runState.set("running");
+	}
+
+
 	const makeSmaller = () => {
 		if ($size > 100) {
 			size.update(v => v - 50);
@@ -54,122 +94,6 @@
 		if ($size < $maxSize) {
 			size.update(v => v + 50)
 		}
-	}
-
-	const favKeyMap = {
-		set: {
-			Q: 0,
-			W: 1,
-			E: 2,
-			R: 3,
-			T: 4
-		},
-		load: {
-			"!": 0,
-			"@": 1,
-			"#": 2,
-			"$": 3,
-			"%": 4
-		}
-	}
-
-	const setFavorite = (key) => {
-		if ($focused) {
-			console.log("setting favorite: ", favKeyMap.set[key], " to ", $tempDuration)
-			const tempFavorites = $settings.favorites;
-			// if this value isn't already in a favorite slot
-			if (!tempFavorites.includes($tempDuration)) {
-				tempFavorites[favKeyMap.set[key]] = $tempDuration > 0 ? $tempDuration : null;
-				settings.set({...$settings, favorites: tempFavorites})
-				currentFavInd.set(favKeyMap.set[key]);
-			}
-		}
-	}
-
-	const loadFavorite = (key) => {
-		const favInd = favKeyMap.load[key];
-		const setting = $settings.favorites[favInd]
-		if (!!setting && setting !== $tempDuration) {
-			if ($runState === "running") {
-				pause();
-			}
-			focused.set(true);
-			tempDuration.set(setting);
-			currentFavInd.set(favInd);
-		}
-	}
-
-	const handleKeyDown = (e) => {
-		const key = e.key;
-		if (e.repeat) return;
-		console.log(key)
-		switch (key) {
-			/// MAIN PAUSE/PLAY CONTROLS
-			case " ":
-				if ($runState === "running") pause();
-				else if (($runState === "finished" || ($currentFavInd !== null && $tempDuration !== $duration)) && $tempDuration) start();
-				else if ($runState === "paused") resume();
-				break;
-			case "Enter":
-				if ($focused && $tempDuration) {
-					start();
-				}
-				break;
-			case "Escape":
-				if ($focused) {
-					focused.set(false);
-				}
-				break;
-			case "Tab":
-				// prevents focus being shifted away from the input as soon as it renders
-				e.preventDefault();
-				e.stopPropagation();
-				focused.set(!$focused);
-				break;
-
-			/// FAVORITES CONTROLS:
-			case "Shift":
-				showFavorites.set(true);
-				break;
-			// keys for setting favorites
-			case "Q":
-			case "W":
-			case "E":
-			case "R":
-			case "T":
-				setFavorite(key);
-				break;
-			// keys for loading favorites
-			case "!":
-			case "@":
-			case "#":
-			case "$":
-			case "%":
-				loadFavorite(key);
-				break;
-
-			/// WINDOW SIZING CONTROLS:
-			case "-":
-				makeSmaller();
-				break;
-			case "=":
-				makeBigger();
-				break;
-			default:
-				break;
-		}
-	}
-
-	const handleKeyUp = (e) => {
-		const key = e.key;
-		switch (key) {
-			case "Shift":
-				showFavorites.set(false);
-				break;
-			default:
-				break;
-		}
-
 	}
 
 	const themes = {
@@ -200,11 +124,8 @@
 >
 	<div class="draggableArea"></div>
 
-	<div
-		class="timerSection"
-
-	>
-		<Timer/>
+	<div class="timerSection">
+		<Timer start={start} pause={pause} resume={resume}/>
 		<ResizeControl on:sizeUp={makeBigger} on:sizeDown={makeSmaller}/>
 		<OpenSettingsButton/>
 		<ThemeCycleButton/>
@@ -215,9 +136,9 @@
 		<Settings/>
 	{/if}
 
-
 </main>
-<svelte:window on:keydown={handleKeyDown} on:keyup={handleKeyUp}/>
+<MasterControls start={start} pause={pause} resume={resume} makeBigger={makeBigger} makeSmaller={makeSmaller}/>
+
 
 <style>
 	main {

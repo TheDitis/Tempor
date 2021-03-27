@@ -825,6 +825,2194 @@ var app = (function () {
         });
     }
 
+    var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+    function createCommonjsModule(fn) {
+      var module = { exports: {} };
+    	return fn(module, module.exports), module.exports;
+    }
+
+    var colorName$1 = {
+    	"aliceblue": [240, 248, 255],
+    	"antiquewhite": [250, 235, 215],
+    	"aqua": [0, 255, 255],
+    	"aquamarine": [127, 255, 212],
+    	"azure": [240, 255, 255],
+    	"beige": [245, 245, 220],
+    	"bisque": [255, 228, 196],
+    	"black": [0, 0, 0],
+    	"blanchedalmond": [255, 235, 205],
+    	"blue": [0, 0, 255],
+    	"blueviolet": [138, 43, 226],
+    	"brown": [165, 42, 42],
+    	"burlywood": [222, 184, 135],
+    	"cadetblue": [95, 158, 160],
+    	"chartreuse": [127, 255, 0],
+    	"chocolate": [210, 105, 30],
+    	"coral": [255, 127, 80],
+    	"cornflowerblue": [100, 149, 237],
+    	"cornsilk": [255, 248, 220],
+    	"crimson": [220, 20, 60],
+    	"cyan": [0, 255, 255],
+    	"darkblue": [0, 0, 139],
+    	"darkcyan": [0, 139, 139],
+    	"darkgoldenrod": [184, 134, 11],
+    	"darkgray": [169, 169, 169],
+    	"darkgreen": [0, 100, 0],
+    	"darkgrey": [169, 169, 169],
+    	"darkkhaki": [189, 183, 107],
+    	"darkmagenta": [139, 0, 139],
+    	"darkolivegreen": [85, 107, 47],
+    	"darkorange": [255, 140, 0],
+    	"darkorchid": [153, 50, 204],
+    	"darkred": [139, 0, 0],
+    	"darksalmon": [233, 150, 122],
+    	"darkseagreen": [143, 188, 143],
+    	"darkslateblue": [72, 61, 139],
+    	"darkslategray": [47, 79, 79],
+    	"darkslategrey": [47, 79, 79],
+    	"darkturquoise": [0, 206, 209],
+    	"darkviolet": [148, 0, 211],
+    	"deeppink": [255, 20, 147],
+    	"deepskyblue": [0, 191, 255],
+    	"dimgray": [105, 105, 105],
+    	"dimgrey": [105, 105, 105],
+    	"dodgerblue": [30, 144, 255],
+    	"firebrick": [178, 34, 34],
+    	"floralwhite": [255, 250, 240],
+    	"forestgreen": [34, 139, 34],
+    	"fuchsia": [255, 0, 255],
+    	"gainsboro": [220, 220, 220],
+    	"ghostwhite": [248, 248, 255],
+    	"gold": [255, 215, 0],
+    	"goldenrod": [218, 165, 32],
+    	"gray": [128, 128, 128],
+    	"green": [0, 128, 0],
+    	"greenyellow": [173, 255, 47],
+    	"grey": [128, 128, 128],
+    	"honeydew": [240, 255, 240],
+    	"hotpink": [255, 105, 180],
+    	"indianred": [205, 92, 92],
+    	"indigo": [75, 0, 130],
+    	"ivory": [255, 255, 240],
+    	"khaki": [240, 230, 140],
+    	"lavender": [230, 230, 250],
+    	"lavenderblush": [255, 240, 245],
+    	"lawngreen": [124, 252, 0],
+    	"lemonchiffon": [255, 250, 205],
+    	"lightblue": [173, 216, 230],
+    	"lightcoral": [240, 128, 128],
+    	"lightcyan": [224, 255, 255],
+    	"lightgoldenrodyellow": [250, 250, 210],
+    	"lightgray": [211, 211, 211],
+    	"lightgreen": [144, 238, 144],
+    	"lightgrey": [211, 211, 211],
+    	"lightpink": [255, 182, 193],
+    	"lightsalmon": [255, 160, 122],
+    	"lightseagreen": [32, 178, 170],
+    	"lightskyblue": [135, 206, 250],
+    	"lightslategray": [119, 136, 153],
+    	"lightslategrey": [119, 136, 153],
+    	"lightsteelblue": [176, 196, 222],
+    	"lightyellow": [255, 255, 224],
+    	"lime": [0, 255, 0],
+    	"limegreen": [50, 205, 50],
+    	"linen": [250, 240, 230],
+    	"magenta": [255, 0, 255],
+    	"maroon": [128, 0, 0],
+    	"mediumaquamarine": [102, 205, 170],
+    	"mediumblue": [0, 0, 205],
+    	"mediumorchid": [186, 85, 211],
+    	"mediumpurple": [147, 112, 219],
+    	"mediumseagreen": [60, 179, 113],
+    	"mediumslateblue": [123, 104, 238],
+    	"mediumspringgreen": [0, 250, 154],
+    	"mediumturquoise": [72, 209, 204],
+    	"mediumvioletred": [199, 21, 133],
+    	"midnightblue": [25, 25, 112],
+    	"mintcream": [245, 255, 250],
+    	"mistyrose": [255, 228, 225],
+    	"moccasin": [255, 228, 181],
+    	"navajowhite": [255, 222, 173],
+    	"navy": [0, 0, 128],
+    	"oldlace": [253, 245, 230],
+    	"olive": [128, 128, 0],
+    	"olivedrab": [107, 142, 35],
+    	"orange": [255, 165, 0],
+    	"orangered": [255, 69, 0],
+    	"orchid": [218, 112, 214],
+    	"palegoldenrod": [238, 232, 170],
+    	"palegreen": [152, 251, 152],
+    	"paleturquoise": [175, 238, 238],
+    	"palevioletred": [219, 112, 147],
+    	"papayawhip": [255, 239, 213],
+    	"peachpuff": [255, 218, 185],
+    	"peru": [205, 133, 63],
+    	"pink": [255, 192, 203],
+    	"plum": [221, 160, 221],
+    	"powderblue": [176, 224, 230],
+    	"purple": [128, 0, 128],
+    	"rebeccapurple": [102, 51, 153],
+    	"red": [255, 0, 0],
+    	"rosybrown": [188, 143, 143],
+    	"royalblue": [65, 105, 225],
+    	"saddlebrown": [139, 69, 19],
+    	"salmon": [250, 128, 114],
+    	"sandybrown": [244, 164, 96],
+    	"seagreen": [46, 139, 87],
+    	"seashell": [255, 245, 238],
+    	"sienna": [160, 82, 45],
+    	"silver": [192, 192, 192],
+    	"skyblue": [135, 206, 235],
+    	"slateblue": [106, 90, 205],
+    	"slategray": [112, 128, 144],
+    	"slategrey": [112, 128, 144],
+    	"snow": [255, 250, 250],
+    	"springgreen": [0, 255, 127],
+    	"steelblue": [70, 130, 180],
+    	"tan": [210, 180, 140],
+    	"teal": [0, 128, 128],
+    	"thistle": [216, 191, 216],
+    	"tomato": [255, 99, 71],
+    	"turquoise": [64, 224, 208],
+    	"violet": [238, 130, 238],
+    	"wheat": [245, 222, 179],
+    	"white": [255, 255, 255],
+    	"whitesmoke": [245, 245, 245],
+    	"yellow": [255, 255, 0],
+    	"yellowgreen": [154, 205, 50]
+    };
+
+    var isArrayish = function isArrayish(obj) {
+    	if (!obj || typeof obj === 'string') {
+    		return false;
+    	}
+
+    	return obj instanceof Array || Array.isArray(obj) ||
+    		(obj.length >= 0 && (obj.splice instanceof Function ||
+    			(Object.getOwnPropertyDescriptor(obj, (obj.length - 1)) && obj.constructor.name !== 'String')));
+    };
+
+    var simpleSwizzle = createCommonjsModule(function (module) {
+
+
+
+    var concat = Array.prototype.concat;
+    var slice = Array.prototype.slice;
+
+    var swizzle = module.exports = function swizzle(args) {
+    	var results = [];
+
+    	for (var i = 0, len = args.length; i < len; i++) {
+    		var arg = args[i];
+
+    		if (isArrayish(arg)) {
+    			// http://jsperf.com/javascript-array-concat-vs-push/98
+    			results = concat.call(results, slice.call(arg));
+    		} else {
+    			results.push(arg);
+    		}
+    	}
+
+    	return results;
+    };
+
+    swizzle.wrap = function (fn) {
+    	return function () {
+    		return fn(swizzle(arguments));
+    	};
+    };
+    });
+
+    /* MIT license */
+
+    var colorString = createCommonjsModule(function (module) {
+    var reverseNames = {};
+
+    // create a list of reverse color names
+    for (var name in colorName$1) {
+    	if (colorName$1.hasOwnProperty(name)) {
+    		reverseNames[colorName$1[name]] = name;
+    	}
+    }
+
+    var cs = module.exports = {
+    	to: {},
+    	get: {}
+    };
+
+    cs.get = function (string) {
+    	var prefix = string.substring(0, 3).toLowerCase();
+    	var val;
+    	var model;
+    	switch (prefix) {
+    		case 'hsl':
+    			val = cs.get.hsl(string);
+    			model = 'hsl';
+    			break;
+    		case 'hwb':
+    			val = cs.get.hwb(string);
+    			model = 'hwb';
+    			break;
+    		default:
+    			val = cs.get.rgb(string);
+    			model = 'rgb';
+    			break;
+    	}
+
+    	if (!val) {
+    		return null;
+    	}
+
+    	return {model: model, value: val};
+    };
+
+    cs.get.rgb = function (string) {
+    	if (!string) {
+    		return null;
+    	}
+
+    	var abbr = /^#([a-f0-9]{3,4})$/i;
+    	var hex = /^#([a-f0-9]{6})([a-f0-9]{2})?$/i;
+    	var rgba = /^rgba?\(\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)$/;
+    	var per = /^rgba?\(\s*([+-]?[\d\.]+)\%\s*,\s*([+-]?[\d\.]+)\%\s*,\s*([+-]?[\d\.]+)\%\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)$/;
+    	var keyword = /(\D+)/;
+
+    	var rgb = [0, 0, 0, 1];
+    	var match;
+    	var i;
+    	var hexAlpha;
+
+    	if (match = string.match(hex)) {
+    		hexAlpha = match[2];
+    		match = match[1];
+
+    		for (i = 0; i < 3; i++) {
+    			// https://jsperf.com/slice-vs-substr-vs-substring-methods-long-string/19
+    			var i2 = i * 2;
+    			rgb[i] = parseInt(match.slice(i2, i2 + 2), 16);
+    		}
+
+    		if (hexAlpha) {
+    			rgb[3] = parseInt(hexAlpha, 16) / 255;
+    		}
+    	} else if (match = string.match(abbr)) {
+    		match = match[1];
+    		hexAlpha = match[3];
+
+    		for (i = 0; i < 3; i++) {
+    			rgb[i] = parseInt(match[i] + match[i], 16);
+    		}
+
+    		if (hexAlpha) {
+    			rgb[3] = parseInt(hexAlpha + hexAlpha, 16) / 255;
+    		}
+    	} else if (match = string.match(rgba)) {
+    		for (i = 0; i < 3; i++) {
+    			rgb[i] = parseInt(match[i + 1], 0);
+    		}
+
+    		if (match[4]) {
+    			rgb[3] = parseFloat(match[4]);
+    		}
+    	} else if (match = string.match(per)) {
+    		for (i = 0; i < 3; i++) {
+    			rgb[i] = Math.round(parseFloat(match[i + 1]) * 2.55);
+    		}
+
+    		if (match[4]) {
+    			rgb[3] = parseFloat(match[4]);
+    		}
+    	} else if (match = string.match(keyword)) {
+    		if (match[1] === 'transparent') {
+    			return [0, 0, 0, 0];
+    		}
+
+    		rgb = colorName$1[match[1]];
+
+    		if (!rgb) {
+    			return null;
+    		}
+
+    		rgb[3] = 1;
+
+    		return rgb;
+    	} else {
+    		return null;
+    	}
+
+    	for (i = 0; i < 3; i++) {
+    		rgb[i] = clamp(rgb[i], 0, 255);
+    	}
+    	rgb[3] = clamp(rgb[3], 0, 1);
+
+    	return rgb;
+    };
+
+    cs.get.hsl = function (string) {
+    	if (!string) {
+    		return null;
+    	}
+
+    	var hsl = /^hsla?\(\s*([+-]?(?:\d{0,3}\.)?\d+)(?:deg)?\s*,\s*([+-]?[\d\.]+)%\s*,\s*([+-]?[\d\.]+)%\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)$/;
+    	var match = string.match(hsl);
+
+    	if (match) {
+    		var alpha = parseFloat(match[4]);
+    		var h = (parseFloat(match[1]) + 360) % 360;
+    		var s = clamp(parseFloat(match[2]), 0, 100);
+    		var l = clamp(parseFloat(match[3]), 0, 100);
+    		var a = clamp(isNaN(alpha) ? 1 : alpha, 0, 1);
+
+    		return [h, s, l, a];
+    	}
+
+    	return null;
+    };
+
+    cs.get.hwb = function (string) {
+    	if (!string) {
+    		return null;
+    	}
+
+    	var hwb = /^hwb\(\s*([+-]?\d{0,3}(?:\.\d+)?)(?:deg)?\s*,\s*([+-]?[\d\.]+)%\s*,\s*([+-]?[\d\.]+)%\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)$/;
+    	var match = string.match(hwb);
+
+    	if (match) {
+    		var alpha = parseFloat(match[4]);
+    		var h = ((parseFloat(match[1]) % 360) + 360) % 360;
+    		var w = clamp(parseFloat(match[2]), 0, 100);
+    		var b = clamp(parseFloat(match[3]), 0, 100);
+    		var a = clamp(isNaN(alpha) ? 1 : alpha, 0, 1);
+    		return [h, w, b, a];
+    	}
+
+    	return null;
+    };
+
+    cs.to.hex = function () {
+    	var rgba = simpleSwizzle(arguments);
+
+    	return (
+    		'#' +
+    		hexDouble(rgba[0]) +
+    		hexDouble(rgba[1]) +
+    		hexDouble(rgba[2]) +
+    		(rgba[3] < 1
+    			? (hexDouble(Math.round(rgba[3] * 255)))
+    			: '')
+    	);
+    };
+
+    cs.to.rgb = function () {
+    	var rgba = simpleSwizzle(arguments);
+
+    	return rgba.length < 4 || rgba[3] === 1
+    		? 'rgb(' + Math.round(rgba[0]) + ', ' + Math.round(rgba[1]) + ', ' + Math.round(rgba[2]) + ')'
+    		: 'rgba(' + Math.round(rgba[0]) + ', ' + Math.round(rgba[1]) + ', ' + Math.round(rgba[2]) + ', ' + rgba[3] + ')';
+    };
+
+    cs.to.rgb.percent = function () {
+    	var rgba = simpleSwizzle(arguments);
+
+    	var r = Math.round(rgba[0] / 255 * 100);
+    	var g = Math.round(rgba[1] / 255 * 100);
+    	var b = Math.round(rgba[2] / 255 * 100);
+
+    	return rgba.length < 4 || rgba[3] === 1
+    		? 'rgb(' + r + '%, ' + g + '%, ' + b + '%)'
+    		: 'rgba(' + r + '%, ' + g + '%, ' + b + '%, ' + rgba[3] + ')';
+    };
+
+    cs.to.hsl = function () {
+    	var hsla = simpleSwizzle(arguments);
+    	return hsla.length < 4 || hsla[3] === 1
+    		? 'hsl(' + hsla[0] + ', ' + hsla[1] + '%, ' + hsla[2] + '%)'
+    		: 'hsla(' + hsla[0] + ', ' + hsla[1] + '%, ' + hsla[2] + '%, ' + hsla[3] + ')';
+    };
+
+    // hwb is a bit different than rgb(a) & hsl(a) since there is no alpha specific syntax
+    // (hwb have alpha optional & 1 is default value)
+    cs.to.hwb = function () {
+    	var hwba = simpleSwizzle(arguments);
+
+    	var a = '';
+    	if (hwba.length >= 4 && hwba[3] !== 1) {
+    		a = ', ' + hwba[3];
+    	}
+
+    	return 'hwb(' + hwba[0] + ', ' + hwba[1] + '%, ' + hwba[2] + '%' + a + ')';
+    };
+
+    cs.to.keyword = function (rgb) {
+    	return reverseNames[rgb.slice(0, 3)];
+    };
+
+    // helpers
+    function clamp(num, min, max) {
+    	return Math.min(Math.max(min, num), max);
+    }
+
+    function hexDouble(num) {
+    	var str = num.toString(16).toUpperCase();
+    	return (str.length < 2) ? '0' + str : str;
+    }
+    });
+
+    var colorName = {
+    	"aliceblue": [240, 248, 255],
+    	"antiquewhite": [250, 235, 215],
+    	"aqua": [0, 255, 255],
+    	"aquamarine": [127, 255, 212],
+    	"azure": [240, 255, 255],
+    	"beige": [245, 245, 220],
+    	"bisque": [255, 228, 196],
+    	"black": [0, 0, 0],
+    	"blanchedalmond": [255, 235, 205],
+    	"blue": [0, 0, 255],
+    	"blueviolet": [138, 43, 226],
+    	"brown": [165, 42, 42],
+    	"burlywood": [222, 184, 135],
+    	"cadetblue": [95, 158, 160],
+    	"chartreuse": [127, 255, 0],
+    	"chocolate": [210, 105, 30],
+    	"coral": [255, 127, 80],
+    	"cornflowerblue": [100, 149, 237],
+    	"cornsilk": [255, 248, 220],
+    	"crimson": [220, 20, 60],
+    	"cyan": [0, 255, 255],
+    	"darkblue": [0, 0, 139],
+    	"darkcyan": [0, 139, 139],
+    	"darkgoldenrod": [184, 134, 11],
+    	"darkgray": [169, 169, 169],
+    	"darkgreen": [0, 100, 0],
+    	"darkgrey": [169, 169, 169],
+    	"darkkhaki": [189, 183, 107],
+    	"darkmagenta": [139, 0, 139],
+    	"darkolivegreen": [85, 107, 47],
+    	"darkorange": [255, 140, 0],
+    	"darkorchid": [153, 50, 204],
+    	"darkred": [139, 0, 0],
+    	"darksalmon": [233, 150, 122],
+    	"darkseagreen": [143, 188, 143],
+    	"darkslateblue": [72, 61, 139],
+    	"darkslategray": [47, 79, 79],
+    	"darkslategrey": [47, 79, 79],
+    	"darkturquoise": [0, 206, 209],
+    	"darkviolet": [148, 0, 211],
+    	"deeppink": [255, 20, 147],
+    	"deepskyblue": [0, 191, 255],
+    	"dimgray": [105, 105, 105],
+    	"dimgrey": [105, 105, 105],
+    	"dodgerblue": [30, 144, 255],
+    	"firebrick": [178, 34, 34],
+    	"floralwhite": [255, 250, 240],
+    	"forestgreen": [34, 139, 34],
+    	"fuchsia": [255, 0, 255],
+    	"gainsboro": [220, 220, 220],
+    	"ghostwhite": [248, 248, 255],
+    	"gold": [255, 215, 0],
+    	"goldenrod": [218, 165, 32],
+    	"gray": [128, 128, 128],
+    	"green": [0, 128, 0],
+    	"greenyellow": [173, 255, 47],
+    	"grey": [128, 128, 128],
+    	"honeydew": [240, 255, 240],
+    	"hotpink": [255, 105, 180],
+    	"indianred": [205, 92, 92],
+    	"indigo": [75, 0, 130],
+    	"ivory": [255, 255, 240],
+    	"khaki": [240, 230, 140],
+    	"lavender": [230, 230, 250],
+    	"lavenderblush": [255, 240, 245],
+    	"lawngreen": [124, 252, 0],
+    	"lemonchiffon": [255, 250, 205],
+    	"lightblue": [173, 216, 230],
+    	"lightcoral": [240, 128, 128],
+    	"lightcyan": [224, 255, 255],
+    	"lightgoldenrodyellow": [250, 250, 210],
+    	"lightgray": [211, 211, 211],
+    	"lightgreen": [144, 238, 144],
+    	"lightgrey": [211, 211, 211],
+    	"lightpink": [255, 182, 193],
+    	"lightsalmon": [255, 160, 122],
+    	"lightseagreen": [32, 178, 170],
+    	"lightskyblue": [135, 206, 250],
+    	"lightslategray": [119, 136, 153],
+    	"lightslategrey": [119, 136, 153],
+    	"lightsteelblue": [176, 196, 222],
+    	"lightyellow": [255, 255, 224],
+    	"lime": [0, 255, 0],
+    	"limegreen": [50, 205, 50],
+    	"linen": [250, 240, 230],
+    	"magenta": [255, 0, 255],
+    	"maroon": [128, 0, 0],
+    	"mediumaquamarine": [102, 205, 170],
+    	"mediumblue": [0, 0, 205],
+    	"mediumorchid": [186, 85, 211],
+    	"mediumpurple": [147, 112, 219],
+    	"mediumseagreen": [60, 179, 113],
+    	"mediumslateblue": [123, 104, 238],
+    	"mediumspringgreen": [0, 250, 154],
+    	"mediumturquoise": [72, 209, 204],
+    	"mediumvioletred": [199, 21, 133],
+    	"midnightblue": [25, 25, 112],
+    	"mintcream": [245, 255, 250],
+    	"mistyrose": [255, 228, 225],
+    	"moccasin": [255, 228, 181],
+    	"navajowhite": [255, 222, 173],
+    	"navy": [0, 0, 128],
+    	"oldlace": [253, 245, 230],
+    	"olive": [128, 128, 0],
+    	"olivedrab": [107, 142, 35],
+    	"orange": [255, 165, 0],
+    	"orangered": [255, 69, 0],
+    	"orchid": [218, 112, 214],
+    	"palegoldenrod": [238, 232, 170],
+    	"palegreen": [152, 251, 152],
+    	"paleturquoise": [175, 238, 238],
+    	"palevioletred": [219, 112, 147],
+    	"papayawhip": [255, 239, 213],
+    	"peachpuff": [255, 218, 185],
+    	"peru": [205, 133, 63],
+    	"pink": [255, 192, 203],
+    	"plum": [221, 160, 221],
+    	"powderblue": [176, 224, 230],
+    	"purple": [128, 0, 128],
+    	"rebeccapurple": [102, 51, 153],
+    	"red": [255, 0, 0],
+    	"rosybrown": [188, 143, 143],
+    	"royalblue": [65, 105, 225],
+    	"saddlebrown": [139, 69, 19],
+    	"salmon": [250, 128, 114],
+    	"sandybrown": [244, 164, 96],
+    	"seagreen": [46, 139, 87],
+    	"seashell": [255, 245, 238],
+    	"sienna": [160, 82, 45],
+    	"silver": [192, 192, 192],
+    	"skyblue": [135, 206, 235],
+    	"slateblue": [106, 90, 205],
+    	"slategray": [112, 128, 144],
+    	"slategrey": [112, 128, 144],
+    	"snow": [255, 250, 250],
+    	"springgreen": [0, 255, 127],
+    	"steelblue": [70, 130, 180],
+    	"tan": [210, 180, 140],
+    	"teal": [0, 128, 128],
+    	"thistle": [216, 191, 216],
+    	"tomato": [255, 99, 71],
+    	"turquoise": [64, 224, 208],
+    	"violet": [238, 130, 238],
+    	"wheat": [245, 222, 179],
+    	"white": [255, 255, 255],
+    	"whitesmoke": [245, 245, 245],
+    	"yellow": [255, 255, 0],
+    	"yellowgreen": [154, 205, 50]
+    };
+
+    /* MIT license */
+
+    var conversions = createCommonjsModule(function (module) {
+    // NOTE: conversions should only return primitive values (i.e. arrays, or
+    //       values that give correct `typeof` results).
+    //       do not use box values types (i.e. Number(), String(), etc.)
+
+    var reverseKeywords = {};
+    for (var key in colorName) {
+    	if (colorName.hasOwnProperty(key)) {
+    		reverseKeywords[colorName[key]] = key;
+    	}
+    }
+
+    var convert = module.exports = {
+    	rgb: {channels: 3, labels: 'rgb'},
+    	hsl: {channels: 3, labels: 'hsl'},
+    	hsv: {channels: 3, labels: 'hsv'},
+    	hwb: {channels: 3, labels: 'hwb'},
+    	cmyk: {channels: 4, labels: 'cmyk'},
+    	xyz: {channels: 3, labels: 'xyz'},
+    	lab: {channels: 3, labels: 'lab'},
+    	lch: {channels: 3, labels: 'lch'},
+    	hex: {channels: 1, labels: ['hex']},
+    	keyword: {channels: 1, labels: ['keyword']},
+    	ansi16: {channels: 1, labels: ['ansi16']},
+    	ansi256: {channels: 1, labels: ['ansi256']},
+    	hcg: {channels: 3, labels: ['h', 'c', 'g']},
+    	apple: {channels: 3, labels: ['r16', 'g16', 'b16']},
+    	gray: {channels: 1, labels: ['gray']}
+    };
+
+    // hide .channels and .labels properties
+    for (var model in convert) {
+    	if (convert.hasOwnProperty(model)) {
+    		if (!('channels' in convert[model])) {
+    			throw new Error('missing channels property: ' + model);
+    		}
+
+    		if (!('labels' in convert[model])) {
+    			throw new Error('missing channel labels property: ' + model);
+    		}
+
+    		if (convert[model].labels.length !== convert[model].channels) {
+    			throw new Error('channel and label counts mismatch: ' + model);
+    		}
+
+    		var channels = convert[model].channels;
+    		var labels = convert[model].labels;
+    		delete convert[model].channels;
+    		delete convert[model].labels;
+    		Object.defineProperty(convert[model], 'channels', {value: channels});
+    		Object.defineProperty(convert[model], 'labels', {value: labels});
+    	}
+    }
+
+    convert.rgb.hsl = function (rgb) {
+    	var r = rgb[0] / 255;
+    	var g = rgb[1] / 255;
+    	var b = rgb[2] / 255;
+    	var min = Math.min(r, g, b);
+    	var max = Math.max(r, g, b);
+    	var delta = max - min;
+    	var h;
+    	var s;
+    	var l;
+
+    	if (max === min) {
+    		h = 0;
+    	} else if (r === max) {
+    		h = (g - b) / delta;
+    	} else if (g === max) {
+    		h = 2 + (b - r) / delta;
+    	} else if (b === max) {
+    		h = 4 + (r - g) / delta;
+    	}
+
+    	h = Math.min(h * 60, 360);
+
+    	if (h < 0) {
+    		h += 360;
+    	}
+
+    	l = (min + max) / 2;
+
+    	if (max === min) {
+    		s = 0;
+    	} else if (l <= 0.5) {
+    		s = delta / (max + min);
+    	} else {
+    		s = delta / (2 - max - min);
+    	}
+
+    	return [h, s * 100, l * 100];
+    };
+
+    convert.rgb.hsv = function (rgb) {
+    	var rdif;
+    	var gdif;
+    	var bdif;
+    	var h;
+    	var s;
+
+    	var r = rgb[0] / 255;
+    	var g = rgb[1] / 255;
+    	var b = rgb[2] / 255;
+    	var v = Math.max(r, g, b);
+    	var diff = v - Math.min(r, g, b);
+    	var diffc = function (c) {
+    		return (v - c) / 6 / diff + 1 / 2;
+    	};
+
+    	if (diff === 0) {
+    		h = s = 0;
+    	} else {
+    		s = diff / v;
+    		rdif = diffc(r);
+    		gdif = diffc(g);
+    		bdif = diffc(b);
+
+    		if (r === v) {
+    			h = bdif - gdif;
+    		} else if (g === v) {
+    			h = (1 / 3) + rdif - bdif;
+    		} else if (b === v) {
+    			h = (2 / 3) + gdif - rdif;
+    		}
+    		if (h < 0) {
+    			h += 1;
+    		} else if (h > 1) {
+    			h -= 1;
+    		}
+    	}
+
+    	return [
+    		h * 360,
+    		s * 100,
+    		v * 100
+    	];
+    };
+
+    convert.rgb.hwb = function (rgb) {
+    	var r = rgb[0];
+    	var g = rgb[1];
+    	var b = rgb[2];
+    	var h = convert.rgb.hsl(rgb)[0];
+    	var w = 1 / 255 * Math.min(r, Math.min(g, b));
+
+    	b = 1 - 1 / 255 * Math.max(r, Math.max(g, b));
+
+    	return [h, w * 100, b * 100];
+    };
+
+    convert.rgb.cmyk = function (rgb) {
+    	var r = rgb[0] / 255;
+    	var g = rgb[1] / 255;
+    	var b = rgb[2] / 255;
+    	var c;
+    	var m;
+    	var y;
+    	var k;
+
+    	k = Math.min(1 - r, 1 - g, 1 - b);
+    	c = (1 - r - k) / (1 - k) || 0;
+    	m = (1 - g - k) / (1 - k) || 0;
+    	y = (1 - b - k) / (1 - k) || 0;
+
+    	return [c * 100, m * 100, y * 100, k * 100];
+    };
+
+    /**
+     * See https://en.m.wikipedia.org/wiki/Euclidean_distance#Squared_Euclidean_distance
+     * */
+    function comparativeDistance(x, y) {
+    	return (
+    		Math.pow(x[0] - y[0], 2) +
+    		Math.pow(x[1] - y[1], 2) +
+    		Math.pow(x[2] - y[2], 2)
+    	);
+    }
+
+    convert.rgb.keyword = function (rgb) {
+    	var reversed = reverseKeywords[rgb];
+    	if (reversed) {
+    		return reversed;
+    	}
+
+    	var currentClosestDistance = Infinity;
+    	var currentClosestKeyword;
+
+    	for (var keyword in colorName) {
+    		if (colorName.hasOwnProperty(keyword)) {
+    			var value = colorName[keyword];
+
+    			// Compute comparative distance
+    			var distance = comparativeDistance(rgb, value);
+
+    			// Check if its less, if so set as closest
+    			if (distance < currentClosestDistance) {
+    				currentClosestDistance = distance;
+    				currentClosestKeyword = keyword;
+    			}
+    		}
+    	}
+
+    	return currentClosestKeyword;
+    };
+
+    convert.keyword.rgb = function (keyword) {
+    	return colorName[keyword];
+    };
+
+    convert.rgb.xyz = function (rgb) {
+    	var r = rgb[0] / 255;
+    	var g = rgb[1] / 255;
+    	var b = rgb[2] / 255;
+
+    	// assume sRGB
+    	r = r > 0.04045 ? Math.pow(((r + 0.055) / 1.055), 2.4) : (r / 12.92);
+    	g = g > 0.04045 ? Math.pow(((g + 0.055) / 1.055), 2.4) : (g / 12.92);
+    	b = b > 0.04045 ? Math.pow(((b + 0.055) / 1.055), 2.4) : (b / 12.92);
+
+    	var x = (r * 0.4124) + (g * 0.3576) + (b * 0.1805);
+    	var y = (r * 0.2126) + (g * 0.7152) + (b * 0.0722);
+    	var z = (r * 0.0193) + (g * 0.1192) + (b * 0.9505);
+
+    	return [x * 100, y * 100, z * 100];
+    };
+
+    convert.rgb.lab = function (rgb) {
+    	var xyz = convert.rgb.xyz(rgb);
+    	var x = xyz[0];
+    	var y = xyz[1];
+    	var z = xyz[2];
+    	var l;
+    	var a;
+    	var b;
+
+    	x /= 95.047;
+    	y /= 100;
+    	z /= 108.883;
+
+    	x = x > 0.008856 ? Math.pow(x, 1 / 3) : (7.787 * x) + (16 / 116);
+    	y = y > 0.008856 ? Math.pow(y, 1 / 3) : (7.787 * y) + (16 / 116);
+    	z = z > 0.008856 ? Math.pow(z, 1 / 3) : (7.787 * z) + (16 / 116);
+
+    	l = (116 * y) - 16;
+    	a = 500 * (x - y);
+    	b = 200 * (y - z);
+
+    	return [l, a, b];
+    };
+
+    convert.hsl.rgb = function (hsl) {
+    	var h = hsl[0] / 360;
+    	var s = hsl[1] / 100;
+    	var l = hsl[2] / 100;
+    	var t1;
+    	var t2;
+    	var t3;
+    	var rgb;
+    	var val;
+
+    	if (s === 0) {
+    		val = l * 255;
+    		return [val, val, val];
+    	}
+
+    	if (l < 0.5) {
+    		t2 = l * (1 + s);
+    	} else {
+    		t2 = l + s - l * s;
+    	}
+
+    	t1 = 2 * l - t2;
+
+    	rgb = [0, 0, 0];
+    	for (var i = 0; i < 3; i++) {
+    		t3 = h + 1 / 3 * -(i - 1);
+    		if (t3 < 0) {
+    			t3++;
+    		}
+    		if (t3 > 1) {
+    			t3--;
+    		}
+
+    		if (6 * t3 < 1) {
+    			val = t1 + (t2 - t1) * 6 * t3;
+    		} else if (2 * t3 < 1) {
+    			val = t2;
+    		} else if (3 * t3 < 2) {
+    			val = t1 + (t2 - t1) * (2 / 3 - t3) * 6;
+    		} else {
+    			val = t1;
+    		}
+
+    		rgb[i] = val * 255;
+    	}
+
+    	return rgb;
+    };
+
+    convert.hsl.hsv = function (hsl) {
+    	var h = hsl[0];
+    	var s = hsl[1] / 100;
+    	var l = hsl[2] / 100;
+    	var smin = s;
+    	var lmin = Math.max(l, 0.01);
+    	var sv;
+    	var v;
+
+    	l *= 2;
+    	s *= (l <= 1) ? l : 2 - l;
+    	smin *= lmin <= 1 ? lmin : 2 - lmin;
+    	v = (l + s) / 2;
+    	sv = l === 0 ? (2 * smin) / (lmin + smin) : (2 * s) / (l + s);
+
+    	return [h, sv * 100, v * 100];
+    };
+
+    convert.hsv.rgb = function (hsv) {
+    	var h = hsv[0] / 60;
+    	var s = hsv[1] / 100;
+    	var v = hsv[2] / 100;
+    	var hi = Math.floor(h) % 6;
+
+    	var f = h - Math.floor(h);
+    	var p = 255 * v * (1 - s);
+    	var q = 255 * v * (1 - (s * f));
+    	var t = 255 * v * (1 - (s * (1 - f)));
+    	v *= 255;
+
+    	switch (hi) {
+    		case 0:
+    			return [v, t, p];
+    		case 1:
+    			return [q, v, p];
+    		case 2:
+    			return [p, v, t];
+    		case 3:
+    			return [p, q, v];
+    		case 4:
+    			return [t, p, v];
+    		case 5:
+    			return [v, p, q];
+    	}
+    };
+
+    convert.hsv.hsl = function (hsv) {
+    	var h = hsv[0];
+    	var s = hsv[1] / 100;
+    	var v = hsv[2] / 100;
+    	var vmin = Math.max(v, 0.01);
+    	var lmin;
+    	var sl;
+    	var l;
+
+    	l = (2 - s) * v;
+    	lmin = (2 - s) * vmin;
+    	sl = s * vmin;
+    	sl /= (lmin <= 1) ? lmin : 2 - lmin;
+    	sl = sl || 0;
+    	l /= 2;
+
+    	return [h, sl * 100, l * 100];
+    };
+
+    // http://dev.w3.org/csswg/css-color/#hwb-to-rgb
+    convert.hwb.rgb = function (hwb) {
+    	var h = hwb[0] / 360;
+    	var wh = hwb[1] / 100;
+    	var bl = hwb[2] / 100;
+    	var ratio = wh + bl;
+    	var i;
+    	var v;
+    	var f;
+    	var n;
+
+    	// wh + bl cant be > 1
+    	if (ratio > 1) {
+    		wh /= ratio;
+    		bl /= ratio;
+    	}
+
+    	i = Math.floor(6 * h);
+    	v = 1 - bl;
+    	f = 6 * h - i;
+
+    	if ((i & 0x01) !== 0) {
+    		f = 1 - f;
+    	}
+
+    	n = wh + f * (v - wh); // linear interpolation
+
+    	var r;
+    	var g;
+    	var b;
+    	switch (i) {
+    		default:
+    		case 6:
+    		case 0: r = v; g = n; b = wh; break;
+    		case 1: r = n; g = v; b = wh; break;
+    		case 2: r = wh; g = v; b = n; break;
+    		case 3: r = wh; g = n; b = v; break;
+    		case 4: r = n; g = wh; b = v; break;
+    		case 5: r = v; g = wh; b = n; break;
+    	}
+
+    	return [r * 255, g * 255, b * 255];
+    };
+
+    convert.cmyk.rgb = function (cmyk) {
+    	var c = cmyk[0] / 100;
+    	var m = cmyk[1] / 100;
+    	var y = cmyk[2] / 100;
+    	var k = cmyk[3] / 100;
+    	var r;
+    	var g;
+    	var b;
+
+    	r = 1 - Math.min(1, c * (1 - k) + k);
+    	g = 1 - Math.min(1, m * (1 - k) + k);
+    	b = 1 - Math.min(1, y * (1 - k) + k);
+
+    	return [r * 255, g * 255, b * 255];
+    };
+
+    convert.xyz.rgb = function (xyz) {
+    	var x = xyz[0] / 100;
+    	var y = xyz[1] / 100;
+    	var z = xyz[2] / 100;
+    	var r;
+    	var g;
+    	var b;
+
+    	r = (x * 3.2406) + (y * -1.5372) + (z * -0.4986);
+    	g = (x * -0.9689) + (y * 1.8758) + (z * 0.0415);
+    	b = (x * 0.0557) + (y * -0.2040) + (z * 1.0570);
+
+    	// assume sRGB
+    	r = r > 0.0031308
+    		? ((1.055 * Math.pow(r, 1.0 / 2.4)) - 0.055)
+    		: r * 12.92;
+
+    	g = g > 0.0031308
+    		? ((1.055 * Math.pow(g, 1.0 / 2.4)) - 0.055)
+    		: g * 12.92;
+
+    	b = b > 0.0031308
+    		? ((1.055 * Math.pow(b, 1.0 / 2.4)) - 0.055)
+    		: b * 12.92;
+
+    	r = Math.min(Math.max(0, r), 1);
+    	g = Math.min(Math.max(0, g), 1);
+    	b = Math.min(Math.max(0, b), 1);
+
+    	return [r * 255, g * 255, b * 255];
+    };
+
+    convert.xyz.lab = function (xyz) {
+    	var x = xyz[0];
+    	var y = xyz[1];
+    	var z = xyz[2];
+    	var l;
+    	var a;
+    	var b;
+
+    	x /= 95.047;
+    	y /= 100;
+    	z /= 108.883;
+
+    	x = x > 0.008856 ? Math.pow(x, 1 / 3) : (7.787 * x) + (16 / 116);
+    	y = y > 0.008856 ? Math.pow(y, 1 / 3) : (7.787 * y) + (16 / 116);
+    	z = z > 0.008856 ? Math.pow(z, 1 / 3) : (7.787 * z) + (16 / 116);
+
+    	l = (116 * y) - 16;
+    	a = 500 * (x - y);
+    	b = 200 * (y - z);
+
+    	return [l, a, b];
+    };
+
+    convert.lab.xyz = function (lab) {
+    	var l = lab[0];
+    	var a = lab[1];
+    	var b = lab[2];
+    	var x;
+    	var y;
+    	var z;
+
+    	y = (l + 16) / 116;
+    	x = a / 500 + y;
+    	z = y - b / 200;
+
+    	var y2 = Math.pow(y, 3);
+    	var x2 = Math.pow(x, 3);
+    	var z2 = Math.pow(z, 3);
+    	y = y2 > 0.008856 ? y2 : (y - 16 / 116) / 7.787;
+    	x = x2 > 0.008856 ? x2 : (x - 16 / 116) / 7.787;
+    	z = z2 > 0.008856 ? z2 : (z - 16 / 116) / 7.787;
+
+    	x *= 95.047;
+    	y *= 100;
+    	z *= 108.883;
+
+    	return [x, y, z];
+    };
+
+    convert.lab.lch = function (lab) {
+    	var l = lab[0];
+    	var a = lab[1];
+    	var b = lab[2];
+    	var hr;
+    	var h;
+    	var c;
+
+    	hr = Math.atan2(b, a);
+    	h = hr * 360 / 2 / Math.PI;
+
+    	if (h < 0) {
+    		h += 360;
+    	}
+
+    	c = Math.sqrt(a * a + b * b);
+
+    	return [l, c, h];
+    };
+
+    convert.lch.lab = function (lch) {
+    	var l = lch[0];
+    	var c = lch[1];
+    	var h = lch[2];
+    	var a;
+    	var b;
+    	var hr;
+
+    	hr = h / 360 * 2 * Math.PI;
+    	a = c * Math.cos(hr);
+    	b = c * Math.sin(hr);
+
+    	return [l, a, b];
+    };
+
+    convert.rgb.ansi16 = function (args) {
+    	var r = args[0];
+    	var g = args[1];
+    	var b = args[2];
+    	var value = 1 in arguments ? arguments[1] : convert.rgb.hsv(args)[2]; // hsv -> ansi16 optimization
+
+    	value = Math.round(value / 50);
+
+    	if (value === 0) {
+    		return 30;
+    	}
+
+    	var ansi = 30
+    		+ ((Math.round(b / 255) << 2)
+    		| (Math.round(g / 255) << 1)
+    		| Math.round(r / 255));
+
+    	if (value === 2) {
+    		ansi += 60;
+    	}
+
+    	return ansi;
+    };
+
+    convert.hsv.ansi16 = function (args) {
+    	// optimization here; we already know the value and don't need to get
+    	// it converted for us.
+    	return convert.rgb.ansi16(convert.hsv.rgb(args), args[2]);
+    };
+
+    convert.rgb.ansi256 = function (args) {
+    	var r = args[0];
+    	var g = args[1];
+    	var b = args[2];
+
+    	// we use the extended greyscale palette here, with the exception of
+    	// black and white. normal palette only has 4 greyscale shades.
+    	if (r === g && g === b) {
+    		if (r < 8) {
+    			return 16;
+    		}
+
+    		if (r > 248) {
+    			return 231;
+    		}
+
+    		return Math.round(((r - 8) / 247) * 24) + 232;
+    	}
+
+    	var ansi = 16
+    		+ (36 * Math.round(r / 255 * 5))
+    		+ (6 * Math.round(g / 255 * 5))
+    		+ Math.round(b / 255 * 5);
+
+    	return ansi;
+    };
+
+    convert.ansi16.rgb = function (args) {
+    	var color = args % 10;
+
+    	// handle greyscale
+    	if (color === 0 || color === 7) {
+    		if (args > 50) {
+    			color += 3.5;
+    		}
+
+    		color = color / 10.5 * 255;
+
+    		return [color, color, color];
+    	}
+
+    	var mult = (~~(args > 50) + 1) * 0.5;
+    	var r = ((color & 1) * mult) * 255;
+    	var g = (((color >> 1) & 1) * mult) * 255;
+    	var b = (((color >> 2) & 1) * mult) * 255;
+
+    	return [r, g, b];
+    };
+
+    convert.ansi256.rgb = function (args) {
+    	// handle greyscale
+    	if (args >= 232) {
+    		var c = (args - 232) * 10 + 8;
+    		return [c, c, c];
+    	}
+
+    	args -= 16;
+
+    	var rem;
+    	var r = Math.floor(args / 36) / 5 * 255;
+    	var g = Math.floor((rem = args % 36) / 6) / 5 * 255;
+    	var b = (rem % 6) / 5 * 255;
+
+    	return [r, g, b];
+    };
+
+    convert.rgb.hex = function (args) {
+    	var integer = ((Math.round(args[0]) & 0xFF) << 16)
+    		+ ((Math.round(args[1]) & 0xFF) << 8)
+    		+ (Math.round(args[2]) & 0xFF);
+
+    	var string = integer.toString(16).toUpperCase();
+    	return '000000'.substring(string.length) + string;
+    };
+
+    convert.hex.rgb = function (args) {
+    	var match = args.toString(16).match(/[a-f0-9]{6}|[a-f0-9]{3}/i);
+    	if (!match) {
+    		return [0, 0, 0];
+    	}
+
+    	var colorString = match[0];
+
+    	if (match[0].length === 3) {
+    		colorString = colorString.split('').map(function (char) {
+    			return char + char;
+    		}).join('');
+    	}
+
+    	var integer = parseInt(colorString, 16);
+    	var r = (integer >> 16) & 0xFF;
+    	var g = (integer >> 8) & 0xFF;
+    	var b = integer & 0xFF;
+
+    	return [r, g, b];
+    };
+
+    convert.rgb.hcg = function (rgb) {
+    	var r = rgb[0] / 255;
+    	var g = rgb[1] / 255;
+    	var b = rgb[2] / 255;
+    	var max = Math.max(Math.max(r, g), b);
+    	var min = Math.min(Math.min(r, g), b);
+    	var chroma = (max - min);
+    	var grayscale;
+    	var hue;
+
+    	if (chroma < 1) {
+    		grayscale = min / (1 - chroma);
+    	} else {
+    		grayscale = 0;
+    	}
+
+    	if (chroma <= 0) {
+    		hue = 0;
+    	} else
+    	if (max === r) {
+    		hue = ((g - b) / chroma) % 6;
+    	} else
+    	if (max === g) {
+    		hue = 2 + (b - r) / chroma;
+    	} else {
+    		hue = 4 + (r - g) / chroma + 4;
+    	}
+
+    	hue /= 6;
+    	hue %= 1;
+
+    	return [hue * 360, chroma * 100, grayscale * 100];
+    };
+
+    convert.hsl.hcg = function (hsl) {
+    	var s = hsl[1] / 100;
+    	var l = hsl[2] / 100;
+    	var c = 1;
+    	var f = 0;
+
+    	if (l < 0.5) {
+    		c = 2.0 * s * l;
+    	} else {
+    		c = 2.0 * s * (1.0 - l);
+    	}
+
+    	if (c < 1.0) {
+    		f = (l - 0.5 * c) / (1.0 - c);
+    	}
+
+    	return [hsl[0], c * 100, f * 100];
+    };
+
+    convert.hsv.hcg = function (hsv) {
+    	var s = hsv[1] / 100;
+    	var v = hsv[2] / 100;
+
+    	var c = s * v;
+    	var f = 0;
+
+    	if (c < 1.0) {
+    		f = (v - c) / (1 - c);
+    	}
+
+    	return [hsv[0], c * 100, f * 100];
+    };
+
+    convert.hcg.rgb = function (hcg) {
+    	var h = hcg[0] / 360;
+    	var c = hcg[1] / 100;
+    	var g = hcg[2] / 100;
+
+    	if (c === 0.0) {
+    		return [g * 255, g * 255, g * 255];
+    	}
+
+    	var pure = [0, 0, 0];
+    	var hi = (h % 1) * 6;
+    	var v = hi % 1;
+    	var w = 1 - v;
+    	var mg = 0;
+
+    	switch (Math.floor(hi)) {
+    		case 0:
+    			pure[0] = 1; pure[1] = v; pure[2] = 0; break;
+    		case 1:
+    			pure[0] = w; pure[1] = 1; pure[2] = 0; break;
+    		case 2:
+    			pure[0] = 0; pure[1] = 1; pure[2] = v; break;
+    		case 3:
+    			pure[0] = 0; pure[1] = w; pure[2] = 1; break;
+    		case 4:
+    			pure[0] = v; pure[1] = 0; pure[2] = 1; break;
+    		default:
+    			pure[0] = 1; pure[1] = 0; pure[2] = w;
+    	}
+
+    	mg = (1.0 - c) * g;
+
+    	return [
+    		(c * pure[0] + mg) * 255,
+    		(c * pure[1] + mg) * 255,
+    		(c * pure[2] + mg) * 255
+    	];
+    };
+
+    convert.hcg.hsv = function (hcg) {
+    	var c = hcg[1] / 100;
+    	var g = hcg[2] / 100;
+
+    	var v = c + g * (1.0 - c);
+    	var f = 0;
+
+    	if (v > 0.0) {
+    		f = c / v;
+    	}
+
+    	return [hcg[0], f * 100, v * 100];
+    };
+
+    convert.hcg.hsl = function (hcg) {
+    	var c = hcg[1] / 100;
+    	var g = hcg[2] / 100;
+
+    	var l = g * (1.0 - c) + 0.5 * c;
+    	var s = 0;
+
+    	if (l > 0.0 && l < 0.5) {
+    		s = c / (2 * l);
+    	} else
+    	if (l >= 0.5 && l < 1.0) {
+    		s = c / (2 * (1 - l));
+    	}
+
+    	return [hcg[0], s * 100, l * 100];
+    };
+
+    convert.hcg.hwb = function (hcg) {
+    	var c = hcg[1] / 100;
+    	var g = hcg[2] / 100;
+    	var v = c + g * (1.0 - c);
+    	return [hcg[0], (v - c) * 100, (1 - v) * 100];
+    };
+
+    convert.hwb.hcg = function (hwb) {
+    	var w = hwb[1] / 100;
+    	var b = hwb[2] / 100;
+    	var v = 1 - b;
+    	var c = v - w;
+    	var g = 0;
+
+    	if (c < 1) {
+    		g = (v - c) / (1 - c);
+    	}
+
+    	return [hwb[0], c * 100, g * 100];
+    };
+
+    convert.apple.rgb = function (apple) {
+    	return [(apple[0] / 65535) * 255, (apple[1] / 65535) * 255, (apple[2] / 65535) * 255];
+    };
+
+    convert.rgb.apple = function (rgb) {
+    	return [(rgb[0] / 255) * 65535, (rgb[1] / 255) * 65535, (rgb[2] / 255) * 65535];
+    };
+
+    convert.gray.rgb = function (args) {
+    	return [args[0] / 100 * 255, args[0] / 100 * 255, args[0] / 100 * 255];
+    };
+
+    convert.gray.hsl = convert.gray.hsv = function (args) {
+    	return [0, 0, args[0]];
+    };
+
+    convert.gray.hwb = function (gray) {
+    	return [0, 100, gray[0]];
+    };
+
+    convert.gray.cmyk = function (gray) {
+    	return [0, 0, 0, gray[0]];
+    };
+
+    convert.gray.lab = function (gray) {
+    	return [gray[0], 0, 0];
+    };
+
+    convert.gray.hex = function (gray) {
+    	var val = Math.round(gray[0] / 100 * 255) & 0xFF;
+    	var integer = (val << 16) + (val << 8) + val;
+
+    	var string = integer.toString(16).toUpperCase();
+    	return '000000'.substring(string.length) + string;
+    };
+
+    convert.rgb.gray = function (rgb) {
+    	var val = (rgb[0] + rgb[1] + rgb[2]) / 3;
+    	return [val / 255 * 100];
+    };
+    });
+
+    /*
+    	this function routes a model to all other models.
+
+    	all functions that are routed have a property `.conversion` attached
+    	to the returned synthetic function. This property is an array
+    	of strings, each with the steps in between the 'from' and 'to'
+    	color models (inclusive).
+
+    	conversions that are not possible simply are not included.
+    */
+
+    function buildGraph() {
+    	var graph = {};
+    	// https://jsperf.com/object-keys-vs-for-in-with-closure/3
+    	var models = Object.keys(conversions);
+
+    	for (var len = models.length, i = 0; i < len; i++) {
+    		graph[models[i]] = {
+    			// http://jsperf.com/1-vs-infinity
+    			// micro-opt, but this is simple.
+    			distance: -1,
+    			parent: null
+    		};
+    	}
+
+    	return graph;
+    }
+
+    // https://en.wikipedia.org/wiki/Breadth-first_search
+    function deriveBFS(fromModel) {
+    	var graph = buildGraph();
+    	var queue = [fromModel]; // unshift -> queue -> pop
+
+    	graph[fromModel].distance = 0;
+
+    	while (queue.length) {
+    		var current = queue.pop();
+    		var adjacents = Object.keys(conversions[current]);
+
+    		for (var len = adjacents.length, i = 0; i < len; i++) {
+    			var adjacent = adjacents[i];
+    			var node = graph[adjacent];
+
+    			if (node.distance === -1) {
+    				node.distance = graph[current].distance + 1;
+    				node.parent = current;
+    				queue.unshift(adjacent);
+    			}
+    		}
+    	}
+
+    	return graph;
+    }
+
+    function link(from, to) {
+    	return function (args) {
+    		return to(from(args));
+    	};
+    }
+
+    function wrapConversion(toModel, graph) {
+    	var path = [graph[toModel].parent, toModel];
+    	var fn = conversions[graph[toModel].parent][toModel];
+
+    	var cur = graph[toModel].parent;
+    	while (graph[cur].parent) {
+    		path.unshift(graph[cur].parent);
+    		fn = link(conversions[graph[cur].parent][cur], fn);
+    		cur = graph[cur].parent;
+    	}
+
+    	fn.conversion = path;
+    	return fn;
+    }
+
+    var route = function (fromModel) {
+    	var graph = deriveBFS(fromModel);
+    	var conversion = {};
+
+    	var models = Object.keys(graph);
+    	for (var len = models.length, i = 0; i < len; i++) {
+    		var toModel = models[i];
+    		var node = graph[toModel];
+
+    		if (node.parent === null) {
+    			// no possible conversion, or this node is the source model.
+    			continue;
+    		}
+
+    		conversion[toModel] = wrapConversion(toModel, graph);
+    	}
+
+    	return conversion;
+    };
+
+    var convert$1 = {};
+
+    var models = Object.keys(conversions);
+
+    function wrapRaw(fn) {
+    	var wrappedFn = function (args) {
+    		if (args === undefined || args === null) {
+    			return args;
+    		}
+
+    		if (arguments.length > 1) {
+    			args = Array.prototype.slice.call(arguments);
+    		}
+
+    		return fn(args);
+    	};
+
+    	// preserve .conversion property if there is one
+    	if ('conversion' in fn) {
+    		wrappedFn.conversion = fn.conversion;
+    	}
+
+    	return wrappedFn;
+    }
+
+    function wrapRounded(fn) {
+    	var wrappedFn = function (args) {
+    		if (args === undefined || args === null) {
+    			return args;
+    		}
+
+    		if (arguments.length > 1) {
+    			args = Array.prototype.slice.call(arguments);
+    		}
+
+    		var result = fn(args);
+
+    		// we're assuming the result is an array here.
+    		// see notice in conversions.js; don't use box types
+    		// in conversion functions.
+    		if (typeof result === 'object') {
+    			for (var len = result.length, i = 0; i < len; i++) {
+    				result[i] = Math.round(result[i]);
+    			}
+    		}
+
+    		return result;
+    	};
+
+    	// preserve .conversion property if there is one
+    	if ('conversion' in fn) {
+    		wrappedFn.conversion = fn.conversion;
+    	}
+
+    	return wrappedFn;
+    }
+
+    models.forEach(function (fromModel) {
+    	convert$1[fromModel] = {};
+
+    	Object.defineProperty(convert$1[fromModel], 'channels', {value: conversions[fromModel].channels});
+    	Object.defineProperty(convert$1[fromModel], 'labels', {value: conversions[fromModel].labels});
+
+    	var routes = route(fromModel);
+    	var routeModels = Object.keys(routes);
+
+    	routeModels.forEach(function (toModel) {
+    		var fn = routes[toModel];
+
+    		convert$1[fromModel][toModel] = wrapRounded(fn);
+    		convert$1[fromModel][toModel].raw = wrapRaw(fn);
+    	});
+    });
+
+    var colorConvert = convert$1;
+
+    var _slice = [].slice;
+
+    var skippedModels = [
+    	// to be honest, I don't really feel like keyword belongs in color convert, but eh.
+    	'keyword',
+
+    	// gray conflicts with some method names, and has its own method defined.
+    	'gray',
+
+    	// shouldn't really be in color-convert either...
+    	'hex'
+    ];
+
+    var hashedModelKeys = {};
+    Object.keys(colorConvert).forEach(function (model) {
+    	hashedModelKeys[_slice.call(colorConvert[model].labels).sort().join('')] = model;
+    });
+
+    var limiters = {};
+
+    function Color(obj, model) {
+    	if (!(this instanceof Color)) {
+    		return new Color(obj, model);
+    	}
+
+    	if (model && model in skippedModels) {
+    		model = null;
+    	}
+
+    	if (model && !(model in colorConvert)) {
+    		throw new Error('Unknown model: ' + model);
+    	}
+
+    	var i;
+    	var channels;
+
+    	if (obj == null) { // eslint-disable-line no-eq-null,eqeqeq
+    		this.model = 'rgb';
+    		this.color = [0, 0, 0];
+    		this.valpha = 1;
+    	} else if (obj instanceof Color) {
+    		this.model = obj.model;
+    		this.color = obj.color.slice();
+    		this.valpha = obj.valpha;
+    	} else if (typeof obj === 'string') {
+    		var result = colorString.get(obj);
+    		if (result === null) {
+    			throw new Error('Unable to parse color from string: ' + obj);
+    		}
+
+    		this.model = result.model;
+    		channels = colorConvert[this.model].channels;
+    		this.color = result.value.slice(0, channels);
+    		this.valpha = typeof result.value[channels] === 'number' ? result.value[channels] : 1;
+    	} else if (obj.length) {
+    		this.model = model || 'rgb';
+    		channels = colorConvert[this.model].channels;
+    		var newArr = _slice.call(obj, 0, channels);
+    		this.color = zeroArray(newArr, channels);
+    		this.valpha = typeof obj[channels] === 'number' ? obj[channels] : 1;
+    	} else if (typeof obj === 'number') {
+    		// this is always RGB - can be converted later on.
+    		obj &= 0xFFFFFF;
+    		this.model = 'rgb';
+    		this.color = [
+    			(obj >> 16) & 0xFF,
+    			(obj >> 8) & 0xFF,
+    			obj & 0xFF
+    		];
+    		this.valpha = 1;
+    	} else {
+    		this.valpha = 1;
+
+    		var keys = Object.keys(obj);
+    		if ('alpha' in obj) {
+    			keys.splice(keys.indexOf('alpha'), 1);
+    			this.valpha = typeof obj.alpha === 'number' ? obj.alpha : 0;
+    		}
+
+    		var hashedKeys = keys.sort().join('');
+    		if (!(hashedKeys in hashedModelKeys)) {
+    			throw new Error('Unable to parse color from object: ' + JSON.stringify(obj));
+    		}
+
+    		this.model = hashedModelKeys[hashedKeys];
+
+    		var labels = colorConvert[this.model].labels;
+    		var color = [];
+    		for (i = 0; i < labels.length; i++) {
+    			color.push(obj[labels[i]]);
+    		}
+
+    		this.color = zeroArray(color);
+    	}
+
+    	// perform limitations (clamping, etc.)
+    	if (limiters[this.model]) {
+    		channels = colorConvert[this.model].channels;
+    		for (i = 0; i < channels; i++) {
+    			var limit = limiters[this.model][i];
+    			if (limit) {
+    				this.color[i] = limit(this.color[i]);
+    			}
+    		}
+    	}
+
+    	this.valpha = Math.max(0, Math.min(1, this.valpha));
+
+    	if (Object.freeze) {
+    		Object.freeze(this);
+    	}
+    }
+
+    Color.prototype = {
+    	toString: function () {
+    		return this.string();
+    	},
+
+    	toJSON: function () {
+    		return this[this.model]();
+    	},
+
+    	string: function (places) {
+    		var self = this.model in colorString.to ? this : this.rgb();
+    		self = self.round(typeof places === 'number' ? places : 1);
+    		var args = self.valpha === 1 ? self.color : self.color.concat(this.valpha);
+    		return colorString.to[self.model](args);
+    	},
+
+    	percentString: function (places) {
+    		var self = this.rgb().round(typeof places === 'number' ? places : 1);
+    		var args = self.valpha === 1 ? self.color : self.color.concat(this.valpha);
+    		return colorString.to.rgb.percent(args);
+    	},
+
+    	array: function () {
+    		return this.valpha === 1 ? this.color.slice() : this.color.concat(this.valpha);
+    	},
+
+    	object: function () {
+    		var result = {};
+    		var channels = colorConvert[this.model].channels;
+    		var labels = colorConvert[this.model].labels;
+
+    		for (var i = 0; i < channels; i++) {
+    			result[labels[i]] = this.color[i];
+    		}
+
+    		if (this.valpha !== 1) {
+    			result.alpha = this.valpha;
+    		}
+
+    		return result;
+    	},
+
+    	unitArray: function () {
+    		var rgb = this.rgb().color;
+    		rgb[0] /= 255;
+    		rgb[1] /= 255;
+    		rgb[2] /= 255;
+
+    		if (this.valpha !== 1) {
+    			rgb.push(this.valpha);
+    		}
+
+    		return rgb;
+    	},
+
+    	unitObject: function () {
+    		var rgb = this.rgb().object();
+    		rgb.r /= 255;
+    		rgb.g /= 255;
+    		rgb.b /= 255;
+
+    		if (this.valpha !== 1) {
+    			rgb.alpha = this.valpha;
+    		}
+
+    		return rgb;
+    	},
+
+    	round: function (places) {
+    		places = Math.max(places || 0, 0);
+    		return new Color(this.color.map(roundToPlace(places)).concat(this.valpha), this.model);
+    	},
+
+    	alpha: function (val) {
+    		if (arguments.length) {
+    			return new Color(this.color.concat(Math.max(0, Math.min(1, val))), this.model);
+    		}
+
+    		return this.valpha;
+    	},
+
+    	// rgb
+    	red: getset('rgb', 0, maxfn(255)),
+    	green: getset('rgb', 1, maxfn(255)),
+    	blue: getset('rgb', 2, maxfn(255)),
+
+    	hue: getset(['hsl', 'hsv', 'hsl', 'hwb', 'hcg'], 0, function (val) { return ((val % 360) + 360) % 360; }), // eslint-disable-line brace-style
+
+    	saturationl: getset('hsl', 1, maxfn(100)),
+    	lightness: getset('hsl', 2, maxfn(100)),
+
+    	saturationv: getset('hsv', 1, maxfn(100)),
+    	value: getset('hsv', 2, maxfn(100)),
+
+    	chroma: getset('hcg', 1, maxfn(100)),
+    	gray: getset('hcg', 2, maxfn(100)),
+
+    	white: getset('hwb', 1, maxfn(100)),
+    	wblack: getset('hwb', 2, maxfn(100)),
+
+    	cyan: getset('cmyk', 0, maxfn(100)),
+    	magenta: getset('cmyk', 1, maxfn(100)),
+    	yellow: getset('cmyk', 2, maxfn(100)),
+    	black: getset('cmyk', 3, maxfn(100)),
+
+    	x: getset('xyz', 0, maxfn(100)),
+    	y: getset('xyz', 1, maxfn(100)),
+    	z: getset('xyz', 2, maxfn(100)),
+
+    	l: getset('lab', 0, maxfn(100)),
+    	a: getset('lab', 1),
+    	b: getset('lab', 2),
+
+    	keyword: function (val) {
+    		if (arguments.length) {
+    			return new Color(val);
+    		}
+
+    		return colorConvert[this.model].keyword(this.color);
+    	},
+
+    	hex: function (val) {
+    		if (arguments.length) {
+    			return new Color(val);
+    		}
+
+    		return colorString.to.hex(this.rgb().round().color);
+    	},
+
+    	rgbNumber: function () {
+    		var rgb = this.rgb().color;
+    		return ((rgb[0] & 0xFF) << 16) | ((rgb[1] & 0xFF) << 8) | (rgb[2] & 0xFF);
+    	},
+
+    	luminosity: function () {
+    		// http://www.w3.org/TR/WCAG20/#relativeluminancedef
+    		var rgb = this.rgb().color;
+
+    		var lum = [];
+    		for (var i = 0; i < rgb.length; i++) {
+    			var chan = rgb[i] / 255;
+    			lum[i] = (chan <= 0.03928) ? chan / 12.92 : Math.pow(((chan + 0.055) / 1.055), 2.4);
+    		}
+
+    		return 0.2126 * lum[0] + 0.7152 * lum[1] + 0.0722 * lum[2];
+    	},
+
+    	contrast: function (color2) {
+    		// http://www.w3.org/TR/WCAG20/#contrast-ratiodef
+    		var lum1 = this.luminosity();
+    		var lum2 = color2.luminosity();
+
+    		if (lum1 > lum2) {
+    			return (lum1 + 0.05) / (lum2 + 0.05);
+    		}
+
+    		return (lum2 + 0.05) / (lum1 + 0.05);
+    	},
+
+    	level: function (color2) {
+    		var contrastRatio = this.contrast(color2);
+    		if (contrastRatio >= 7.1) {
+    			return 'AAA';
+    		}
+
+    		return (contrastRatio >= 4.5) ? 'AA' : '';
+    	},
+
+    	isDark: function () {
+    		// YIQ equation from http://24ways.org/2010/calculating-color-contrast
+    		var rgb = this.rgb().color;
+    		var yiq = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000;
+    		return yiq < 128;
+    	},
+
+    	isLight: function () {
+    		return !this.isDark();
+    	},
+
+    	negate: function () {
+    		var rgb = this.rgb();
+    		for (var i = 0; i < 3; i++) {
+    			rgb.color[i] = 255 - rgb.color[i];
+    		}
+    		return rgb;
+    	},
+
+    	lighten: function (ratio) {
+    		var hsl = this.hsl();
+    		hsl.color[2] += hsl.color[2] * ratio;
+    		return hsl;
+    	},
+
+    	darken: function (ratio) {
+    		var hsl = this.hsl();
+    		hsl.color[2] -= hsl.color[2] * ratio;
+    		return hsl;
+    	},
+
+    	saturate: function (ratio) {
+    		var hsl = this.hsl();
+    		hsl.color[1] += hsl.color[1] * ratio;
+    		return hsl;
+    	},
+
+    	desaturate: function (ratio) {
+    		var hsl = this.hsl();
+    		hsl.color[1] -= hsl.color[1] * ratio;
+    		return hsl;
+    	},
+
+    	whiten: function (ratio) {
+    		var hwb = this.hwb();
+    		hwb.color[1] += hwb.color[1] * ratio;
+    		return hwb;
+    	},
+
+    	blacken: function (ratio) {
+    		var hwb = this.hwb();
+    		hwb.color[2] += hwb.color[2] * ratio;
+    		return hwb;
+    	},
+
+    	grayscale: function () {
+    		// http://en.wikipedia.org/wiki/Grayscale#Converting_color_to_grayscale
+    		var rgb = this.rgb().color;
+    		var val = rgb[0] * 0.3 + rgb[1] * 0.59 + rgb[2] * 0.11;
+    		return Color.rgb(val, val, val);
+    	},
+
+    	fade: function (ratio) {
+    		return this.alpha(this.valpha - (this.valpha * ratio));
+    	},
+
+    	opaquer: function (ratio) {
+    		return this.alpha(this.valpha + (this.valpha * ratio));
+    	},
+
+    	rotate: function (degrees) {
+    		var hsl = this.hsl();
+    		var hue = hsl.color[0];
+    		hue = (hue + degrees) % 360;
+    		hue = hue < 0 ? 360 + hue : hue;
+    		hsl.color[0] = hue;
+    		return hsl;
+    	},
+
+    	mix: function (mixinColor, weight) {
+    		// ported from sass implementation in C
+    		// https://github.com/sass/libsass/blob/0e6b4a2850092356aa3ece07c6b249f0221caced/functions.cpp#L209
+    		if (!mixinColor || !mixinColor.rgb) {
+    			throw new Error('Argument to "mix" was not a Color instance, but rather an instance of ' + typeof mixinColor);
+    		}
+    		var color1 = mixinColor.rgb();
+    		var color2 = this.rgb();
+    		var p = weight === undefined ? 0.5 : weight;
+
+    		var w = 2 * p - 1;
+    		var a = color1.alpha() - color2.alpha();
+
+    		var w1 = (((w * a === -1) ? w : (w + a) / (1 + w * a)) + 1) / 2.0;
+    		var w2 = 1 - w1;
+
+    		return Color.rgb(
+    				w1 * color1.red() + w2 * color2.red(),
+    				w1 * color1.green() + w2 * color2.green(),
+    				w1 * color1.blue() + w2 * color2.blue(),
+    				color1.alpha() * p + color2.alpha() * (1 - p));
+    	}
+    };
+
+    // model conversion methods and static constructors
+    Object.keys(colorConvert).forEach(function (model) {
+    	if (skippedModels.indexOf(model) !== -1) {
+    		return;
+    	}
+
+    	var channels = colorConvert[model].channels;
+
+    	// conversion methods
+    	Color.prototype[model] = function () {
+    		if (this.model === model) {
+    			return new Color(this);
+    		}
+
+    		if (arguments.length) {
+    			return new Color(arguments, model);
+    		}
+
+    		var newAlpha = typeof arguments[channels] === 'number' ? channels : this.valpha;
+    		return new Color(assertArray(colorConvert[this.model][model].raw(this.color)).concat(newAlpha), model);
+    	};
+
+    	// 'static' construction methods
+    	Color[model] = function (color) {
+    		if (typeof color === 'number') {
+    			color = zeroArray(_slice.call(arguments), channels);
+    		}
+    		return new Color(color, model);
+    	};
+    });
+
+    function roundTo$1(num, places) {
+    	return Number(num.toFixed(places));
+    }
+
+    function roundToPlace(places) {
+    	return function (num) {
+    		return roundTo$1(num, places);
+    	};
+    }
+
+    function getset(model, channel, modifier) {
+    	model = Array.isArray(model) ? model : [model];
+
+    	model.forEach(function (m) {
+    		(limiters[m] || (limiters[m] = []))[channel] = modifier;
+    	});
+
+    	model = model[0];
+
+    	return function (val) {
+    		var result;
+
+    		if (arguments.length) {
+    			if (modifier) {
+    				val = modifier(val);
+    			}
+
+    			result = this[model]();
+    			result.color[channel] = val;
+    			return result;
+    		}
+
+    		result = this[model]().color[channel];
+    		if (modifier) {
+    			result = modifier(result);
+    		}
+
+    		return result;
+    	};
+    }
+
+    function maxfn(max) {
+    	return function (v) {
+    		return Math.max(0, Math.min(max, v));
+    	};
+    }
+
+    function assertArray(val) {
+    	return Array.isArray(val) ? val : [val];
+    }
+
+    function zeroArray(arr, length) {
+    	for (var i = 0; i < length; i++) {
+    		if (typeof arr[i] !== 'number') {
+    			arr[i] = 0;
+    		}
+    	}
+
+    	return arr;
+    }
+
+    var color$1 = Color;
+
+    const fs = require("fs");
+    const path = require("path");
+
+
+    const showFavorites = writable(false);
+
+
+    /// COLOR STATE ITEMS
+    const hue = writable(180);
+
+    const color = derived(
+        hue,
+        ($hue) => {
+            return color$1("rgb(255, 0, 0)").rotate($hue)
+        }
+    );
+
+    /// Timer Size
+    const size = writable(300);
+
+    const blur = writable(0);
+    // so that the blur stays consistent in style when the window is resized:
+    const scaledBlur = derived(
+        [blur, size],
+        ([$blur, $size]) => $blur * ($size / 300)
+    );
+
+
+    const maxSize = readable(Math.min(window.screen.height, window.screen.width));
+
+    const settingsHeight = derived([size], $size => {
+        if ($size >= 200) return Math.round($size / 1.2);
+        else return Math.round(150)
+    });
+    const settingsOpen = writable(false);
+
+    const width = derived(
+        [size, scaledBlur],
+        ([$size, $scaledBlur]) => {
+            return Math.round($size + ($scaledBlur * 7))
+        }
+    );
+
+
+    const height = derived(
+        [settingsHeight, settingsOpen, size, scaledBlur],
+        ([$settingsHeight, $settingsOpen, $size, $scaledBlur]) => {
+            // main area height is size + blur + draggable-bar
+            const mainSectionSize = Math.round($size + ($scaledBlur * 7)) + 20;
+            if ($settingsOpen) return mainSectionSize + $settingsHeight + 20;
+            else return mainSectionSize
+        }
+    );
+
+
+    const intervalMode = writable(true);
+
+    const settings = writable({});
+
+    const stayOnTop = derived(settings, $settings => $settings.alwaysOnTop);
+
+    const currentFavInd = writable(null);
+
+    const loadSettings = () => {
+        // read settings file:
+        const settingsData = JSON.parse(fs.readFileSync(path.join(__dirname, "./settings.json")));
+        settings.set(settingsData);
+        console.log("favs: ", settingsData.favorites);
+        hue.set(settingsData.hue);
+        size.set(settingsData.size);
+        blur.set(settingsData.blur);
+    };
+
+
+    const saveSettings = () => {
+        const tempHue = get_store_value(hue);
+        const tempSize = get_store_value(size);
+        const tempBlur = get_store_value(blur);
+        let tempSettings = get_store_value(settings);
+        tempSettings = {...tempSettings, hue: tempHue, size: tempSize, blur: tempBlur};
+        tempSettings = JSON.stringify(tempSettings, null, 2);
+        fs.writeFileSync(path.join(__dirname, "./settings.json"), tempSettings);
+    };
+
     const focused = writable(true);
 
     // then current time, updated every 10 milliseconds
@@ -869,40 +3057,10 @@ var app = (function () {
 
     /// USED IN INTERVAL MODE
     // this is used for the temporary durations in interval mode
-    const intervalDurations = writable([0, 0]);
+    const intervalDurations = writable([25000, 5000]);
 
     // the index of the current interval duration
     const intervalIndex = writable(0);
-
-
-    // sets the duration, start time, and run-state of the timer
-    const start = () => {
-        const tempDur = get_store_value(tempDuration);
-        if (tempDur !== 0) {
-            startTime.set(Date.now());
-            duration.set(tempDur);
-            focused.set(false);
-            runState.set("running");
-            const sound = new Audio("file://" + __dirname + "/sounds/startSound.wav");
-            sound.play();
-        }
-    };
-
-    // gets the current remaining time and sets the state to 'paused'
-    const pause = () => {
-        const remTime = get_store_value(remainingTime);
-        pausedRemainingTime.set(remTime);
-        runState.set("paused");
-    };
-
-    // calculates the new relative start-time based on how much time is remaining and sets the state back to running
-    const resume = () => {
-        const dur = get_store_value(duration);
-        const remTime = get_store_value(pausedRemainingTime);
-        startTime.set(Date.now() - (dur - remTime));
-        focused.set(false);
-        runState.set("running");
-    };
 
     // runs when the time runs out
     const handleEnd = () => {
@@ -1296,7 +3454,7 @@ var app = (function () {
       }
     }
 
-    function roundTo$1(number, digits, towardZero = false) {
+    function roundTo(number, digits, towardZero = false) {
       const factor = 10 ** digits,
         rounder = towardZero ? Math.trunc : Math.round;
       return rounder(number * factor) / factor;
@@ -2888,7 +5046,7 @@ var app = (function () {
           return this.inf.format(fixed);
         } else {
           // to match the browser's numberformatter defaults
-          const fixed = this.floor ? Math.floor(i) : roundTo$1(i, 3);
+          const fixed = this.floor ? Math.floor(i) : roundTo(i, 3);
           return padStart(fixed, this.padTo);
         }
       }
@@ -3635,7 +5793,7 @@ var app = (function () {
     }
 
     // NB: mutates parameters
-    function convert$1(matrix, fromMap, fromUnit, toMap, toUnit) {
+    function convert(matrix, fromMap, fromUnit, toMap, toUnit) {
       const conv = matrix[toUnit][fromUnit],
         raw = fromMap[fromUnit] / conv,
         sameSign = Math.sign(raw) === Math.sign(toMap[toUnit]),
@@ -3651,7 +5809,7 @@ var app = (function () {
       reverseUnits.reduce((previous, current) => {
         if (!isUndefined(vals[current])) {
           if (previous) {
-            convert$1(matrix, vals, previous, vals, current);
+            convert(matrix, vals, previous, vals, current);
           }
           return current;
         } else {
@@ -3956,7 +6114,7 @@ var app = (function () {
         if (this.seconds !== 0 || this.milliseconds !== 0)
           // this will handle "floating point madness" by removing extra decimal places
           // https://stackoverflow.com/questions/588004/is-floating-point-math-broken
-          s += roundTo$1(this.seconds + this.milliseconds / 1000, 3) + "S";
+          s += roundTo(this.seconds + this.milliseconds / 1000, 3) + "S";
         if (s === "P") s += "T0S";
         return s;
       }
@@ -4203,7 +6361,7 @@ var app = (function () {
             // plus anything further down the chain that should be rolled up in to this
             for (const down in vals) {
               if (orderedUnits$1.indexOf(down) > orderedUnits$1.indexOf(k)) {
-                convert$1(this.matrix, vals, down, built, k);
+                convert(this.matrix, vals, down, built, k);
               }
             }
             // otherwise, keep it in the wings to boil it later
@@ -6168,7 +8326,7 @@ var app = (function () {
     function diffRelative(start, end, opts) {
       const round = isUndefined(opts.round) ? true : opts.round,
         format = (c, unit) => {
-          c = roundTo$1(c, round || opts.calendary ? 0 : 2, true);
+          c = roundTo(c, round || opts.calendary ? 0 : 2, true);
           const formatter = end.loc.clone(opts).relFormatter(opts);
           return formatter.format(c, unit);
         },
@@ -8006,2194 +10164,6 @@ var app = (function () {
     };
 
     // export const msToHoursMinsSeconds
-
-    var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
-
-    function createCommonjsModule(fn) {
-      var module = { exports: {} };
-    	return fn(module, module.exports), module.exports;
-    }
-
-    var colorName$1 = {
-    	"aliceblue": [240, 248, 255],
-    	"antiquewhite": [250, 235, 215],
-    	"aqua": [0, 255, 255],
-    	"aquamarine": [127, 255, 212],
-    	"azure": [240, 255, 255],
-    	"beige": [245, 245, 220],
-    	"bisque": [255, 228, 196],
-    	"black": [0, 0, 0],
-    	"blanchedalmond": [255, 235, 205],
-    	"blue": [0, 0, 255],
-    	"blueviolet": [138, 43, 226],
-    	"brown": [165, 42, 42],
-    	"burlywood": [222, 184, 135],
-    	"cadetblue": [95, 158, 160],
-    	"chartreuse": [127, 255, 0],
-    	"chocolate": [210, 105, 30],
-    	"coral": [255, 127, 80],
-    	"cornflowerblue": [100, 149, 237],
-    	"cornsilk": [255, 248, 220],
-    	"crimson": [220, 20, 60],
-    	"cyan": [0, 255, 255],
-    	"darkblue": [0, 0, 139],
-    	"darkcyan": [0, 139, 139],
-    	"darkgoldenrod": [184, 134, 11],
-    	"darkgray": [169, 169, 169],
-    	"darkgreen": [0, 100, 0],
-    	"darkgrey": [169, 169, 169],
-    	"darkkhaki": [189, 183, 107],
-    	"darkmagenta": [139, 0, 139],
-    	"darkolivegreen": [85, 107, 47],
-    	"darkorange": [255, 140, 0],
-    	"darkorchid": [153, 50, 204],
-    	"darkred": [139, 0, 0],
-    	"darksalmon": [233, 150, 122],
-    	"darkseagreen": [143, 188, 143],
-    	"darkslateblue": [72, 61, 139],
-    	"darkslategray": [47, 79, 79],
-    	"darkslategrey": [47, 79, 79],
-    	"darkturquoise": [0, 206, 209],
-    	"darkviolet": [148, 0, 211],
-    	"deeppink": [255, 20, 147],
-    	"deepskyblue": [0, 191, 255],
-    	"dimgray": [105, 105, 105],
-    	"dimgrey": [105, 105, 105],
-    	"dodgerblue": [30, 144, 255],
-    	"firebrick": [178, 34, 34],
-    	"floralwhite": [255, 250, 240],
-    	"forestgreen": [34, 139, 34],
-    	"fuchsia": [255, 0, 255],
-    	"gainsboro": [220, 220, 220],
-    	"ghostwhite": [248, 248, 255],
-    	"gold": [255, 215, 0],
-    	"goldenrod": [218, 165, 32],
-    	"gray": [128, 128, 128],
-    	"green": [0, 128, 0],
-    	"greenyellow": [173, 255, 47],
-    	"grey": [128, 128, 128],
-    	"honeydew": [240, 255, 240],
-    	"hotpink": [255, 105, 180],
-    	"indianred": [205, 92, 92],
-    	"indigo": [75, 0, 130],
-    	"ivory": [255, 255, 240],
-    	"khaki": [240, 230, 140],
-    	"lavender": [230, 230, 250],
-    	"lavenderblush": [255, 240, 245],
-    	"lawngreen": [124, 252, 0],
-    	"lemonchiffon": [255, 250, 205],
-    	"lightblue": [173, 216, 230],
-    	"lightcoral": [240, 128, 128],
-    	"lightcyan": [224, 255, 255],
-    	"lightgoldenrodyellow": [250, 250, 210],
-    	"lightgray": [211, 211, 211],
-    	"lightgreen": [144, 238, 144],
-    	"lightgrey": [211, 211, 211],
-    	"lightpink": [255, 182, 193],
-    	"lightsalmon": [255, 160, 122],
-    	"lightseagreen": [32, 178, 170],
-    	"lightskyblue": [135, 206, 250],
-    	"lightslategray": [119, 136, 153],
-    	"lightslategrey": [119, 136, 153],
-    	"lightsteelblue": [176, 196, 222],
-    	"lightyellow": [255, 255, 224],
-    	"lime": [0, 255, 0],
-    	"limegreen": [50, 205, 50],
-    	"linen": [250, 240, 230],
-    	"magenta": [255, 0, 255],
-    	"maroon": [128, 0, 0],
-    	"mediumaquamarine": [102, 205, 170],
-    	"mediumblue": [0, 0, 205],
-    	"mediumorchid": [186, 85, 211],
-    	"mediumpurple": [147, 112, 219],
-    	"mediumseagreen": [60, 179, 113],
-    	"mediumslateblue": [123, 104, 238],
-    	"mediumspringgreen": [0, 250, 154],
-    	"mediumturquoise": [72, 209, 204],
-    	"mediumvioletred": [199, 21, 133],
-    	"midnightblue": [25, 25, 112],
-    	"mintcream": [245, 255, 250],
-    	"mistyrose": [255, 228, 225],
-    	"moccasin": [255, 228, 181],
-    	"navajowhite": [255, 222, 173],
-    	"navy": [0, 0, 128],
-    	"oldlace": [253, 245, 230],
-    	"olive": [128, 128, 0],
-    	"olivedrab": [107, 142, 35],
-    	"orange": [255, 165, 0],
-    	"orangered": [255, 69, 0],
-    	"orchid": [218, 112, 214],
-    	"palegoldenrod": [238, 232, 170],
-    	"palegreen": [152, 251, 152],
-    	"paleturquoise": [175, 238, 238],
-    	"palevioletred": [219, 112, 147],
-    	"papayawhip": [255, 239, 213],
-    	"peachpuff": [255, 218, 185],
-    	"peru": [205, 133, 63],
-    	"pink": [255, 192, 203],
-    	"plum": [221, 160, 221],
-    	"powderblue": [176, 224, 230],
-    	"purple": [128, 0, 128],
-    	"rebeccapurple": [102, 51, 153],
-    	"red": [255, 0, 0],
-    	"rosybrown": [188, 143, 143],
-    	"royalblue": [65, 105, 225],
-    	"saddlebrown": [139, 69, 19],
-    	"salmon": [250, 128, 114],
-    	"sandybrown": [244, 164, 96],
-    	"seagreen": [46, 139, 87],
-    	"seashell": [255, 245, 238],
-    	"sienna": [160, 82, 45],
-    	"silver": [192, 192, 192],
-    	"skyblue": [135, 206, 235],
-    	"slateblue": [106, 90, 205],
-    	"slategray": [112, 128, 144],
-    	"slategrey": [112, 128, 144],
-    	"snow": [255, 250, 250],
-    	"springgreen": [0, 255, 127],
-    	"steelblue": [70, 130, 180],
-    	"tan": [210, 180, 140],
-    	"teal": [0, 128, 128],
-    	"thistle": [216, 191, 216],
-    	"tomato": [255, 99, 71],
-    	"turquoise": [64, 224, 208],
-    	"violet": [238, 130, 238],
-    	"wheat": [245, 222, 179],
-    	"white": [255, 255, 255],
-    	"whitesmoke": [245, 245, 245],
-    	"yellow": [255, 255, 0],
-    	"yellowgreen": [154, 205, 50]
-    };
-
-    var isArrayish = function isArrayish(obj) {
-    	if (!obj || typeof obj === 'string') {
-    		return false;
-    	}
-
-    	return obj instanceof Array || Array.isArray(obj) ||
-    		(obj.length >= 0 && (obj.splice instanceof Function ||
-    			(Object.getOwnPropertyDescriptor(obj, (obj.length - 1)) && obj.constructor.name !== 'String')));
-    };
-
-    var simpleSwizzle = createCommonjsModule(function (module) {
-
-
-
-    var concat = Array.prototype.concat;
-    var slice = Array.prototype.slice;
-
-    var swizzle = module.exports = function swizzle(args) {
-    	var results = [];
-
-    	for (var i = 0, len = args.length; i < len; i++) {
-    		var arg = args[i];
-
-    		if (isArrayish(arg)) {
-    			// http://jsperf.com/javascript-array-concat-vs-push/98
-    			results = concat.call(results, slice.call(arg));
-    		} else {
-    			results.push(arg);
-    		}
-    	}
-
-    	return results;
-    };
-
-    swizzle.wrap = function (fn) {
-    	return function () {
-    		return fn(swizzle(arguments));
-    	};
-    };
-    });
-
-    /* MIT license */
-
-    var colorString = createCommonjsModule(function (module) {
-    var reverseNames = {};
-
-    // create a list of reverse color names
-    for (var name in colorName$1) {
-    	if (colorName$1.hasOwnProperty(name)) {
-    		reverseNames[colorName$1[name]] = name;
-    	}
-    }
-
-    var cs = module.exports = {
-    	to: {},
-    	get: {}
-    };
-
-    cs.get = function (string) {
-    	var prefix = string.substring(0, 3).toLowerCase();
-    	var val;
-    	var model;
-    	switch (prefix) {
-    		case 'hsl':
-    			val = cs.get.hsl(string);
-    			model = 'hsl';
-    			break;
-    		case 'hwb':
-    			val = cs.get.hwb(string);
-    			model = 'hwb';
-    			break;
-    		default:
-    			val = cs.get.rgb(string);
-    			model = 'rgb';
-    			break;
-    	}
-
-    	if (!val) {
-    		return null;
-    	}
-
-    	return {model: model, value: val};
-    };
-
-    cs.get.rgb = function (string) {
-    	if (!string) {
-    		return null;
-    	}
-
-    	var abbr = /^#([a-f0-9]{3,4})$/i;
-    	var hex = /^#([a-f0-9]{6})([a-f0-9]{2})?$/i;
-    	var rgba = /^rgba?\(\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)$/;
-    	var per = /^rgba?\(\s*([+-]?[\d\.]+)\%\s*,\s*([+-]?[\d\.]+)\%\s*,\s*([+-]?[\d\.]+)\%\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)$/;
-    	var keyword = /(\D+)/;
-
-    	var rgb = [0, 0, 0, 1];
-    	var match;
-    	var i;
-    	var hexAlpha;
-
-    	if (match = string.match(hex)) {
-    		hexAlpha = match[2];
-    		match = match[1];
-
-    		for (i = 0; i < 3; i++) {
-    			// https://jsperf.com/slice-vs-substr-vs-substring-methods-long-string/19
-    			var i2 = i * 2;
-    			rgb[i] = parseInt(match.slice(i2, i2 + 2), 16);
-    		}
-
-    		if (hexAlpha) {
-    			rgb[3] = parseInt(hexAlpha, 16) / 255;
-    		}
-    	} else if (match = string.match(abbr)) {
-    		match = match[1];
-    		hexAlpha = match[3];
-
-    		for (i = 0; i < 3; i++) {
-    			rgb[i] = parseInt(match[i] + match[i], 16);
-    		}
-
-    		if (hexAlpha) {
-    			rgb[3] = parseInt(hexAlpha + hexAlpha, 16) / 255;
-    		}
-    	} else if (match = string.match(rgba)) {
-    		for (i = 0; i < 3; i++) {
-    			rgb[i] = parseInt(match[i + 1], 0);
-    		}
-
-    		if (match[4]) {
-    			rgb[3] = parseFloat(match[4]);
-    		}
-    	} else if (match = string.match(per)) {
-    		for (i = 0; i < 3; i++) {
-    			rgb[i] = Math.round(parseFloat(match[i + 1]) * 2.55);
-    		}
-
-    		if (match[4]) {
-    			rgb[3] = parseFloat(match[4]);
-    		}
-    	} else if (match = string.match(keyword)) {
-    		if (match[1] === 'transparent') {
-    			return [0, 0, 0, 0];
-    		}
-
-    		rgb = colorName$1[match[1]];
-
-    		if (!rgb) {
-    			return null;
-    		}
-
-    		rgb[3] = 1;
-
-    		return rgb;
-    	} else {
-    		return null;
-    	}
-
-    	for (i = 0; i < 3; i++) {
-    		rgb[i] = clamp(rgb[i], 0, 255);
-    	}
-    	rgb[3] = clamp(rgb[3], 0, 1);
-
-    	return rgb;
-    };
-
-    cs.get.hsl = function (string) {
-    	if (!string) {
-    		return null;
-    	}
-
-    	var hsl = /^hsla?\(\s*([+-]?(?:\d{0,3}\.)?\d+)(?:deg)?\s*,\s*([+-]?[\d\.]+)%\s*,\s*([+-]?[\d\.]+)%\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)$/;
-    	var match = string.match(hsl);
-
-    	if (match) {
-    		var alpha = parseFloat(match[4]);
-    		var h = (parseFloat(match[1]) + 360) % 360;
-    		var s = clamp(parseFloat(match[2]), 0, 100);
-    		var l = clamp(parseFloat(match[3]), 0, 100);
-    		var a = clamp(isNaN(alpha) ? 1 : alpha, 0, 1);
-
-    		return [h, s, l, a];
-    	}
-
-    	return null;
-    };
-
-    cs.get.hwb = function (string) {
-    	if (!string) {
-    		return null;
-    	}
-
-    	var hwb = /^hwb\(\s*([+-]?\d{0,3}(?:\.\d+)?)(?:deg)?\s*,\s*([+-]?[\d\.]+)%\s*,\s*([+-]?[\d\.]+)%\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)$/;
-    	var match = string.match(hwb);
-
-    	if (match) {
-    		var alpha = parseFloat(match[4]);
-    		var h = ((parseFloat(match[1]) % 360) + 360) % 360;
-    		var w = clamp(parseFloat(match[2]), 0, 100);
-    		var b = clamp(parseFloat(match[3]), 0, 100);
-    		var a = clamp(isNaN(alpha) ? 1 : alpha, 0, 1);
-    		return [h, w, b, a];
-    	}
-
-    	return null;
-    };
-
-    cs.to.hex = function () {
-    	var rgba = simpleSwizzle(arguments);
-
-    	return (
-    		'#' +
-    		hexDouble(rgba[0]) +
-    		hexDouble(rgba[1]) +
-    		hexDouble(rgba[2]) +
-    		(rgba[3] < 1
-    			? (hexDouble(Math.round(rgba[3] * 255)))
-    			: '')
-    	);
-    };
-
-    cs.to.rgb = function () {
-    	var rgba = simpleSwizzle(arguments);
-
-    	return rgba.length < 4 || rgba[3] === 1
-    		? 'rgb(' + Math.round(rgba[0]) + ', ' + Math.round(rgba[1]) + ', ' + Math.round(rgba[2]) + ')'
-    		: 'rgba(' + Math.round(rgba[0]) + ', ' + Math.round(rgba[1]) + ', ' + Math.round(rgba[2]) + ', ' + rgba[3] + ')';
-    };
-
-    cs.to.rgb.percent = function () {
-    	var rgba = simpleSwizzle(arguments);
-
-    	var r = Math.round(rgba[0] / 255 * 100);
-    	var g = Math.round(rgba[1] / 255 * 100);
-    	var b = Math.round(rgba[2] / 255 * 100);
-
-    	return rgba.length < 4 || rgba[3] === 1
-    		? 'rgb(' + r + '%, ' + g + '%, ' + b + '%)'
-    		: 'rgba(' + r + '%, ' + g + '%, ' + b + '%, ' + rgba[3] + ')';
-    };
-
-    cs.to.hsl = function () {
-    	var hsla = simpleSwizzle(arguments);
-    	return hsla.length < 4 || hsla[3] === 1
-    		? 'hsl(' + hsla[0] + ', ' + hsla[1] + '%, ' + hsla[2] + '%)'
-    		: 'hsla(' + hsla[0] + ', ' + hsla[1] + '%, ' + hsla[2] + '%, ' + hsla[3] + ')';
-    };
-
-    // hwb is a bit different than rgb(a) & hsl(a) since there is no alpha specific syntax
-    // (hwb have alpha optional & 1 is default value)
-    cs.to.hwb = function () {
-    	var hwba = simpleSwizzle(arguments);
-
-    	var a = '';
-    	if (hwba.length >= 4 && hwba[3] !== 1) {
-    		a = ', ' + hwba[3];
-    	}
-
-    	return 'hwb(' + hwba[0] + ', ' + hwba[1] + '%, ' + hwba[2] + '%' + a + ')';
-    };
-
-    cs.to.keyword = function (rgb) {
-    	return reverseNames[rgb.slice(0, 3)];
-    };
-
-    // helpers
-    function clamp(num, min, max) {
-    	return Math.min(Math.max(min, num), max);
-    }
-
-    function hexDouble(num) {
-    	var str = num.toString(16).toUpperCase();
-    	return (str.length < 2) ? '0' + str : str;
-    }
-    });
-
-    var colorName = {
-    	"aliceblue": [240, 248, 255],
-    	"antiquewhite": [250, 235, 215],
-    	"aqua": [0, 255, 255],
-    	"aquamarine": [127, 255, 212],
-    	"azure": [240, 255, 255],
-    	"beige": [245, 245, 220],
-    	"bisque": [255, 228, 196],
-    	"black": [0, 0, 0],
-    	"blanchedalmond": [255, 235, 205],
-    	"blue": [0, 0, 255],
-    	"blueviolet": [138, 43, 226],
-    	"brown": [165, 42, 42],
-    	"burlywood": [222, 184, 135],
-    	"cadetblue": [95, 158, 160],
-    	"chartreuse": [127, 255, 0],
-    	"chocolate": [210, 105, 30],
-    	"coral": [255, 127, 80],
-    	"cornflowerblue": [100, 149, 237],
-    	"cornsilk": [255, 248, 220],
-    	"crimson": [220, 20, 60],
-    	"cyan": [0, 255, 255],
-    	"darkblue": [0, 0, 139],
-    	"darkcyan": [0, 139, 139],
-    	"darkgoldenrod": [184, 134, 11],
-    	"darkgray": [169, 169, 169],
-    	"darkgreen": [0, 100, 0],
-    	"darkgrey": [169, 169, 169],
-    	"darkkhaki": [189, 183, 107],
-    	"darkmagenta": [139, 0, 139],
-    	"darkolivegreen": [85, 107, 47],
-    	"darkorange": [255, 140, 0],
-    	"darkorchid": [153, 50, 204],
-    	"darkred": [139, 0, 0],
-    	"darksalmon": [233, 150, 122],
-    	"darkseagreen": [143, 188, 143],
-    	"darkslateblue": [72, 61, 139],
-    	"darkslategray": [47, 79, 79],
-    	"darkslategrey": [47, 79, 79],
-    	"darkturquoise": [0, 206, 209],
-    	"darkviolet": [148, 0, 211],
-    	"deeppink": [255, 20, 147],
-    	"deepskyblue": [0, 191, 255],
-    	"dimgray": [105, 105, 105],
-    	"dimgrey": [105, 105, 105],
-    	"dodgerblue": [30, 144, 255],
-    	"firebrick": [178, 34, 34],
-    	"floralwhite": [255, 250, 240],
-    	"forestgreen": [34, 139, 34],
-    	"fuchsia": [255, 0, 255],
-    	"gainsboro": [220, 220, 220],
-    	"ghostwhite": [248, 248, 255],
-    	"gold": [255, 215, 0],
-    	"goldenrod": [218, 165, 32],
-    	"gray": [128, 128, 128],
-    	"green": [0, 128, 0],
-    	"greenyellow": [173, 255, 47],
-    	"grey": [128, 128, 128],
-    	"honeydew": [240, 255, 240],
-    	"hotpink": [255, 105, 180],
-    	"indianred": [205, 92, 92],
-    	"indigo": [75, 0, 130],
-    	"ivory": [255, 255, 240],
-    	"khaki": [240, 230, 140],
-    	"lavender": [230, 230, 250],
-    	"lavenderblush": [255, 240, 245],
-    	"lawngreen": [124, 252, 0],
-    	"lemonchiffon": [255, 250, 205],
-    	"lightblue": [173, 216, 230],
-    	"lightcoral": [240, 128, 128],
-    	"lightcyan": [224, 255, 255],
-    	"lightgoldenrodyellow": [250, 250, 210],
-    	"lightgray": [211, 211, 211],
-    	"lightgreen": [144, 238, 144],
-    	"lightgrey": [211, 211, 211],
-    	"lightpink": [255, 182, 193],
-    	"lightsalmon": [255, 160, 122],
-    	"lightseagreen": [32, 178, 170],
-    	"lightskyblue": [135, 206, 250],
-    	"lightslategray": [119, 136, 153],
-    	"lightslategrey": [119, 136, 153],
-    	"lightsteelblue": [176, 196, 222],
-    	"lightyellow": [255, 255, 224],
-    	"lime": [0, 255, 0],
-    	"limegreen": [50, 205, 50],
-    	"linen": [250, 240, 230],
-    	"magenta": [255, 0, 255],
-    	"maroon": [128, 0, 0],
-    	"mediumaquamarine": [102, 205, 170],
-    	"mediumblue": [0, 0, 205],
-    	"mediumorchid": [186, 85, 211],
-    	"mediumpurple": [147, 112, 219],
-    	"mediumseagreen": [60, 179, 113],
-    	"mediumslateblue": [123, 104, 238],
-    	"mediumspringgreen": [0, 250, 154],
-    	"mediumturquoise": [72, 209, 204],
-    	"mediumvioletred": [199, 21, 133],
-    	"midnightblue": [25, 25, 112],
-    	"mintcream": [245, 255, 250],
-    	"mistyrose": [255, 228, 225],
-    	"moccasin": [255, 228, 181],
-    	"navajowhite": [255, 222, 173],
-    	"navy": [0, 0, 128],
-    	"oldlace": [253, 245, 230],
-    	"olive": [128, 128, 0],
-    	"olivedrab": [107, 142, 35],
-    	"orange": [255, 165, 0],
-    	"orangered": [255, 69, 0],
-    	"orchid": [218, 112, 214],
-    	"palegoldenrod": [238, 232, 170],
-    	"palegreen": [152, 251, 152],
-    	"paleturquoise": [175, 238, 238],
-    	"palevioletred": [219, 112, 147],
-    	"papayawhip": [255, 239, 213],
-    	"peachpuff": [255, 218, 185],
-    	"peru": [205, 133, 63],
-    	"pink": [255, 192, 203],
-    	"plum": [221, 160, 221],
-    	"powderblue": [176, 224, 230],
-    	"purple": [128, 0, 128],
-    	"rebeccapurple": [102, 51, 153],
-    	"red": [255, 0, 0],
-    	"rosybrown": [188, 143, 143],
-    	"royalblue": [65, 105, 225],
-    	"saddlebrown": [139, 69, 19],
-    	"salmon": [250, 128, 114],
-    	"sandybrown": [244, 164, 96],
-    	"seagreen": [46, 139, 87],
-    	"seashell": [255, 245, 238],
-    	"sienna": [160, 82, 45],
-    	"silver": [192, 192, 192],
-    	"skyblue": [135, 206, 235],
-    	"slateblue": [106, 90, 205],
-    	"slategray": [112, 128, 144],
-    	"slategrey": [112, 128, 144],
-    	"snow": [255, 250, 250],
-    	"springgreen": [0, 255, 127],
-    	"steelblue": [70, 130, 180],
-    	"tan": [210, 180, 140],
-    	"teal": [0, 128, 128],
-    	"thistle": [216, 191, 216],
-    	"tomato": [255, 99, 71],
-    	"turquoise": [64, 224, 208],
-    	"violet": [238, 130, 238],
-    	"wheat": [245, 222, 179],
-    	"white": [255, 255, 255],
-    	"whitesmoke": [245, 245, 245],
-    	"yellow": [255, 255, 0],
-    	"yellowgreen": [154, 205, 50]
-    };
-
-    /* MIT license */
-
-    var conversions = createCommonjsModule(function (module) {
-    // NOTE: conversions should only return primitive values (i.e. arrays, or
-    //       values that give correct `typeof` results).
-    //       do not use box values types (i.e. Number(), String(), etc.)
-
-    var reverseKeywords = {};
-    for (var key in colorName) {
-    	if (colorName.hasOwnProperty(key)) {
-    		reverseKeywords[colorName[key]] = key;
-    	}
-    }
-
-    var convert = module.exports = {
-    	rgb: {channels: 3, labels: 'rgb'},
-    	hsl: {channels: 3, labels: 'hsl'},
-    	hsv: {channels: 3, labels: 'hsv'},
-    	hwb: {channels: 3, labels: 'hwb'},
-    	cmyk: {channels: 4, labels: 'cmyk'},
-    	xyz: {channels: 3, labels: 'xyz'},
-    	lab: {channels: 3, labels: 'lab'},
-    	lch: {channels: 3, labels: 'lch'},
-    	hex: {channels: 1, labels: ['hex']},
-    	keyword: {channels: 1, labels: ['keyword']},
-    	ansi16: {channels: 1, labels: ['ansi16']},
-    	ansi256: {channels: 1, labels: ['ansi256']},
-    	hcg: {channels: 3, labels: ['h', 'c', 'g']},
-    	apple: {channels: 3, labels: ['r16', 'g16', 'b16']},
-    	gray: {channels: 1, labels: ['gray']}
-    };
-
-    // hide .channels and .labels properties
-    for (var model in convert) {
-    	if (convert.hasOwnProperty(model)) {
-    		if (!('channels' in convert[model])) {
-    			throw new Error('missing channels property: ' + model);
-    		}
-
-    		if (!('labels' in convert[model])) {
-    			throw new Error('missing channel labels property: ' + model);
-    		}
-
-    		if (convert[model].labels.length !== convert[model].channels) {
-    			throw new Error('channel and label counts mismatch: ' + model);
-    		}
-
-    		var channels = convert[model].channels;
-    		var labels = convert[model].labels;
-    		delete convert[model].channels;
-    		delete convert[model].labels;
-    		Object.defineProperty(convert[model], 'channels', {value: channels});
-    		Object.defineProperty(convert[model], 'labels', {value: labels});
-    	}
-    }
-
-    convert.rgb.hsl = function (rgb) {
-    	var r = rgb[0] / 255;
-    	var g = rgb[1] / 255;
-    	var b = rgb[2] / 255;
-    	var min = Math.min(r, g, b);
-    	var max = Math.max(r, g, b);
-    	var delta = max - min;
-    	var h;
-    	var s;
-    	var l;
-
-    	if (max === min) {
-    		h = 0;
-    	} else if (r === max) {
-    		h = (g - b) / delta;
-    	} else if (g === max) {
-    		h = 2 + (b - r) / delta;
-    	} else if (b === max) {
-    		h = 4 + (r - g) / delta;
-    	}
-
-    	h = Math.min(h * 60, 360);
-
-    	if (h < 0) {
-    		h += 360;
-    	}
-
-    	l = (min + max) / 2;
-
-    	if (max === min) {
-    		s = 0;
-    	} else if (l <= 0.5) {
-    		s = delta / (max + min);
-    	} else {
-    		s = delta / (2 - max - min);
-    	}
-
-    	return [h, s * 100, l * 100];
-    };
-
-    convert.rgb.hsv = function (rgb) {
-    	var rdif;
-    	var gdif;
-    	var bdif;
-    	var h;
-    	var s;
-
-    	var r = rgb[0] / 255;
-    	var g = rgb[1] / 255;
-    	var b = rgb[2] / 255;
-    	var v = Math.max(r, g, b);
-    	var diff = v - Math.min(r, g, b);
-    	var diffc = function (c) {
-    		return (v - c) / 6 / diff + 1 / 2;
-    	};
-
-    	if (diff === 0) {
-    		h = s = 0;
-    	} else {
-    		s = diff / v;
-    		rdif = diffc(r);
-    		gdif = diffc(g);
-    		bdif = diffc(b);
-
-    		if (r === v) {
-    			h = bdif - gdif;
-    		} else if (g === v) {
-    			h = (1 / 3) + rdif - bdif;
-    		} else if (b === v) {
-    			h = (2 / 3) + gdif - rdif;
-    		}
-    		if (h < 0) {
-    			h += 1;
-    		} else if (h > 1) {
-    			h -= 1;
-    		}
-    	}
-
-    	return [
-    		h * 360,
-    		s * 100,
-    		v * 100
-    	];
-    };
-
-    convert.rgb.hwb = function (rgb) {
-    	var r = rgb[0];
-    	var g = rgb[1];
-    	var b = rgb[2];
-    	var h = convert.rgb.hsl(rgb)[0];
-    	var w = 1 / 255 * Math.min(r, Math.min(g, b));
-
-    	b = 1 - 1 / 255 * Math.max(r, Math.max(g, b));
-
-    	return [h, w * 100, b * 100];
-    };
-
-    convert.rgb.cmyk = function (rgb) {
-    	var r = rgb[0] / 255;
-    	var g = rgb[1] / 255;
-    	var b = rgb[2] / 255;
-    	var c;
-    	var m;
-    	var y;
-    	var k;
-
-    	k = Math.min(1 - r, 1 - g, 1 - b);
-    	c = (1 - r - k) / (1 - k) || 0;
-    	m = (1 - g - k) / (1 - k) || 0;
-    	y = (1 - b - k) / (1 - k) || 0;
-
-    	return [c * 100, m * 100, y * 100, k * 100];
-    };
-
-    /**
-     * See https://en.m.wikipedia.org/wiki/Euclidean_distance#Squared_Euclidean_distance
-     * */
-    function comparativeDistance(x, y) {
-    	return (
-    		Math.pow(x[0] - y[0], 2) +
-    		Math.pow(x[1] - y[1], 2) +
-    		Math.pow(x[2] - y[2], 2)
-    	);
-    }
-
-    convert.rgb.keyword = function (rgb) {
-    	var reversed = reverseKeywords[rgb];
-    	if (reversed) {
-    		return reversed;
-    	}
-
-    	var currentClosestDistance = Infinity;
-    	var currentClosestKeyword;
-
-    	for (var keyword in colorName) {
-    		if (colorName.hasOwnProperty(keyword)) {
-    			var value = colorName[keyword];
-
-    			// Compute comparative distance
-    			var distance = comparativeDistance(rgb, value);
-
-    			// Check if its less, if so set as closest
-    			if (distance < currentClosestDistance) {
-    				currentClosestDistance = distance;
-    				currentClosestKeyword = keyword;
-    			}
-    		}
-    	}
-
-    	return currentClosestKeyword;
-    };
-
-    convert.keyword.rgb = function (keyword) {
-    	return colorName[keyword];
-    };
-
-    convert.rgb.xyz = function (rgb) {
-    	var r = rgb[0] / 255;
-    	var g = rgb[1] / 255;
-    	var b = rgb[2] / 255;
-
-    	// assume sRGB
-    	r = r > 0.04045 ? Math.pow(((r + 0.055) / 1.055), 2.4) : (r / 12.92);
-    	g = g > 0.04045 ? Math.pow(((g + 0.055) / 1.055), 2.4) : (g / 12.92);
-    	b = b > 0.04045 ? Math.pow(((b + 0.055) / 1.055), 2.4) : (b / 12.92);
-
-    	var x = (r * 0.4124) + (g * 0.3576) + (b * 0.1805);
-    	var y = (r * 0.2126) + (g * 0.7152) + (b * 0.0722);
-    	var z = (r * 0.0193) + (g * 0.1192) + (b * 0.9505);
-
-    	return [x * 100, y * 100, z * 100];
-    };
-
-    convert.rgb.lab = function (rgb) {
-    	var xyz = convert.rgb.xyz(rgb);
-    	var x = xyz[0];
-    	var y = xyz[1];
-    	var z = xyz[2];
-    	var l;
-    	var a;
-    	var b;
-
-    	x /= 95.047;
-    	y /= 100;
-    	z /= 108.883;
-
-    	x = x > 0.008856 ? Math.pow(x, 1 / 3) : (7.787 * x) + (16 / 116);
-    	y = y > 0.008856 ? Math.pow(y, 1 / 3) : (7.787 * y) + (16 / 116);
-    	z = z > 0.008856 ? Math.pow(z, 1 / 3) : (7.787 * z) + (16 / 116);
-
-    	l = (116 * y) - 16;
-    	a = 500 * (x - y);
-    	b = 200 * (y - z);
-
-    	return [l, a, b];
-    };
-
-    convert.hsl.rgb = function (hsl) {
-    	var h = hsl[0] / 360;
-    	var s = hsl[1] / 100;
-    	var l = hsl[2] / 100;
-    	var t1;
-    	var t2;
-    	var t3;
-    	var rgb;
-    	var val;
-
-    	if (s === 0) {
-    		val = l * 255;
-    		return [val, val, val];
-    	}
-
-    	if (l < 0.5) {
-    		t2 = l * (1 + s);
-    	} else {
-    		t2 = l + s - l * s;
-    	}
-
-    	t1 = 2 * l - t2;
-
-    	rgb = [0, 0, 0];
-    	for (var i = 0; i < 3; i++) {
-    		t3 = h + 1 / 3 * -(i - 1);
-    		if (t3 < 0) {
-    			t3++;
-    		}
-    		if (t3 > 1) {
-    			t3--;
-    		}
-
-    		if (6 * t3 < 1) {
-    			val = t1 + (t2 - t1) * 6 * t3;
-    		} else if (2 * t3 < 1) {
-    			val = t2;
-    		} else if (3 * t3 < 2) {
-    			val = t1 + (t2 - t1) * (2 / 3 - t3) * 6;
-    		} else {
-    			val = t1;
-    		}
-
-    		rgb[i] = val * 255;
-    	}
-
-    	return rgb;
-    };
-
-    convert.hsl.hsv = function (hsl) {
-    	var h = hsl[0];
-    	var s = hsl[1] / 100;
-    	var l = hsl[2] / 100;
-    	var smin = s;
-    	var lmin = Math.max(l, 0.01);
-    	var sv;
-    	var v;
-
-    	l *= 2;
-    	s *= (l <= 1) ? l : 2 - l;
-    	smin *= lmin <= 1 ? lmin : 2 - lmin;
-    	v = (l + s) / 2;
-    	sv = l === 0 ? (2 * smin) / (lmin + smin) : (2 * s) / (l + s);
-
-    	return [h, sv * 100, v * 100];
-    };
-
-    convert.hsv.rgb = function (hsv) {
-    	var h = hsv[0] / 60;
-    	var s = hsv[1] / 100;
-    	var v = hsv[2] / 100;
-    	var hi = Math.floor(h) % 6;
-
-    	var f = h - Math.floor(h);
-    	var p = 255 * v * (1 - s);
-    	var q = 255 * v * (1 - (s * f));
-    	var t = 255 * v * (1 - (s * (1 - f)));
-    	v *= 255;
-
-    	switch (hi) {
-    		case 0:
-    			return [v, t, p];
-    		case 1:
-    			return [q, v, p];
-    		case 2:
-    			return [p, v, t];
-    		case 3:
-    			return [p, q, v];
-    		case 4:
-    			return [t, p, v];
-    		case 5:
-    			return [v, p, q];
-    	}
-    };
-
-    convert.hsv.hsl = function (hsv) {
-    	var h = hsv[0];
-    	var s = hsv[1] / 100;
-    	var v = hsv[2] / 100;
-    	var vmin = Math.max(v, 0.01);
-    	var lmin;
-    	var sl;
-    	var l;
-
-    	l = (2 - s) * v;
-    	lmin = (2 - s) * vmin;
-    	sl = s * vmin;
-    	sl /= (lmin <= 1) ? lmin : 2 - lmin;
-    	sl = sl || 0;
-    	l /= 2;
-
-    	return [h, sl * 100, l * 100];
-    };
-
-    // http://dev.w3.org/csswg/css-color/#hwb-to-rgb
-    convert.hwb.rgb = function (hwb) {
-    	var h = hwb[0] / 360;
-    	var wh = hwb[1] / 100;
-    	var bl = hwb[2] / 100;
-    	var ratio = wh + bl;
-    	var i;
-    	var v;
-    	var f;
-    	var n;
-
-    	// wh + bl cant be > 1
-    	if (ratio > 1) {
-    		wh /= ratio;
-    		bl /= ratio;
-    	}
-
-    	i = Math.floor(6 * h);
-    	v = 1 - bl;
-    	f = 6 * h - i;
-
-    	if ((i & 0x01) !== 0) {
-    		f = 1 - f;
-    	}
-
-    	n = wh + f * (v - wh); // linear interpolation
-
-    	var r;
-    	var g;
-    	var b;
-    	switch (i) {
-    		default:
-    		case 6:
-    		case 0: r = v; g = n; b = wh; break;
-    		case 1: r = n; g = v; b = wh; break;
-    		case 2: r = wh; g = v; b = n; break;
-    		case 3: r = wh; g = n; b = v; break;
-    		case 4: r = n; g = wh; b = v; break;
-    		case 5: r = v; g = wh; b = n; break;
-    	}
-
-    	return [r * 255, g * 255, b * 255];
-    };
-
-    convert.cmyk.rgb = function (cmyk) {
-    	var c = cmyk[0] / 100;
-    	var m = cmyk[1] / 100;
-    	var y = cmyk[2] / 100;
-    	var k = cmyk[3] / 100;
-    	var r;
-    	var g;
-    	var b;
-
-    	r = 1 - Math.min(1, c * (1 - k) + k);
-    	g = 1 - Math.min(1, m * (1 - k) + k);
-    	b = 1 - Math.min(1, y * (1 - k) + k);
-
-    	return [r * 255, g * 255, b * 255];
-    };
-
-    convert.xyz.rgb = function (xyz) {
-    	var x = xyz[0] / 100;
-    	var y = xyz[1] / 100;
-    	var z = xyz[2] / 100;
-    	var r;
-    	var g;
-    	var b;
-
-    	r = (x * 3.2406) + (y * -1.5372) + (z * -0.4986);
-    	g = (x * -0.9689) + (y * 1.8758) + (z * 0.0415);
-    	b = (x * 0.0557) + (y * -0.2040) + (z * 1.0570);
-
-    	// assume sRGB
-    	r = r > 0.0031308
-    		? ((1.055 * Math.pow(r, 1.0 / 2.4)) - 0.055)
-    		: r * 12.92;
-
-    	g = g > 0.0031308
-    		? ((1.055 * Math.pow(g, 1.0 / 2.4)) - 0.055)
-    		: g * 12.92;
-
-    	b = b > 0.0031308
-    		? ((1.055 * Math.pow(b, 1.0 / 2.4)) - 0.055)
-    		: b * 12.92;
-
-    	r = Math.min(Math.max(0, r), 1);
-    	g = Math.min(Math.max(0, g), 1);
-    	b = Math.min(Math.max(0, b), 1);
-
-    	return [r * 255, g * 255, b * 255];
-    };
-
-    convert.xyz.lab = function (xyz) {
-    	var x = xyz[0];
-    	var y = xyz[1];
-    	var z = xyz[2];
-    	var l;
-    	var a;
-    	var b;
-
-    	x /= 95.047;
-    	y /= 100;
-    	z /= 108.883;
-
-    	x = x > 0.008856 ? Math.pow(x, 1 / 3) : (7.787 * x) + (16 / 116);
-    	y = y > 0.008856 ? Math.pow(y, 1 / 3) : (7.787 * y) + (16 / 116);
-    	z = z > 0.008856 ? Math.pow(z, 1 / 3) : (7.787 * z) + (16 / 116);
-
-    	l = (116 * y) - 16;
-    	a = 500 * (x - y);
-    	b = 200 * (y - z);
-
-    	return [l, a, b];
-    };
-
-    convert.lab.xyz = function (lab) {
-    	var l = lab[0];
-    	var a = lab[1];
-    	var b = lab[2];
-    	var x;
-    	var y;
-    	var z;
-
-    	y = (l + 16) / 116;
-    	x = a / 500 + y;
-    	z = y - b / 200;
-
-    	var y2 = Math.pow(y, 3);
-    	var x2 = Math.pow(x, 3);
-    	var z2 = Math.pow(z, 3);
-    	y = y2 > 0.008856 ? y2 : (y - 16 / 116) / 7.787;
-    	x = x2 > 0.008856 ? x2 : (x - 16 / 116) / 7.787;
-    	z = z2 > 0.008856 ? z2 : (z - 16 / 116) / 7.787;
-
-    	x *= 95.047;
-    	y *= 100;
-    	z *= 108.883;
-
-    	return [x, y, z];
-    };
-
-    convert.lab.lch = function (lab) {
-    	var l = lab[0];
-    	var a = lab[1];
-    	var b = lab[2];
-    	var hr;
-    	var h;
-    	var c;
-
-    	hr = Math.atan2(b, a);
-    	h = hr * 360 / 2 / Math.PI;
-
-    	if (h < 0) {
-    		h += 360;
-    	}
-
-    	c = Math.sqrt(a * a + b * b);
-
-    	return [l, c, h];
-    };
-
-    convert.lch.lab = function (lch) {
-    	var l = lch[0];
-    	var c = lch[1];
-    	var h = lch[2];
-    	var a;
-    	var b;
-    	var hr;
-
-    	hr = h / 360 * 2 * Math.PI;
-    	a = c * Math.cos(hr);
-    	b = c * Math.sin(hr);
-
-    	return [l, a, b];
-    };
-
-    convert.rgb.ansi16 = function (args) {
-    	var r = args[0];
-    	var g = args[1];
-    	var b = args[2];
-    	var value = 1 in arguments ? arguments[1] : convert.rgb.hsv(args)[2]; // hsv -> ansi16 optimization
-
-    	value = Math.round(value / 50);
-
-    	if (value === 0) {
-    		return 30;
-    	}
-
-    	var ansi = 30
-    		+ ((Math.round(b / 255) << 2)
-    		| (Math.round(g / 255) << 1)
-    		| Math.round(r / 255));
-
-    	if (value === 2) {
-    		ansi += 60;
-    	}
-
-    	return ansi;
-    };
-
-    convert.hsv.ansi16 = function (args) {
-    	// optimization here; we already know the value and don't need to get
-    	// it converted for us.
-    	return convert.rgb.ansi16(convert.hsv.rgb(args), args[2]);
-    };
-
-    convert.rgb.ansi256 = function (args) {
-    	var r = args[0];
-    	var g = args[1];
-    	var b = args[2];
-
-    	// we use the extended greyscale palette here, with the exception of
-    	// black and white. normal palette only has 4 greyscale shades.
-    	if (r === g && g === b) {
-    		if (r < 8) {
-    			return 16;
-    		}
-
-    		if (r > 248) {
-    			return 231;
-    		}
-
-    		return Math.round(((r - 8) / 247) * 24) + 232;
-    	}
-
-    	var ansi = 16
-    		+ (36 * Math.round(r / 255 * 5))
-    		+ (6 * Math.round(g / 255 * 5))
-    		+ Math.round(b / 255 * 5);
-
-    	return ansi;
-    };
-
-    convert.ansi16.rgb = function (args) {
-    	var color = args % 10;
-
-    	// handle greyscale
-    	if (color === 0 || color === 7) {
-    		if (args > 50) {
-    			color += 3.5;
-    		}
-
-    		color = color / 10.5 * 255;
-
-    		return [color, color, color];
-    	}
-
-    	var mult = (~~(args > 50) + 1) * 0.5;
-    	var r = ((color & 1) * mult) * 255;
-    	var g = (((color >> 1) & 1) * mult) * 255;
-    	var b = (((color >> 2) & 1) * mult) * 255;
-
-    	return [r, g, b];
-    };
-
-    convert.ansi256.rgb = function (args) {
-    	// handle greyscale
-    	if (args >= 232) {
-    		var c = (args - 232) * 10 + 8;
-    		return [c, c, c];
-    	}
-
-    	args -= 16;
-
-    	var rem;
-    	var r = Math.floor(args / 36) / 5 * 255;
-    	var g = Math.floor((rem = args % 36) / 6) / 5 * 255;
-    	var b = (rem % 6) / 5 * 255;
-
-    	return [r, g, b];
-    };
-
-    convert.rgb.hex = function (args) {
-    	var integer = ((Math.round(args[0]) & 0xFF) << 16)
-    		+ ((Math.round(args[1]) & 0xFF) << 8)
-    		+ (Math.round(args[2]) & 0xFF);
-
-    	var string = integer.toString(16).toUpperCase();
-    	return '000000'.substring(string.length) + string;
-    };
-
-    convert.hex.rgb = function (args) {
-    	var match = args.toString(16).match(/[a-f0-9]{6}|[a-f0-9]{3}/i);
-    	if (!match) {
-    		return [0, 0, 0];
-    	}
-
-    	var colorString = match[0];
-
-    	if (match[0].length === 3) {
-    		colorString = colorString.split('').map(function (char) {
-    			return char + char;
-    		}).join('');
-    	}
-
-    	var integer = parseInt(colorString, 16);
-    	var r = (integer >> 16) & 0xFF;
-    	var g = (integer >> 8) & 0xFF;
-    	var b = integer & 0xFF;
-
-    	return [r, g, b];
-    };
-
-    convert.rgb.hcg = function (rgb) {
-    	var r = rgb[0] / 255;
-    	var g = rgb[1] / 255;
-    	var b = rgb[2] / 255;
-    	var max = Math.max(Math.max(r, g), b);
-    	var min = Math.min(Math.min(r, g), b);
-    	var chroma = (max - min);
-    	var grayscale;
-    	var hue;
-
-    	if (chroma < 1) {
-    		grayscale = min / (1 - chroma);
-    	} else {
-    		grayscale = 0;
-    	}
-
-    	if (chroma <= 0) {
-    		hue = 0;
-    	} else
-    	if (max === r) {
-    		hue = ((g - b) / chroma) % 6;
-    	} else
-    	if (max === g) {
-    		hue = 2 + (b - r) / chroma;
-    	} else {
-    		hue = 4 + (r - g) / chroma + 4;
-    	}
-
-    	hue /= 6;
-    	hue %= 1;
-
-    	return [hue * 360, chroma * 100, grayscale * 100];
-    };
-
-    convert.hsl.hcg = function (hsl) {
-    	var s = hsl[1] / 100;
-    	var l = hsl[2] / 100;
-    	var c = 1;
-    	var f = 0;
-
-    	if (l < 0.5) {
-    		c = 2.0 * s * l;
-    	} else {
-    		c = 2.0 * s * (1.0 - l);
-    	}
-
-    	if (c < 1.0) {
-    		f = (l - 0.5 * c) / (1.0 - c);
-    	}
-
-    	return [hsl[0], c * 100, f * 100];
-    };
-
-    convert.hsv.hcg = function (hsv) {
-    	var s = hsv[1] / 100;
-    	var v = hsv[2] / 100;
-
-    	var c = s * v;
-    	var f = 0;
-
-    	if (c < 1.0) {
-    		f = (v - c) / (1 - c);
-    	}
-
-    	return [hsv[0], c * 100, f * 100];
-    };
-
-    convert.hcg.rgb = function (hcg) {
-    	var h = hcg[0] / 360;
-    	var c = hcg[1] / 100;
-    	var g = hcg[2] / 100;
-
-    	if (c === 0.0) {
-    		return [g * 255, g * 255, g * 255];
-    	}
-
-    	var pure = [0, 0, 0];
-    	var hi = (h % 1) * 6;
-    	var v = hi % 1;
-    	var w = 1 - v;
-    	var mg = 0;
-
-    	switch (Math.floor(hi)) {
-    		case 0:
-    			pure[0] = 1; pure[1] = v; pure[2] = 0; break;
-    		case 1:
-    			pure[0] = w; pure[1] = 1; pure[2] = 0; break;
-    		case 2:
-    			pure[0] = 0; pure[1] = 1; pure[2] = v; break;
-    		case 3:
-    			pure[0] = 0; pure[1] = w; pure[2] = 1; break;
-    		case 4:
-    			pure[0] = v; pure[1] = 0; pure[2] = 1; break;
-    		default:
-    			pure[0] = 1; pure[1] = 0; pure[2] = w;
-    	}
-
-    	mg = (1.0 - c) * g;
-
-    	return [
-    		(c * pure[0] + mg) * 255,
-    		(c * pure[1] + mg) * 255,
-    		(c * pure[2] + mg) * 255
-    	];
-    };
-
-    convert.hcg.hsv = function (hcg) {
-    	var c = hcg[1] / 100;
-    	var g = hcg[2] / 100;
-
-    	var v = c + g * (1.0 - c);
-    	var f = 0;
-
-    	if (v > 0.0) {
-    		f = c / v;
-    	}
-
-    	return [hcg[0], f * 100, v * 100];
-    };
-
-    convert.hcg.hsl = function (hcg) {
-    	var c = hcg[1] / 100;
-    	var g = hcg[2] / 100;
-
-    	var l = g * (1.0 - c) + 0.5 * c;
-    	var s = 0;
-
-    	if (l > 0.0 && l < 0.5) {
-    		s = c / (2 * l);
-    	} else
-    	if (l >= 0.5 && l < 1.0) {
-    		s = c / (2 * (1 - l));
-    	}
-
-    	return [hcg[0], s * 100, l * 100];
-    };
-
-    convert.hcg.hwb = function (hcg) {
-    	var c = hcg[1] / 100;
-    	var g = hcg[2] / 100;
-    	var v = c + g * (1.0 - c);
-    	return [hcg[0], (v - c) * 100, (1 - v) * 100];
-    };
-
-    convert.hwb.hcg = function (hwb) {
-    	var w = hwb[1] / 100;
-    	var b = hwb[2] / 100;
-    	var v = 1 - b;
-    	var c = v - w;
-    	var g = 0;
-
-    	if (c < 1) {
-    		g = (v - c) / (1 - c);
-    	}
-
-    	return [hwb[0], c * 100, g * 100];
-    };
-
-    convert.apple.rgb = function (apple) {
-    	return [(apple[0] / 65535) * 255, (apple[1] / 65535) * 255, (apple[2] / 65535) * 255];
-    };
-
-    convert.rgb.apple = function (rgb) {
-    	return [(rgb[0] / 255) * 65535, (rgb[1] / 255) * 65535, (rgb[2] / 255) * 65535];
-    };
-
-    convert.gray.rgb = function (args) {
-    	return [args[0] / 100 * 255, args[0] / 100 * 255, args[0] / 100 * 255];
-    };
-
-    convert.gray.hsl = convert.gray.hsv = function (args) {
-    	return [0, 0, args[0]];
-    };
-
-    convert.gray.hwb = function (gray) {
-    	return [0, 100, gray[0]];
-    };
-
-    convert.gray.cmyk = function (gray) {
-    	return [0, 0, 0, gray[0]];
-    };
-
-    convert.gray.lab = function (gray) {
-    	return [gray[0], 0, 0];
-    };
-
-    convert.gray.hex = function (gray) {
-    	var val = Math.round(gray[0] / 100 * 255) & 0xFF;
-    	var integer = (val << 16) + (val << 8) + val;
-
-    	var string = integer.toString(16).toUpperCase();
-    	return '000000'.substring(string.length) + string;
-    };
-
-    convert.rgb.gray = function (rgb) {
-    	var val = (rgb[0] + rgb[1] + rgb[2]) / 3;
-    	return [val / 255 * 100];
-    };
-    });
-
-    /*
-    	this function routes a model to all other models.
-
-    	all functions that are routed have a property `.conversion` attached
-    	to the returned synthetic function. This property is an array
-    	of strings, each with the steps in between the 'from' and 'to'
-    	color models (inclusive).
-
-    	conversions that are not possible simply are not included.
-    */
-
-    function buildGraph() {
-    	var graph = {};
-    	// https://jsperf.com/object-keys-vs-for-in-with-closure/3
-    	var models = Object.keys(conversions);
-
-    	for (var len = models.length, i = 0; i < len; i++) {
-    		graph[models[i]] = {
-    			// http://jsperf.com/1-vs-infinity
-    			// micro-opt, but this is simple.
-    			distance: -1,
-    			parent: null
-    		};
-    	}
-
-    	return graph;
-    }
-
-    // https://en.wikipedia.org/wiki/Breadth-first_search
-    function deriveBFS(fromModel) {
-    	var graph = buildGraph();
-    	var queue = [fromModel]; // unshift -> queue -> pop
-
-    	graph[fromModel].distance = 0;
-
-    	while (queue.length) {
-    		var current = queue.pop();
-    		var adjacents = Object.keys(conversions[current]);
-
-    		for (var len = adjacents.length, i = 0; i < len; i++) {
-    			var adjacent = adjacents[i];
-    			var node = graph[adjacent];
-
-    			if (node.distance === -1) {
-    				node.distance = graph[current].distance + 1;
-    				node.parent = current;
-    				queue.unshift(adjacent);
-    			}
-    		}
-    	}
-
-    	return graph;
-    }
-
-    function link(from, to) {
-    	return function (args) {
-    		return to(from(args));
-    	};
-    }
-
-    function wrapConversion(toModel, graph) {
-    	var path = [graph[toModel].parent, toModel];
-    	var fn = conversions[graph[toModel].parent][toModel];
-
-    	var cur = graph[toModel].parent;
-    	while (graph[cur].parent) {
-    		path.unshift(graph[cur].parent);
-    		fn = link(conversions[graph[cur].parent][cur], fn);
-    		cur = graph[cur].parent;
-    	}
-
-    	fn.conversion = path;
-    	return fn;
-    }
-
-    var route = function (fromModel) {
-    	var graph = deriveBFS(fromModel);
-    	var conversion = {};
-
-    	var models = Object.keys(graph);
-    	for (var len = models.length, i = 0; i < len; i++) {
-    		var toModel = models[i];
-    		var node = graph[toModel];
-
-    		if (node.parent === null) {
-    			// no possible conversion, or this node is the source model.
-    			continue;
-    		}
-
-    		conversion[toModel] = wrapConversion(toModel, graph);
-    	}
-
-    	return conversion;
-    };
-
-    var convert = {};
-
-    var models = Object.keys(conversions);
-
-    function wrapRaw(fn) {
-    	var wrappedFn = function (args) {
-    		if (args === undefined || args === null) {
-    			return args;
-    		}
-
-    		if (arguments.length > 1) {
-    			args = Array.prototype.slice.call(arguments);
-    		}
-
-    		return fn(args);
-    	};
-
-    	// preserve .conversion property if there is one
-    	if ('conversion' in fn) {
-    		wrappedFn.conversion = fn.conversion;
-    	}
-
-    	return wrappedFn;
-    }
-
-    function wrapRounded(fn) {
-    	var wrappedFn = function (args) {
-    		if (args === undefined || args === null) {
-    			return args;
-    		}
-
-    		if (arguments.length > 1) {
-    			args = Array.prototype.slice.call(arguments);
-    		}
-
-    		var result = fn(args);
-
-    		// we're assuming the result is an array here.
-    		// see notice in conversions.js; don't use box types
-    		// in conversion functions.
-    		if (typeof result === 'object') {
-    			for (var len = result.length, i = 0; i < len; i++) {
-    				result[i] = Math.round(result[i]);
-    			}
-    		}
-
-    		return result;
-    	};
-
-    	// preserve .conversion property if there is one
-    	if ('conversion' in fn) {
-    		wrappedFn.conversion = fn.conversion;
-    	}
-
-    	return wrappedFn;
-    }
-
-    models.forEach(function (fromModel) {
-    	convert[fromModel] = {};
-
-    	Object.defineProperty(convert[fromModel], 'channels', {value: conversions[fromModel].channels});
-    	Object.defineProperty(convert[fromModel], 'labels', {value: conversions[fromModel].labels});
-
-    	var routes = route(fromModel);
-    	var routeModels = Object.keys(routes);
-
-    	routeModels.forEach(function (toModel) {
-    		var fn = routes[toModel];
-
-    		convert[fromModel][toModel] = wrapRounded(fn);
-    		convert[fromModel][toModel].raw = wrapRaw(fn);
-    	});
-    });
-
-    var colorConvert = convert;
-
-    var _slice = [].slice;
-
-    var skippedModels = [
-    	// to be honest, I don't really feel like keyword belongs in color convert, but eh.
-    	'keyword',
-
-    	// gray conflicts with some method names, and has its own method defined.
-    	'gray',
-
-    	// shouldn't really be in color-convert either...
-    	'hex'
-    ];
-
-    var hashedModelKeys = {};
-    Object.keys(colorConvert).forEach(function (model) {
-    	hashedModelKeys[_slice.call(colorConvert[model].labels).sort().join('')] = model;
-    });
-
-    var limiters = {};
-
-    function Color(obj, model) {
-    	if (!(this instanceof Color)) {
-    		return new Color(obj, model);
-    	}
-
-    	if (model && model in skippedModels) {
-    		model = null;
-    	}
-
-    	if (model && !(model in colorConvert)) {
-    		throw new Error('Unknown model: ' + model);
-    	}
-
-    	var i;
-    	var channels;
-
-    	if (obj == null) { // eslint-disable-line no-eq-null,eqeqeq
-    		this.model = 'rgb';
-    		this.color = [0, 0, 0];
-    		this.valpha = 1;
-    	} else if (obj instanceof Color) {
-    		this.model = obj.model;
-    		this.color = obj.color.slice();
-    		this.valpha = obj.valpha;
-    	} else if (typeof obj === 'string') {
-    		var result = colorString.get(obj);
-    		if (result === null) {
-    			throw new Error('Unable to parse color from string: ' + obj);
-    		}
-
-    		this.model = result.model;
-    		channels = colorConvert[this.model].channels;
-    		this.color = result.value.slice(0, channels);
-    		this.valpha = typeof result.value[channels] === 'number' ? result.value[channels] : 1;
-    	} else if (obj.length) {
-    		this.model = model || 'rgb';
-    		channels = colorConvert[this.model].channels;
-    		var newArr = _slice.call(obj, 0, channels);
-    		this.color = zeroArray(newArr, channels);
-    		this.valpha = typeof obj[channels] === 'number' ? obj[channels] : 1;
-    	} else if (typeof obj === 'number') {
-    		// this is always RGB - can be converted later on.
-    		obj &= 0xFFFFFF;
-    		this.model = 'rgb';
-    		this.color = [
-    			(obj >> 16) & 0xFF,
-    			(obj >> 8) & 0xFF,
-    			obj & 0xFF
-    		];
-    		this.valpha = 1;
-    	} else {
-    		this.valpha = 1;
-
-    		var keys = Object.keys(obj);
-    		if ('alpha' in obj) {
-    			keys.splice(keys.indexOf('alpha'), 1);
-    			this.valpha = typeof obj.alpha === 'number' ? obj.alpha : 0;
-    		}
-
-    		var hashedKeys = keys.sort().join('');
-    		if (!(hashedKeys in hashedModelKeys)) {
-    			throw new Error('Unable to parse color from object: ' + JSON.stringify(obj));
-    		}
-
-    		this.model = hashedModelKeys[hashedKeys];
-
-    		var labels = colorConvert[this.model].labels;
-    		var color = [];
-    		for (i = 0; i < labels.length; i++) {
-    			color.push(obj[labels[i]]);
-    		}
-
-    		this.color = zeroArray(color);
-    	}
-
-    	// perform limitations (clamping, etc.)
-    	if (limiters[this.model]) {
-    		channels = colorConvert[this.model].channels;
-    		for (i = 0; i < channels; i++) {
-    			var limit = limiters[this.model][i];
-    			if (limit) {
-    				this.color[i] = limit(this.color[i]);
-    			}
-    		}
-    	}
-
-    	this.valpha = Math.max(0, Math.min(1, this.valpha));
-
-    	if (Object.freeze) {
-    		Object.freeze(this);
-    	}
-    }
-
-    Color.prototype = {
-    	toString: function () {
-    		return this.string();
-    	},
-
-    	toJSON: function () {
-    		return this[this.model]();
-    	},
-
-    	string: function (places) {
-    		var self = this.model in colorString.to ? this : this.rgb();
-    		self = self.round(typeof places === 'number' ? places : 1);
-    		var args = self.valpha === 1 ? self.color : self.color.concat(this.valpha);
-    		return colorString.to[self.model](args);
-    	},
-
-    	percentString: function (places) {
-    		var self = this.rgb().round(typeof places === 'number' ? places : 1);
-    		var args = self.valpha === 1 ? self.color : self.color.concat(this.valpha);
-    		return colorString.to.rgb.percent(args);
-    	},
-
-    	array: function () {
-    		return this.valpha === 1 ? this.color.slice() : this.color.concat(this.valpha);
-    	},
-
-    	object: function () {
-    		var result = {};
-    		var channels = colorConvert[this.model].channels;
-    		var labels = colorConvert[this.model].labels;
-
-    		for (var i = 0; i < channels; i++) {
-    			result[labels[i]] = this.color[i];
-    		}
-
-    		if (this.valpha !== 1) {
-    			result.alpha = this.valpha;
-    		}
-
-    		return result;
-    	},
-
-    	unitArray: function () {
-    		var rgb = this.rgb().color;
-    		rgb[0] /= 255;
-    		rgb[1] /= 255;
-    		rgb[2] /= 255;
-
-    		if (this.valpha !== 1) {
-    			rgb.push(this.valpha);
-    		}
-
-    		return rgb;
-    	},
-
-    	unitObject: function () {
-    		var rgb = this.rgb().object();
-    		rgb.r /= 255;
-    		rgb.g /= 255;
-    		rgb.b /= 255;
-
-    		if (this.valpha !== 1) {
-    			rgb.alpha = this.valpha;
-    		}
-
-    		return rgb;
-    	},
-
-    	round: function (places) {
-    		places = Math.max(places || 0, 0);
-    		return new Color(this.color.map(roundToPlace(places)).concat(this.valpha), this.model);
-    	},
-
-    	alpha: function (val) {
-    		if (arguments.length) {
-    			return new Color(this.color.concat(Math.max(0, Math.min(1, val))), this.model);
-    		}
-
-    		return this.valpha;
-    	},
-
-    	// rgb
-    	red: getset('rgb', 0, maxfn(255)),
-    	green: getset('rgb', 1, maxfn(255)),
-    	blue: getset('rgb', 2, maxfn(255)),
-
-    	hue: getset(['hsl', 'hsv', 'hsl', 'hwb', 'hcg'], 0, function (val) { return ((val % 360) + 360) % 360; }), // eslint-disable-line brace-style
-
-    	saturationl: getset('hsl', 1, maxfn(100)),
-    	lightness: getset('hsl', 2, maxfn(100)),
-
-    	saturationv: getset('hsv', 1, maxfn(100)),
-    	value: getset('hsv', 2, maxfn(100)),
-
-    	chroma: getset('hcg', 1, maxfn(100)),
-    	gray: getset('hcg', 2, maxfn(100)),
-
-    	white: getset('hwb', 1, maxfn(100)),
-    	wblack: getset('hwb', 2, maxfn(100)),
-
-    	cyan: getset('cmyk', 0, maxfn(100)),
-    	magenta: getset('cmyk', 1, maxfn(100)),
-    	yellow: getset('cmyk', 2, maxfn(100)),
-    	black: getset('cmyk', 3, maxfn(100)),
-
-    	x: getset('xyz', 0, maxfn(100)),
-    	y: getset('xyz', 1, maxfn(100)),
-    	z: getset('xyz', 2, maxfn(100)),
-
-    	l: getset('lab', 0, maxfn(100)),
-    	a: getset('lab', 1),
-    	b: getset('lab', 2),
-
-    	keyword: function (val) {
-    		if (arguments.length) {
-    			return new Color(val);
-    		}
-
-    		return colorConvert[this.model].keyword(this.color);
-    	},
-
-    	hex: function (val) {
-    		if (arguments.length) {
-    			return new Color(val);
-    		}
-
-    		return colorString.to.hex(this.rgb().round().color);
-    	},
-
-    	rgbNumber: function () {
-    		var rgb = this.rgb().color;
-    		return ((rgb[0] & 0xFF) << 16) | ((rgb[1] & 0xFF) << 8) | (rgb[2] & 0xFF);
-    	},
-
-    	luminosity: function () {
-    		// http://www.w3.org/TR/WCAG20/#relativeluminancedef
-    		var rgb = this.rgb().color;
-
-    		var lum = [];
-    		for (var i = 0; i < rgb.length; i++) {
-    			var chan = rgb[i] / 255;
-    			lum[i] = (chan <= 0.03928) ? chan / 12.92 : Math.pow(((chan + 0.055) / 1.055), 2.4);
-    		}
-
-    		return 0.2126 * lum[0] + 0.7152 * lum[1] + 0.0722 * lum[2];
-    	},
-
-    	contrast: function (color2) {
-    		// http://www.w3.org/TR/WCAG20/#contrast-ratiodef
-    		var lum1 = this.luminosity();
-    		var lum2 = color2.luminosity();
-
-    		if (lum1 > lum2) {
-    			return (lum1 + 0.05) / (lum2 + 0.05);
-    		}
-
-    		return (lum2 + 0.05) / (lum1 + 0.05);
-    	},
-
-    	level: function (color2) {
-    		var contrastRatio = this.contrast(color2);
-    		if (contrastRatio >= 7.1) {
-    			return 'AAA';
-    		}
-
-    		return (contrastRatio >= 4.5) ? 'AA' : '';
-    	},
-
-    	isDark: function () {
-    		// YIQ equation from http://24ways.org/2010/calculating-color-contrast
-    		var rgb = this.rgb().color;
-    		var yiq = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000;
-    		return yiq < 128;
-    	},
-
-    	isLight: function () {
-    		return !this.isDark();
-    	},
-
-    	negate: function () {
-    		var rgb = this.rgb();
-    		for (var i = 0; i < 3; i++) {
-    			rgb.color[i] = 255 - rgb.color[i];
-    		}
-    		return rgb;
-    	},
-
-    	lighten: function (ratio) {
-    		var hsl = this.hsl();
-    		hsl.color[2] += hsl.color[2] * ratio;
-    		return hsl;
-    	},
-
-    	darken: function (ratio) {
-    		var hsl = this.hsl();
-    		hsl.color[2] -= hsl.color[2] * ratio;
-    		return hsl;
-    	},
-
-    	saturate: function (ratio) {
-    		var hsl = this.hsl();
-    		hsl.color[1] += hsl.color[1] * ratio;
-    		return hsl;
-    	},
-
-    	desaturate: function (ratio) {
-    		var hsl = this.hsl();
-    		hsl.color[1] -= hsl.color[1] * ratio;
-    		return hsl;
-    	},
-
-    	whiten: function (ratio) {
-    		var hwb = this.hwb();
-    		hwb.color[1] += hwb.color[1] * ratio;
-    		return hwb;
-    	},
-
-    	blacken: function (ratio) {
-    		var hwb = this.hwb();
-    		hwb.color[2] += hwb.color[2] * ratio;
-    		return hwb;
-    	},
-
-    	grayscale: function () {
-    		// http://en.wikipedia.org/wiki/Grayscale#Converting_color_to_grayscale
-    		var rgb = this.rgb().color;
-    		var val = rgb[0] * 0.3 + rgb[1] * 0.59 + rgb[2] * 0.11;
-    		return Color.rgb(val, val, val);
-    	},
-
-    	fade: function (ratio) {
-    		return this.alpha(this.valpha - (this.valpha * ratio));
-    	},
-
-    	opaquer: function (ratio) {
-    		return this.alpha(this.valpha + (this.valpha * ratio));
-    	},
-
-    	rotate: function (degrees) {
-    		var hsl = this.hsl();
-    		var hue = hsl.color[0];
-    		hue = (hue + degrees) % 360;
-    		hue = hue < 0 ? 360 + hue : hue;
-    		hsl.color[0] = hue;
-    		return hsl;
-    	},
-
-    	mix: function (mixinColor, weight) {
-    		// ported from sass implementation in C
-    		// https://github.com/sass/libsass/blob/0e6b4a2850092356aa3ece07c6b249f0221caced/functions.cpp#L209
-    		if (!mixinColor || !mixinColor.rgb) {
-    			throw new Error('Argument to "mix" was not a Color instance, but rather an instance of ' + typeof mixinColor);
-    		}
-    		var color1 = mixinColor.rgb();
-    		var color2 = this.rgb();
-    		var p = weight === undefined ? 0.5 : weight;
-
-    		var w = 2 * p - 1;
-    		var a = color1.alpha() - color2.alpha();
-
-    		var w1 = (((w * a === -1) ? w : (w + a) / (1 + w * a)) + 1) / 2.0;
-    		var w2 = 1 - w1;
-
-    		return Color.rgb(
-    				w1 * color1.red() + w2 * color2.red(),
-    				w1 * color1.green() + w2 * color2.green(),
-    				w1 * color1.blue() + w2 * color2.blue(),
-    				color1.alpha() * p + color2.alpha() * (1 - p));
-    	}
-    };
-
-    // model conversion methods and static constructors
-    Object.keys(colorConvert).forEach(function (model) {
-    	if (skippedModels.indexOf(model) !== -1) {
-    		return;
-    	}
-
-    	var channels = colorConvert[model].channels;
-
-    	// conversion methods
-    	Color.prototype[model] = function () {
-    		if (this.model === model) {
-    			return new Color(this);
-    		}
-
-    		if (arguments.length) {
-    			return new Color(arguments, model);
-    		}
-
-    		var newAlpha = typeof arguments[channels] === 'number' ? channels : this.valpha;
-    		return new Color(assertArray(colorConvert[this.model][model].raw(this.color)).concat(newAlpha), model);
-    	};
-
-    	// 'static' construction methods
-    	Color[model] = function (color) {
-    		if (typeof color === 'number') {
-    			color = zeroArray(_slice.call(arguments), channels);
-    		}
-    		return new Color(color, model);
-    	};
-    });
-
-    function roundTo(num, places) {
-    	return Number(num.toFixed(places));
-    }
-
-    function roundToPlace(places) {
-    	return function (num) {
-    		return roundTo(num, places);
-    	};
-    }
-
-    function getset(model, channel, modifier) {
-    	model = Array.isArray(model) ? model : [model];
-
-    	model.forEach(function (m) {
-    		(limiters[m] || (limiters[m] = []))[channel] = modifier;
-    	});
-
-    	model = model[0];
-
-    	return function (val) {
-    		var result;
-
-    		if (arguments.length) {
-    			if (modifier) {
-    				val = modifier(val);
-    			}
-
-    			result = this[model]();
-    			result.color[channel] = val;
-    			return result;
-    		}
-
-    		result = this[model]().color[channel];
-    		if (modifier) {
-    			result = modifier(result);
-    		}
-
-    		return result;
-    	};
-    }
-
-    function maxfn(max) {
-    	return function (v) {
-    		return Math.max(0, Math.min(max, v));
-    	};
-    }
-
-    function assertArray(val) {
-    	return Array.isArray(val) ? val : [val];
-    }
-
-    function zeroArray(arr, length) {
-    	for (var i = 0; i < length; i++) {
-    		if (typeof arr[i] !== 'number') {
-    			arr[i] = 0;
-    		}
-    	}
-
-    	return arr;
-    }
-
-    var color$1 = Color;
-
-    const fs = require("fs");
-    const path = require("path");
-
-
-    const showFavorites = writable(false);
-
-
-    /// COLOR STATE ITEMS
-    const hue = writable(180);
-
-    const color = derived(
-        hue,
-        ($hue) => {
-            return color$1("rgb(255, 0, 0)").rotate($hue)
-        }
-    );
-
-    /// Timer Size
-    const size = writable(300);
-
-    const blur = writable(0);
-    // so that the blur stays consistent in style when the window is resized:
-    const scaledBlur = derived(
-        [blur, size],
-        ([$blur, $size]) => $blur * ($size / 300)
-    );
-
-
-    const maxSize = readable(Math.min(window.screen.height, window.screen.width));
-
-    const settingsHeight = derived([size], $size => {
-        if ($size >= 200) return Math.round($size / 1.2);
-        else return Math.round(150)
-    });
-    const settingsOpen = writable(false);
-
-    const width = derived(
-        [size, scaledBlur],
-        ([$size, $scaledBlur]) => {
-            return Math.round($size + ($scaledBlur * 7))
-        }
-    );
-
-
-    const height = derived(
-        [settingsHeight, settingsOpen, size, scaledBlur],
-        ([$settingsHeight, $settingsOpen, $size, $scaledBlur]) => {
-            // main area height is size + blur + draggable-bar
-            const mainSectionSize = Math.round($size + ($scaledBlur * 7)) + 20;
-            if ($settingsOpen) return mainSectionSize + $settingsHeight + 20;
-            else return mainSectionSize
-        }
-    );
-
-
-    const intervalMode = writable(true);
-
-    const settings = writable({});
-
-    const stayOnTop = derived(settings, $settings => $settings.alwaysOnTop);
-
-    const currentFavInd = writable(null);
-
-    const loadSettings = () => {
-        // read settings file:
-        const settingsData = JSON.parse(fs.readFileSync(path.join(__dirname, "./settings.json")));
-        settings.set(settingsData);
-        console.log("favs: ", settingsData.favorites);
-        hue.set(settingsData.hue);
-        size.set(settingsData.size);
-        blur.set(settingsData.blur);
-    };
-
-
-    const saveSettings = () => {
-        const tempHue = get_store_value(hue);
-        const tempSize = get_store_value(size);
-        const tempBlur = get_store_value(blur);
-        let tempSettings = get_store_value(settings);
-        tempSettings = {...tempSettings, hue: tempHue, size: tempSize, blur: tempBlur};
-        tempSettings = JSON.stringify(tempSettings, null, 2);
-        fs.writeFileSync(path.join(__dirname, "./settings.json"), tempSettings);
-    };
 
     /**
      * @license
@@ -27399,7 +27369,7 @@ var app = (function () {
     const { console: console_1$2 } = globals;
     const file$h = "src\\Components\\Timer\\TimeIndicator\\TimeInput.svelte";
 
-    function create_fragment$h(ctx) {
+    function create_fragment$i(ctx) {
     	let div;
     	let h1;
     	let t0;
@@ -27416,13 +27386,13 @@ var app = (function () {
     			t1 = space();
     			input_1 = element("input");
     			attr_dev(h1, "class", "svelte-190qjsj");
-    			add_location(h1, file$h, 87, 0, 2573);
+    			add_location(h1, file$h, 101, 0, 3094);
     			attr_dev(input_1, "class", "hiddenInput svelte-190qjsj");
     			attr_dev(input_1, "type", "text");
     			input_1.autofocus = true;
-    			add_location(input_1, file$h, 88, 0, 2598);
+    			add_location(input_1, file$h, 102, 0, 3119);
     			attr_dev(div, "class", "TimeInput svelte-190qjsj");
-    			add_location(div, file$h, 86, 0, 2517);
+    			add_location(div, file$h, 100, 0, 3038);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -27466,7 +27436,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$h.name,
+    		id: create_fragment$i.name,
     		type: "component",
     		source: "",
     		ctx
@@ -27475,12 +27445,15 @@ var app = (function () {
     	return block;
     }
 
-    function instance$h($$self, $$props, $$invalidate) {
+    function instance$i($$self, $$props, $$invalidate) {
     	let readableTime;
     	let $tempDuration;
     	let $runState;
     	let $currentFavInd;
     	let $settings;
+    	let $intervalDurations;
+    	let $intervalIndex;
+    	let $intervalMode;
     	validate_store(tempDuration, "tempDuration");
     	component_subscribe($$self, tempDuration, $$value => $$invalidate(11, $tempDuration = $$value));
     	validate_store(runState, "runState");
@@ -27489,6 +27462,12 @@ var app = (function () {
     	component_subscribe($$self, currentFavInd, $$value => $$invalidate(7, $currentFavInd = $$value));
     	validate_store(settings, "settings");
     	component_subscribe($$self, settings, $$value => $$invalidate(13, $settings = $$value));
+    	validate_store(intervalDurations, "intervalDurations");
+    	component_subscribe($$self, intervalDurations, $$value => $$invalidate(14, $intervalDurations = $$value));
+    	validate_store(intervalIndex, "intervalIndex");
+    	component_subscribe($$self, intervalIndex, $$value => $$invalidate(15, $intervalIndex = $$value));
+    	validate_store(intervalMode, "intervalMode");
+    	component_subscribe($$self, intervalMode, $$value => $$invalidate(16, $intervalMode = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("TimeInput", slots, []);
     	let hours = 0;
@@ -27506,11 +27485,10 @@ var app = (function () {
     		}
     	}); // input.focus();
 
-    	afterUpdate(() => {
-    		setTimeout(input.focus, 200);
-    		console.log("update called");
-    	});
-
+    	// afterUpdate(() => {
+    	//     setTimeout(input.focus, 200)
+    	//     console.log("update called")
+    	// })
     	const onFavUpdate = deps => {
     		if ($tempDuration !== 0 && $runState !== "running") {
     			$$invalidate(0, numbers = formatTimeMs($tempDuration).replaceAll(":", ""));
@@ -27529,6 +27507,14 @@ var app = (function () {
     		if ($currentFavInd !== null && $settings.favorites[$currentFavInd] !== duration.toMillis()) {
     			currentFavInd.set(null);
     		}
+    	};
+
+    	const updateIntervalTime = () => {
+    		const duration = Duration.fromObject({ hours, minutes, seconds });
+    		const tempIntervalDurations = $intervalDurations;
+    		tempIntervalDurations[$intervalIndex] = duration.toMillis();
+    		console.log(tempIntervalDurations);
+    		intervalDurations.set(tempIntervalDurations);
     	};
 
     	const numsStrToHrsMinsSecs = () => {
@@ -27556,7 +27542,12 @@ var app = (function () {
     		}
 
     		numsStrToHrsMinsSecs();
-    		updateTempDuration();
+
+    		if (!$intervalMode) {
+    			updateTempDuration();
+    		} else {
+    			updateIntervalTime();
+    		}
     	};
 
     	const writable_props = [];
@@ -27587,8 +27578,11 @@ var app = (function () {
     		tempDuration,
     		runState,
     		focused,
+    		intervalDurations,
+    		intervalIndex,
     		currentFavInd,
     		settings,
+    		intervalMode,
     		Duration,
     		_: lodash,
     		hours,
@@ -27598,13 +27592,17 @@ var app = (function () {
     		input,
     		onFavUpdate,
     		updateTempDuration,
+    		updateIntervalTime,
     		numsStrToHrsMinsSecs,
     		handleChange,
     		$tempDuration,
     		$runState,
     		$currentFavInd,
     		readableTime,
-    		$settings
+    		$settings,
+    		$intervalDurations,
+    		$intervalIndex,
+    		$intervalMode
     	});
 
     	$$self.$inject_state = $$props => {
@@ -27650,13 +27648,13 @@ var app = (function () {
     class TimeInput extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$h, create_fragment$h, safe_not_equal, {});
+    		init(this, options, instance$i, create_fragment$i, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "TimeInput",
     			options,
-    			id: create_fragment$h.name
+    			id: create_fragment$i.name
     		});
     	}
     }
@@ -27752,7 +27750,7 @@ var app = (function () {
     	return block;
     }
 
-    function create_fragment$g(ctx) {
+    function create_fragment$h(ctx) {
     	let div;
     	let current_block_type_index;
     	let if_block;
@@ -27841,7 +27839,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$g.name,
+    		id: create_fragment$h.name,
     		type: "component",
     		source: "",
     		ctx
@@ -27852,7 +27850,7 @@ var app = (function () {
 
     const blinkInterval = 1000; // one second blinks
 
-    function instance$g($$self, $$props, $$invalidate) {
+    function instance$h($$self, $$props, $$invalidate) {
     	let opacity;
     	let $runState;
     	let $time;
@@ -27918,13 +27916,13 @@ var app = (function () {
     class TimeIndicator extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$g, create_fragment$g, safe_not_equal, {});
+    		init(this, options, instance$h, create_fragment$h, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "TimeIndicator",
     			options,
-    			id: create_fragment$g.name
+    			id: create_fragment$h.name
     		});
     	}
     }
@@ -28149,7 +28147,7 @@ var app = (function () {
     	return block;
     }
 
-    function create_fragment$f(ctx) {
+    function create_fragment$g(ctx) {
     	let if_block_anchor;
     	let if_block = /*i*/ ctx[8][4] && create_if_block$2(ctx);
 
@@ -28189,7 +28187,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$f.name,
+    		id: create_fragment$g.name,
     		type: "component",
     		source: "",
     		ctx
@@ -28198,7 +28196,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$f($$self, $$props, $$invalidate) {
+    function instance$g($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("Fa", slots, []);
     	let { class: clazz = "" } = $$props;
@@ -28422,7 +28420,7 @@ var app = (function () {
     	constructor(options) {
     		super(options);
 
-    		init(this, options, instance$f, create_fragment$f, safe_not_equal, {
+    		init(this, options, instance$g, create_fragment$g, safe_not_equal, {
     			class: 0,
     			id: 1,
     			style: 11,
@@ -28444,7 +28442,7 @@ var app = (function () {
     			component: this,
     			tagName: "Fa",
     			options,
-    			id: create_fragment$f.name
+    			id: create_fragment$g.name
     		});
 
     		const { ctx } = this.$$;
@@ -28629,7 +28627,7 @@ var app = (function () {
     /* src\Components\Controls\PlayPauseControl.svelte generated by Svelte v3.35.0 */
     const file$e = "src\\Components\\Controls\\PlayPauseControl.svelte";
 
-    function create_fragment$e(ctx) {
+    function create_fragment$f(ctx) {
     	let button;
     	let fa;
     	let current;
@@ -28638,7 +28636,7 @@ var app = (function () {
 
     	fa = new Fa({
     			props: {
-    				icon: /*getRunStateItem*/ ctx[0](faPlay, faPause, faPlay)
+    				icon: /*getRunStateItem*/ ctx[3](faPlay, faPause, faPlay)
     			},
     			$$inline: true
     		});
@@ -28648,7 +28646,7 @@ var app = (function () {
     			button = element("button");
     			create_component(fa.$$.fragment);
     			attr_dev(button, "class", "PlayPauseButton svelte-dj9u01");
-    			add_location(button, file$e, 21, 4, 631);
+    			add_location(button, file$e, 31, 4, 743);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -28663,7 +28661,7 @@ var app = (function () {
     					button,
     					"click",
     					function () {
-    						if (is_function(/*getRunStateItem*/ ctx[0](start, pause, resume))) /*getRunStateItem*/ ctx[0](start, pause, resume).apply(this, arguments);
+    						if (is_function(/*getRunStateItem*/ ctx[3](/*start*/ ctx[0], /*pause*/ ctx[1], /*resume*/ ctx[2]))) /*getRunStateItem*/ ctx[3](/*start*/ ctx[0], /*pause*/ ctx[1], /*resume*/ ctx[2]).apply(this, arguments);
     					},
     					false,
     					false,
@@ -28676,7 +28674,7 @@ var app = (function () {
     		p: function update(new_ctx, [dirty]) {
     			ctx = new_ctx;
     			const fa_changes = {};
-    			if (dirty & /*getRunStateItem*/ 1) fa_changes.icon = /*getRunStateItem*/ ctx[0](faPlay, faPause, faPlay);
+    			if (dirty & /*getRunStateItem*/ 8) fa_changes.icon = /*getRunStateItem*/ ctx[3](faPlay, faPause, faPlay);
     			fa.$set(fa_changes);
     		},
     		i: function intro(local) {
@@ -28698,7 +28696,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$e.name,
+    		id: create_fragment$f.name,
     		type: "component",
     		source: "",
     		ctx
@@ -28707,26 +28705,33 @@ var app = (function () {
     	return block;
     }
 
-    function instance$e($$self, $$props, $$invalidate) {
+    function instance$f($$self, $$props, $$invalidate) {
     	let getRunStateItem;
     	let $runState;
     	validate_store(runState, "runState");
-    	component_subscribe($$self, runState, $$value => $$invalidate(1, $runState = $$value));
+    	component_subscribe($$self, runState, $$value => $$invalidate(4, $runState = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("PlayPauseControl", slots, []);
-    	const writable_props = [];
+    	let { start } = $$props, { pause } = $$props, { resume } = $$props;
+    	const writable_props = ["start", "pause", "resume"];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<PlayPauseControl> was created with unknown prop '${key}'`);
     	});
 
+    	$$self.$$set = $$props => {
+    		if ("start" in $$props) $$invalidate(0, start = $$props.start);
+    		if ("pause" in $$props) $$invalidate(1, pause = $$props.pause);
+    		if ("resume" in $$props) $$invalidate(2, resume = $$props.resume);
+    	};
+
     	$$self.$capture_state = () => ({
-    		start,
-    		pause,
-    		resume,
     		runState,
     		focused,
     		tempDuration,
+    		start,
+    		pause,
+    		resume,
     		Fa,
     		faPlay,
     		faPause,
@@ -28736,7 +28741,10 @@ var app = (function () {
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ("getRunStateItem" in $$props) $$invalidate(0, getRunStateItem = $$props.getRunStateItem);
+    		if ("start" in $$props) $$invalidate(0, start = $$props.start);
+    		if ("pause" in $$props) $$invalidate(1, pause = $$props.pause);
+    		if ("resume" in $$props) $$invalidate(2, resume = $$props.resume);
+    		if ("getRunStateItem" in $$props) $$invalidate(3, getRunStateItem = $$props.getRunStateItem);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -28744,8 +28752,8 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*$runState*/ 2) {
-    			$$invalidate(0, getRunStateItem = (stoppedResult, runningResult, pausedResult) => {
+    		if ($$self.$$.dirty & /*$runState*/ 16) {
+    			$$invalidate(3, getRunStateItem = (stoppedResult, runningResult, pausedResult) => {
     				switch ($runState) {
     					case "running":
     						return runningResult;
@@ -28760,20 +28768,59 @@ var app = (function () {
     		}
     	};
 
-    	return [getRunStateItem, $runState];
+    	return [start, pause, resume, getRunStateItem, $runState];
     }
 
     class PlayPauseControl extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$e, create_fragment$e, safe_not_equal, {});
+    		init(this, options, instance$f, create_fragment$f, safe_not_equal, { start: 0, pause: 1, resume: 2 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "PlayPauseControl",
     			options,
-    			id: create_fragment$e.name
+    			id: create_fragment$f.name
     		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || {};
+
+    		if (/*start*/ ctx[0] === undefined && !("start" in props)) {
+    			console.warn("<PlayPauseControl> was created without expected prop 'start'");
+    		}
+
+    		if (/*pause*/ ctx[1] === undefined && !("pause" in props)) {
+    			console.warn("<PlayPauseControl> was created without expected prop 'pause'");
+    		}
+
+    		if (/*resume*/ ctx[2] === undefined && !("resume" in props)) {
+    			console.warn("<PlayPauseControl> was created without expected prop 'resume'");
+    		}
+    	}
+
+    	get start() {
+    		throw new Error("<PlayPauseControl>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set start(value) {
+    		throw new Error("<PlayPauseControl>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get pause() {
+    		throw new Error("<PlayPauseControl>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set pause(value) {
+    		throw new Error("<PlayPauseControl>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get resume() {
+    		throw new Error("<PlayPauseControl>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set resume(value) {
+    		throw new Error("<PlayPauseControl>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
 
@@ -28839,7 +28886,7 @@ var app = (function () {
     	return block;
     }
 
-    function create_fragment$d(ctx) {
+    function create_fragment$e(ctx) {
     	let div;
     	let div_intro;
     	let div_outro;
@@ -28925,7 +28972,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$d.name,
+    		id: create_fragment$e.name,
     		type: "component",
     		source: "",
     		ctx
@@ -28934,7 +28981,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$d($$self, $$props, $$invalidate) {
+    function instance$e($$self, $$props, $$invalidate) {
     	let favsList;
     	let $settings;
     	let $currentFavInd;
@@ -28979,13 +29026,13 @@ var app = (function () {
     class Favorites extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$d, create_fragment$d, safe_not_equal, {});
+    		init(this, options, instance$e, create_fragment$e, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Favorites",
     			options,
-    			id: create_fragment$d.name
+    			id: create_fragment$e.name
     		});
     	}
     }
@@ -28994,7 +29041,7 @@ var app = (function () {
 
     const file$c = "src\\Components\\Icons\\TomatoIcon.svelte";
 
-    function create_fragment$c(ctx) {
+    function create_fragment$d(ctx) {
     	let svg;
     	let path0;
     	let path0_fill_value;
@@ -29051,7 +29098,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$c.name,
+    		id: create_fragment$d.name,
     		type: "component",
     		source: "",
     		ctx
@@ -29063,7 +29110,7 @@ var app = (function () {
     const tomatoRed = "rgb(252, 61, 3)";
     const stemGreen = "rgb(0, 163, 27)";
 
-    function instance$c($$self, $$props, $$invalidate) {
+    function instance$d($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("TomatoIcon", slots, []);
     	let { size = 10 } = $$props;
@@ -29096,13 +29143,13 @@ var app = (function () {
     class TomatoIcon extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$c, create_fragment$c, safe_not_equal, { size: 0, color: 1 });
+    		init(this, options, instance$d, create_fragment$d, safe_not_equal, { size: 0, color: 1 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "TomatoIcon",
     			options,
-    			id: create_fragment$c.name
+    			id: create_fragment$d.name
     		});
 
     		const { ctx } = this.$$;
@@ -29133,7 +29180,7 @@ var app = (function () {
     /* src\Components\Timer\IntervalMode\IntervalModeIndicator.svelte generated by Svelte v3.35.0 */
     const file$b = "src\\Components\\Timer\\IntervalMode\\IntervalModeIndicator.svelte";
 
-    function create_fragment$b(ctx) {
+    function create_fragment$c(ctx) {
     	let div;
     	let tomatoicon;
     	let current;
@@ -29180,7 +29227,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$b.name,
+    		id: create_fragment$c.name,
     		type: "component",
     		source: "",
     		ctx
@@ -29189,7 +29236,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$b($$self, $$props, $$invalidate) {
+    function instance$c($$self, $$props, $$invalidate) {
     	let $color;
     	validate_store(color, "color");
     	component_subscribe($$self, color, $$value => $$invalidate(0, $color = $$value));
@@ -29208,13 +29255,13 @@ var app = (function () {
     class IntervalModeIndicator extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$b, create_fragment$b, safe_not_equal, {});
+    		init(this, options, instance$c, create_fragment$c, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "IntervalModeIndicator",
     			options,
-    			id: create_fragment$b.name
+    			id: create_fragment$c.name
     		});
     	}
     }
@@ -29236,7 +29283,7 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			div = element("div");
-    			attr_dev(div, "class", "intervalItem svelte-hqf5b9");
+    			attr_dev(div, "class", "intervalItem svelte-yx3cx3");
     			toggle_class(div, "current", /*$intervalIndex*/ ctx[1] === /*ind*/ ctx[4]);
     			add_location(div, file$a, 7, 8, 203);
     		},
@@ -29264,7 +29311,7 @@ var app = (function () {
     	return block;
     }
 
-    function create_fragment$a(ctx) {
+    function create_fragment$b(ctx) {
     	let div;
     	let each_value = /*$intervalDurations*/ ctx[0];
     	validate_each_argument(each_value);
@@ -29282,7 +29329,7 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(div, "class", "IntervalNumberIndicator svelte-hqf5b9");
+    			attr_dev(div, "class", "IntervalNumberIndicator svelte-yx3cx3");
     			add_location(div, file$a, 5, 0, 107);
     		},
     		l: function claim(nodes) {
@@ -29330,7 +29377,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$a.name,
+    		id: create_fragment$b.name,
     		type: "component",
     		source: "",
     		ctx
@@ -29339,7 +29386,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$a($$self, $$props, $$invalidate) {
+    function instance$b($$self, $$props, $$invalidate) {
     	let $intervalDurations;
     	let $intervalIndex;
     	validate_store(intervalDurations, "intervalDurations");
@@ -29367,13 +29414,13 @@ var app = (function () {
     class IntervalNumberIndicator extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$a, create_fragment$a, safe_not_equal, {});
+    		init(this, options, instance$b, create_fragment$b, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "IntervalNumberIndicator",
     			options,
-    			id: create_fragment$a.name
+    			id: create_fragment$b.name
     		});
     	}
     }
@@ -29381,7 +29428,7 @@ var app = (function () {
     /* src\Components\Timer\Timer.svelte generated by Svelte v3.35.0 */
     const file$9 = "src\\Components\\Timer\\Timer.svelte";
 
-    // (60:4) {#if $showFavorites && $settings.favorites}
+    // (59:4) {#if $showFavorites && $settings.favorites}
     function create_if_block_1(ctx) {
     	let favorites;
     	let current;
@@ -29413,14 +29460,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(60:4) {#if $showFavorites && $settings.favorites}",
+    		source: "(59:4) {#if $showFavorites && $settings.favorites}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (64:4) {#if $intervalMode}
+    // (63:4) {#if $intervalMode}
     function create_if_block$1(ctx) {
     	let intervalmodeindicator;
     	let t;
@@ -29463,14 +29510,14 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(64:4) {#if $intervalMode}",
+    		source: "(63:4) {#if $intervalMode}",
     		ctx
     	});
 
     	return block;
     }
 
-    function create_fragment$9(ctx) {
+    function create_fragment$a(ctx) {
     	let div;
     	let svg;
     	let circle;
@@ -29488,10 +29535,18 @@ var app = (function () {
     	let current;
     	let mounted;
     	let dispose;
-    	let if_block0 = /*$showFavorites*/ ctx[4] && /*$settings*/ ctx[5].favorites && create_if_block_1(ctx);
-    	let if_block1 = /*$intervalMode*/ ctx[6] && create_if_block$1(ctx);
+    	let if_block0 = /*$showFavorites*/ ctx[7] && /*$settings*/ ctx[8].favorites && create_if_block_1(ctx);
+    	let if_block1 = /*$intervalMode*/ ctx[9] && create_if_block$1(ctx);
     	timeindicatorinput = new TimeIndicator({ $$inline: true });
-    	playpausecontrol = new PlayPauseControl({ $$inline: true });
+
+    	playpausecontrol = new PlayPauseControl({
+    			props: {
+    				start: /*start*/ ctx[0],
+    				pause: /*pause*/ ctx[1],
+    				resume: /*resume*/ ctx[2]
+    			},
+    			$$inline: true
+    		});
 
     	const block = {
     		c: function create() {
@@ -29507,25 +29562,25 @@ var app = (function () {
     			create_component(timeindicatorinput.$$.fragment);
     			t3 = space();
     			create_component(playpausecontrol.$$.fragment);
-    			attr_dev(circle, "r", circle_r_value = /*$size*/ ctx[1] / 2 - /*thickness*/ ctx[0]);
+    			attr_dev(circle, "r", circle_r_value = /*$size*/ ctx[4] / 2 - /*thickness*/ ctx[3]);
     			attr_dev(circle, "cx", "50%");
     			attr_dev(circle, "cy", "50%");
     			attr_dev(circle, "fill", "transparent");
-    			attr_dev(circle, "stroke-width", /*thickness*/ ctx[0]);
-    			attr_dev(circle, "stroke", circle_stroke_value = /*$color*/ ctx[3].alpha(0.08).hsl().string());
-    			add_location(circle, file$9, 54, 8, 1718);
-    			attr_dev(path_1, "d", path_1_d_value = `${/*path*/ ctx[2]}`);
-    			attr_dev(path_1, "stroke-width", /*thickness*/ ctx[0]);
-    			attr_dev(path_1, "stroke", path_1_stroke_value = /*$color*/ ctx[3].hsl().string());
+    			attr_dev(circle, "stroke-width", /*thickness*/ ctx[3]);
+    			attr_dev(circle, "stroke", circle_stroke_value = /*$color*/ ctx[6].alpha(0.08).hsl().string());
+    			add_location(circle, file$9, 53, 8, 1710);
+    			attr_dev(path_1, "d", path_1_d_value = `${/*path*/ ctx[5]}`);
+    			attr_dev(path_1, "stroke-width", /*thickness*/ ctx[3]);
+    			attr_dev(path_1, "stroke", path_1_stroke_value = /*$color*/ ctx[6].hsl().string());
     			attr_dev(path_1, "stroke-linecap", "round");
     			attr_dev(path_1, "fill", "transparent");
-    			add_location(path_1, file$9, 56, 8, 1895);
+    			add_location(path_1, file$9, 55, 8, 1887);
     			attr_dev(svg, "class", "circle svelte-14fxcpi");
-    			attr_dev(svg, "width", /*$size*/ ctx[1]);
-    			attr_dev(svg, "height", /*$size*/ ctx[1]);
-    			add_location(svg, file$9, 53, 4, 1659);
+    			attr_dev(svg, "width", /*$size*/ ctx[4]);
+    			attr_dev(svg, "height", /*$size*/ ctx[4]);
+    			add_location(svg, file$9, 52, 4, 1651);
     			attr_dev(div, "class", "Timer svelte-14fxcpi");
-    			add_location(div, file$9, 49, 0, 1586);
+    			add_location(div, file$9, 48, 0, 1578);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -29546,46 +29601,46 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(div, "click", /*click_handler*/ ctx[9], false, false, false);
+    				dispose = listen_dev(div, "click", /*click_handler*/ ctx[12], false, false, false);
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if (!current || dirty & /*$size, thickness*/ 3 && circle_r_value !== (circle_r_value = /*$size*/ ctx[1] / 2 - /*thickness*/ ctx[0])) {
+    			if (!current || dirty & /*$size, thickness*/ 24 && circle_r_value !== (circle_r_value = /*$size*/ ctx[4] / 2 - /*thickness*/ ctx[3])) {
     				attr_dev(circle, "r", circle_r_value);
     			}
 
-    			if (!current || dirty & /*thickness*/ 1) {
-    				attr_dev(circle, "stroke-width", /*thickness*/ ctx[0]);
+    			if (!current || dirty & /*thickness*/ 8) {
+    				attr_dev(circle, "stroke-width", /*thickness*/ ctx[3]);
     			}
 
-    			if (!current || dirty & /*$color*/ 8 && circle_stroke_value !== (circle_stroke_value = /*$color*/ ctx[3].alpha(0.08).hsl().string())) {
+    			if (!current || dirty & /*$color*/ 64 && circle_stroke_value !== (circle_stroke_value = /*$color*/ ctx[6].alpha(0.08).hsl().string())) {
     				attr_dev(circle, "stroke", circle_stroke_value);
     			}
 
-    			if (!current || dirty & /*path*/ 4 && path_1_d_value !== (path_1_d_value = `${/*path*/ ctx[2]}`)) {
+    			if (!current || dirty & /*path*/ 32 && path_1_d_value !== (path_1_d_value = `${/*path*/ ctx[5]}`)) {
     				attr_dev(path_1, "d", path_1_d_value);
     			}
 
-    			if (!current || dirty & /*thickness*/ 1) {
-    				attr_dev(path_1, "stroke-width", /*thickness*/ ctx[0]);
+    			if (!current || dirty & /*thickness*/ 8) {
+    				attr_dev(path_1, "stroke-width", /*thickness*/ ctx[3]);
     			}
 
-    			if (!current || dirty & /*$color*/ 8 && path_1_stroke_value !== (path_1_stroke_value = /*$color*/ ctx[3].hsl().string())) {
+    			if (!current || dirty & /*$color*/ 64 && path_1_stroke_value !== (path_1_stroke_value = /*$color*/ ctx[6].hsl().string())) {
     				attr_dev(path_1, "stroke", path_1_stroke_value);
     			}
 
-    			if (!current || dirty & /*$size*/ 2) {
-    				attr_dev(svg, "width", /*$size*/ ctx[1]);
+    			if (!current || dirty & /*$size*/ 16) {
+    				attr_dev(svg, "width", /*$size*/ ctx[4]);
     			}
 
-    			if (!current || dirty & /*$size*/ 2) {
-    				attr_dev(svg, "height", /*$size*/ ctx[1]);
+    			if (!current || dirty & /*$size*/ 16) {
+    				attr_dev(svg, "height", /*$size*/ ctx[4]);
     			}
 
-    			if (/*$showFavorites*/ ctx[4] && /*$settings*/ ctx[5].favorites) {
+    			if (/*$showFavorites*/ ctx[7] && /*$settings*/ ctx[8].favorites) {
     				if (if_block0) {
-    					if (dirty & /*$showFavorites, $settings*/ 48) {
+    					if (dirty & /*$showFavorites, $settings*/ 384) {
     						transition_in(if_block0, 1);
     					}
     				} else {
@@ -29604,9 +29659,9 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if (/*$intervalMode*/ ctx[6]) {
+    			if (/*$intervalMode*/ ctx[9]) {
     				if (if_block1) {
-    					if (dirty & /*$intervalMode*/ 64) {
+    					if (dirty & /*$intervalMode*/ 512) {
     						transition_in(if_block1, 1);
     					}
     				} else {
@@ -29624,6 +29679,12 @@ var app = (function () {
 
     				check_outros();
     			}
+
+    			const playpausecontrol_changes = {};
+    			if (dirty & /*start*/ 1) playpausecontrol_changes.start = /*start*/ ctx[0];
+    			if (dirty & /*pause*/ 2) playpausecontrol_changes.pause = /*pause*/ ctx[1];
+    			if (dirty & /*resume*/ 4) playpausecontrol_changes.resume = /*resume*/ ctx[2];
+    			playpausecontrol.$set(playpausecontrol_changes);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -29653,7 +29714,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$9.name,
+    		id: create_fragment$a.name,
     		type: "component",
     		source: "",
     		ctx
@@ -29662,7 +29723,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$9($$self, $$props, $$invalidate) {
+    function instance$a($$self, $$props, $$invalidate) {
     	let thickness;
     	let circleAngle;
     	let path;
@@ -29675,24 +29736,26 @@ var app = (function () {
     	let $settings;
     	let $intervalMode;
     	validate_store(size, "size");
-    	component_subscribe($$self, size, $$value => $$invalidate(1, $size = $$value));
+    	component_subscribe($$self, size, $$value => $$invalidate(4, $size = $$value));
     	validate_store(runState, "runState");
-    	component_subscribe($$self, runState, $$value => $$invalidate(10, $runState = $$value));
+    	component_subscribe($$self, runState, $$value => $$invalidate(13, $runState = $$value));
     	validate_store(remainingTime, "remainingTime");
-    	component_subscribe($$self, remainingTime, $$value => $$invalidate(7, $remainingTime = $$value));
+    	component_subscribe($$self, remainingTime, $$value => $$invalidate(10, $remainingTime = $$value));
     	validate_store(duration, "duration");
-    	component_subscribe($$self, duration, $$value => $$invalidate(11, $duration = $$value));
+    	component_subscribe($$self, duration, $$value => $$invalidate(14, $duration = $$value));
     	validate_store(color, "color");
-    	component_subscribe($$self, color, $$value => $$invalidate(3, $color = $$value));
+    	component_subscribe($$self, color, $$value => $$invalidate(6, $color = $$value));
     	validate_store(showFavorites, "showFavorites");
-    	component_subscribe($$self, showFavorites, $$value => $$invalidate(4, $showFavorites = $$value));
+    	component_subscribe($$self, showFavorites, $$value => $$invalidate(7, $showFavorites = $$value));
     	validate_store(settings, "settings");
-    	component_subscribe($$self, settings, $$value => $$invalidate(5, $settings = $$value));
+    	component_subscribe($$self, settings, $$value => $$invalidate(8, $settings = $$value));
     	validate_store(intervalMode, "intervalMode");
-    	component_subscribe($$self, intervalMode, $$value => $$invalidate(6, $intervalMode = $$value));
+    	component_subscribe($$self, intervalMode, $$value => $$invalidate(9, $intervalMode = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("Timer", slots, []);
+    	let { start } = $$props, { pause } = $$props, { resume } = $$props;
 
+    	// calculates the the angle of the count down progress circle based on the ratio of remainingTime to duration
     	const calculateAngle = remtime => {
     		if ($runState === "finished") return 359;
     		if ($remainingTime > 0) return $remainingTime * 359 / $duration; else return 0;
@@ -29700,13 +29763,19 @@ var app = (function () {
 
     	const degToRad = deg => deg * Math.PI / 180; // π
     	const convertAngle = deg => degToRad(deg - 90);
-    	const writable_props = [];
+    	const writable_props = ["start", "pause", "resume"];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Timer> was created with unknown prop '${key}'`);
     	});
 
     	const click_handler = () => focused.set(false);
+
+    	$$self.$$set = $$props => {
+    		if ("start" in $$props) $$invalidate(0, start = $$props.start);
+    		if ("pause" in $$props) $$invalidate(1, pause = $$props.pause);
+    		if ("resume" in $$props) $$invalidate(2, resume = $$props.resume);
+    	};
 
     	$$self.$capture_state = () => ({
     		partialCircle: svgPartialCircle,
@@ -29715,10 +29784,7 @@ var app = (function () {
     		duration,
     		runState,
     		focused,
-    		pause,
-    		resume,
     		tempDuration,
-    		start,
     		color,
     		size,
     		settings,
@@ -29728,6 +29794,9 @@ var app = (function () {
     		Favorites,
     		IntervalModeIndicator,
     		IntervalNumberIndicator,
+    		start,
+    		pause,
+    		resume,
     		calculateAngle,
     		degToRad,
     		convertAngle,
@@ -29745,9 +29814,12 @@ var app = (function () {
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ("thickness" in $$props) $$invalidate(0, thickness = $$props.thickness);
-    		if ("circleAngle" in $$props) $$invalidate(8, circleAngle = $$props.circleAngle);
-    		if ("path" in $$props) $$invalidate(2, path = $$props.path);
+    		if ("start" in $$props) $$invalidate(0, start = $$props.start);
+    		if ("pause" in $$props) $$invalidate(1, pause = $$props.pause);
+    		if ("resume" in $$props) $$invalidate(2, resume = $$props.resume);
+    		if ("thickness" in $$props) $$invalidate(3, thickness = $$props.thickness);
+    		if ("circleAngle" in $$props) $$invalidate(11, circleAngle = $$props.circleAngle);
+    		if ("path" in $$props) $$invalidate(5, path = $$props.path);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -29755,22 +29827,25 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*$size*/ 2) {
+    		if ($$self.$$.dirty & /*$size*/ 16) {
     			// thickness of the line
-    			$$invalidate(0, thickness = $size / 20);
+    			$$invalidate(3, thickness = $size / 20);
     		}
 
-    		if ($$self.$$.dirty & /*$remainingTime*/ 128) {
-    			$$invalidate(8, circleAngle = calculateAngle());
+    		if ($$self.$$.dirty & /*$remainingTime*/ 1024) {
+    			$$invalidate(11, circleAngle = calculateAngle());
     		}
 
-    		if ($$self.$$.dirty & /*$size, thickness, circleAngle*/ 259) {
+    		if ($$self.$$.dirty & /*$size, thickness, circleAngle*/ 2072) {
     			// the path of the progress circle
-    			$$invalidate(2, path = svgPartialCircle($size / 2, $size / 2, $size / 2 - thickness, convertAngle(circleAngle), convertAngle(0)).map(cmd => cmd.join(" ")).join(" "));
+    			$$invalidate(5, path = svgPartialCircle($size / 2, $size / 2, $size / 2 - thickness, convertAngle(circleAngle), convertAngle(0)).map(cmd => cmd.join(" ")).join(" "));
     		}
     	};
 
     	return [
+    		start,
+    		pause,
+    		resume,
     		thickness,
     		$size,
     		path,
@@ -29787,21 +29862,60 @@ var app = (function () {
     class Timer extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$9, create_fragment$9, safe_not_equal, {});
+    		init(this, options, instance$a, create_fragment$a, safe_not_equal, { start: 0, pause: 1, resume: 2 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Timer",
     			options,
-    			id: create_fragment$9.name
+    			id: create_fragment$a.name
     		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || {};
+
+    		if (/*start*/ ctx[0] === undefined && !("start" in props)) {
+    			console.warn("<Timer> was created without expected prop 'start'");
+    		}
+
+    		if (/*pause*/ ctx[1] === undefined && !("pause" in props)) {
+    			console.warn("<Timer> was created without expected prop 'pause'");
+    		}
+
+    		if (/*resume*/ ctx[2] === undefined && !("resume" in props)) {
+    			console.warn("<Timer> was created without expected prop 'resume'");
+    		}
+    	}
+
+    	get start() {
+    		throw new Error("<Timer>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set start(value) {
+    		throw new Error("<Timer>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get pause() {
+    		throw new Error("<Timer>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set pause(value) {
+    		throw new Error("<Timer>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get resume() {
+    		throw new Error("<Timer>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set resume(value) {
+    		throw new Error("<Timer>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
 
     /* src\Components\Controls\ResizeControl.svelte generated by Svelte v3.35.0 */
     const file$8 = "src\\Components\\Controls\\ResizeControl.svelte";
 
-    function create_fragment$8(ctx) {
+    function create_fragment$9(ctx) {
     	let div;
     	let button0;
     	let fa0;
@@ -29885,7 +29999,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$8.name,
+    		id: create_fragment$9.name,
     		type: "component",
     		source: "",
     		ctx
@@ -29894,7 +30008,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$8($$self, $$props, $$invalidate) {
+    function instance$9($$self, $$props, $$invalidate) {
     	let $size;
     	let $maxSize;
     	validate_store(size, "size");
@@ -29933,13 +30047,13 @@ var app = (function () {
     class ResizeControl extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$8, create_fragment$8, safe_not_equal, {});
+    		init(this, options, instance$9, create_fragment$9, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "ResizeControl",
     			options,
-    			id: create_fragment$8.name
+    			id: create_fragment$9.name
     		});
     	}
     }
@@ -29947,7 +30061,7 @@ var app = (function () {
     /* src\Components\Settings\OpenSettingsButton.svelte generated by Svelte v3.35.0 */
     const file$7 = "src\\Components\\Settings\\OpenSettingsButton.svelte";
 
-    function create_fragment$7(ctx) {
+    function create_fragment$8(ctx) {
     	let button;
     	let fa;
     	let current;
@@ -29995,7 +30109,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$7.name,
+    		id: create_fragment$8.name,
     		type: "component",
     		source: "",
     		ctx
@@ -30004,7 +30118,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$7($$self, $$props, $$invalidate) {
+    function instance$8($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("OpenSettingsButton", slots, []);
 
@@ -30025,13 +30139,13 @@ var app = (function () {
     class OpenSettingsButton extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$7, create_fragment$7, safe_not_equal, {});
+    		init(this, options, instance$8, create_fragment$8, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "OpenSettingsButton",
     			options,
-    			id: create_fragment$7.name
+    			id: create_fragment$8.name
     		});
     	}
     }
@@ -30040,7 +30154,7 @@ var app = (function () {
 
     const file$6 = "src\\Components\\Settings\\SettingsSlider.svelte";
 
-    function create_fragment$6(ctx) {
+    function create_fragment$7(ctx) {
     	let div;
     	let p;
     	let t0;
@@ -30113,7 +30227,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$6.name,
+    		id: create_fragment$7.name,
     		type: "component",
     		source: "",
     		ctx
@@ -30122,7 +30236,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$6($$self, $$props, $$invalidate) {
+    function instance$7($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("SettingsSlider", slots, []);
     	let { value } = $$props;
@@ -30166,13 +30280,13 @@ var app = (function () {
     class SettingsSlider extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$6, create_fragment$6, safe_not_equal, { value: 0, min: 1, max: 2, label: 3 });
+    		init(this, options, instance$7, create_fragment$7, safe_not_equal, { value: 0, min: 1, max: 2, label: 3 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "SettingsSlider",
     			options,
-    			id: create_fragment$6.name
+    			id: create_fragment$7.name
     		});
 
     		const { ctx } = this.$$;
@@ -30233,7 +30347,7 @@ var app = (function () {
     const { console: console_1$1 } = globals;
     const file$5 = "src\\Components\\Settings\\SettingsOptionButton.svelte";
 
-    function create_fragment$5(ctx) {
+    function create_fragment$6(ctx) {
     	let button;
     	let fa;
     	let current;
@@ -30299,7 +30413,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$5.name,
+    		id: create_fragment$6.name,
     		type: "component",
     		source: "",
     		ctx
@@ -30308,7 +30422,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$5($$self, $$props, $$invalidate) {
+    function instance$6($$self, $$props, $$invalidate) {
     	let $settings;
     	validate_store(settings, "settings");
     	component_subscribe($$self, settings, $$value => $$invalidate(2, $settings = $$value));
@@ -30365,13 +30479,13 @@ var app = (function () {
     class SettingsOptionButton extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$5, create_fragment$5, safe_not_equal, { icon: 0, option: 1, label: 4 });
+    		init(this, options, instance$6, create_fragment$6, safe_not_equal, { icon: 0, option: 1, label: 4 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "SettingsOptionButton",
     			options,
-    			id: create_fragment$5.name
+    			id: create_fragment$6.name
     		});
 
     		const { ctx } = this.$$;
@@ -30418,7 +30532,7 @@ var app = (function () {
     /* src\Components\Settings\SaveButton.svelte generated by Svelte v3.35.0 */
     const file$4 = "src\\Components\\Settings\\SaveButton.svelte";
 
-    function create_fragment$4(ctx) {
+    function create_fragment$5(ctx) {
     	let button;
     	let fa;
     	let current;
@@ -30466,7 +30580,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$4.name,
+    		id: create_fragment$5.name,
     		type: "component",
     		source: "",
     		ctx
@@ -30475,7 +30589,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$4($$self, $$props, $$invalidate) {
+    function instance$5($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("SaveButton", slots, []);
     	const writable_props = [];
@@ -30491,13 +30605,13 @@ var app = (function () {
     class SaveButton extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$4, create_fragment$4, safe_not_equal, {});
+    		init(this, options, instance$5, create_fragment$5, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "SaveButton",
     			options,
-    			id: create_fragment$4.name
+    			id: create_fragment$5.name
     		});
     	}
     }
@@ -30505,7 +30619,7 @@ var app = (function () {
     /* src\Components\Settings\Settings.svelte generated by Svelte v3.35.0 */
     const file$3 = "src\\Components\\Settings\\Settings.svelte";
 
-    function create_fragment$3(ctx) {
+    function create_fragment$4(ctx) {
     	let div1;
     	let settingsslider0;
     	let updating_value;
@@ -30651,7 +30765,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$3.name,
+    		id: create_fragment$4.name,
     		type: "component",
     		source: "",
     		ctx
@@ -30660,7 +30774,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$3($$self, $$props, $$invalidate) {
+    function instance$4($$self, $$props, $$invalidate) {
     	let $settingsHeight;
     	let $color;
     	let $hue;
@@ -30721,13 +30835,13 @@ var app = (function () {
     class Settings extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$3, create_fragment$3, safe_not_equal, {});
+    		init(this, options, instance$4, create_fragment$4, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Settings",
     			options,
-    			id: create_fragment$3.name
+    			id: create_fragment$4.name
     		});
     	}
     }
@@ -30735,7 +30849,7 @@ var app = (function () {
     /* src\Components\Settings\ThemeCycleButton.svelte generated by Svelte v3.35.0 */
     const file$2 = "src\\Components\\Settings\\ThemeCycleButton.svelte";
 
-    function create_fragment$2(ctx) {
+    function create_fragment$3(ctx) {
     	let button;
     	let fa;
     	let current;
@@ -30787,7 +30901,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$2.name,
+    		id: create_fragment$3.name,
     		type: "component",
     		source: "",
     		ctx
@@ -30796,7 +30910,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$2($$self, $$props, $$invalidate) {
+    function instance$3($$self, $$props, $$invalidate) {
     	let $settings;
     	validate_store(settings, "settings");
     	component_subscribe($$self, settings, $$value => $$invalidate(1, $settings = $$value));
@@ -30831,13 +30945,13 @@ var app = (function () {
     class ThemeCycleButton extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$2, create_fragment$2, safe_not_equal, {});
+    		init(this, options, instance$3, create_fragment$3, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "ThemeCycleButton",
     			options,
-    			id: create_fragment$2.name
+    			id: create_fragment$3.name
     		});
     	}
     }
@@ -30846,7 +30960,7 @@ var app = (function () {
 
     const file$1 = "src\\Components\\Controls\\IntervalModeButton.svelte";
 
-    function create_fragment$1(ctx) {
+    function create_fragment$2(ctx) {
     	let button;
     	let tomatoicon;
     	let current;
@@ -30905,7 +31019,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$1.name,
+    		id: create_fragment$2.name,
     		type: "component",
     		source: "",
     		ctx
@@ -30914,7 +31028,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$1($$self, $$props, $$invalidate) {
+    function instance$2($$self, $$props, $$invalidate) {
     	let $intervalMode;
     	let $size;
     	validate_store(intervalMode, "intervalMode");
@@ -30945,246 +31059,44 @@ var app = (function () {
     class IntervalModeButton extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$1, create_fragment$1, safe_not_equal, {});
+    		init(this, options, instance$2, create_fragment$2, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "IntervalModeButton",
     			options,
-    			id: create_fragment$1.name
+    			id: create_fragment$2.name
     		});
     	}
     }
 
-    /* src\App.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Controls\MasterControls.svelte generated by Svelte v3.35.0 */
 
     const { console: console_1 } = globals;
-    const file = "src\\App.svelte";
 
-    // (214:1) {#if $settingsOpen}
-    function create_if_block(ctx) {
-    	let settings_1;
-    	let current;
-    	settings_1 = new Settings({ $$inline: true });
-
-    	const block = {
-    		c: function create() {
-    			create_component(settings_1.$$.fragment);
-    		},
-    		m: function mount(target, anchor) {
-    			mount_component(settings_1, target, anchor);
-    			current = true;
-    		},
-    		i: function intro(local) {
-    			if (current) return;
-    			transition_in(settings_1.$$.fragment, local);
-    			current = true;
-    		},
-    		o: function outro(local) {
-    			transition_out(settings_1.$$.fragment, local);
-    			current = false;
-    		},
-    		d: function destroy(detaching) {
-    			destroy_component(settings_1, detaching);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_if_block.name,
-    		type: "if",
-    		source: "(214:1) {#if $settingsOpen}",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    function create_fragment(ctx) {
-    	let main;
-    	let div0;
-    	let t0;
-    	let div1;
-    	let timer;
-    	let t1;
-    	let resizecontrol;
-    	let t2;
-    	let opensettingsbutton;
-    	let t3;
-    	let themecyclebutton;
-    	let t4;
-    	let intervalmodebutton;
-    	let t5;
-    	let current;
+    function create_fragment$1(ctx) {
     	let mounted;
     	let dispose;
-    	timer = new Timer({ $$inline: true });
-    	resizecontrol = new ResizeControl({ $$inline: true });
-    	resizecontrol.$on("sizeUp", /*makeBigger*/ ctx[9]);
-    	resizecontrol.$on("sizeDown", /*makeSmaller*/ ctx[8]);
-    	opensettingsbutton = new OpenSettingsButton({ $$inline: true });
-    	themecyclebutton = new ThemeCycleButton({ $$inline: true });
-    	intervalmodebutton = new IntervalModeButton({ $$inline: true });
-    	let if_block = /*$settingsOpen*/ ctx[7] && create_if_block(ctx);
 
     	const block = {
-    		c: function create() {
-    			main = element("main");
-    			div0 = element("div");
-    			t0 = space();
-    			div1 = element("div");
-    			create_component(timer.$$.fragment);
-    			t1 = space();
-    			create_component(resizecontrol.$$.fragment);
-    			t2 = space();
-    			create_component(opensettingsbutton.$$.fragment);
-    			t3 = space();
-    			create_component(themecyclebutton.$$.fragment);
-    			t4 = space();
-    			create_component(intervalmodebutton.$$.fragment);
-    			t5 = space();
-    			if (if_block) if_block.c();
-    			attr_dev(div0, "class", "draggableArea svelte-18abru");
-    			add_location(div0, file, 200, 1, 4334);
-    			attr_dev(div1, "class", "timerSection svelte-18abru");
-    			add_location(div1, file, 202, 1, 4370);
-    			set_style(main, "--size", /*$size*/ ctx[1]);
-    			set_style(main, "--width", /*$width*/ ctx[0]);
-    			set_style(main, "--color", /*$color*/ ctx[5].hsl().string());
-    			set_style(main, "--blur", /*$scaledBlur*/ ctx[6]);
-    			set_style(main, "--textBlur", /*$scaledBlur*/ ctx[6] * 0.2);
-    			set_style(main, "--fontSize", /*$size*/ ctx[1] / 6 + "px");
-    			set_style(main, "--fontFamily", "Roboto " + /*$settings*/ ctx[2].fontWeight);
-    			set_style(main, "--buttonBg", /*$color*/ ctx[5].alpha(0.5).hsl().string());
-    			set_style(main, "--activeButtonBg", /*$color*/ ctx[5].alpha(0.6).hsl().string());
-    			set_style(main, "--appBg", /*appBg*/ ctx[3]);
-    			set_style(main, "--frameRadius", /*borderRadius*/ ctx[4]);
-    			attr_dev(main, "class", "svelte-18abru");
-    			add_location(main, file, 185, 0, 3937);
-    		},
+    		c: noop,
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, main, anchor);
-    			append_dev(main, div0);
-    			append_dev(main, t0);
-    			append_dev(main, div1);
-    			mount_component(timer, div1, null);
-    			append_dev(div1, t1);
-    			mount_component(resizecontrol, div1, null);
-    			append_dev(div1, t2);
-    			mount_component(opensettingsbutton, div1, null);
-    			append_dev(div1, t3);
-    			mount_component(themecyclebutton, div1, null);
-    			append_dev(div1, t4);
-    			mount_component(intervalmodebutton, div1, null);
-    			append_dev(main, t5);
-    			if (if_block) if_block.m(main, null);
-    			current = true;
-
     			if (!mounted) {
     				dispose = [
-    					listen_dev(window, "keydown", /*handleKeyDown*/ ctx[10], false, false, false),
-    					listen_dev(window, "keyup", /*handleKeyUp*/ ctx[11], false, false, false)
+    					listen_dev(window, "keydown", /*handleKeyDown*/ ctx[0], false, false, false),
+    					listen_dev(window, "keyup", /*handleKeyUp*/ ctx[1], false, false, false)
     				];
 
     				mounted = true;
     			}
     		},
-    		p: function update(ctx, [dirty]) {
-    			if (/*$settingsOpen*/ ctx[7]) {
-    				if (if_block) {
-    					if (dirty & /*$settingsOpen*/ 128) {
-    						transition_in(if_block, 1);
-    					}
-    				} else {
-    					if_block = create_if_block(ctx);
-    					if_block.c();
-    					transition_in(if_block, 1);
-    					if_block.m(main, null);
-    				}
-    			} else if (if_block) {
-    				group_outros();
-
-    				transition_out(if_block, 1, 1, () => {
-    					if_block = null;
-    				});
-
-    				check_outros();
-    			}
-
-    			if (!current || dirty & /*$size*/ 2) {
-    				set_style(main, "--size", /*$size*/ ctx[1]);
-    			}
-
-    			if (!current || dirty & /*$width*/ 1) {
-    				set_style(main, "--width", /*$width*/ ctx[0]);
-    			}
-
-    			if (!current || dirty & /*$color*/ 32) {
-    				set_style(main, "--color", /*$color*/ ctx[5].hsl().string());
-    			}
-
-    			if (!current || dirty & /*$scaledBlur*/ 64) {
-    				set_style(main, "--blur", /*$scaledBlur*/ ctx[6]);
-    			}
-
-    			if (!current || dirty & /*$scaledBlur*/ 64) {
-    				set_style(main, "--textBlur", /*$scaledBlur*/ ctx[6] * 0.2);
-    			}
-
-    			if (!current || dirty & /*$size*/ 2) {
-    				set_style(main, "--fontSize", /*$size*/ ctx[1] / 6 + "px");
-    			}
-
-    			if (!current || dirty & /*$settings*/ 4) {
-    				set_style(main, "--fontFamily", "Roboto " + /*$settings*/ ctx[2].fontWeight);
-    			}
-
-    			if (!current || dirty & /*$color*/ 32) {
-    				set_style(main, "--buttonBg", /*$color*/ ctx[5].alpha(0.5).hsl().string());
-    			}
-
-    			if (!current || dirty & /*$color*/ 32) {
-    				set_style(main, "--activeButtonBg", /*$color*/ ctx[5].alpha(0.6).hsl().string());
-    			}
-
-    			if (!current || dirty & /*appBg*/ 8) {
-    				set_style(main, "--appBg", /*appBg*/ ctx[3]);
-    			}
-
-    			if (!current || dirty & /*borderRadius*/ 16) {
-    				set_style(main, "--frameRadius", /*borderRadius*/ ctx[4]);
-    			}
-    		},
-    		i: function intro(local) {
-    			if (current) return;
-    			transition_in(timer.$$.fragment, local);
-    			transition_in(resizecontrol.$$.fragment, local);
-    			transition_in(opensettingsbutton.$$.fragment, local);
-    			transition_in(themecyclebutton.$$.fragment, local);
-    			transition_in(intervalmodebutton.$$.fragment, local);
-    			transition_in(if_block);
-    			current = true;
-    		},
-    		o: function outro(local) {
-    			transition_out(timer.$$.fragment, local);
-    			transition_out(resizecontrol.$$.fragment, local);
-    			transition_out(opensettingsbutton.$$.fragment, local);
-    			transition_out(themecyclebutton.$$.fragment, local);
-    			transition_out(intervalmodebutton.$$.fragment, local);
-    			transition_out(if_block);
-    			current = false;
-    		},
+    		p: noop,
+    		i: noop,
+    		o: noop,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(main);
-    			destroy_component(timer);
-    			destroy_component(resizecontrol);
-    			destroy_component(opensettingsbutton);
-    			destroy_component(themecyclebutton);
-    			destroy_component(intervalmodebutton);
-    			if (if_block) if_block.d();
     			mounted = false;
     			run_all(dispose);
     		}
@@ -31192,7 +31104,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment.name,
+    		id: create_fragment$1.name,
     		type: "component",
     		source: "",
     		ctx
@@ -31201,78 +31113,42 @@ var app = (function () {
     	return block;
     }
 
-    function instance($$self, $$props, $$invalidate) {
-    	let appBg;
-    	let borderRadius;
-    	let $width;
-    	let $height;
-    	let $stayOnTop;
-    	let $size;
-    	let $maxSize;
+    function instance$1($$self, $$props, $$invalidate) {
     	let $focused;
     	let $tempDuration;
     	let $settings;
     	let $runState;
     	let $currentFavInd;
     	let $duration;
-    	let $color;
-    	let $scaledBlur;
-    	let $settingsOpen;
-    	validate_store(width, "width");
-    	component_subscribe($$self, width, $$value => $$invalidate(0, $width = $$value));
-    	validate_store(height, "height");
-    	component_subscribe($$self, height, $$value => $$invalidate(12, $height = $$value));
-    	validate_store(stayOnTop, "stayOnTop");
-    	component_subscribe($$self, stayOnTop, $$value => $$invalidate(13, $stayOnTop = $$value));
-    	validate_store(size, "size");
-    	component_subscribe($$self, size, $$value => $$invalidate(1, $size = $$value));
-    	validate_store(maxSize, "maxSize");
-    	component_subscribe($$self, maxSize, $$value => $$invalidate(14, $maxSize = $$value));
+    	let $intervalMode;
+    	let $intervalDurations;
     	validate_store(focused, "focused");
-    	component_subscribe($$self, focused, $$value => $$invalidate(15, $focused = $$value));
+    	component_subscribe($$self, focused, $$value => $$invalidate(8, $focused = $$value));
     	validate_store(tempDuration, "tempDuration");
-    	component_subscribe($$self, tempDuration, $$value => $$invalidate(16, $tempDuration = $$value));
+    	component_subscribe($$self, tempDuration, $$value => $$invalidate(9, $tempDuration = $$value));
     	validate_store(settings, "settings");
-    	component_subscribe($$self, settings, $$value => $$invalidate(2, $settings = $$value));
+    	component_subscribe($$self, settings, $$value => $$invalidate(10, $settings = $$value));
     	validate_store(runState, "runState");
-    	component_subscribe($$self, runState, $$value => $$invalidate(17, $runState = $$value));
+    	component_subscribe($$self, runState, $$value => $$invalidate(11, $runState = $$value));
     	validate_store(currentFavInd, "currentFavInd");
-    	component_subscribe($$self, currentFavInd, $$value => $$invalidate(18, $currentFavInd = $$value));
+    	component_subscribe($$self, currentFavInd, $$value => $$invalidate(12, $currentFavInd = $$value));
     	validate_store(duration, "duration");
-    	component_subscribe($$self, duration, $$value => $$invalidate(19, $duration = $$value));
-    	validate_store(color, "color");
-    	component_subscribe($$self, color, $$value => $$invalidate(5, $color = $$value));
-    	validate_store(scaledBlur, "scaledBlur");
-    	component_subscribe($$self, scaledBlur, $$value => $$invalidate(6, $scaledBlur = $$value));
-    	validate_store(settingsOpen, "settingsOpen");
-    	component_subscribe($$self, settingsOpen, $$value => $$invalidate(7, $settingsOpen = $$value));
+    	component_subscribe($$self, duration, $$value => $$invalidate(13, $duration = $$value));
+    	validate_store(intervalMode, "intervalMode");
+    	component_subscribe($$self, intervalMode, $$value => $$invalidate(14, $intervalMode = $$value));
+    	validate_store(intervalDurations, "intervalDurations");
+    	component_subscribe($$self, intervalDurations, $$value => $$invalidate(15, $intervalDurations = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
-    	validate_slots("App", slots, []);
-    	const { ipcRenderer } = require("electron");
+    	validate_slots("MasterControls", slots, []);
+    	let { makeBigger } = $$props;
+    	let { makeSmaller } = $$props;
+    	let { start } = $$props, { pause } = $$props, { resume } = $$props;
 
-    	onMount(() => {
-    		loadSettings();
-    		ipcRenderer.send("resize", $width, $height);
-    	});
-
-    	const changeStayOnTop = deps => {
-    		ipcRenderer.send("stayontop", $stayOnTop);
-    	};
-
-    	const resizeWindow = deps => {
-    		ipcRenderer.send("resize", $width, $height);
-    	};
-
-    	const makeSmaller = () => {
-    		if ($size > 100) {
-    			size.update(v => v - 50);
-    		}
-    	};
-
-    	const makeBigger = () => {
-    		if ($size < $maxSize) {
-    			size.update(v => v + 50);
-    		}
+    	const handleEnd = () => {
+    		runState.set("finished");
+    		const sound = new Audio("file://" + __dirname + "/sounds/endSound.wav");
+    		sound.play();
+    		focused.set(true);
     	};
 
     	const favKeyMap = {
@@ -31316,10 +31192,10 @@ var app = (function () {
 
     		switch (key) {
     			case " ":
-    				if ($runState === "running") pause(); else if (($runState === "finished" || $currentFavInd !== null && $tempDuration !== $duration) && $tempDuration) start(); else if ($runState === "paused") resume();
+    				if ($runState === "running") pause(); else if (($runState === "finished" || $currentFavInd !== null && $tempDuration !== $duration) && ($intervalMode || $tempDuration)) start(); else if ($runState === "paused") resume();
     				break;
     			case "Enter":
-    				if ($focused && $tempDuration) {
+    				if ($focused && ($intervalMode && $intervalDurations.every(v => v) || $tempDuration)) {
     					start();
     				}
     				break;
@@ -31333,6 +31209,10 @@ var app = (function () {
     				e.preventDefault();
     				e.stopPropagation();
     				focused.set(!$focused);
+    				break;
+    			case "i":
+    			case "p":
+    				intervalMode.set(!$intervalMode);
     				break;
     			case "Shift":
     				showFavorites.set(true);
@@ -31370,6 +31250,543 @@ var app = (function () {
     		}
     	};
 
+    	const writable_props = ["makeBigger", "makeSmaller", "start", "pause", "resume"];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console_1.warn(`<MasterControls> was created with unknown prop '${key}'`);
+    	});
+
+    	$$self.$$set = $$props => {
+    		if ("makeBigger" in $$props) $$invalidate(2, makeBigger = $$props.makeBigger);
+    		if ("makeSmaller" in $$props) $$invalidate(3, makeSmaller = $$props.makeSmaller);
+    		if ("start" in $$props) $$invalidate(4, start = $$props.start);
+    		if ("pause" in $$props) $$invalidate(5, pause = $$props.pause);
+    		if ("resume" in $$props) $$invalidate(6, resume = $$props.resume);
+    	};
+
+    	$$self.$capture_state = () => ({
+    		currentFavInd,
+    		intervalMode,
+    		settings,
+    		showFavorites,
+    		duration,
+    		focused,
+    		intervalDurations,
+    		intervalIndex,
+    		pausedRemainingTime,
+    		remainingTime,
+    		runState,
+    		startTime,
+    		tempDuration,
+    		makeBigger,
+    		makeSmaller,
+    		start,
+    		pause,
+    		resume,
+    		handleEnd,
+    		favKeyMap,
+    		setFavorite,
+    		loadFavorite,
+    		handleKeyDown,
+    		handleKeyUp,
+    		$focused,
+    		$tempDuration,
+    		$settings,
+    		$runState,
+    		$currentFavInd,
+    		$duration,
+    		$intervalMode,
+    		$intervalDurations
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ("makeBigger" in $$props) $$invalidate(2, makeBigger = $$props.makeBigger);
+    		if ("makeSmaller" in $$props) $$invalidate(3, makeSmaller = $$props.makeSmaller);
+    		if ("start" in $$props) $$invalidate(4, start = $$props.start);
+    		if ("pause" in $$props) $$invalidate(5, pause = $$props.pause);
+    		if ("resume" in $$props) $$invalidate(6, resume = $$props.resume);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [
+    		handleKeyDown,
+    		handleKeyUp,
+    		makeBigger,
+    		makeSmaller,
+    		start,
+    		pause,
+    		resume,
+    		handleEnd
+    	];
+    }
+
+    class MasterControls extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+
+    		init(this, options, instance$1, create_fragment$1, safe_not_equal, {
+    			makeBigger: 2,
+    			makeSmaller: 3,
+    			start: 4,
+    			pause: 5,
+    			resume: 6,
+    			handleEnd: 7
+    		});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "MasterControls",
+    			options,
+    			id: create_fragment$1.name
+    		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || {};
+
+    		if (/*makeBigger*/ ctx[2] === undefined && !("makeBigger" in props)) {
+    			console_1.warn("<MasterControls> was created without expected prop 'makeBigger'");
+    		}
+
+    		if (/*makeSmaller*/ ctx[3] === undefined && !("makeSmaller" in props)) {
+    			console_1.warn("<MasterControls> was created without expected prop 'makeSmaller'");
+    		}
+
+    		if (/*start*/ ctx[4] === undefined && !("start" in props)) {
+    			console_1.warn("<MasterControls> was created without expected prop 'start'");
+    		}
+
+    		if (/*pause*/ ctx[5] === undefined && !("pause" in props)) {
+    			console_1.warn("<MasterControls> was created without expected prop 'pause'");
+    		}
+
+    		if (/*resume*/ ctx[6] === undefined && !("resume" in props)) {
+    			console_1.warn("<MasterControls> was created without expected prop 'resume'");
+    		}
+    	}
+
+    	get makeBigger() {
+    		throw new Error("<MasterControls>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set makeBigger(value) {
+    		throw new Error("<MasterControls>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get makeSmaller() {
+    		throw new Error("<MasterControls>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set makeSmaller(value) {
+    		throw new Error("<MasterControls>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get start() {
+    		throw new Error("<MasterControls>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set start(value) {
+    		throw new Error("<MasterControls>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get pause() {
+    		throw new Error("<MasterControls>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set pause(value) {
+    		throw new Error("<MasterControls>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get resume() {
+    		throw new Error("<MasterControls>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set resume(value) {
+    		throw new Error("<MasterControls>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get handleEnd() {
+    		return this.$$.ctx[7];
+    	}
+
+    	set handleEnd(value) {
+    		throw new Error("<MasterControls>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* src\App.svelte generated by Svelte v3.35.0 */
+
+    const file = "src\\App.svelte";
+
+    // (135:1) {#if $settingsOpen}
+    function create_if_block(ctx) {
+    	let settings_1;
+    	let current;
+    	settings_1 = new Settings({ $$inline: true });
+
+    	const block = {
+    		c: function create() {
+    			create_component(settings_1.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(settings_1, target, anchor);
+    			current = true;
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(settings_1.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(settings_1.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(settings_1, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block.name,
+    		type: "if",
+    		source: "(135:1) {#if $settingsOpen}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment(ctx) {
+    	let main;
+    	let div0;
+    	let t0;
+    	let div1;
+    	let timer;
+    	let t1;
+    	let resizecontrol;
+    	let t2;
+    	let opensettingsbutton;
+    	let t3;
+    	let themecyclebutton;
+    	let t4;
+    	let intervalmodebutton;
+    	let t5;
+    	let t6;
+    	let mastercontrols;
+    	let current;
+
+    	timer = new Timer({
+    			props: {
+    				start: /*start*/ ctx[0],
+    				pause: /*pause*/ ctx[1],
+    				resume: /*resume*/ ctx[2]
+    			},
+    			$$inline: true
+    		});
+
+    	resizecontrol = new ResizeControl({ $$inline: true });
+    	resizecontrol.$on("sizeUp", /*makeBigger*/ ctx[12]);
+    	resizecontrol.$on("sizeDown", /*makeSmaller*/ ctx[11]);
+    	opensettingsbutton = new OpenSettingsButton({ $$inline: true });
+    	themecyclebutton = new ThemeCycleButton({ $$inline: true });
+    	intervalmodebutton = new IntervalModeButton({ $$inline: true });
+    	let if_block = /*$settingsOpen*/ ctx[10] && create_if_block(ctx);
+
+    	mastercontrols = new MasterControls({
+    			props: {
+    				start: /*start*/ ctx[0],
+    				pause: /*pause*/ ctx[1],
+    				resume: /*resume*/ ctx[2],
+    				makeBigger: /*makeBigger*/ ctx[12],
+    				makeSmaller: /*makeSmaller*/ ctx[11]
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			main = element("main");
+    			div0 = element("div");
+    			t0 = space();
+    			div1 = element("div");
+    			create_component(timer.$$.fragment);
+    			t1 = space();
+    			create_component(resizecontrol.$$.fragment);
+    			t2 = space();
+    			create_component(opensettingsbutton.$$.fragment);
+    			t3 = space();
+    			create_component(themecyclebutton.$$.fragment);
+    			t4 = space();
+    			create_component(intervalmodebutton.$$.fragment);
+    			t5 = space();
+    			if (if_block) if_block.c();
+    			t6 = space();
+    			create_component(mastercontrols.$$.fragment);
+    			attr_dev(div0, "class", "draggableArea svelte-18abru");
+    			add_location(div0, file, 124, 1, 3033);
+    			attr_dev(div1, "class", "timerSection svelte-18abru");
+    			add_location(div1, file, 126, 1, 3069);
+    			set_style(main, "--size", /*$size*/ ctx[4]);
+    			set_style(main, "--width", /*$width*/ ctx[3]);
+    			set_style(main, "--color", /*$color*/ ctx[8].hsl().string());
+    			set_style(main, "--blur", /*$scaledBlur*/ ctx[9]);
+    			set_style(main, "--textBlur", /*$scaledBlur*/ ctx[9] * 0.2);
+    			set_style(main, "--fontSize", /*$size*/ ctx[4] / 6 + "px");
+    			set_style(main, "--fontFamily", "Roboto " + /*$settings*/ ctx[5].fontWeight);
+    			set_style(main, "--buttonBg", /*$color*/ ctx[8].alpha(0.5).hsl().string());
+    			set_style(main, "--activeButtonBg", /*$color*/ ctx[8].alpha(0.6).hsl().string());
+    			set_style(main, "--appBg", /*appBg*/ ctx[6]);
+    			set_style(main, "--frameRadius", /*borderRadius*/ ctx[7]);
+    			attr_dev(main, "class", "svelte-18abru");
+    			add_location(main, file, 109, 0, 2636);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, main, anchor);
+    			append_dev(main, div0);
+    			append_dev(main, t0);
+    			append_dev(main, div1);
+    			mount_component(timer, div1, null);
+    			append_dev(div1, t1);
+    			mount_component(resizecontrol, div1, null);
+    			append_dev(div1, t2);
+    			mount_component(opensettingsbutton, div1, null);
+    			append_dev(div1, t3);
+    			mount_component(themecyclebutton, div1, null);
+    			append_dev(div1, t4);
+    			mount_component(intervalmodebutton, div1, null);
+    			append_dev(main, t5);
+    			if (if_block) if_block.m(main, null);
+    			insert_dev(target, t6, anchor);
+    			mount_component(mastercontrols, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (/*$settingsOpen*/ ctx[10]) {
+    				if (if_block) {
+    					if (dirty & /*$settingsOpen*/ 1024) {
+    						transition_in(if_block, 1);
+    					}
+    				} else {
+    					if_block = create_if_block(ctx);
+    					if_block.c();
+    					transition_in(if_block, 1);
+    					if_block.m(main, null);
+    				}
+    			} else if (if_block) {
+    				group_outros();
+
+    				transition_out(if_block, 1, 1, () => {
+    					if_block = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			if (!current || dirty & /*$size*/ 16) {
+    				set_style(main, "--size", /*$size*/ ctx[4]);
+    			}
+
+    			if (!current || dirty & /*$width*/ 8) {
+    				set_style(main, "--width", /*$width*/ ctx[3]);
+    			}
+
+    			if (!current || dirty & /*$color*/ 256) {
+    				set_style(main, "--color", /*$color*/ ctx[8].hsl().string());
+    			}
+
+    			if (!current || dirty & /*$scaledBlur*/ 512) {
+    				set_style(main, "--blur", /*$scaledBlur*/ ctx[9]);
+    			}
+
+    			if (!current || dirty & /*$scaledBlur*/ 512) {
+    				set_style(main, "--textBlur", /*$scaledBlur*/ ctx[9] * 0.2);
+    			}
+
+    			if (!current || dirty & /*$size*/ 16) {
+    				set_style(main, "--fontSize", /*$size*/ ctx[4] / 6 + "px");
+    			}
+
+    			if (!current || dirty & /*$settings*/ 32) {
+    				set_style(main, "--fontFamily", "Roboto " + /*$settings*/ ctx[5].fontWeight);
+    			}
+
+    			if (!current || dirty & /*$color*/ 256) {
+    				set_style(main, "--buttonBg", /*$color*/ ctx[8].alpha(0.5).hsl().string());
+    			}
+
+    			if (!current || dirty & /*$color*/ 256) {
+    				set_style(main, "--activeButtonBg", /*$color*/ ctx[8].alpha(0.6).hsl().string());
+    			}
+
+    			if (!current || dirty & /*appBg*/ 64) {
+    				set_style(main, "--appBg", /*appBg*/ ctx[6]);
+    			}
+
+    			if (!current || dirty & /*borderRadius*/ 128) {
+    				set_style(main, "--frameRadius", /*borderRadius*/ ctx[7]);
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(timer.$$.fragment, local);
+    			transition_in(resizecontrol.$$.fragment, local);
+    			transition_in(opensettingsbutton.$$.fragment, local);
+    			transition_in(themecyclebutton.$$.fragment, local);
+    			transition_in(intervalmodebutton.$$.fragment, local);
+    			transition_in(if_block);
+    			transition_in(mastercontrols.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(timer.$$.fragment, local);
+    			transition_out(resizecontrol.$$.fragment, local);
+    			transition_out(opensettingsbutton.$$.fragment, local);
+    			transition_out(themecyclebutton.$$.fragment, local);
+    			transition_out(intervalmodebutton.$$.fragment, local);
+    			transition_out(if_block);
+    			transition_out(mastercontrols.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(main);
+    			destroy_component(timer);
+    			destroy_component(resizecontrol);
+    			destroy_component(opensettingsbutton);
+    			destroy_component(themecyclebutton);
+    			destroy_component(intervalmodebutton);
+    			if (if_block) if_block.d();
+    			if (detaching) detach_dev(t6);
+    			destroy_component(mastercontrols, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance($$self, $$props, $$invalidate) {
+    	let appBg;
+    	let borderRadius;
+    	let $width;
+    	let $height;
+    	let $stayOnTop;
+    	let $size;
+    	let $intervalMode;
+    	let $tempDuration;
+    	let $intervalDurations;
+    	let $intervalIndex;
+    	let $remainingTime;
+    	let $duration;
+    	let $pausedRemainingTime;
+    	let $maxSize;
+    	let $settings;
+    	let $color;
+    	let $scaledBlur;
+    	let $settingsOpen;
+    	validate_store(width, "width");
+    	component_subscribe($$self, width, $$value => $$invalidate(3, $width = $$value));
+    	validate_store(height, "height");
+    	component_subscribe($$self, height, $$value => $$invalidate(13, $height = $$value));
+    	validate_store(stayOnTop, "stayOnTop");
+    	component_subscribe($$self, stayOnTop, $$value => $$invalidate(14, $stayOnTop = $$value));
+    	validate_store(size, "size");
+    	component_subscribe($$self, size, $$value => $$invalidate(4, $size = $$value));
+    	validate_store(intervalMode, "intervalMode");
+    	component_subscribe($$self, intervalMode, $$value => $$invalidate(15, $intervalMode = $$value));
+    	validate_store(tempDuration, "tempDuration");
+    	component_subscribe($$self, tempDuration, $$value => $$invalidate(16, $tempDuration = $$value));
+    	validate_store(intervalDurations, "intervalDurations");
+    	component_subscribe($$self, intervalDurations, $$value => $$invalidate(17, $intervalDurations = $$value));
+    	validate_store(intervalIndex, "intervalIndex");
+    	component_subscribe($$self, intervalIndex, $$value => $$invalidate(18, $intervalIndex = $$value));
+    	validate_store(remainingTime, "remainingTime");
+    	component_subscribe($$self, remainingTime, $$value => $$invalidate(19, $remainingTime = $$value));
+    	validate_store(duration, "duration");
+    	component_subscribe($$self, duration, $$value => $$invalidate(20, $duration = $$value));
+    	validate_store(pausedRemainingTime, "pausedRemainingTime");
+    	component_subscribe($$self, pausedRemainingTime, $$value => $$invalidate(21, $pausedRemainingTime = $$value));
+    	validate_store(maxSize, "maxSize");
+    	component_subscribe($$self, maxSize, $$value => $$invalidate(22, $maxSize = $$value));
+    	validate_store(settings, "settings");
+    	component_subscribe($$self, settings, $$value => $$invalidate(5, $settings = $$value));
+    	validate_store(color, "color");
+    	component_subscribe($$self, color, $$value => $$invalidate(8, $color = $$value));
+    	validate_store(scaledBlur, "scaledBlur");
+    	component_subscribe($$self, scaledBlur, $$value => $$invalidate(9, $scaledBlur = $$value));
+    	validate_store(settingsOpen, "settingsOpen");
+    	component_subscribe($$self, settingsOpen, $$value => $$invalidate(10, $settingsOpen = $$value));
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots("App", slots, []);
+    	const { ipcRenderer } = require("electron");
+
+    	onMount(() => {
+    		loadSettings();
+    		ipcRenderer.send("resize", $width, $height);
+    	});
+
+    	const changeStayOnTop = deps => {
+    		ipcRenderer.send("stayontop", $stayOnTop);
+    	};
+
+    	const resizeWindow = deps => {
+    		ipcRenderer.send("resize", $width, $height);
+    	};
+
+    	const start = () => {
+    		let tempDur;
+
+    		if (!$intervalMode) {
+    			tempDur = $tempDuration;
+    		} else {
+    			tempDur = $intervalDurations[$intervalIndex];
+    		}
+
+    		if (tempDur !== 0) {
+    			startTime.set(Date.now());
+    			duration.set(tempDur);
+    			focused.set(false);
+    			runState.set("running");
+    			const sound = new Audio("file://" + __dirname + "/sounds/startSound.wav");
+    			sound.play();
+    		}
+    	};
+
+    	const pause = () => {
+    		pausedRemainingTime.set($remainingTime);
+    		runState.set("paused");
+    	};
+
+    	const resume = () => {
+    		startTime.set(Date.now() - ($duration - $pausedRemainingTime));
+    		focused.set(false);
+    		runState.set("running");
+    	};
+
+    	const makeSmaller = () => {
+    		if ($size > 100) {
+    			size.update(v => v - 50);
+    		}
+    	};
+
+    	const makeBigger = () => {
+    		if ($size < $maxSize) {
+    			size.update(v => v + 50);
+    		}
+    	};
+
     	const themes = {
     		"transparent": "transparent",
     		"dark": "rgb(33, 33, 33)",
@@ -31379,7 +31796,7 @@ var app = (function () {
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console_1.warn(`<App> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<App> was created with unknown prop '${key}'`);
     	});
 
     	$$self.$capture_state = () => ({
@@ -31390,49 +31807,50 @@ var app = (function () {
     		width,
     		height,
     		color,
-    		blur,
     		stayOnTop,
     		scaledBlur,
     		settings,
     		maxSize,
     		settingsOpen,
-    		showFavorites,
-    		currentFavInd,
     		loadSettings,
-    		focused,
-    		pause,
-    		resume,
-    		runState,
-    		start,
-    		tempDuration,
-    		duration,
+    		intervalMode,
     		ResizeControl,
     		OpenSettingsButton,
     		Settings,
     		ThemeCycleButton,
     		IntervalModeButton,
+    		MasterControls,
+    		duration,
+    		focused,
+    		intervalDurations,
+    		intervalIndex,
+    		pausedRemainingTime,
+    		remainingTime,
+    		runState,
+    		startTime,
+    		tempDuration,
     		changeStayOnTop,
     		resizeWindow,
+    		start,
+    		pause,
+    		resume,
     		makeSmaller,
     		makeBigger,
-    		favKeyMap,
-    		setFavorite,
-    		loadFavorite,
-    		handleKeyDown,
-    		handleKeyUp,
     		themes,
     		$width,
     		$height,
     		$stayOnTop,
     		$size,
-    		$maxSize,
-    		$focused,
+    		$intervalMode,
     		$tempDuration,
-    		$settings,
-    		$runState,
-    		$currentFavInd,
+    		$intervalDurations,
+    		$intervalIndex,
+    		$remainingTime,
     		$duration,
+    		$pausedRemainingTime,
+    		$maxSize,
     		appBg,
+    		$settings,
     		borderRadius,
     		$color,
     		$scaledBlur,
@@ -31440,8 +31858,8 @@ var app = (function () {
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ("appBg" in $$props) $$invalidate(3, appBg = $$props.appBg);
-    		if ("borderRadius" in $$props) $$invalidate(4, borderRadius = $$props.borderRadius);
+    		if ("appBg" in $$props) $$invalidate(6, appBg = $$props.appBg);
+    		if ("borderRadius" in $$props) $$invalidate(7, borderRadius = $$props.borderRadius);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -31449,25 +31867,28 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*$size, $height*/ 4098) {
+    		if ($$self.$$.dirty & /*$size, $height*/ 8208) {
     			// any time the window size changes, send the signal to electron
     			resizeWindow();
     		}
 
-    		if ($$self.$$.dirty & /*$stayOnTop*/ 8192) {
+    		if ($$self.$$.dirty & /*$stayOnTop*/ 16384) {
     			changeStayOnTop();
     		}
 
-    		if ($$self.$$.dirty & /*$settings*/ 4) {
-    			$$invalidate(3, appBg = themes[$settings.theme]);
+    		if ($$self.$$.dirty & /*$settings*/ 32) {
+    			$$invalidate(6, appBg = themes[$settings.theme]);
     		}
 
-    		if ($$self.$$.dirty & /*$settings, $width*/ 5) {
-    			$$invalidate(4, borderRadius = $settings.frame === "round" ? `${$width}px` : "40px");
+    		if ($$self.$$.dirty & /*$settings, $width*/ 40) {
+    			$$invalidate(7, borderRadius = $settings.frame === "round" ? `${$width}px` : "40px");
     		}
     	};
 
     	return [
+    		start,
+    		pause,
+    		resume,
     		$width,
     		$size,
     		$settings,
@@ -31478,8 +31899,6 @@ var app = (function () {
     		$settingsOpen,
     		makeSmaller,
     		makeBigger,
-    		handleKeyDown,
-    		handleKeyUp,
     		$height,
     		$stayOnTop
     	];
@@ -31488,7 +31907,7 @@ var app = (function () {
     class App extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance, create_fragment, safe_not_equal, {});
+    		init(this, options, instance, create_fragment, safe_not_equal, { start: 0, pause: 1, resume: 2 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -31496,6 +31915,30 @@ var app = (function () {
     			options,
     			id: create_fragment.name
     		});
+    	}
+
+    	get start() {
+    		return this.$$.ctx[0];
+    	}
+
+    	set start(value) {
+    		throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get pause() {
+    		return this.$$.ctx[1];
+    	}
+
+    	set pause(value) {
+    		throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get resume() {
+    		return this.$$.ctx[2];
+    	}
+
+    	set resume(value) {
+    		throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
 

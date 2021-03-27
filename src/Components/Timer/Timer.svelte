@@ -6,16 +6,15 @@
         duration,
         runState,
         focused,
-        pause,
-        resume,
         tempDuration,
-        start
     } from "../../stores/timerState";
     import {color, size, settings, showFavorites, intervalMode} from "../../stores/appState";
     import PlayPauseControl from "../Controls/PlayPauseControl.svelte";
     import Favorites from "./Favorites/Favorites.svelte";
     import IntervalModeIndicator from "./IntervalMode/IntervalModeIndicator.svelte";
     import IntervalNumberIndicator from "./IntervalMode/IntervalNumberIndicator.svelte";
+
+    export let start, pause, resume;
 
     // thickness of the line
     $: thickness = $size / 20;
@@ -67,7 +66,7 @@
     {/if}
 
     <TimeIndicatorInput/>
-    <PlayPauseControl/>
+    <PlayPauseControl  start={start} pause={pause} resume={resume}/>
 </div>
 
 

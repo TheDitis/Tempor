@@ -1,4 +1,5 @@
 import {readable, derived, writable, get} from "svelte/store";
+import {intervalMode} from "./appState";
 
 export const focused = writable(true);
 
@@ -44,7 +45,7 @@ export const remainingTime = derived(
 
 /// USED IN INTERVAL MODE
 // this is used for the temporary durations in interval mode
-export const intervalDurations = writable([0, 0])
+export const intervalDurations = writable([25000, 5000])
 
 // the index of the current interval duration
 export const intervalIndex = writable(0)
@@ -52,7 +53,16 @@ export const intervalIndex = writable(0)
 
 // sets the duration, start time, and run-state of the timer
 export const start = () => {
-    const tempDur = get(tempDuration);
+    const isIntervalMode = get(intervalMode);
+    let tempDur;
+    if (!isIntervalMode) {
+        tempDur = get(tempDuration);
+    }
+    else {
+        const tempIntervalDurations = get(intervalDurations);
+        const intervalInd = get(intervalIndex);
+        tempDur = tempIntervalDurations[intervalInd];
+    }
     if (tempDur !== 0) {
         startTime.set(Date.now())
         duration.set(tempDur);

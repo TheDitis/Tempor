@@ -15,7 +15,8 @@
         position: absolute;
         bottom: calc(var(--size) * 0.43 * 1px);
         display: flex;
-        width: calc(var(--size) * 0.67 * 1px);
+        width: calc(var(--size) * 0.65 * 1px);
+        filter: blur(calc(var(--textBlur) * 1px));
     }
     .intervalItem {
         width: 100%;

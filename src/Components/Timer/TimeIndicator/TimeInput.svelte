@@ -1,8 +1,8 @@
 <script>
     import {onMount, afterUpdate} from "svelte";
     import {formatTime, formatTimeMs} from "../../../utils/utils";
-    import {tempDuration, runState, focused} from "../../../stores/timerState";
-    import {currentFavInd, settings} from "../../../stores/appState";
+    import {tempDuration, runState, focused, intervalDurations, intervalIndex} from "../../../stores/timerState";
+    import {currentFavInd, settings, intervalMode} from "../../../stores/appState";
     import {Duration} from "luxon";
     import _ from "lodash";
 
@@ -23,10 +23,10 @@
         // input.focus();
     })
 
-    afterUpdate(() => {
-        setTimeout(input.focus, 200)
-        console.log("update called")
-    })
+    // afterUpdate(() => {
+    //     setTimeout(input.focus, 200)
+    //     console.log("update called")
+    // })
 
     const onFavUpdate = (deps) => {
         if ($tempDuration !== 0 && $runState !== "running") {
@@ -55,6 +55,15 @@
         }
     }
 
+
+    const updateIntervalTime = () => {
+        const duration = Duration.fromObject({hours, minutes, seconds});
+        const tempIntervalDurations = $intervalDurations;
+        tempIntervalDurations[$intervalIndex] = duration.toMillis();
+        console.log(tempIntervalDurations)
+        intervalDurations.set(tempIntervalDurations);
+    }
+
     const numsStrToHrsMinsSecs = () => {
         /// create 6 digit string, split into pairs (hr, min, sec) and parse each into integers
         let sixNums = _.padStart(numbers, 6, "0");
@@ -79,7 +88,12 @@
 
         numsStrToHrsMinsSecs();
 
-        updateTempDuration();
+        if (!$intervalMode) {
+            updateTempDuration();
+        }
+        else {
+            updateIntervalTime();
+        }
     }
 </script>
 
