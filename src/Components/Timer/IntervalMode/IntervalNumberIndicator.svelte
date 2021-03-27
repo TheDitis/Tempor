@@ -1,5 +1,6 @@
 <script>
     import {intervalDurations, intervalIndex, time, runState} from "../../../stores/timerState";
+    import {fade} from "svelte/transition";
 
     const blinkRate = 130;
     let opacity
@@ -17,8 +18,10 @@
 </script>
 
 
-<div class="IntervalNumberIndicator"
-     style="--blink: {opacity};"
+<div
+    class="IntervalNumberIndicator"
+    transition:fade={{duration: 100}}
+    style="--blink: {opacity};"
 >
     {#each $intervalDurations as duration, ind}
         <div class="intervalItem" class:current={$intervalIndex === ind}></div>
@@ -40,6 +43,7 @@
         margin: 3px;
         background: var(--color);
         opacity: 0.2;
+        transition-duration: 500ms;
     }
     .current {
         /*opacity: 1;*/

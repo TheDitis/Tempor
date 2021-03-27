@@ -1,11 +1,20 @@
 <script>
+    import {tick} from "svelte";
     import TomatoIcon from "../Icons/TomatoIcon.svelte";
-    import {size} from "../../stores/appState";
+    // import {} from "../../stores/appState";
     // import {faSyncAlt} from "@fortawesome/free-solid-svg-icons";
-    import {intervalMode} from "../../stores/appState";
+    import {intervalMode, size} from "../../stores/appState";
+    import {focused} from "../../stores/timerState";
+
+    const toggleIntervalMode = async () => {
+        focused.set(false)
+        intervalMode.set(!$intervalMode);
+        await tick();
+        focused.set(true)
+    }
 </script>
 
-<button class="IntervalModeButton" on:click={() => intervalMode.set(!$intervalMode)}>
+<button class="IntervalModeButton" on:click={toggleIntervalMode}>
     <TomatoIcon size={$size / 13} color="white"/>
 </button>
 

@@ -1,10 +1,22 @@
 <script>
+    import {fade} from "svelte/transition";
     import TomatoIcon from "../../Icons/TomatoIcon.svelte";
-    import {color, intervalMode} from "../../../stores/appState";
+    import {color, intervalMode, size} from "../../../stores/appState";
+    import {focused} from "../../../stores/timerState";
+    import {tick} from "svelte";
+
+    const turnOff = async () => {
+        focused.set(false);
+        intervalMode.set(false);
+        await tick();
+        focused.set(true);
+    }
+
 </script>
 
-<div class="IntervalModeIndicator" on:click={() => intervalMode.set(false)}>
-    <TomatoIcon size={30} color={$color.hex()}/>
+
+<div class="IntervalModeIndicator" transition:fade={{duration: 100}} on:click={turnOff}>
+    <TomatoIcon size={$size / 10} color={$color.hex()}/>
 </div>
 
 

@@ -483,6 +483,111 @@ var app = (function () {
             }
         };
     }
+    function create_bidirectional_transition(node, fn, params, intro) {
+        let config = fn(node, params);
+        let t = intro ? 0 : 1;
+        let running_program = null;
+        let pending_program = null;
+        let animation_name = null;
+        function clear_animation() {
+            if (animation_name)
+                delete_rule(node, animation_name);
+        }
+        function init(program, duration) {
+            const d = program.b - t;
+            duration *= Math.abs(d);
+            return {
+                a: t,
+                b: program.b,
+                d,
+                duration,
+                start: program.start,
+                end: program.start + duration,
+                group: program.group
+            };
+        }
+        function go(b) {
+            const { delay = 0, duration = 300, easing = identity, tick = noop, css } = config || null_transition;
+            const program = {
+                start: now$1() + delay,
+                b
+            };
+            if (!b) {
+                // @ts-ignore todo: improve typings
+                program.group = outros;
+                outros.r += 1;
+            }
+            if (running_program || pending_program) {
+                pending_program = program;
+            }
+            else {
+                // if this is an intro, and there's a delay, we need to do
+                // an initial tick and/or apply CSS animation immediately
+                if (css) {
+                    clear_animation();
+                    animation_name = create_rule(node, t, b, duration, delay, easing, css);
+                }
+                if (b)
+                    tick(0, 1);
+                running_program = init(program, duration);
+                add_render_callback(() => dispatch(node, b, 'start'));
+                loop(now => {
+                    if (pending_program && now > pending_program.start) {
+                        running_program = init(pending_program, duration);
+                        pending_program = null;
+                        dispatch(node, running_program.b, 'start');
+                        if (css) {
+                            clear_animation();
+                            animation_name = create_rule(node, t, running_program.b, running_program.duration, 0, easing, config.css);
+                        }
+                    }
+                    if (running_program) {
+                        if (now >= running_program.end) {
+                            tick(t = running_program.b, 1 - t);
+                            dispatch(node, running_program.b, 'end');
+                            if (!pending_program) {
+                                // we're done
+                                if (running_program.b) {
+                                    // intro — we can tidy up immediately
+                                    clear_animation();
+                                }
+                                else {
+                                    // outro — needs to be coordinated
+                                    if (!--running_program.group.r)
+                                        run_all(running_program.group.c);
+                                }
+                            }
+                            running_program = null;
+                        }
+                        else if (now >= running_program.start) {
+                            const p = now - running_program.start;
+                            t = running_program.a + running_program.d * easing(p / running_program.duration);
+                            tick(t, 1 - t);
+                        }
+                    }
+                    return !!(running_program || pending_program);
+                });
+            }
+        }
+        return {
+            run(b) {
+                if (is_function(config)) {
+                    wait().then(() => {
+                        // @ts-ignore
+                        config = config();
+                        go(b);
+                    });
+                }
+                else {
+                    go(b);
+                }
+            },
+            end() {
+                clear_animation();
+                running_program = pending_program = null;
+            }
+        };
+    }
 
     const globals = (typeof window !== 'undefined'
         ? window
@@ -29223,12 +29328,16 @@ var app = (function () {
     function create_fragment$c(ctx) {
     	let div;
     	let tomatoicon;
+    	let div_transition;
     	let current;
     	let mounted;
     	let dispose;
 
     	tomatoicon = new TomatoIcon({
-    			props: { size: 30, color: /*$color*/ ctx[0].hex() },
+    			props: {
+    				size: /*$size*/ ctx[0] / 10,
+    				color: /*$color*/ ctx[1].hex()
+    			},
     			$$inline: true
     		});
 
@@ -29237,7 +29346,7 @@ var app = (function () {
     			div = element("div");
     			create_component(tomatoicon.$$.fragment);
     			attr_dev(div, "class", "IntervalModeIndicator svelte-dnmlwm");
-    			add_location(div, file$b, 5, 0, 151);
+    			add_location(div, file$b, 17, 0, 455);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -29248,27 +29357,37 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(div, "click", /*click_handler*/ ctx[1], false, false, false);
+    				dispose = listen_dev(div, "click", /*turnOff*/ ctx[2], false, false, false);
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
     			const tomatoicon_changes = {};
-    			if (dirty & /*$color*/ 1) tomatoicon_changes.color = /*$color*/ ctx[0].hex();
+    			if (dirty & /*$size*/ 1) tomatoicon_changes.size = /*$size*/ ctx[0] / 10;
+    			if (dirty & /*$color*/ 2) tomatoicon_changes.color = /*$color*/ ctx[1].hex();
     			tomatoicon.$set(tomatoicon_changes);
     		},
     		i: function intro(local) {
     			if (current) return;
     			transition_in(tomatoicon.$$.fragment, local);
+
+    			add_render_callback(() => {
+    				if (!div_transition) div_transition = create_bidirectional_transition(div, fade, { duration: 100 }, true);
+    				div_transition.run(1);
+    			});
+
     			current = true;
     		},
     		o: function outro(local) {
     			transition_out(tomatoicon.$$.fragment, local);
+    			if (!div_transition) div_transition = create_bidirectional_transition(div, fade, { duration: 100 }, false);
+    			div_transition.run(0);
     			current = false;
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
     			destroy_component(tomatoicon);
+    			if (detaching && div_transition) div_transition.end();
     			mounted = false;
     			dispose();
     		}
@@ -29286,20 +29405,42 @@ var app = (function () {
     }
 
     function instance$c($$self, $$props, $$invalidate) {
+    	let $size;
     	let $color;
+    	validate_store(size, "size");
+    	component_subscribe($$self, size, $$value => $$invalidate(0, $size = $$value));
     	validate_store(color, "color");
-    	component_subscribe($$self, color, $$value => $$invalidate(0, $color = $$value));
+    	component_subscribe($$self, color, $$value => $$invalidate(1, $color = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("IntervalModeIndicator", slots, []);
+
+    	const turnOff = async () => {
+    		focused.set(false);
+    		intervalMode.set(false);
+    		await tick();
+    		focused.set(true);
+    	};
+
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<IntervalModeIndicator> was created with unknown prop '${key}'`);
     	});
 
-    	const click_handler = () => intervalMode.set(false);
-    	$$self.$capture_state = () => ({ TomatoIcon, color, intervalMode, $color });
-    	return [$color, click_handler];
+    	$$self.$capture_state = () => ({
+    		fade,
+    		TomatoIcon,
+    		color,
+    		intervalMode,
+    		size,
+    		focused,
+    		tick,
+    		turnOff,
+    		$size,
+    		$color
+    	});
+
+    	return [$size, $color, turnOff];
     }
 
     class IntervalModeIndicator extends SvelteComponentDev {
@@ -29319,7 +29460,6 @@ var app = (function () {
     /* src\Components\Timer\IntervalMode\IntervalNumberIndicator.svelte generated by Svelte v3.35.0 */
 
     const { console: console_1$2 } = globals;
-
     const file$a = "src\\Components\\Timer\\IntervalMode\\IntervalNumberIndicator.svelte";
 
     function get_each_context(ctx, list, i) {
@@ -29329,16 +29469,16 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (23:4) {#each $intervalDurations as duration, ind}
+    // (26:4) {#each $intervalDurations as duration, ind}
     function create_each_block(ctx) {
     	let div;
 
     	const block = {
     		c: function create() {
     			div = element("div");
-    			attr_dev(div, "class", "intervalItem svelte-1mbt1yu");
+    			attr_dev(div, "class", "intervalItem svelte-4rxad0");
     			toggle_class(div, "current", /*$intervalIndex*/ ctx[2] === /*ind*/ ctx[7]);
-    			add_location(div, file$a, 23, 8, 683);
+    			add_location(div, file$a, 26, 8, 771);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -29357,7 +29497,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(23:4) {#each $intervalDurations as duration, ind}",
+    		source: "(26:4) {#each $intervalDurations as duration, ind}",
     		ctx
     	});
 
@@ -29366,6 +29506,8 @@ var app = (function () {
 
     function create_fragment$b(ctx) {
     	let div;
+    	let div_transition;
+    	let current;
     	let each_value = /*$intervalDurations*/ ctx[1];
     	validate_each_argument(each_value);
     	let each_blocks = [];
@@ -29382,9 +29524,9 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(div, "class", "IntervalNumberIndicator svelte-1mbt1yu");
+    			attr_dev(div, "class", "IntervalNumberIndicator svelte-4rxad0");
     			set_style(div, "--blink", /*opacity*/ ctx[0]);
-    			add_location(div, file$a, 19, 0, 551);
+    			add_location(div, file$a, 20, 0, 596);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -29395,6 +29537,8 @@ var app = (function () {
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].m(div, null);
     			}
+
+    			current = true;
     		},
     		p: function update(ctx, [dirty]) {
     			if (dirty & /*$intervalIndex, $intervalDurations*/ 6) {
@@ -29421,15 +29565,29 @@ var app = (function () {
     				each_blocks.length = each_value.length;
     			}
 
-    			if (dirty & /*opacity*/ 1) {
+    			if (!current || dirty & /*opacity*/ 1) {
     				set_style(div, "--blink", /*opacity*/ ctx[0]);
     			}
     		},
-    		i: noop,
-    		o: noop,
+    		i: function intro(local) {
+    			if (current) return;
+
+    			add_render_callback(() => {
+    				if (!div_transition) div_transition = create_bidirectional_transition(div, fade, { duration: 100 }, true);
+    				div_transition.run(1);
+    			});
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			if (!div_transition) div_transition = create_bidirectional_transition(div, fade, { duration: 100 }, false);
+    			div_transition.run(0);
+    			current = false;
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
     			destroy_each(each_blocks, detaching);
+    			if (detaching && div_transition) div_transition.end();
     		}
     	};
 
@@ -29473,6 +29631,7 @@ var app = (function () {
     		intervalIndex,
     		time,
     		runState,
+    		fade,
     		blinkRate,
     		opacity,
     		$runState,
@@ -31085,7 +31244,6 @@ var app = (function () {
     }
 
     /* src\Components\Controls\IntervalModeButton.svelte generated by Svelte v3.35.0 */
-
     const file$1 = "src\\Components\\Controls\\IntervalModeButton.svelte";
 
     function create_fragment$2(ctx) {
@@ -31097,7 +31255,7 @@ var app = (function () {
 
     	tomatoicon = new TomatoIcon({
     			props: {
-    				size: /*$size*/ ctx[1] / 13,
+    				size: /*$size*/ ctx[0] / 13,
     				color: "white"
     			},
     			$$inline: true
@@ -31108,7 +31266,7 @@ var app = (function () {
     			button = element("button");
     			create_component(tomatoicon.$$.fragment);
     			attr_dev(button, "class", "IntervalModeButton svelte-1sc5q0");
-    			add_location(button, file$1, 7, 0, 256);
+    			add_location(button, file$1, 16, 0, 525);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -31119,13 +31277,13 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[2], false, false, false);
+    				dispose = listen_dev(button, "click", /*toggleIntervalMode*/ ctx[1], false, false, false);
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
     			const tomatoicon_changes = {};
-    			if (dirty & /*$size*/ 2) tomatoicon_changes.size = /*$size*/ ctx[1] / 13;
+    			if (dirty & /*$size*/ 1) tomatoicon_changes.size = /*$size*/ ctx[0] / 13;
     			tomatoicon.$set(tomatoicon_changes);
     		},
     		i: function intro(local) {
@@ -31160,28 +31318,37 @@ var app = (function () {
     	let $intervalMode;
     	let $size;
     	validate_store(intervalMode, "intervalMode");
-    	component_subscribe($$self, intervalMode, $$value => $$invalidate(0, $intervalMode = $$value));
+    	component_subscribe($$self, intervalMode, $$value => $$invalidate(2, $intervalMode = $$value));
     	validate_store(size, "size");
-    	component_subscribe($$self, size, $$value => $$invalidate(1, $size = $$value));
+    	component_subscribe($$self, size, $$value => $$invalidate(0, $size = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("IntervalModeButton", slots, []);
+
+    	const toggleIntervalMode = async () => {
+    		focused.set(false);
+    		intervalMode.set(!$intervalMode);
+    		await tick();
+    		focused.set(true);
+    	};
+
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<IntervalModeButton> was created with unknown prop '${key}'`);
     	});
 
-    	const click_handler = () => intervalMode.set(!$intervalMode);
-
     	$$self.$capture_state = () => ({
+    		tick,
     		TomatoIcon,
-    		size,
     		intervalMode,
+    		size,
+    		focused,
+    		toggleIntervalMode,
     		$intervalMode,
     		$size
     	});
 
-    	return [$intervalMode, $size, click_handler];
+    	return [$size, toggleIntervalMode];
     }
 
     class IntervalModeButton extends SvelteComponentDev {
@@ -31379,8 +31546,9 @@ var app = (function () {
     					const direction = key === "ArrowLeft" ? -1 : 1;
 
     					intervalIndex.update(ind => {
-    						let newInd = ind + direction % $intervalDurations.length;
+    						let newInd = (ind + direction) % $intervalDurations.length;
     						if (newInd < 0) newInd = $intervalDurations.length - 1;
+    						console.log(newInd);
     						return newInd;
     					});
 
@@ -31389,7 +31557,7 @@ var app = (function () {
     				}
     				break;
     			case "ArrowUp":
-    				if ($intervalMode && $intervalDurations.length <= 5 && $runState !== "running") {
+    				if ($intervalMode && $intervalDurations.length < 5 && $runState !== "running") {
     					focused.set(false);
     					intervalDurations.set([...$intervalDurations, 0]);
     					intervalIndex.set($intervalDurations.length - 1);

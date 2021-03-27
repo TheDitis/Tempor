@@ -155,8 +155,9 @@
                     focused.set(false);
                     const direction = key === "ArrowLeft" ? -1 : 1;
                     intervalIndex.update(ind => {
-                        let newInd = ind + direction % ($intervalDurations.length);
+                        let newInd = (ind + direction) % $intervalDurations.length;
                         if (newInd < 0) newInd = $intervalDurations.length - 1;
+                        console.log(newInd)
                         return newInd
                     })
                     await tick();
@@ -165,7 +166,7 @@
                 break;
             // adding/subtracting cycles
             case "ArrowUp":
-                if ($intervalMode && $intervalDurations.length <= 5 && $runState !== "running") {
+                if ($intervalMode && $intervalDurations.length < 5 && $runState !== "running") {
                     focused.set(false);
                     intervalDurations.set([...$intervalDurations, 0])
                     intervalIndex.set($intervalDurations.length - 1)
