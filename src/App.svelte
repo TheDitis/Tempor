@@ -18,12 +18,12 @@
 		currentFavInd,
 		loadSettings
 	} from "./stores/appState"
-	import {focused, pause, resume, runState, start, tempDuration} from "./stores/timerState";
-	import ResizeControl from "./Components/ResizeControl/ResizeControl.svelte";
+	import {focused, pause, resume, runState, start, tempDuration, duration} from "./stores/timerState";
+	import ResizeControl from "./Components/Controls/ResizeControl.svelte";
 	import OpenSettingsButton from "./Components/Settings/OpenSettingsButton.svelte";
 	import Settings from "./Components/Settings/Settings.svelte";
 	import ThemeCycleButton from "./Components/Settings/ThemeCycleButton.svelte";
-	import IntervalModeButton from "./Components/Settings/IntervalModeButton.svelte";
+	import IntervalModeButton from "./Components/Controls/IntervalModeButton.svelte";
 
 
 	onMount(() => {
@@ -89,7 +89,7 @@
 	const loadFavorite = (key) => {
 		const favInd = favKeyMap.load[key];
 		const setting = $settings.favorites[favInd]
-		if (!!setting) {
+		if (!!setting && setting !== $tempDuration) {
 			if ($runState === "running") {
 				pause();
 			}
@@ -107,8 +107,8 @@
 			/// MAIN PAUSE/PLAY CONTROLS
 			case " ":
 				if ($runState === "running") pause();
+				else if (($runState === "finished" || ($currentFavInd !== null && $tempDuration !== $duration)) && $tempDuration) start();
 				else if ($runState === "paused") resume();
-				else if ($runState === "finished" && $tempDuration) start();
 				break;
 			case "Enter":
 				if ($focused && $tempDuration) {

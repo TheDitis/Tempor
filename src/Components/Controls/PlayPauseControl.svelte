@@ -35,7 +35,9 @@
         border: none;
         font-size: calc(var(--size) * 0.10 * 1px);
         color: var(--color);
-        filter: blur(calc(var(--textBlur) * 1px))
+        filter: blur(calc(var(--textBlur) * 1px));
+        /*transition-property: filter;*/
+        transition-duration: 200ms;
     }
     .PlayPauseButton:focus {
         border: none;
@@ -43,6 +45,7 @@
     }
     .PlayPauseButton:hover {
         transform: scale(1.05);
+        /*filter: hue-rotate(-35deg);*/
     }
 </style>
 

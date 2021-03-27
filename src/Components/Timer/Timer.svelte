@@ -12,7 +12,7 @@
         start
     } from "../../stores/timerState";
     import {color, size, settings, showFavorites} from "../../stores/appState";
-    import PlayPauseControl from "./PlayPauseControl.svelte";
+    import PlayPauseControl from "../Controls/PlayPauseControl.svelte";
     import Favorites from "./Favorites/Favorites.svelte";
 
     // thickness of the line
