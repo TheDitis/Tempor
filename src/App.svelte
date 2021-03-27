@@ -65,7 +65,7 @@
 			duration.set(tempDur);
 			focused.set(false);
 			runState.set("running");
-			const sound = new Audio("file://" + __dirname + "/sounds/startSound.wav");
+			const sound = new Audio("file://" + __dirname + "/sounds/sound (1).wav");
 			sound.play();
 		}
 	}

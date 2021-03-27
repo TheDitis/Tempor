@@ -1,14 +1,22 @@
 <script>
-    // import {onMount}
     import {settingsOpen, settingsHeight, settings, hue, color, blur} from "../../stores/appState";
     import SettingsSlider from "./SettingsSlider.svelte";
     import SettingsOptionButton from "./SettingsOptionButton.svelte";
     import {faLayerGroup} from "@fortawesome/free-solid-svg-icons";
     import SaveButton from "./SaveButton.svelte";
+    import {onMount} from "svelte";
+
+    let settingsRef;
+
+
+    onMount(() => {
+        settingsHeight.set(settingsRef.clientHeight)
+    })
 </script>
 
 
 <div
+        bind:this={settingsRef}
     class="Settings"
     style="
         --settingsHeight: {$settingsHeight};
@@ -20,7 +28,9 @@
     <div class="buttonSection">
         <SettingsOptionButton icon={faLayerGroup} option="alwaysOnTop" label="Stay on top"/>
     </div>
-    <SaveButton/>
+    <div class="bottomRow">
+        <SaveButton/>
+    </div>
 </div>
 
 
@@ -28,13 +38,12 @@
     .Settings {
         position: relative;
         width: calc(var(--width) * 1px);
-        height: calc(var(--settingsHeight) * 1px);
+        /*height: calc(var(--settingsHeight) * 1px);*/
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         padding-bottom: 20px;
-        /*border: 2px solid red;*/
         box-sizing: border-box;
         padding-top: 0;
         /*box-shadow: 15px 0 15px -15px var(--color);*/
@@ -45,5 +54,13 @@
         width: 100%;
         display: flex;
         justify-content: space-evenly;
+    }
+
+    .bottomRow {
+        margin-top: 30px;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
     }
 </style>

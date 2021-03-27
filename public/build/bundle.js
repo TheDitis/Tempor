@@ -1,5 +1,5 @@
 
-(function(l, r) { if (l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (window.location.host || 'localhost').split(':')[0] + ':35730/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(window.document);
+(function(l, r) { if (l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (window.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(window.document);
 var app = (function () {
     'use strict';
 
@@ -2959,10 +2959,12 @@ var app = (function () {
 
     const maxSize = readable(Math.min(window.screen.height, window.screen.width));
 
-    const settingsHeight = derived([size], $size => {
-        if ($size >= 200) return Math.round($size / 1.2);
-        else return Math.round(150)
-    });
+    // export const settingsHeight = derived([size], $size => {
+    //     if ($size >= 200) return Math.round($size / 1.2);
+    //     else return Math.round(150)
+    // });
+    const settingsHeight = writable(0);
+
     const settingsOpen = writable(false);
 
     const width = derived(
@@ -3067,7 +3069,7 @@ var app = (function () {
         // if not in interval mode
         if (!get_store_value(intervalMode)) {
             runState.set("finished");
-            const sound = new Audio("file://" + __dirname + "/sounds/endSound.wav");
+            const sound = new Audio("file://" + __dirname + "/sounds/sound (1).wav");
             sound.play();
             focused.set(true);
         }
@@ -30560,7 +30562,7 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			create_component(fa.$$.fragment);
-    			attr_dev(button, "class", "SaveButton svelte-1kxc6nl");
+    			attr_dev(button, "class", "SaveButton svelte-10w5g5");
     			add_location(button, file$4, 8, 0, 180);
     		},
     		l: function claim(nodes) {
@@ -30636,7 +30638,7 @@ var app = (function () {
     const file$3 = "src\\Components\\Settings\\Settings.svelte";
 
     function create_fragment$4(ctx) {
-    	let div1;
+    	let div2;
     	let settingsslider0;
     	let updating_value;
     	let t0;
@@ -30646,17 +30648,18 @@ var app = (function () {
     	let div0;
     	let settingsoptionbutton;
     	let t2;
+    	let div1;
     	let savebutton;
     	let current;
 
     	function settingsslider0_value_binding(value) {
-    		/*settingsslider0_value_binding*/ ctx[4](value);
+    		/*settingsslider0_value_binding*/ ctx[5](value);
     	}
 
     	let settingsslider0_props = { label: "Color", min: "0", max: "360" };
 
-    	if (/*$hue*/ ctx[2] !== void 0) {
-    		settingsslider0_props.value = /*$hue*/ ctx[2];
+    	if (/*$hue*/ ctx[3] !== void 0) {
+    		settingsslider0_props.value = /*$hue*/ ctx[3];
     	}
 
     	settingsslider0 = new SettingsSlider({
@@ -30667,13 +30670,13 @@ var app = (function () {
     	binding_callbacks.push(() => bind(settingsslider0, "value", settingsslider0_value_binding));
 
     	function settingsslider1_value_binding(value) {
-    		/*settingsslider1_value_binding*/ ctx[5](value);
+    		/*settingsslider1_value_binding*/ ctx[6](value);
     	}
 
     	let settingsslider1_props = { label: "Blur", min: "0", max: "10" };
 
-    	if (/*$blur*/ ctx[3] !== void 0) {
-    		settingsslider1_props.value = /*$blur*/ ctx[3];
+    	if (/*$blur*/ ctx[4] !== void 0) {
+    		settingsslider1_props.value = /*$blur*/ ctx[4];
     	}
 
     	settingsslider1 = new SettingsSlider({
@@ -30696,7 +30699,7 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
-    			div1 = element("div");
+    			div2 = element("div");
     			create_component(settingsslider0.$$.fragment);
     			t0 = space();
     			create_component(settingsslider1.$$.fragment);
@@ -30704,55 +30707,60 @@ var app = (function () {
     			div0 = element("div");
     			create_component(settingsoptionbutton.$$.fragment);
     			t2 = space();
+    			div1 = element("div");
     			create_component(savebutton.$$.fragment);
-    			attr_dev(div0, "class", "buttonSection svelte-u8ou9i");
-    			add_location(div0, file$3, 19, 4, 701);
-    			attr_dev(div1, "class", "Settings svelte-u8ou9i");
-    			set_style(div1, "--settingsHeight", /*$settingsHeight*/ ctx[0]);
-    			set_style(div1, "--color2", /*$color*/ ctx[1].alpha(0.5).hsl().string() + "\r\n    ");
-    			add_location(div1, file$3, 10, 0, 401);
+    			attr_dev(div0, "class", "buttonSection svelte-1fctsxt");
+    			add_location(div0, file$3, 27, 4, 857);
+    			attr_dev(div1, "class", "bottomRow svelte-1fctsxt");
+    			add_location(div1, file$3, 30, 4, 996);
+    			attr_dev(div2, "class", "Settings svelte-1fctsxt");
+    			set_style(div2, "--settingsHeight", /*$settingsHeight*/ ctx[1]);
+    			set_style(div2, "--color2", /*$color*/ ctx[2].alpha(0.5).hsl().string() + "\r\n    ");
+    			add_location(div2, file$3, 17, 0, 524);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div1, anchor);
-    			mount_component(settingsslider0, div1, null);
-    			append_dev(div1, t0);
-    			mount_component(settingsslider1, div1, null);
-    			append_dev(div1, t1);
-    			append_dev(div1, div0);
+    			insert_dev(target, div2, anchor);
+    			mount_component(settingsslider0, div2, null);
+    			append_dev(div2, t0);
+    			mount_component(settingsslider1, div2, null);
+    			append_dev(div2, t1);
+    			append_dev(div2, div0);
     			mount_component(settingsoptionbutton, div0, null);
-    			append_dev(div1, t2);
+    			append_dev(div2, t2);
+    			append_dev(div2, div1);
     			mount_component(savebutton, div1, null);
+    			/*div2_binding*/ ctx[7](div2);
     			current = true;
     		},
     		p: function update(ctx, [dirty]) {
     			const settingsslider0_changes = {};
 
-    			if (!updating_value && dirty & /*$hue*/ 4) {
+    			if (!updating_value && dirty & /*$hue*/ 8) {
     				updating_value = true;
-    				settingsslider0_changes.value = /*$hue*/ ctx[2];
+    				settingsslider0_changes.value = /*$hue*/ ctx[3];
     				add_flush_callback(() => updating_value = false);
     			}
 
     			settingsslider0.$set(settingsslider0_changes);
     			const settingsslider1_changes = {};
 
-    			if (!updating_value_1 && dirty & /*$blur*/ 8) {
+    			if (!updating_value_1 && dirty & /*$blur*/ 16) {
     				updating_value_1 = true;
-    				settingsslider1_changes.value = /*$blur*/ ctx[3];
+    				settingsslider1_changes.value = /*$blur*/ ctx[4];
     				add_flush_callback(() => updating_value_1 = false);
     			}
 
     			settingsslider1.$set(settingsslider1_changes);
 
-    			if (!current || dirty & /*$settingsHeight*/ 1) {
-    				set_style(div1, "--settingsHeight", /*$settingsHeight*/ ctx[0]);
+    			if (!current || dirty & /*$settingsHeight*/ 2) {
+    				set_style(div2, "--settingsHeight", /*$settingsHeight*/ ctx[1]);
     			}
 
-    			if (!current || dirty & /*$color*/ 2) {
-    				set_style(div1, "--color2", /*$color*/ ctx[1].alpha(0.5).hsl().string() + "\r\n    ");
+    			if (!current || dirty & /*$color*/ 4) {
+    				set_style(div2, "--color2", /*$color*/ ctx[2].alpha(0.5).hsl().string() + "\r\n    ");
     			}
     		},
     		i: function intro(local) {
@@ -30771,11 +30779,12 @@ var app = (function () {
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div1);
+    			if (detaching) detach_dev(div2);
     			destroy_component(settingsslider0);
     			destroy_component(settingsslider1);
     			destroy_component(settingsoptionbutton);
     			destroy_component(savebutton);
+    			/*div2_binding*/ ctx[7](null);
     		}
     	};
 
@@ -30796,15 +30805,21 @@ var app = (function () {
     	let $hue;
     	let $blur;
     	validate_store(settingsHeight, "settingsHeight");
-    	component_subscribe($$self, settingsHeight, $$value => $$invalidate(0, $settingsHeight = $$value));
+    	component_subscribe($$self, settingsHeight, $$value => $$invalidate(1, $settingsHeight = $$value));
     	validate_store(color, "color");
-    	component_subscribe($$self, color, $$value => $$invalidate(1, $color = $$value));
+    	component_subscribe($$self, color, $$value => $$invalidate(2, $color = $$value));
     	validate_store(hue, "hue");
-    	component_subscribe($$self, hue, $$value => $$invalidate(2, $hue = $$value));
+    	component_subscribe($$self, hue, $$value => $$invalidate(3, $hue = $$value));
     	validate_store(blur, "blur");
-    	component_subscribe($$self, blur, $$value => $$invalidate(3, $blur = $$value));
+    	component_subscribe($$self, blur, $$value => $$invalidate(4, $blur = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("Settings", slots, []);
+    	let settingsRef;
+
+    	onMount(() => {
+    		settingsHeight.set(settingsRef.clientHeight);
+    	});
+
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
@@ -30821,6 +30836,13 @@ var app = (function () {
     		blur.set($blur);
     	}
 
+    	function div2_binding($$value) {
+    		binding_callbacks[$$value ? "unshift" : "push"](() => {
+    			settingsRef = $$value;
+    			$$invalidate(0, settingsRef);
+    		});
+    	}
+
     	$$self.$capture_state = () => ({
     		settingsOpen,
     		settingsHeight,
@@ -30832,19 +30854,31 @@ var app = (function () {
     		SettingsOptionButton,
     		faLayerGroup,
     		SaveButton,
+    		onMount,
+    		settingsRef,
     		$settingsHeight,
     		$color,
     		$hue,
     		$blur
     	});
 
+    	$$self.$inject_state = $$props => {
+    		if ("settingsRef" in $$props) $$invalidate(0, settingsRef = $$props.settingsRef);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
     	return [
+    		settingsRef,
     		$settingsHeight,
     		$color,
     		$hue,
     		$blur,
     		settingsslider0_value_binding,
-    		settingsslider1_value_binding
+    		settingsslider1_value_binding,
+    		div2_binding
     	];
     }
 
@@ -31546,9 +31580,9 @@ var app = (function () {
     			t6 = space();
     			create_component(mastercontrols.$$.fragment);
     			attr_dev(div0, "class", "draggableArea svelte-18abru");
-    			add_location(div0, file, 124, 1, 3033);
+    			add_location(div0, file, 124, 1, 3032);
     			attr_dev(div1, "class", "timerSection svelte-18abru");
-    			add_location(div1, file, 126, 1, 3069);
+    			add_location(div1, file, 126, 1, 3068);
     			set_style(main, "--size", /*$size*/ ctx[4]);
     			set_style(main, "--width", /*$width*/ ctx[3]);
     			set_style(main, "--color", /*$color*/ ctx[8].hsl().string());
@@ -31561,7 +31595,7 @@ var app = (function () {
     			set_style(main, "--appBg", /*appBg*/ ctx[6]);
     			set_style(main, "--frameRadius", /*borderRadius*/ ctx[7]);
     			attr_dev(main, "class", "svelte-18abru");
-    			add_location(main, file, 109, 0, 2636);
+    			add_location(main, file, 109, 0, 2635);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -31779,7 +31813,7 @@ var app = (function () {
     			duration.set(tempDur);
     			focused.set(false);
     			runState.set("running");
-    			const sound = new Audio("file://" + __dirname + "/sounds/startSound.wav");
+    			const sound = new Audio("file://" + __dirname + "/sounds/sound (1).wav");
     			sound.play();
     		}
     	};

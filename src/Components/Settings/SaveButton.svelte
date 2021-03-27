@@ -33,7 +33,7 @@
         box-shadow: none;
         color: var(--color);
 
-        position: absolute;
+        /*position: absolute;*/
         /*right: 8px;*/
         bottom: 8px;
 

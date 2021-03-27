@@ -69,7 +69,7 @@ export const start = () => {
         duration.set(tempDur);
         focused.set(false);
         runState.set("running");
-        const sound = new Audio("file://" + __dirname + "/sounds/startSound.wav");
+        const sound = new Audio("file://" + __dirname + "/sounds/sound (2).wav");
         sound.play();
     }
 }
@@ -95,7 +95,7 @@ export const handleEnd = () => {
     // if not in interval mode
     if (!get(intervalMode)) {
         runState.set("finished");
-        const sound = new Audio("file://" + __dirname + "/sounds/endSound.wav");
+        const sound = new Audio("file://" + __dirname + "/sounds/sound (1).wav");
         sound.play();
         focused.set(true)
     }

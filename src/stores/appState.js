@@ -30,10 +30,12 @@ export const scaledBlur = derived(
 
 export const maxSize = readable(Math.min(window.screen.height, window.screen.width))
 
-export const settingsHeight = derived([size], $size => {
-    if ($size >= 200) return Math.round($size / 1.2);
-    else return Math.round(150)
-});
+// export const settingsHeight = derived([size], $size => {
+//     if ($size >= 200) return Math.round($size / 1.2);
+//     else return Math.round(150)
+// });
+export const settingsHeight = writable(0);
+
 export const settingsOpen = writable(false);
 
 export const width = derived(
