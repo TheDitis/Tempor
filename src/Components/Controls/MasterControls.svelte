@@ -1,4 +1,5 @@
 <script>
+    import {tick} from "svelte";
     import {
         currentFavInd,
         intervalMode,
@@ -72,7 +73,7 @@
         }
     }
 
-    const handleKeyDown = (e) => {
+    const handleKeyDown = async (e) => {
         const key = e.key;
         if (e.repeat) return;
         console.log(key)
@@ -145,6 +146,23 @@
             case "=":
                 makeBigger();
                 break;
+
+            /// INTERVAL MODE CONTROLS:
+            case "ArrowLeft":
+            case "ArrowRight":
+                if ($intervalMode && $runState !== "running") {
+                    focused.set(false);
+                    const direction = key === "ArrowLeft" ? -1 : 1;
+                    intervalIndex.update(ind => {
+                        let newInd = ind + direction % ($intervalDurations.length);
+                        if (newInd < 0) newInd = $intervalDurations.length - 1;
+                        return newInd
+                    })
+                    await tick();
+                    focused.set(true);
+                }
+                break;
+
             default:
                 break;
         }

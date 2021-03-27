@@ -52,7 +52,9 @@
 			tempDur = $tempDuration;
 		}
 		else {
-			tempDur = $intervalDurations[$intervalIndex];
+			intervalIndex.set(0);
+			tempDur = $intervalDurations[0];
+
 		}
 		if (tempDur !== 0) {
 			startTime.set(Date.now())

@@ -255,6 +255,10 @@ var app = (function () {
             resolved_promise.then(flush);
         }
     }
+    function tick() {
+        schedule_update();
+        return resolved_promise;
+    }
     function add_render_callback(fn) {
         render_callbacks.push(fn);
     }
@@ -27420,13 +27424,13 @@ var app = (function () {
     			t1 = space();
     			input_1 = element("input");
     			attr_dev(h1, "class", "svelte-190qjsj");
-    			add_location(h1, file$h, 101, 0, 3094);
+    			add_location(h1, file$h, 103, 0, 3213);
     			attr_dev(input_1, "class", "hiddenInput svelte-190qjsj");
     			attr_dev(input_1, "type", "text");
     			input_1.autofocus = true;
-    			add_location(input_1, file$h, 102, 0, 3119);
+    			add_location(input_1, file$h, 104, 0, 3238);
     			attr_dev(div, "class", "TimeInput svelte-190qjsj");
-    			add_location(div, file$h, 100, 0, 3038);
+    			add_location(div, file$h, 102, 0, 3157);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -27481,27 +27485,27 @@ var app = (function () {
 
     function instance$i($$self, $$props, $$invalidate) {
     	let readableTime;
+    	let $intervalMode;
     	let $tempDuration;
     	let $runState;
-    	let $currentFavInd;
-    	let $settings;
     	let $intervalDurations;
     	let $intervalIndex;
-    	let $intervalMode;
+    	let $currentFavInd;
+    	let $settings;
+    	validate_store(intervalMode, "intervalMode");
+    	component_subscribe($$self, intervalMode, $$value => $$invalidate(11, $intervalMode = $$value));
     	validate_store(tempDuration, "tempDuration");
-    	component_subscribe($$self, tempDuration, $$value => $$invalidate(11, $tempDuration = $$value));
+    	component_subscribe($$self, tempDuration, $$value => $$invalidate(12, $tempDuration = $$value));
     	validate_store(runState, "runState");
-    	component_subscribe($$self, runState, $$value => $$invalidate(12, $runState = $$value));
-    	validate_store(currentFavInd, "currentFavInd");
-    	component_subscribe($$self, currentFavInd, $$value => $$invalidate(7, $currentFavInd = $$value));
-    	validate_store(settings, "settings");
-    	component_subscribe($$self, settings, $$value => $$invalidate(13, $settings = $$value));
+    	component_subscribe($$self, runState, $$value => $$invalidate(13, $runState = $$value));
     	validate_store(intervalDurations, "intervalDurations");
     	component_subscribe($$self, intervalDurations, $$value => $$invalidate(14, $intervalDurations = $$value));
     	validate_store(intervalIndex, "intervalIndex");
     	component_subscribe($$self, intervalIndex, $$value => $$invalidate(15, $intervalIndex = $$value));
-    	validate_store(intervalMode, "intervalMode");
-    	component_subscribe($$self, intervalMode, $$value => $$invalidate(16, $intervalMode = $$value));
+    	validate_store(currentFavInd, "currentFavInd");
+    	component_subscribe($$self, currentFavInd, $$value => $$invalidate(7, $currentFavInd = $$value));
+    	validate_store(settings, "settings");
+    	component_subscribe($$self, settings, $$value => $$invalidate(16, $settings = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("TimeInput", slots, []);
     	let hours = 0;
@@ -27513,8 +27517,13 @@ var app = (function () {
     	onMount(() => {
     		console.log("mounting input");
 
-    		if ($tempDuration !== 0 && $runState !== "running") {
+    		if (!$intervalMode && $tempDuration !== 0 && $runState !== "running") {
     			$$invalidate(0, numbers = formatTimeMs($tempDuration).replaceAll(":", ""));
+    			numsStrToHrsMinsSecs();
+    		}
+
+    		if ($intervalMode && $intervalDurations[$intervalIndex]) {
+    			$$invalidate(0, numbers = formatTimeMs($intervalDurations[$intervalIndex]).replaceAll(":", ""));
     			numsStrToHrsMinsSecs();
     		}
     	}); // input.focus();
@@ -27528,11 +27537,8 @@ var app = (function () {
     			$$invalidate(0, numbers = formatTimeMs($tempDuration).replaceAll(":", ""));
     			numsStrToHrsMinsSecs();
     		}
-    	}; // if (input) input.focus();
+    	};
 
-    	// $: {
-    	//     if ($focused && input) input.focus();
-    	// }
     	const updateTempDuration = () => {
     		const duration = Duration.fromObject({ hours, minutes, seconds });
     		console.log(duration.toMillis());
@@ -27629,14 +27635,14 @@ var app = (function () {
     		updateIntervalTime,
     		numsStrToHrsMinsSecs,
     		handleChange,
+    		$intervalMode,
     		$tempDuration,
     		$runState,
-    		$currentFavInd,
-    		readableTime,
-    		$settings,
     		$intervalDurations,
     		$intervalIndex,
-    		$intervalMode
+    		$currentFavInd,
+    		readableTime,
+    		$settings
     	});
 
     	$$self.$inject_state = $$props => {
@@ -31307,7 +31313,7 @@ var app = (function () {
     		}
     	};
 
-    	const handleKeyDown = e => {
+    	const handleKeyDown = async e => {
     		const key = e.key;
     		if (e.repeat) return;
     		console.log(key);
@@ -31363,6 +31369,22 @@ var app = (function () {
     			case "=":
     				makeBigger();
     				break;
+    			case "ArrowLeft":
+    			case "ArrowRight":
+    				if ($intervalMode && $runState !== "running") {
+    					focused.set(false);
+    					const direction = key === "ArrowLeft" ? -1 : 1;
+
+    					intervalIndex.update(ind => {
+    						let newInd = ind + direction % $intervalDurations.length;
+    						if (newInd < 0) newInd = $intervalDurations.length - 1;
+    						return newInd;
+    					});
+
+    					await tick();
+    					focused.set(true);
+    				}
+    				break;
     		}
     	};
 
@@ -31391,6 +31413,7 @@ var app = (function () {
     	};
 
     	$$self.$capture_state = () => ({
+    		tick,
     		currentFavInd,
     		intervalMode,
     		settings,
@@ -31546,7 +31569,7 @@ var app = (function () {
 
     const file = "src\\App.svelte";
 
-    // (128:1) {#if $settingsOpen}
+    // (130:1) {#if $settingsOpen}
     function create_if_block(ctx) {
     	let settings_1;
     	let current;
@@ -31578,7 +31601,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(128:1) {#if $settingsOpen}",
+    		source: "(130:1) {#if $settingsOpen}",
     		ctx
     	});
 
@@ -31652,9 +31675,9 @@ var app = (function () {
     			t6 = space();
     			create_component(mastercontrols.$$.fragment);
     			attr_dev(div0, "class", "draggableArea svelte-18abru");
-    			add_location(div0, file, 117, 1, 2929);
+    			add_location(div0, file, 119, 1, 2942);
     			attr_dev(div1, "class", "timerSection svelte-18abru");
-    			add_location(div1, file, 119, 1, 2965);
+    			add_location(div1, file, 121, 1, 2978);
     			set_style(main, "--size", /*$size*/ ctx[5]);
     			set_style(main, "--width", /*$width*/ ctx[3]);
     			set_style(main, "--color", /*$color*/ ctx[8].hsl().string());
@@ -31667,7 +31690,7 @@ var app = (function () {
     			set_style(main, "--appBg", /*appBg*/ ctx[6]);
     			set_style(main, "--frameRadius", /*borderRadius*/ ctx[7]);
     			attr_dev(main, "class", "svelte-18abru");
-    			add_location(main, file, 102, 0, 2532);
+    			add_location(main, file, 104, 0, 2545);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -31812,7 +31835,6 @@ var app = (function () {
     	let $intervalMode;
     	let $tempDuration;
     	let $intervalDurations;
-    	let $intervalIndex;
     	let $settings;
     	let $remainingTime;
     	let $duration;
@@ -31834,20 +31856,18 @@ var app = (function () {
     	component_subscribe($$self, tempDuration, $$value => $$invalidate(16, $tempDuration = $$value));
     	validate_store(intervalDurations, "intervalDurations");
     	component_subscribe($$self, intervalDurations, $$value => $$invalidate(17, $intervalDurations = $$value));
-    	validate_store(intervalIndex, "intervalIndex");
-    	component_subscribe($$self, intervalIndex, $$value => $$invalidate(18, $intervalIndex = $$value));
     	validate_store(settings, "settings");
     	component_subscribe($$self, settings, $$value => $$invalidate(4, $settings = $$value));
     	validate_store(remainingTime, "remainingTime");
-    	component_subscribe($$self, remainingTime, $$value => $$invalidate(19, $remainingTime = $$value));
+    	component_subscribe($$self, remainingTime, $$value => $$invalidate(18, $remainingTime = $$value));
     	validate_store(duration, "duration");
-    	component_subscribe($$self, duration, $$value => $$invalidate(20, $duration = $$value));
+    	component_subscribe($$self, duration, $$value => $$invalidate(19, $duration = $$value));
     	validate_store(pausedRemainingTime, "pausedRemainingTime");
-    	component_subscribe($$self, pausedRemainingTime, $$value => $$invalidate(21, $pausedRemainingTime = $$value));
+    	component_subscribe($$self, pausedRemainingTime, $$value => $$invalidate(20, $pausedRemainingTime = $$value));
     	validate_store(size, "size");
     	component_subscribe($$self, size, $$value => $$invalidate(5, $size = $$value));
     	validate_store(maxSize, "maxSize");
-    	component_subscribe($$self, maxSize, $$value => $$invalidate(22, $maxSize = $$value));
+    	component_subscribe($$self, maxSize, $$value => $$invalidate(21, $maxSize = $$value));
     	validate_store(color, "color");
     	component_subscribe($$self, color, $$value => $$invalidate(8, $color = $$value));
     	validate_store(scaledBlur, "scaledBlur");
@@ -31869,7 +31889,8 @@ var app = (function () {
     		if (!$intervalMode) {
     			tempDur = $tempDuration;
     		} else {
-    			tempDur = $intervalDurations[$intervalIndex];
+    			intervalIndex.set(0);
+    			tempDur = $intervalDurations[0];
     		}
 
     		if (tempDur !== 0) {
@@ -31959,7 +31980,6 @@ var app = (function () {
     		$intervalMode,
     		$tempDuration,
     		$intervalDurations,
-    		$intervalIndex,
     		$settings,
     		$remainingTime,
     		$duration,

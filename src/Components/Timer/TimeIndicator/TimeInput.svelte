@@ -16,10 +16,16 @@
     onMount(() => {
         console.log("mounting input")
 
-        if ($tempDuration !== 0 && $runState !== "running") {
+        if (!$intervalMode && $tempDuration !== 0 && $runState !== "running") {
             numbers = formatTimeMs($tempDuration).replaceAll(":", "")
             numsStrToHrsMinsSecs();
         }
+
+        if ($intervalMode && $intervalDurations[$intervalIndex]) {
+            numbers = formatTimeMs($intervalDurations[$intervalIndex]).replaceAll(":", "")
+            numsStrToHrsMinsSecs();
+        }
+
         // input.focus();
     })
 
@@ -33,7 +39,6 @@
             numbers = formatTimeMs($tempDuration).replaceAll(":", "")
             numsStrToHrsMinsSecs();
         }
-        // if (input) input.focus();
     }
 
     $: {
@@ -41,9 +46,6 @@
     }
     $: readableTime = formatTime(hours, minutes, seconds)
 
-    // $: {
-    //     if ($focused && input) input.focus();
-    // }
 
 
     const updateTempDuration = () => {
