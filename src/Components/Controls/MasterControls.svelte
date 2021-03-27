@@ -208,6 +208,9 @@
             case "ArrowUp":
                 if ($intervalMode && $intervalDurations.length < 5 && $runState !== "running") {
                     focused.set(false);
+                    if (!$currentFavInterval) {
+                        currentFavInterval.set(null);
+                    }
                     intervalDurations.set([...$intervalDurations, 0])
                     intervalIndex.set($intervalDurations.length - 1)
                     await tick();
@@ -217,6 +220,9 @@
             case "ArrowDown":
                 if ($intervalMode && $intervalDurations.length > 1 && $runState !== "running") {
                     focused.set(false);
+                    if (!$currentFavInterval) {
+                        currentFavInterval.set(null);
+                    }
                     if ($intervalIndex === $intervalDurations.length - 1) {
                         intervalIndex.update(ind => ind - 1);
                     }

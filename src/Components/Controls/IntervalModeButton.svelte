@@ -2,7 +2,8 @@
     import {tick} from "svelte";
     import TomatoIcon from "../Icons/TomatoIcon.svelte";
     // import {} from "../../stores/appState";
-    // import {faSyncAlt} from "@fortawesome/free-solid-svg-icons";
+    import Fa from "svelte-fa";
+    import {faSyncAlt} from "@fortawesome/free-solid-svg-icons";
     import {intervalMode, size} from "../../stores/appState";
     import {focused} from "../../stores/timerState";
 
@@ -15,7 +16,7 @@
 </script>
 
 <button class="IntervalModeButton" on:click={toggleIntervalMode}>
-    <TomatoIcon size={$size / 13} color="white"/>
+    <Fa icon={faSyncAlt}/>
 </button>
 
 

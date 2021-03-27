@@ -9,7 +9,6 @@
     let hours = 0;
     let minutes = 0;
     let seconds = 0;
-
     let numbers = ""
     let input;
 
@@ -25,14 +24,7 @@
             numbers = formatTimeMs($intervalDurations[$intervalIndex]).replaceAll(":", "")
             numsStrToHrsMinsSecs();
         }
-
-        // input.focus();
     })
-
-    // afterUpdate(() => {
-    //     setTimeout(input.focus, 200)
-    //     console.log("update called")
-    // })
 
     const update = (deps = null) => {
         if (!$intervalMode) {
@@ -49,9 +41,7 @@
         }
     }
 
-    $: {
-        update([$currentFavInd, $currentFavInterval]);
-    }
+    $: { update([$currentFavInd, $currentFavInterval]) }
     $: readableTime = formatTime(hours, minutes, seconds)
 
 
