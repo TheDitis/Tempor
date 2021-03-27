@@ -1,5 +1,5 @@
 {
-  "hue": 38.7,
+  "hue": 186.4,
   "size": 350,
   "blur": 3.4,
   "fontWeight": "Regular",
@@ -20,8 +20,14 @@
     null
   ],
   "favoriteIntervals": [
-    [1500000, 300000],
-    [20000, 10000],
+    [
+      1500000,
+      300000
+    ],
+    [
+      20000,
+      10000
+    ],
     null,
     null,
     null

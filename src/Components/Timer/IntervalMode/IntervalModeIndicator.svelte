@@ -1,9 +1,9 @@
 <script>
     import TomatoIcon from "../../Icons/TomatoIcon.svelte";
-    import {color} from "../../../stores/appState";
+    import {color, intervalMode} from "../../../stores/appState";
 </script>
 
-<div class="IntervalModeIndicator">
+<div class="IntervalModeIndicator" on:click={() => intervalMode.set(false)}>
     <TomatoIcon size={30} color={$color.hex()}/>
 </div>
 

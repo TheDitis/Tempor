@@ -39,18 +39,10 @@
 		ipcRenderer.send("resize", $width, $height)
 	})
 
-	const changeStayOnTop = (deps) => {
-		ipcRenderer.send("stayontop", $stayOnTop);
-	}
-
-	const resizeWindow = (deps) => {
-		ipcRenderer.send("resize", $width, $height)
-	}
-
 	// any time the window size changes, send the signal to electron
-	$: resizeWindow([$size, $height])
-
-	$: changeStayOnTop([$stayOnTop])
+	$: { ipcRenderer.send("resize", $width, $height) }
+	// tell the window whether to stay on top or not when that setting changes
+	$: { ipcRenderer.send("stayontop", $stayOnTop) }
 
 
 	// sets the duration, start time, and run-state of the timer
