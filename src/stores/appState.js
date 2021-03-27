@@ -86,3 +86,10 @@ export const saveSettings = () => {
     fs.writeFileSync(path.join(__dirname, "./settings.json"), tempSettings)
 }
 
+
+export const playSound = (filename) => {
+    const sound = new Audio();
+    sound.src = "file://" + __dirname + "/sounds/" + filename;
+    sound.volume = get(settings).volume;
+    sound.play();
+}

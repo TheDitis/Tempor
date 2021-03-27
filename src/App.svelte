@@ -13,7 +13,9 @@
 		settings,
 		maxSize,
 		settingsOpen,
-		loadSettings, intervalMode
+		loadSettings,
+		intervalMode,
+		playSound
 	} from "./stores/appState";
 	import ResizeControl from "./Components/Controls/ResizeControl.svelte";
 	import OpenSettingsButton from "./Components/Settings/OpenSettingsButton.svelte";
@@ -65,8 +67,7 @@
 			duration.set(tempDur);
 			focused.set(false);
 			runState.set("running");
-			const sound = new Audio("file://" + __dirname + "/sounds/sound (1).wav");
-			sound.play();
+			playSound($settings.sounds.start);
 		}
 	}
 

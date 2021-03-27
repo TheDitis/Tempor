@@ -1,5 +1,5 @@
 <script>
-    import {settingsOpen, settingsHeight, settings, hue, color, blur} from "../../stores/appState";
+    import {settingsHeight, settings, hue, color, blur} from "../../stores/appState";
     import SettingsSlider from "./SettingsSlider.svelte";
     import SettingsOptionButton from "./SettingsOptionButton.svelte";
     import {faLayerGroup} from "@fortawesome/free-solid-svg-icons";

@@ -6,6 +6,12 @@
   "alwaysOnTop": true,
   "theme": "dark",
   "frame": "square",
+  "volume": 1,
+  "sounds": {
+    "start": "sound (1).wav",
+    "next": "sound (8).wav",
+    "end": "sound (14).wav"
+  },
   "favorites": [
     12000,
     62000,

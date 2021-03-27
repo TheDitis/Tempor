@@ -3015,6 +3015,14 @@ var app = (function () {
         fs.writeFileSync(path.join(__dirname, "./settings.json"), tempSettings);
     };
 
+
+    const playSound = (filename) => {
+        const sound = new Audio();
+        sound.src = "file://" + __dirname + "/sounds/" + filename;
+        sound.volume = get_store_value(settings).volume;
+        sound.play();
+    };
+
     const focused = writable(true);
 
     // then current time, updated every 10 milliseconds
@@ -3066,11 +3074,13 @@ var app = (function () {
 
     // runs when the time runs out
     const handleEnd = () => {
+        const curSettings = get_store_value(settings);
         // if not in interval mode
         if (!get_store_value(intervalMode)) {
             runState.set("finished");
-            const sound = new Audio("file://" + __dirname + "/sounds/sound (1).wav");
-            sound.play();
+            // const sound = new Audio("file://" + __dirname + "/sounds/sound (1).wav");
+            // sound.play();
+            playSound(curSettings.sounds.end);
             focused.set(true);
         }
         // if in interval mode
@@ -3080,10 +3090,16 @@ var app = (function () {
             const nextInd = (currentInd + 1) % tempDurations.length;
             intervalIndex.set(nextInd);
             // if repeatIntervalCycle setting is on or we haven't reached the end of the list:
-            if (get_store_value(settings).repeatIntervalCycle || nextInd > currentInd) {
+            if (curSettings.repeatIntervalCycle || nextInd > currentInd) {
                 startTime.set(Date.now());
                 duration.set(tempDurations[nextInd]);
                 focused.set(false);
+                playSound(curSettings.sounds[nextInd === 0 ? "end" : "next"] );
+            }
+            else {
+                runState.set("finished");
+                playSound(curSettings.sounds.end);
+                focused.set(true);
             }
         }
     };
@@ -30710,13 +30726,13 @@ var app = (function () {
     			div1 = element("div");
     			create_component(savebutton.$$.fragment);
     			attr_dev(div0, "class", "buttonSection svelte-1fctsxt");
-    			add_location(div0, file$3, 27, 4, 857);
+    			add_location(div0, file$3, 27, 4, 843);
     			attr_dev(div1, "class", "bottomRow svelte-1fctsxt");
-    			add_location(div1, file$3, 30, 4, 996);
+    			add_location(div1, file$3, 30, 4, 982);
     			attr_dev(div2, "class", "Settings svelte-1fctsxt");
     			set_style(div2, "--settingsHeight", /*$settingsHeight*/ ctx[1]);
     			set_style(div2, "--color2", /*$color*/ ctx[2].alpha(0.5).hsl().string() + "\r\n    ");
-    			add_location(div2, file$3, 17, 0, 524);
+    			add_location(div2, file$3, 17, 0, 510);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -30844,7 +30860,6 @@ var app = (function () {
     	}
 
     	$$self.$capture_state = () => ({
-    		settingsOpen,
     		settingsHeight,
     		settings,
     		hue,
@@ -31474,7 +31489,7 @@ var app = (function () {
 
     const file = "src\\App.svelte";
 
-    // (135:1) {#if $settingsOpen}
+    // (136:1) {#if $settingsOpen}
     function create_if_block(ctx) {
     	let settings_1;
     	let current;
@@ -31506,7 +31521,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(135:1) {#if $settingsOpen}",
+    		source: "(136:1) {#if $settingsOpen}",
     		ctx
     	});
 
@@ -31580,9 +31595,9 @@ var app = (function () {
     			t6 = space();
     			create_component(mastercontrols.$$.fragment);
     			attr_dev(div0, "class", "draggableArea svelte-18abru");
-    			add_location(div0, file, 124, 1, 3032);
+    			add_location(div0, file, 125, 1, 2991);
     			attr_dev(div1, "class", "timerSection svelte-18abru");
-    			add_location(div1, file, 126, 1, 3068);
+    			add_location(div1, file, 127, 1, 3027);
     			set_style(main, "--size", /*$size*/ ctx[4]);
     			set_style(main, "--width", /*$width*/ ctx[3]);
     			set_style(main, "--color", /*$color*/ ctx[8].hsl().string());
@@ -31595,7 +31610,7 @@ var app = (function () {
     			set_style(main, "--appBg", /*appBg*/ ctx[6]);
     			set_style(main, "--frameRadius", /*borderRadius*/ ctx[7]);
     			attr_dev(main, "class", "svelte-18abru");
-    			add_location(main, file, 109, 0, 2635);
+    			add_location(main, file, 110, 0, 2594);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -31742,11 +31757,11 @@ var app = (function () {
     	let $tempDuration;
     	let $intervalDurations;
     	let $intervalIndex;
+    	let $settings;
     	let $remainingTime;
     	let $duration;
     	let $pausedRemainingTime;
     	let $maxSize;
-    	let $settings;
     	let $color;
     	let $scaledBlur;
     	let $settingsOpen;
@@ -31766,6 +31781,8 @@ var app = (function () {
     	component_subscribe($$self, intervalDurations, $$value => $$invalidate(17, $intervalDurations = $$value));
     	validate_store(intervalIndex, "intervalIndex");
     	component_subscribe($$self, intervalIndex, $$value => $$invalidate(18, $intervalIndex = $$value));
+    	validate_store(settings, "settings");
+    	component_subscribe($$self, settings, $$value => $$invalidate(5, $settings = $$value));
     	validate_store(remainingTime, "remainingTime");
     	component_subscribe($$self, remainingTime, $$value => $$invalidate(19, $remainingTime = $$value));
     	validate_store(duration, "duration");
@@ -31774,8 +31791,6 @@ var app = (function () {
     	component_subscribe($$self, pausedRemainingTime, $$value => $$invalidate(21, $pausedRemainingTime = $$value));
     	validate_store(maxSize, "maxSize");
     	component_subscribe($$self, maxSize, $$value => $$invalidate(22, $maxSize = $$value));
-    	validate_store(settings, "settings");
-    	component_subscribe($$self, settings, $$value => $$invalidate(5, $settings = $$value));
     	validate_store(color, "color");
     	component_subscribe($$self, color, $$value => $$invalidate(8, $color = $$value));
     	validate_store(scaledBlur, "scaledBlur");
@@ -31813,8 +31828,7 @@ var app = (function () {
     			duration.set(tempDur);
     			focused.set(false);
     			runState.set("running");
-    			const sound = new Audio("file://" + __dirname + "/sounds/sound (1).wav");
-    			sound.play();
+    			playSound($settings.sounds.start);
     		}
     	};
 
@@ -31868,6 +31882,7 @@ var app = (function () {
     		settingsOpen,
     		loadSettings,
     		intervalMode,
+    		playSound,
     		ResizeControl,
     		OpenSettingsButton,
     		Settings,
@@ -31899,12 +31914,12 @@ var app = (function () {
     		$tempDuration,
     		$intervalDurations,
     		$intervalIndex,
+    		$settings,
     		$remainingTime,
     		$duration,
     		$pausedRemainingTime,
     		$maxSize,
     		appBg,
-    		$settings,
     		borderRadius,
     		$color,
     		$scaledBlur,
