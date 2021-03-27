@@ -26,4 +26,11 @@ export const formatTime = (hours, minutes, seconds) => {
     return `${hoursStr}:${minutesStr}:${secondsStr}`;
 }
 
-// export const msToHoursMinsSeconds
+
+export const arraysEqual = (arr1, arr2) => {
+    if (!(arr1.length === arr2.length)) return false;
+    for (let i in arr1) {
+        if (arr1[i] !== arr2[i]) return false
+    }
+    return true
+}

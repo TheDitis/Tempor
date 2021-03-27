@@ -65,6 +65,8 @@ export const stayOnTop = derived(settings, $settings => $settings.alwaysOnTop);
 
 export const currentFavInd = writable(null);
 
+export const currentFavInterval = writable(null);
+
 export const loadSettings = () => {
     // read settings file:
     const settingsData = JSON.parse(fs.readFileSync(path.join(__dirname, "./settings.json")));

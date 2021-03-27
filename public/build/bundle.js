@@ -3103,6 +3103,8 @@ var app = (function () {
 
     const currentFavInd = writable(null);
 
+    const currentFavInterval = writable(null);
+
     const loadSettings = () => {
         // read settings file:
         const settingsData = JSON.parse(fs.readFileSync(path.join(__dirname, "./settings.json")));
@@ -10306,7 +10308,14 @@ var app = (function () {
         return `${hoursStr}:${minutesStr}:${secondsStr}`;
     };
 
-    // export const msToHoursMinsSeconds
+
+    const arraysEqual = (arr1, arr2) => {
+        if (!(arr1.length === arr2.length)) return false;
+        for (let i in arr1) {
+            if (arr1[i] !== arr2[i]) return false
+        }
+        return true
+    };
 
     /**
      * @license
@@ -27529,13 +27538,13 @@ var app = (function () {
     			t1 = space();
     			input_1 = element("input");
     			attr_dev(h1, "class", "svelte-190qjsj");
-    			add_location(h1, file$h, 103, 0, 3213);
+    			add_location(h1, file$h, 114, 0, 3806);
     			attr_dev(input_1, "class", "hiddenInput svelte-190qjsj");
     			attr_dev(input_1, "type", "text");
     			input_1.autofocus = true;
-    			add_location(input_1, file$h, 104, 0, 3238);
+    			add_location(input_1, file$h, 115, 0, 3831);
     			attr_dev(div, "class", "TimeInput svelte-190qjsj");
-    			add_location(div, file$h, 102, 0, 3157);
+    			add_location(div, file$h, 113, 0, 3750);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -27546,15 +27555,15 @@ var app = (function () {
     			append_dev(h1, t0);
     			append_dev(div, t1);
     			append_dev(div, input_1);
-    			/*input_1_binding*/ ctx[8](input_1);
+    			/*input_1_binding*/ ctx[9](input_1);
     			set_input_value(input_1, /*numbers*/ ctx[0]);
     			input_1.focus();
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(input_1, "input", /*input_1_input_handler*/ ctx[9]),
+    					listen_dev(input_1, "input", /*input_1_input_handler*/ ctx[10]),
     					listen_dev(input_1, "input", /*handleChange*/ ctx[3], false, false, false),
-    					listen_dev(div, "click", /*click_handler*/ ctx[10], false, false, false)
+    					listen_dev(div, "click", /*click_handler*/ ctx[11], false, false, false)
     				];
 
     				mounted = true;
@@ -27571,7 +27580,7 @@ var app = (function () {
     		o: noop,
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
-    			/*input_1_binding*/ ctx[8](null);
+    			/*input_1_binding*/ ctx[9](null);
     			mounted = false;
     			run_all(dispose);
     		}
@@ -27596,21 +27605,24 @@ var app = (function () {
     	let $intervalDurations;
     	let $intervalIndex;
     	let $currentFavInd;
+    	let $currentFavInterval;
     	let $settings;
     	validate_store(intervalMode, "intervalMode");
-    	component_subscribe($$self, intervalMode, $$value => $$invalidate(11, $intervalMode = $$value));
+    	component_subscribe($$self, intervalMode, $$value => $$invalidate(12, $intervalMode = $$value));
     	validate_store(tempDuration, "tempDuration");
-    	component_subscribe($$self, tempDuration, $$value => $$invalidate(12, $tempDuration = $$value));
+    	component_subscribe($$self, tempDuration, $$value => $$invalidate(13, $tempDuration = $$value));
     	validate_store(runState, "runState");
-    	component_subscribe($$self, runState, $$value => $$invalidate(13, $runState = $$value));
+    	component_subscribe($$self, runState, $$value => $$invalidate(14, $runState = $$value));
     	validate_store(intervalDurations, "intervalDurations");
-    	component_subscribe($$self, intervalDurations, $$value => $$invalidate(14, $intervalDurations = $$value));
+    	component_subscribe($$self, intervalDurations, $$value => $$invalidate(15, $intervalDurations = $$value));
     	validate_store(intervalIndex, "intervalIndex");
-    	component_subscribe($$self, intervalIndex, $$value => $$invalidate(15, $intervalIndex = $$value));
+    	component_subscribe($$self, intervalIndex, $$value => $$invalidate(16, $intervalIndex = $$value));
     	validate_store(currentFavInd, "currentFavInd");
     	component_subscribe($$self, currentFavInd, $$value => $$invalidate(7, $currentFavInd = $$value));
+    	validate_store(currentFavInterval, "currentFavInterval");
+    	component_subscribe($$self, currentFavInterval, $$value => $$invalidate(8, $currentFavInterval = $$value));
     	validate_store(settings, "settings");
-    	component_subscribe($$self, settings, $$value => $$invalidate(16, $settings = $$value));
+    	component_subscribe($$self, settings, $$value => $$invalidate(17, $settings = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("TimeInput", slots, []);
     	let hours = 0;
@@ -27637,10 +27649,17 @@ var app = (function () {
     	//     setTimeout(input.focus, 200)
     	//     console.log("update called")
     	// })
-    	const onFavUpdate = deps => {
-    		if ($tempDuration !== 0 && $runState !== "running") {
-    			$$invalidate(0, numbers = formatTimeMs($tempDuration).replaceAll(":", ""));
-    			numsStrToHrsMinsSecs();
+    	const update = (deps = null) => {
+    		if (!$intervalMode) {
+    			if ($tempDuration !== 0 && $runState !== "running") {
+    				$$invalidate(0, numbers = formatTimeMs($tempDuration).replaceAll(":", ""));
+    				numsStrToHrsMinsSecs();
+    			}
+    		} else {
+    			if ($intervalDurations.every(v => v) && $runState !== "running") {
+    				$$invalidate(0, numbers = formatTimeMs($intervalDurations[$intervalIndex]).replaceAll(":", ""));
+    				numsStrToHrsMinsSecs();
+    			}
     		}
     	};
 
@@ -27655,11 +27674,15 @@ var app = (function () {
     	};
 
     	const updateIntervalTime = () => {
+    		console.log("favorite intervals: ", $settings.favoriteIntervals);
     		const duration = Duration.fromObject({ hours, minutes, seconds });
-    		const tempIntervalDurations = $intervalDurations;
+    		const tempIntervalDurations = [...$intervalDurations];
     		tempIntervalDurations[$intervalIndex] = duration.toMillis();
-    		console.log(tempIntervalDurations);
     		intervalDurations.set(tempIntervalDurations);
+
+    		if ($currentFavInterval !== null && !arraysEqual(tempIntervalDurations, $settings.favoriteIntervals[$currentFavInterval])) {
+    			currentFavInterval.set(null);
+    		}
     	};
 
     	const numsStrToHrsMinsSecs = () => {
@@ -27720,6 +27743,7 @@ var app = (function () {
     		afterUpdate,
     		formatTime,
     		formatTimeMs,
+    		arraysEqual,
     		tempDuration,
     		runState,
     		focused,
@@ -27728,6 +27752,7 @@ var app = (function () {
     		currentFavInd,
     		settings,
     		intervalMode,
+    		currentFavInterval,
     		Duration,
     		_: lodash,
     		hours,
@@ -27735,7 +27760,7 @@ var app = (function () {
     		seconds,
     		numbers,
     		input,
-    		onFavUpdate,
+    		update,
     		updateTempDuration,
     		updateIntervalTime,
     		numsStrToHrsMinsSecs,
@@ -27746,6 +27771,7 @@ var app = (function () {
     		$intervalDurations,
     		$intervalIndex,
     		$currentFavInd,
+    		$currentFavInterval,
     		readableTime,
     		$settings
     	});
@@ -27764,9 +27790,9 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*$currentFavInd*/ 128) {
+    		if ($$self.$$.dirty & /*$currentFavInd, $currentFavInterval*/ 384) {
     			{
-    				onFavUpdate();
+    				update([$currentFavInd, $currentFavInterval]);
     			}
     		}
 
@@ -27784,6 +27810,7 @@ var app = (function () {
     		minutes,
     		seconds,
     		$currentFavInd,
+    		$currentFavInterval,
     		input_1_binding,
     		input_1_input_handler,
     		click_handler
@@ -28970,20 +28997,22 @@ var app = (function () {
     }
 
     /* src\Components\Timer\Favorites\Favorites.svelte generated by Svelte v3.35.0 */
+
+    const { console: console_1$2 } = globals;
     const file$d = "src\\Components\\Timer\\Favorites\\Favorites.svelte";
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[3] = list[i];
-    	child_ctx[5] = i;
+    	child_ctx[6] = list[i];
+    	child_ctx[8] = i;
     	return child_ctx;
     }
 
-    // (10:4) {#each favsList as fav, i}
+    // (16:4) {#each favsList as fav, i}
     function create_each_block$1(ctx) {
     	let div;
     	let p;
-    	let t0_value = /*i*/ ctx[5] + 1 + "";
+    	let t0_value = /*i*/ ctx[8] + 1 + "";
     	let t0;
     	let t1;
 
@@ -28994,11 +29023,11 @@ var app = (function () {
     			t0 = text(t0_value);
     			t1 = space();
     			attr_dev(p, "class", "svelte-iy3uej");
-    			add_location(p, file$d, 11, 12, 392);
+    			add_location(p, file$d, 17, 12, 692);
     			attr_dev(div, "class", "favorite svelte-iy3uej");
-    			toggle_class(div, "used", !!/*fav*/ ctx[3]);
-    			toggle_class(div, "selected", /*$currentFavInd*/ ctx[1] === /*i*/ ctx[5]);
-    			add_location(div, file$d, 10, 8, 299);
+    			toggle_class(div, "used", !!/*fav*/ ctx[6]);
+    			toggle_class(div, "selected", /*curInd*/ ctx[1] === /*i*/ ctx[8]);
+    			add_location(div, file$d, 16, 8, 607);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -29008,11 +29037,11 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			if (dirty & /*favsList*/ 1) {
-    				toggle_class(div, "used", !!/*fav*/ ctx[3]);
+    				toggle_class(div, "used", !!/*fav*/ ctx[6]);
     			}
 
-    			if (dirty & /*$currentFavInd*/ 2) {
-    				toggle_class(div, "selected", /*$currentFavInd*/ ctx[1] === /*i*/ ctx[5]);
+    			if (dirty & /*curInd*/ 2) {
+    				toggle_class(div, "selected", /*curInd*/ ctx[1] === /*i*/ ctx[8]);
     			}
     		},
     		d: function destroy(detaching) {
@@ -29024,7 +29053,7 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(10:4) {#each favsList as fav, i}",
+    		source: "(16:4) {#each favsList as fav, i}",
     		ctx
     	});
 
@@ -29053,7 +29082,7 @@ var app = (function () {
     			}
 
     			attr_dev(div, "class", "Favorites svelte-iy3uej");
-    			add_location(div, file$d, 8, 0, 181);
+    			add_location(div, file$d, 14, 0, 489);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -29068,7 +29097,7 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*favsList, $currentFavInd*/ 3) {
+    			if (dirty & /*favsList, curInd*/ 3) {
     				each_value = /*favsList*/ ctx[0];
     				validate_each_argument(each_value);
     				let i;
@@ -29127,32 +29156,44 @@ var app = (function () {
     }
 
     function instance$e($$self, $$props, $$invalidate) {
-    	let favsList;
+    	let $intervalMode;
     	let $settings;
+    	let $currentFavInterval;
     	let $currentFavInd;
+    	validate_store(intervalMode, "intervalMode");
+    	component_subscribe($$self, intervalMode, $$value => $$invalidate(2, $intervalMode = $$value));
     	validate_store(settings, "settings");
-    	component_subscribe($$self, settings, $$value => $$invalidate(2, $settings = $$value));
+    	component_subscribe($$self, settings, $$value => $$invalidate(3, $settings = $$value));
+    	validate_store(currentFavInterval, "currentFavInterval");
+    	component_subscribe($$self, currentFavInterval, $$value => $$invalidate(4, $currentFavInterval = $$value));
     	validate_store(currentFavInd, "currentFavInd");
-    	component_subscribe($$self, currentFavInd, $$value => $$invalidate(1, $currentFavInd = $$value));
+    	component_subscribe($$self, currentFavInd, $$value => $$invalidate(5, $currentFavInd = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("Favorites", slots, []);
+    	let favsList, curInd;
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Favorites> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console_1$2.warn(`<Favorites> was created with unknown prop '${key}'`);
     	});
 
     	$$self.$capture_state = () => ({
     		settings,
     		currentFavInd,
+    		intervalMode,
+    		currentFavInterval,
     		fade,
     		favsList,
+    		curInd,
+    		$intervalMode,
     		$settings,
+    		$currentFavInterval,
     		$currentFavInd
     	});
 
     	$$self.$inject_state = $$props => {
     		if ("favsList" in $$props) $$invalidate(0, favsList = $$props.favsList);
+    		if ("curInd" in $$props) $$invalidate(1, curInd = $$props.curInd);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -29160,12 +29201,29 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*$settings*/ 4) {
-    			$$invalidate(0, favsList = $settings.favorites);
+    		if ($$self.$$.dirty & /*$intervalMode, $settings, favsList*/ 13) {
+    			{
+    				$$invalidate(0, favsList = $intervalMode
+    				? $settings.favoriteIntervals
+    				: $settings.favorites);
+
+    				console.log("favsList: ", favsList);
+    			}
+    		}
+
+    		if ($$self.$$.dirty & /*$intervalMode, $currentFavInterval, $currentFavInd*/ 52) {
+    			$$invalidate(1, curInd = $intervalMode ? $currentFavInterval : $currentFavInd);
     		}
     	};
 
-    	return [favsList, $currentFavInd, $settings];
+    	return [
+    		favsList,
+    		curInd,
+    		$intervalMode,
+    		$settings,
+    		$currentFavInterval,
+    		$currentFavInd
+    	];
     }
 
     class Favorites extends SvelteComponentDev {
@@ -29458,8 +29516,6 @@ var app = (function () {
     }
 
     /* src\Components\Timer\IntervalMode\IntervalNumberIndicator.svelte generated by Svelte v3.35.0 */
-
-    const { console: console_1$2 } = globals;
     const file$a = "src\\Components\\Timer\\IntervalMode\\IntervalNumberIndicator.svelte";
 
     function get_each_context(ctx, list, i) {
@@ -29469,7 +29525,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (26:4) {#each $intervalDurations as duration, ind}
+    // (25:4) {#each $intervalDurations as duration, ind}
     function create_each_block(ctx) {
     	let div;
 
@@ -29478,7 +29534,7 @@ var app = (function () {
     			div = element("div");
     			attr_dev(div, "class", "intervalItem svelte-4rxad0");
     			toggle_class(div, "current", /*$intervalIndex*/ ctx[2] === /*ind*/ ctx[7]);
-    			add_location(div, file$a, 26, 8, 771);
+    			add_location(div, file$a, 25, 8, 724);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -29497,7 +29553,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(26:4) {#each $intervalDurations as duration, ind}",
+    		source: "(25:4) {#each $intervalDurations as duration, ind}",
     		ctx
     	});
 
@@ -29526,7 +29582,7 @@ var app = (function () {
 
     			attr_dev(div, "class", "IntervalNumberIndicator svelte-4rxad0");
     			set_style(div, "--blink", /*opacity*/ ctx[0]);
-    			add_location(div, file$a, 20, 0, 596);
+    			add_location(div, file$a, 19, 0, 549);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -29623,7 +29679,7 @@ var app = (function () {
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console_1$2.warn(`<IntervalNumberIndicator> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<IntervalNumberIndicator> was created with unknown prop '${key}'`);
     	});
 
     	$$self.$capture_state = () => ({
@@ -29649,7 +29705,7 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*$runState, $time, opacity*/ 25) {
+    		if ($$self.$$.dirty & /*$runState, $time*/ 24) {
     			{
     				if ($runState === "running") {
     					const oneCycle = 2 * Math.PI;
@@ -29657,8 +29713,6 @@ var app = (function () {
 
     					// get the y position and scale between 0.5 & 1
     					$$invalidate(0, opacity = (Math.sin(curTime / oneCycle) + 1) / 4 + 0.5);
-
-    					console.log("opacity: ", opacity);
     				} else $$invalidate(0, opacity = 1);
     			}
     		}
@@ -31410,30 +31464,30 @@ var app = (function () {
 
     function instance$1($$self, $$props, $$invalidate) {
     	let $focused;
+    	let $intervalMode;
     	let $tempDuration;
     	let $settings;
+    	let $intervalDurations;
     	let $runState;
     	let $currentFavInd;
     	let $duration;
-    	let $intervalMode;
-    	let $intervalDurations;
     	let $intervalIndex;
     	validate_store(focused, "focused");
     	component_subscribe($$self, focused, $$value => $$invalidate(8, $focused = $$value));
-    	validate_store(tempDuration, "tempDuration");
-    	component_subscribe($$self, tempDuration, $$value => $$invalidate(9, $tempDuration = $$value));
-    	validate_store(settings, "settings");
-    	component_subscribe($$self, settings, $$value => $$invalidate(10, $settings = $$value));
-    	validate_store(runState, "runState");
-    	component_subscribe($$self, runState, $$value => $$invalidate(11, $runState = $$value));
-    	validate_store(currentFavInd, "currentFavInd");
-    	component_subscribe($$self, currentFavInd, $$value => $$invalidate(12, $currentFavInd = $$value));
-    	validate_store(duration, "duration");
-    	component_subscribe($$self, duration, $$value => $$invalidate(13, $duration = $$value));
     	validate_store(intervalMode, "intervalMode");
-    	component_subscribe($$self, intervalMode, $$value => $$invalidate(14, $intervalMode = $$value));
+    	component_subscribe($$self, intervalMode, $$value => $$invalidate(9, $intervalMode = $$value));
+    	validate_store(tempDuration, "tempDuration");
+    	component_subscribe($$self, tempDuration, $$value => $$invalidate(10, $tempDuration = $$value));
+    	validate_store(settings, "settings");
+    	component_subscribe($$self, settings, $$value => $$invalidate(11, $settings = $$value));
     	validate_store(intervalDurations, "intervalDurations");
-    	component_subscribe($$self, intervalDurations, $$value => $$invalidate(15, $intervalDurations = $$value));
+    	component_subscribe($$self, intervalDurations, $$value => $$invalidate(12, $intervalDurations = $$value));
+    	validate_store(runState, "runState");
+    	component_subscribe($$self, runState, $$value => $$invalidate(13, $runState = $$value));
+    	validate_store(currentFavInd, "currentFavInd");
+    	component_subscribe($$self, currentFavInd, $$value => $$invalidate(14, $currentFavInd = $$value));
+    	validate_store(duration, "duration");
+    	component_subscribe($$self, duration, $$value => $$invalidate(15, $duration = $$value));
     	validate_store(intervalIndex, "intervalIndex");
     	component_subscribe($$self, intervalIndex, $$value => $$invalidate(16, $intervalIndex = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
@@ -31456,38 +31510,76 @@ var app = (function () {
 
     	const setFavorite = key => {
     		if ($focused) {
-    			console.log("setting favorite: ", favKeyMap.set[key], " to ", $tempDuration);
-    			const tempFavorites = $settings.favorites;
+    			// in normal mode:
+    			if (!$intervalMode) {
+    				console.log("setting favorite: ", favKeyMap.set[key], " to ", $tempDuration);
+    				const tempFavorites = $settings.favorites;
 
-    			// if this value isn't already in a favorite slot
-    			if (!tempFavorites.includes($tempDuration)) {
-    				tempFavorites[favKeyMap.set[key]] = $tempDuration > 0 ? $tempDuration : null;
-    				settings.set({ ...$settings, favorites: tempFavorites });
-    				currentFavInd.set(favKeyMap.set[key]);
+    				// if this value isn't already in a favorite slot
+    				if (!tempFavorites.includes($tempDuration)) {
+    					tempFavorites[favKeyMap.set[key]] = $tempDuration > 0 ? $tempDuration : null;
+    					settings.set({ ...$settings, favorites: tempFavorites });
+    					currentFavInd.set(favKeyMap.set[key]);
+    				}
+    			} else {
+    				const tempFavorites = $settings.favoriteIntervals; // in interval mode
+    				tempFavorites[favKeyMap.set[key]] = $intervalDurations;
+
+    				settings.set({
+    					...$settings,
+    					favoriteIntervals: tempFavorites
+    				});
+
+    				currentFavInterval.set(favKeyMap.set[key]);
     			}
     		}
     	};
 
-    	const loadFavorite = key => {
+    	const loadFavorite = async key => {
+    		console.log("loadFavorite called");
     		const favInd = favKeyMap.load[key];
-    		const setting = $settings.favorites[favInd];
 
-    		if (!!setting && setting !== $tempDuration) {
-    			if ($runState === "running") {
-    				pause();
+    		/// IF NOT IN INTERVAL MODE:
+    		if (!$intervalMode) {
+    			console.log("loading non-interval setting.");
+    			const setting = $settings.favorites[favInd];
+
+    			if (!!setting && setting !== $tempDuration) {
+    				if ($runState === "running") {
+    					pause();
+    				}
+
+    				focused.set(true);
+    				tempDuration.set(setting);
+    				currentFavInd.set(favInd);
     			}
+    		} else /// IF IN INTERVAL MODE:
+    		{
+    			console.log("loading interval setting ");
+    			const setting = $settings.favoriteIntervals[favInd];
+    			console.log("fav setting: ", setting);
 
-    			focused.set(true);
-    			tempDuration.set(setting);
-    			currentFavInd.set(favInd);
+    			if (!!setting) {
+    				focused.set(false);
+
+    				if ($runState !== "running") {
+    					pause();
+    				}
+
+    				intervalIndex.set(0);
+    				intervalDurations.set(setting);
+    				currentFavInterval.set(favInd);
+    				await tick();
+    				focused.set(true);
+    			}
     		}
     	};
 
     	const handleKeyDown = async e => {
     		const key = e.key;
     		if (e.repeat) return;
-    		console.log(key);
 
+    		// console.log(key)
     		switch (key) {
     			case " ":
     				if ($runState === "running") pause(); else if ((// not paused or running
@@ -31514,7 +31606,14 @@ var app = (function () {
     				break;
     			case "i":
     			case "p":
-    				intervalMode.set(!$intervalMode);
+    				if (!($runState === "running")) {
+    					focused.set(false);
+    					intervalMode.set(!$intervalMode);
+    					currentFavInd.set(null);
+    					currentFavInterval.set(null);
+    					await tick();
+    					focused.set(true);
+    				}
     				break;
     			case "Shift":
     				showFavorites.set(true);
@@ -31612,6 +31711,7 @@ var app = (function () {
     	$$self.$capture_state = () => ({
     		tick,
     		currentFavInd,
+    		currentFavInterval,
     		intervalMode,
     		settings,
     		showFavorites,
@@ -31636,13 +31736,13 @@ var app = (function () {
     		handleKeyDown,
     		handleKeyUp,
     		$focused,
+    		$intervalMode,
     		$tempDuration,
     		$settings,
+    		$intervalDurations,
     		$runState,
     		$currentFavInd,
     		$duration,
-    		$intervalMode,
-    		$intervalDurations,
     		$intervalIndex
     	});
 

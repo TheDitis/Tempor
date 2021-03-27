@@ -1,8 +1,8 @@
 <script>
     import {onMount, afterUpdate} from "svelte";
-    import {formatTime, formatTimeMs} from "../../../utils/utils";
+    import {formatTime, formatTimeMs, arraysEqual} from "../../../utils/utils";
     import {tempDuration, runState, focused, intervalDurations, intervalIndex} from "../../../stores/timerState";
-    import {currentFavInd, settings, intervalMode} from "../../../stores/appState";
+    import {currentFavInd, settings, intervalMode, currentFavInterval} from "../../../stores/appState";
     import {Duration} from "luxon";
     import _ from "lodash";
 
@@ -34,15 +34,23 @@
     //     console.log("update called")
     // })
 
-    const onFavUpdate = (deps) => {
-        if ($tempDuration !== 0 && $runState !== "running") {
-            numbers = formatTimeMs($tempDuration).replaceAll(":", "")
-            numsStrToHrsMinsSecs();
+    const update = (deps = null) => {
+        if (!$intervalMode) {
+            if ($tempDuration !== 0 && $runState !== "running") {
+                numbers = formatTimeMs($tempDuration).replaceAll(":", "")
+                numsStrToHrsMinsSecs();
+            }
+        }
+        else {
+            if ($intervalDurations.every(v => v) && $runState !== "running") {
+                numbers = formatTimeMs($intervalDurations[$intervalIndex]).replaceAll(":", "")
+                numsStrToHrsMinsSecs();
+            }
         }
     }
 
     $: {
-        onFavUpdate($currentFavInd);
+        update([$currentFavInd, $currentFavInterval]);
     }
     $: readableTime = formatTime(hours, minutes, seconds)
 
@@ -59,11 +67,14 @@
 
 
     const updateIntervalTime = () => {
+        console.log("favorite intervals: ", $settings.favoriteIntervals)
         const duration = Duration.fromObject({hours, minutes, seconds});
-        const tempIntervalDurations = $intervalDurations;
+        const tempIntervalDurations = [...$intervalDurations];
         tempIntervalDurations[$intervalIndex] = duration.toMillis();
-        console.log(tempIntervalDurations)
         intervalDurations.set(tempIntervalDurations);
+        if ($currentFavInterval !== null && !arraysEqual(tempIntervalDurations, $settings.favoriteIntervals[$currentFavInterval])) {
+            currentFavInterval.set(null);
+        }
     }
 
     const numsStrToHrsMinsSecs = () => {

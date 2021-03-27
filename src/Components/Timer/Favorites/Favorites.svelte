@@ -1,14 +1,20 @@
 <script>
-    import {settings, currentFavInd} from "../../../stores/appState";
+    import {settings, currentFavInd, intervalMode, currentFavInterval} from "../../../stores/appState";
 
     import {fade} from "svelte/transition"
+    // import {intervalIndex} from "../../../stores/timerState";
+    let favsList, curInd;
 
-    $: favsList = $settings.favorites
+    $: {
+        favsList = $intervalMode ? $settings.favoriteIntervals : $settings.favorites
+        console.log("favsList: ", favsList);
+    }
+    $: curInd = $intervalMode ? $currentFavInterval : $currentFavInd;
 </script>
 
 <div class="Favorites" in:fade={{duration: 100}} out:fade={{duration: 100}}>
     {#each favsList as fav, i}
-        <div class="favorite" class:used={!!fav} class:selected={$currentFavInd === i}>
+        <div class="favorite" class:used={!!fav} class:selected={curInd === i}>
             <p>{i + 1}</p>
         </div>
     {/each}

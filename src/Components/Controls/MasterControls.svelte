@@ -2,6 +2,7 @@
     import {tick} from "svelte";
     import {
         currentFavInd,
+        currentFavInterval,
         intervalMode,
         settings,
         showFavorites,
@@ -49,34 +50,66 @@
 
     const setFavorite = (key) => {
         if ($focused) {
-            console.log("setting favorite: ", favKeyMap.set[key], " to ", $tempDuration)
-            const tempFavorites = $settings.favorites;
-            // if this value isn't already in a favorite slot
-            if (!tempFavorites.includes($tempDuration)) {
-                tempFavorites[favKeyMap.set[key]] = $tempDuration > 0 ? $tempDuration : null;
-                settings.set({...$settings, favorites: tempFavorites})
-                currentFavInd.set(favKeyMap.set[key]);
+            // in normal mode:
+            if (!$intervalMode) {
+                console.log("setting favorite: ", favKeyMap.set[key], " to ", $tempDuration)
+                const tempFavorites = $settings.favorites;
+                // if this value isn't already in a favorite slot
+                if (!tempFavorites.includes($tempDuration)) {
+                    tempFavorites[favKeyMap.set[key]] = $tempDuration > 0 ? $tempDuration : null;
+                    settings.set({...$settings, favorites: tempFavorites})
+                    currentFavInd.set(favKeyMap.set[key]);
+                }
+            // in interval mode
+            } else {
+                const tempFavorites = $settings.favoriteIntervals;
+
+                tempFavorites[favKeyMap.set[key]] = $intervalDurations;
+                settings.set({...$settings, favoriteIntervals: tempFavorites});
+                currentFavInterval.set(favKeyMap.set[key]);
             }
         }
     }
 
-    const loadFavorite = (key) => {
+    const loadFavorite = async (key) => {
+        console.log("loadFavorite called")
         const favInd = favKeyMap.load[key];
-        const setting = $settings.favorites[favInd]
-        if (!!setting && setting !== $tempDuration) {
-            if ($runState === "running") {
-                pause();
+        /// IF NOT IN INTERVAL MODE:
+        if (!$intervalMode) {
+            console.log("loading non-interval setting.")
+            const setting = $settings.favorites[favInd]
+            if (!!setting && setting !== $tempDuration) {
+                if ($runState === "running") {
+                    pause();
+                }
+                focused.set(true);
+                tempDuration.set(setting);
+                currentFavInd.set(favInd);
             }
-            focused.set(true);
-            tempDuration.set(setting);
-            currentFavInd.set(favInd);
+        }
+        /// IF IN INTERVAL MODE:
+        else {
+            console.log("loading interval setting ")
+            const setting = $settings.favoriteIntervals[favInd];
+            console.log("fav setting: ", setting)
+            if (!!setting) {
+                focused.set(false);
+                if ($runState !== "running") {
+                    pause();
+                }
+                intervalIndex.set(0);
+                intervalDurations.set(setting);
+                currentFavInterval.set(favInd);
+                await tick()
+                focused.set(true);
+            }
         }
     }
 
     const handleKeyDown = async (e) => {
         const key = e.key;
         if (e.repeat) return;
-        console.log(key)
+        // console.log(key)
         switch (key) {
             /// MAIN PAUSE/PLAY CONTROLS
             case " ":
@@ -115,7 +148,14 @@
             // switch to interval (or Pomodoro) mode
             case "i":
             case "p":
-                intervalMode.set(!$intervalMode);
+                if (!($runState === "running")) {
+                    focused.set(false);
+                    intervalMode.set(!$intervalMode);
+                    currentFavInd.set(null);
+                    currentFavInterval.set(null);
+                    await tick();
+                    focused.set(true);
+                }
                 break;
 
             /// FAVORITES CONTROLS:

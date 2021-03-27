@@ -11,7 +11,6 @@
             const curTime = ($time / (blinkRate / oneCycle));
             // get the y position and scale between 0.5 & 1
             opacity = (Math.sin(curTime / oneCycle) + 1) / 4 + 0.5;
-            console.log("opacity: ", opacity)
         }
         else opacity = 1;
     }

@@ -60,12 +60,12 @@ const createWindow = () => {
   mainWindow.webContents.once('did-finish-load', function () {
     var windowBounds = mainWindow.getBounds();
     devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
-    devtools.setSize(windowBounds.width/2, windowBounds.height);
+    devtools.setSize(windowBounds.width, windowBounds.height);
   });
-  mainWindow.on('move', () => {
-    var windowBounds = mainWindow.getBounds();
-    devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
-  });
+  // mainWindow.on('move', () => {
+  //   var windowBounds = mainWindow.getBounds();
+  //   devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
+  // });
 
 
 };
