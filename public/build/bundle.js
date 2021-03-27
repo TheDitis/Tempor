@@ -1,5 +1,5 @@
 
-(function(l, r) { if (l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (window.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(window.document);
+(function(l, r) { if (l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (window.location.host || 'localhost').split(':')[0] + ':35730/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(window.document);
 var app = (function () {
     'use strict';
 
@@ -3064,10 +3064,26 @@ var app = (function () {
 
     // runs when the time runs out
     const handleEnd = () => {
-        runState.set("finished");
-        const sound = new Audio("file://" + __dirname + "/sounds/endSound.wav");
-        sound.play();
-        focused.set(true);
+        // if not in interval mode
+        if (!get_store_value(intervalMode)) {
+            runState.set("finished");
+            const sound = new Audio("file://" + __dirname + "/sounds/endSound.wav");
+            sound.play();
+            focused.set(true);
+        }
+        // if in interval mode
+        else {
+            const tempDurations = get_store_value(intervalDurations);
+            const currentInd = get_store_value(intervalIndex);
+            const nextInd = (currentInd + 1) % tempDurations.length;
+            intervalIndex.set(nextInd);
+            // if repeatIntervalCycle setting is on or we haven't reached the end of the list:
+            if (get_store_value(settings).repeatIntervalCycle || nextInd > currentInd) {
+                startTime.set(Date.now());
+                duration.set(tempDurations[nextInd]);
+                focused.set(false);
+            }
+        }
     };
 
     // these aren't really private, but nor are they really useful to document
@@ -31192,7 +31208,11 @@ var app = (function () {
 
     		switch (key) {
     			case " ":
-    				if ($runState === "running") pause(); else if (($runState === "finished" || $currentFavInd !== null && $tempDuration !== $duration) && ($intervalMode || $tempDuration)) start(); else if ($runState === "paused") resume();
+    				if ($runState === "running") pause(); else if ((// not paused or running
+    				$runState === "finished" || // of you just selected a favorite
+    				$currentFavInd !== null && $tempDuration !== $duration) && ($intervalMode || $tempDuration)) {
+    					start();
+    				} else if ($runState === "paused") resume();
     				break;
     			case "Enter":
     				if ($focused && ($intervalMode && $intervalDurations.every(v => v) || $tempDuration)) {

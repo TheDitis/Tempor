@@ -80,7 +80,18 @@
             /// MAIN PAUSE/PLAY CONTROLS
             case " ":
                 if ($runState === "running") pause();
-                else if (($runState === "finished" || ($currentFavInd !== null && $tempDuration !== $duration)) && ($intervalMode || $tempDuration)) start();
+
+                else if (
+                    (
+                        // not paused or running
+                        $runState === "finished"
+                        // of you just selected a favorite
+                        || ($currentFavInd !== null && $tempDuration !== $duration)
+                    )
+                    && ($intervalMode || $tempDuration)
+                ) {
+                    start();
+                }
                 else if ($runState === "paused") resume();
                 break;
             case "Enter":

@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b7b0175-f98d-43b3-b351-86c5c407840e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/build/bundle.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/build/bundle.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/build/bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/build/bundle.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/build/bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/build/bundle.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Controls/PlayPauseControl.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/PlayPauseControl.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Timer/IntervalMode/IntervalNumberIndicator.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/IntervalMode/IntervalNumberIndicator.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeInput.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeInput.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Timer/Timer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/Timer.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/stores/timerState.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/timerState.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -122,7 +117,7 @@
       <updated>1616465887199</updated>
       <workItem from="1616465888340" duration="491000" />
       <workItem from="1616466762411" duration="2202000" />
-      <workItem from="1616542385164" duration="118167000" />
+      <workItem from="1616542385164" duration="120873000" />
     </task>
     <servers />
   </component>

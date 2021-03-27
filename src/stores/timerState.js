@@ -1,5 +1,6 @@
 import {readable, derived, writable, get} from "svelte/store";
-import {intervalMode} from "./appState";
+import {settings, intervalMode} from "./appState";
+
 
 export const focused = writable(true);
 
@@ -91,10 +92,26 @@ export const resume = () => {
 
 // runs when the time runs out
 export const handleEnd = () => {
-    runState.set("finished");
-    const sound = new Audio("file://" + __dirname + "/sounds/endSound.wav");
-    sound.play();
-    focused.set(true)
+    // if not in interval mode
+    if (!get(intervalMode)) {
+        runState.set("finished");
+        const sound = new Audio("file://" + __dirname + "/sounds/endSound.wav");
+        sound.play();
+        focused.set(true)
+    }
+    // if in interval mode
+    else {
+        const tempDurations = get(intervalDurations);
+        const currentInd = get(intervalIndex);
+        const nextInd = (currentInd + 1) % tempDurations.length;
+        intervalIndex.set(nextInd)
+        // if repeatIntervalCycle setting is on or we haven't reached the end of the list:
+        if (get(settings).repeatIntervalCycle || nextInd > currentInd) {
+            startTime.set(Date.now())
+            duration.set(tempDurations[nextInd]);
+            focused.set(false);
+        }
+    }
 }
 
 

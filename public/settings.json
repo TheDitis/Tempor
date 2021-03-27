@@ -13,5 +13,13 @@
     null,
     null,
     null
-  ]
+  ],
+  "favoriteIntervals": [
+    [1500000, 300000],
+    [20000, 10000],
+    null,
+    null,
+    null
+  ],
+  "repeatIntervalCycle": true
 }
