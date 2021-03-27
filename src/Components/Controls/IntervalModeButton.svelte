@@ -1,16 +1,17 @@
 <script>
     import TomatoIcon from "../Icons/TomatoIcon.svelte";
     import {size} from "../../stores/appState";
-    import {faSyncAlt} from "@fortawesome/free-solid-svg-icons";
+    // import {faSyncAlt} from "@fortawesome/free-solid-svg-icons";
+    import {intervalMode} from "../../stores/appState";
 </script>
 
-<button class="ThemeCycleButton">
-    <TomatoIcon size={$size / 2}/>
+<button class="IntervalModeButton" on:click={() => intervalMode.set(!$intervalMode)}>
+    <TomatoIcon size={$size / 13} color="white"/>
 </button>
 
 
 <style>
-    .ThemeCycleButton {
+    .IntervalModeButton {
         position: absolute;
         bottom: 5px;
         right: 5px;
@@ -31,7 +32,7 @@
         transition-delay: 500ms;
         overflow: hidden;
     }
-    .ThemeCycleButton:hover {
+    .IntervalModeButton:hover {
         opacity: 1;
         transition-duration: 200ms;
         transition-delay: 0ms;

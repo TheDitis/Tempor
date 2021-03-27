@@ -13,13 +13,13 @@
 </script>
 
 
-<button class="ThemeCycleButton" on:click={cycleTheme}>
+<button class="IntervalModeButton" on:click={cycleTheme}>
     <Fa icon={faAdjust}/>
 </button>
 
 
 <style>
-    .ThemeCycleButton {
+    .IntervalModeButton {
         position: absolute;
         top: 5px;
         right: 5px;
@@ -39,7 +39,7 @@
         transition-duration: 700ms;
         transition-delay: 500ms;
     }
-    .ThemeCycleButton:hover {
+    .IntervalModeButton:hover {
         opacity: 1;
         transition-duration: 200ms;
         transition-delay: 0ms;

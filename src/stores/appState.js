@@ -55,7 +55,7 @@ export const height = derived(
 )
 
 
-
+export const intervalMode = writable(true);
 
 export const settings = writable({})
 

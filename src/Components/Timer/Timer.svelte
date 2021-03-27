@@ -11,9 +11,11 @@
         tempDuration,
         start
     } from "../../stores/timerState";
-    import {color, size, settings, showFavorites} from "../../stores/appState";
+    import {color, size, settings, showFavorites, intervalMode} from "../../stores/appState";
     import PlayPauseControl from "../Controls/PlayPauseControl.svelte";
     import Favorites from "./Favorites/Favorites.svelte";
+    import IntervalModeIndicator from "./IntervalMode/IntervalModeIndicator.svelte";
+    import IntervalNumberIndicator from "./IntervalMode/IntervalNumberIndicator.svelte";
 
     // thickness of the line
     $: thickness = $size / 20;
@@ -57,6 +59,11 @@
     </svg>
     {#if $showFavorites && $settings.favorites}
         <Favorites/>
+    {/if}
+
+    {#if $intervalMode}
+        <IntervalModeIndicator/>
+        <IntervalNumberIndicator/>
     {/if}
 
     <TimeIndicatorInput/>

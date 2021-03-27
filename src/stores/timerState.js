@@ -20,6 +20,7 @@ export const runState = writable("finished");
 // set to the time that the counter starts counting down
 export const startTime = writable(Date.now());
 
+
 // this is set when a new time value is entered, so that it is ready to go when play is hit
 export const tempDuration = writable(0);
 
@@ -39,6 +40,14 @@ export const remainingTime = derived(
         else return 0;
     }
 );
+
+
+/// USED IN INTERVAL MODE
+// this is used for the temporary durations in interval mode
+export const intervalDurations = writable([0, 0])
+
+// the index of the current interval duration
+export const intervalIndex = writable(0)
 
 
 // sets the duration, start time, and run-state of the timer
