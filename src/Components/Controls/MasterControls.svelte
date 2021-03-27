@@ -148,6 +148,7 @@
                 break;
 
             /// INTERVAL MODE CONTROLS:
+            // navigating between existing cycles
             case "ArrowLeft":
             case "ArrowRight":
                 if ($intervalMode && $runState !== "running") {
@@ -162,7 +163,30 @@
                     focused.set(true);
                 }
                 break;
-
+            // adding/subtracting cycles
+            case "ArrowUp":
+                if ($intervalMode && $intervalDurations.length <= 5 && $runState !== "running") {
+                    focused.set(false);
+                    intervalDurations.set([...$intervalDurations, 0])
+                    intervalIndex.set($intervalDurations.length - 1)
+                    await tick();
+                    focused.set(true);
+                }
+                break;
+            case "ArrowDown":
+                if ($intervalMode && $intervalDurations.length > 1 && $runState !== "running") {
+                    focused.set(false);
+                    if ($intervalIndex === $intervalDurations.length - 1) {
+                        intervalIndex.update(ind => ind - 1);
+                    }
+                    intervalDurations.update(arr => {
+                        arr.pop();
+                        return arr;
+                    })
+                    await tick();
+                    focused.set(true);
+                }
+                break;
             default:
                 break;
         }

@@ -31250,6 +31250,7 @@ var app = (function () {
     	let $duration;
     	let $intervalMode;
     	let $intervalDurations;
+    	let $intervalIndex;
     	validate_store(focused, "focused");
     	component_subscribe($$self, focused, $$value => $$invalidate(8, $focused = $$value));
     	validate_store(tempDuration, "tempDuration");
@@ -31266,6 +31267,8 @@ var app = (function () {
     	component_subscribe($$self, intervalMode, $$value => $$invalidate(14, $intervalMode = $$value));
     	validate_store(intervalDurations, "intervalDurations");
     	component_subscribe($$self, intervalDurations, $$value => $$invalidate(15, $intervalDurations = $$value));
+    	validate_store(intervalIndex, "intervalIndex");
+    	component_subscribe($$self, intervalIndex, $$value => $$invalidate(16, $intervalIndex = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("MasterControls", slots, []);
     	let { makeBigger } = $$props;
@@ -31385,6 +31388,32 @@ var app = (function () {
     					focused.set(true);
     				}
     				break;
+    			case "ArrowUp":
+    				if ($intervalMode && $intervalDurations.length <= 5 && $runState !== "running") {
+    					focused.set(false);
+    					intervalDurations.set([...$intervalDurations, 0]);
+    					intervalIndex.set($intervalDurations.length - 1);
+    					await tick();
+    					focused.set(true);
+    				}
+    				break;
+    			case "ArrowDown":
+    				if ($intervalMode && $intervalDurations.length > 1 && $runState !== "running") {
+    					focused.set(false);
+
+    					if ($intervalIndex === $intervalDurations.length - 1) {
+    						intervalIndex.update(ind => ind - 1);
+    					}
+
+    					intervalDurations.update(arr => {
+    						arr.pop();
+    						return arr;
+    					});
+
+    					await tick();
+    					focused.set(true);
+    				}
+    				break;
     		}
     	};
 
@@ -31445,7 +31474,8 @@ var app = (function () {
     		$currentFavInd,
     		$duration,
     		$intervalMode,
-    		$intervalDurations
+    		$intervalDurations,
+    		$intervalIndex
     	});
 
     	$$self.$inject_state = $$props => {
