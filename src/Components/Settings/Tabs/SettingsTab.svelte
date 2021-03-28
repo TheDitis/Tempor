@@ -23,7 +23,8 @@
 <style>
     .SettingsTab {
         width: 100%;
-        color: white;
+        color: var(--color);
+        opacity: 0.5;
         transition-duration: 300ms;
         margin-left: 2px;
         margin-right: 2px;
@@ -35,8 +36,7 @@
         filter: blur(calc(var(--textBlur) / 2 * 1px));
     }
     .active {
-        color: var(--color);
-        /*border-bottom: 2px solid var(--color);*/
+        opacity: 1;
     }
     .underline {
         width: 100%;

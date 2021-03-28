@@ -29,6 +29,8 @@ export const scaledBlur = derived(
     ([$blur, $size]) => $blur * ($size / 300)
 );
 
+export const borderRadius = writable(0);
+
 
 export const maxSize = readable(Math.min(window.screen.height, window.screen.width))
 
@@ -59,9 +61,11 @@ export const height = derived(
 )
 
 
-export const intervalMode = writable(true);
+export const intervalMode = writable(false);
 
-export const settings = writable({})
+export const settings = writable({});
+
+export const volume = writable(0);
 
 export const stayOnTop = derived(settings, $settings => $settings.alwaysOnTop);
 
@@ -77,6 +81,8 @@ export const loadSettings = () => {
     hue.set(settingsData.hue);
     size.set(settingsData.size);
     blur.set(settingsData.blur);
+    borderRadius.set(settingsData.frame)
+    volume.set(settingsData.volume);
 }
 
 
@@ -84,8 +90,10 @@ export const saveSettings = () => {
     const tempHue = get(hue);
     const tempSize = get(size);
     const tempBlur = get(blur);
-    let tempSettings = get(settings)
-    tempSettings = {...tempSettings, hue: tempHue, size: tempSize, blur: tempBlur}
+    const frame = get(borderRadius);
+    const vol = get(volume);
+    let tempSettings = get(settings);
+    tempSettings = {...tempSettings, hue: tempHue, size: tempSize, blur: tempBlur, frame, volume: vol}
     tempSettings = JSON.stringify(tempSettings, null, 2);
     fs.writeFileSync(path.join(__dirname, "./settings.json"), tempSettings)
 }
@@ -94,6 +102,6 @@ export const saveSettings = () => {
 export const playSound = (filename) => {
     const sound = new Audio();
     sound.src = "file://" + __dirname + "/sounds/" + filename;
-    sound.volume = get(settings).volume;
+    sound.volume = get(volume);
     sound.play();
 }

@@ -1,7 +1,6 @@
 <script>
 	import {onMount} from "svelte";
 	import Timer from "./Components/Timer/Timer.svelte";
-
 	const {ipcRenderer} = require("electron");
 	import {
 		size,
@@ -10,6 +9,7 @@
 		color,
 		stayOnTop,
 		scaledBlur,
+		borderRadius,
 		settings,
 		maxSize,
 		settingsOpen,
@@ -20,7 +20,7 @@
 	import ResizeControl from "./Components/Controls/ResizeControl.svelte";
 	import OpenSettingsButton from "./Components/Settings/OpenSettingsButton.svelte";
 	import Settings from "./Components/Settings/Settings.svelte";
-	import ThemeCycleButton from "./Components/Settings/ThemeCycleButton.svelte";
+	import ThemeCycleButton from "./Components/Controls/ThemeCycleButton.svelte";
 	import IntervalModeButton from "./Components/Controls/IntervalModeButton.svelte";
 	import MasterControls from "./Components/Controls/MasterControls.svelte";
 	import {
@@ -98,7 +98,7 @@
 	}
 
 	$: appBg = themes[$settings.theme];
-	$: borderRadius = ($settings.frame === "round") ? `${$width}px` : "40px"
+	// $: borderRadius = ($settings.frame === "round") ? `${$width}px` : "40px"
 
 </script>
 
@@ -114,51 +114,59 @@
 		--buttonBg: {$color.alpha(0.5).hsl().string()};
 		--activeButtonBg: {$color.alpha(0.6).hsl().string()};
 		--appBg: {appBg};
-		--frameRadius: {borderRadius};
+		--frameRadius: {$borderRadius  * ($width / 2) / 100}px;
 	"
 >
-	<div class="draggableArea"></div>
+	<div class="App">
+		<div class="draggableArea"></div>
 
-	<div class="timerSection">
-		<Timer start={start} pause={pause} resume={resume}/>
-		<ResizeControl on:sizeUp={makeBigger} on:sizeDown={makeSmaller}/>
-		<OpenSettingsButton/>
-		<ThemeCycleButton/>
-		<IntervalModeButton/>
+		<div class="timerSection">
+			<Timer start={start} pause={pause} resume={resume}/>
+			<ResizeControl on:sizeUp={makeBigger} on:sizeDown={makeSmaller}/>
+			<OpenSettingsButton/>
+			<ThemeCycleButton/>
+			<IntervalModeButton/>
+		</div>
+
+		{#if $settingsOpen}
+			<Settings/>
+		{/if}
 	</div>
-
-	{#if $settingsOpen}
-		<Settings/>
-	{/if}
-
 </main>
 <MasterControls start={start} pause={pause} resume={resume} makeBigger={makeBigger} makeSmaller={makeSmaller}/>
 
 
 <style>
 	main {
-		margin: 0;
+		box-sizing: border-box;
+	}
+
+	.App {
+		margin-top: 20px;
 		padding: 0;
 		background: var(--appBg);
-		/*border-radius: 40px;*/
-		/*border*/
-		/*border-radius: calc(var(--width) * 1px);*/
 		border-radius: var(--frameRadius);
 	}
 
 
 	.draggableArea {
+		position: absolute;
+		top: 0px;
 		height: 20px;
 		width: 100vw;
 		margin: 0;
 		padding: 0;
+		backround: white;
 		-webkit-app-region: drag;
 	}
 
 	.timerSection {
-		width: 100vw;
+		/*width: 100vw;*/
 		margin: 0;
-		padding-bottom: 15px;
+		/*border: 2px solid red;*/
+		padding: 10px;
+		/*margin-top: 20px;*/
+		/*padding-bottom: 15px;*/
 		box-sizing: border-box;
 		position: relative;
 		display: flex;

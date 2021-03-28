@@ -74,6 +74,7 @@
     .Timer {
         width: var(--size);
         height: var(--size);
+        /*border: 2px solid purple;*/
 
         display: flex;
         justify-content: center;

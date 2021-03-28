@@ -1,23 +1,33 @@
 <script>
-    import {settingsHeight, settings, hue, color, blur} from "../../stores/appState";
-    import SettingsSlider from "./SettingsSlider.svelte";
-    import SettingsOptionButton from "./SettingsOptionButton.svelte";
+    import {settingsHeight, settings, hue, color, blur, settingsTab} from "../../stores/appState";
+    import SettingsSlider from "./SettingControls/SettingsSlider.svelte";
+    import SettingsOptionButton from "./SettingControls/SettingsOptionButton.svelte";
     import {faLayerGroup} from "@fortawesome/free-solid-svg-icons";
     import SaveButton from "./SaveButton.svelte";
-    import {onMount} from "svelte";
+    import {afterUpdate, onMount} from "svelte";
     import SettingsTabs from "./Tabs/SettingsTabs.svelte";
+    import StyleSettings from "./Style/StyleSettings.svelte";
+    import SoundSettings from "./Sound/SoundSettings.svelte"
 
     let settingsRef;
 
+    const settingsPages = {
+        "style": StyleSettings,
+        "sound": SoundSettings
+    }
+
 
     onMount(() => {
-        settingsHeight.set(settingsRef.clientHeight)
+        settingsHeight.set(settingsRef.clientHeight);
+    })
+    afterUpdate(() => {
+        settingsHeight.set(settingsRef.clientHeight);
     })
 </script>
 
 
 <div
-        bind:this={settingsRef}
+    bind:this={settingsRef}
     class="Settings"
     style="
         --settingsHeight: {$settingsHeight};
@@ -25,11 +35,9 @@
     "
 >
     <SettingsTabs/>
-    <SettingsSlider label="Color" bind:value={$hue} min="0" max="360"/>
-    <SettingsSlider label="Blur" bind:value={$blur} min="0" max="10"/>
-    <div class="buttonSection">
-        <SettingsOptionButton icon={faLayerGroup} option="alwaysOnTop" label="Stay on top"/>
-    </div>
+
+    <svelte:component this={settingsPages[$settingsTab]}/>
+
     <div class="bottomRow">
         <SaveButton/>
     </div>
@@ -51,12 +59,7 @@
         /*box-shadow: 15px 0 15px -15px var(--color);*/
     }
 
-    .buttonSection {
-        margin-top: 15px;
-        width: 100%;
-        display: flex;
-        justify-content: space-evenly;
-    }
+
 
     .bottomRow {
         margin-top: 30px;

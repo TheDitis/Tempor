@@ -3,12 +3,13 @@
     export let min;
     export let max;
     export let label;
-
+    export let step = 0.1
+    export let onChange = () => null;
 </script>
 
 <div class="SettingsSlider">
     <p>{label}</p>
-    <input type="range" bind:value={value} {min} {max} step={0.1}/>
+    <input type="range" bind:value={value} {min} {max} {step} on:input={onChange}/>
 </div>
 
 <style>

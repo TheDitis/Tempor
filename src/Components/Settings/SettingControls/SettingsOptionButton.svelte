@@ -1,6 +1,6 @@
 <script>
     import Fa from "svelte-fa";
-    import {settings} from "../../stores/appState";
+    import {settings} from "../../../stores/appState";
 
     export let icon;
     export let option;
