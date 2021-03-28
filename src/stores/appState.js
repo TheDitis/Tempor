@@ -6,6 +6,8 @@ const path = require("path");
 
 export const showFavorites = writable(false);
 
+export const settingsTab = writable("style");
+
 
 /// COLOR STATE ITEMS
 export const hue = writable(180);

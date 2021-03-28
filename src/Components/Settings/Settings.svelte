@@ -5,6 +5,7 @@
     import {faLayerGroup} from "@fortawesome/free-solid-svg-icons";
     import SaveButton from "./SaveButton.svelte";
     import {onMount} from "svelte";
+    import SettingsTabs from "./Tabs/SettingsTabs.svelte";
 
     let settingsRef;
 
@@ -23,6 +24,7 @@
         --color2: {$color.alpha(0.5).hsl().string()}
     "
 >
+    <SettingsTabs/>
     <SettingsSlider label="Color" bind:value={$hue} min="0" max="360"/>
     <SettingsSlider label="Blur" bind:value={$blur} min="0" max="10"/>
     <div class="buttonSection">
