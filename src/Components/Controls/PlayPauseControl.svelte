@@ -47,6 +47,7 @@
         color: var(--color);
         filter: blur(calc(var(--textBlur) * 1px));
         /*transition-property: filter;*/
+        transition-property: transform;
         transition-duration: 200ms;
     }
     .PlayPauseButton:focus {

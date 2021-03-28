@@ -151,12 +151,11 @@
 
 	.draggableArea {
 		position: absolute;
-		top: 0px;
+		top: 0;
 		height: 20px;
 		width: 100vw;
 		margin: 0;
 		padding: 0;
-		backround: white;
 		-webkit-app-region: drag;
 	}
 

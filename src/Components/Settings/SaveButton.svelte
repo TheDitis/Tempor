@@ -33,8 +33,7 @@
         box-shadow: none;
         color: var(--color);
 
-        /*position: absolute;*/
-        /*right: 8px;*/
+        transition-property: filter;
         bottom: 8px;
 
         transition-duration: 300ms;

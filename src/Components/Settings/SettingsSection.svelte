@@ -33,7 +33,7 @@
         justify-content: center;
     }
     .buttonSection {
-        margin-top: 15px;
+        margin-top: 25px;
         width: 100%;
         display: flex;
         justify-content: space-evenly;

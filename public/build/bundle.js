@@ -28885,7 +28885,7 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			create_component(fa.$$.fragment);
-    			attr_dev(button, "class", "PlayPauseButton svelte-dj9u01");
+    			attr_dev(button, "class", "PlayPauseButton svelte-n8665z");
     			add_location(button, file$h, 31, 4, 743);
     		},
     		l: function claim(nodes) {
@@ -30691,15 +30691,15 @@ var app = (function () {
     			t0 = text(/*label*/ ctx[3]);
     			t1 = space();
     			input = element("input");
-    			attr_dev(p, "class", "svelte-le8alh");
+    			attr_dev(p, "class", "svelte-fy54l");
     			add_location(p, file$9, 10, 4, 211);
     			attr_dev(input, "type", "range");
     			attr_dev(input, "min", /*min*/ ctx[1]);
     			attr_dev(input, "max", /*max*/ ctx[2]);
     			attr_dev(input, "step", /*step*/ ctx[4]);
-    			attr_dev(input, "class", "svelte-le8alh");
+    			attr_dev(input, "class", "svelte-fy54l");
     			add_location(input, file$9, 11, 4, 231);
-    			attr_dev(div, "class", "SettingsSlider svelte-le8alh");
+    			attr_dev(div, "class", "SettingsSlider svelte-fy54l");
     			add_location(div, file$9, 9, 0, 177);
     		},
     		l: function claim(nodes) {
@@ -31110,7 +31110,7 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			create_component(fa.$$.fragment);
-    			attr_dev(button, "class", "SaveButton svelte-10w5g5");
+    			attr_dev(button, "class", "SaveButton svelte-1sdpkjl");
     			add_location(button, file$7, 8, 0, 180);
     		},
     		l: function claim(nodes) {
@@ -31207,12 +31207,12 @@ var app = (function () {
     			create_component(fa.$$.fragment);
     			t = space();
     			div1 = element("div");
-    			attr_dev(div0, "class", "mainSection svelte-15cvp4x");
+    			attr_dev(div0, "class", "mainSection svelte-1t2qt55");
     			add_location(div0, file$6, 14, 4, 335);
-    			attr_dev(div1, "class", "underline svelte-15cvp4x");
+    			attr_dev(div1, "class", "underline svelte-1t2qt55");
     			toggle_class(div1, "activeUnderline", /*isCurrent*/ ctx[1]);
     			add_location(div1, file$6, 17, 4, 405);
-    			attr_dev(div2, "class", "SettingsTab svelte-15cvp4x");
+    			attr_dev(div2, "class", "SettingsTab svelte-1t2qt55");
     			toggle_class(div2, "active", /*isCurrent*/ ctx[1]);
     			add_location(div2, file$6, 13, 0, 260);
     		},
@@ -31491,11 +31491,11 @@ var app = (function () {
     			t = space();
     			div1 = element("div");
     			if (buttons_slot) buttons_slot.c();
-    			attr_dev(div0, "class", "mainControls svelte-1jyj9pj");
+    			attr_dev(div0, "class", "mainControls svelte-8z4vg");
     			add_location(div0, file$4, 6, 4, 62);
-    			attr_dev(div1, "class", "buttonSection svelte-1jyj9pj");
+    			attr_dev(div1, "class", "buttonSection svelte-8z4vg");
     			add_location(div1, file$4, 10, 4, 125);
-    			attr_dev(div2, "class", "SettingsSection svelte-1jyj9pj");
+    			attr_dev(div2, "class", "SettingsSection svelte-8z4vg");
     			add_location(div2, file$4, 5, 0, 27);
     		},
     		l: function claim(nodes) {
@@ -33168,11 +33168,11 @@ var app = (function () {
     			if (if_block) if_block.c();
     			t6 = space();
     			create_component(mastercontrols.$$.fragment);
-    			attr_dev(div0, "class", "draggableArea svelte-1b2v2ja");
+    			attr_dev(div0, "class", "draggableArea svelte-qkp4gx");
     			add_location(div0, file, 120, 2, 3005);
-    			attr_dev(div1, "class", "timerSection svelte-1b2v2ja");
+    			attr_dev(div1, "class", "timerSection svelte-qkp4gx");
     			add_location(div1, file, 122, 2, 3042);
-    			attr_dev(div2, "class", "App svelte-1b2v2ja");
+    			attr_dev(div2, "class", "App svelte-qkp4gx");
     			add_location(div2, file, 119, 1, 2985);
     			set_style(main, "--size", /*$size*/ ctx[5]);
     			set_style(main, "--width", /*$width*/ ctx[3]);
@@ -33185,7 +33185,7 @@ var app = (function () {
     			set_style(main, "--activeButtonBg", /*$color*/ ctx[7].alpha(0.6).hsl().string());
     			set_style(main, "--appBg", /*appBg*/ ctx[6]);
     			set_style(main, "--frameRadius", /*$borderRadius*/ ctx[9] * (/*$width*/ ctx[3] / 2) / 100 + "px");
-    			attr_dev(main, "class", "svelte-1b2v2ja");
+    			attr_dev(main, "class", "svelte-qkp4gx");
     			add_location(main, file, 104, 0, 2563);
     		},
     		l: function claim(nodes) {

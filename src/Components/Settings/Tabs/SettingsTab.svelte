@@ -25,6 +25,7 @@
         width: 100%;
         color: var(--color);
         opacity: 0.5;
+        transition-property: opacity;
         transition-duration: 300ms;
         margin-left: 2px;
         margin-right: 2px;
@@ -42,6 +43,7 @@
         width: 100%;
         height: 5px;
         background: var(--color);
+        transition-property: opacity;
         opacity: 0.3;
         transition-duration: 500ms;
         filter: blur(calc(var(--textBlur) * 2px));

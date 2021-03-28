@@ -23,6 +23,7 @@
 
     p {
         color: var(--color);
+        /*transition-duration: 400ms;*/
         margin: 0;
         padding: 0 0 0 3px;
         /*padding-left: 3px;*/
@@ -31,6 +32,7 @@
     input[type=range] {
         filter: blur(calc(var(--textBlur) * 1px));
         -webkit-appearance: none;
+        /*transition-duration: 400ms;*/
         width: 100%;
         outline: none;
         border: none;
@@ -40,6 +42,7 @@
 
     input[type=range]::-webkit-slider-thumb {
         -webkit-appearance: none;
+        /*transition-duration: 400ms;*/
         background: var(--color);
         outline: none;
         width: calc(var(--size) / 15 * 1px);
@@ -58,6 +61,7 @@
         height: 8px;
         cursor: pointer;
         background: var(--color2);
+        /*transition-duration: 400ms;*/
         /*opacity: 0.3;*/
         border-radius: 10px;
     }
