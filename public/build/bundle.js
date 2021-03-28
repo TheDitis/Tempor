@@ -29090,9 +29090,9 @@ var app = (function () {
     			p = element("p");
     			t0 = text(t0_value);
     			t1 = space();
-    			attr_dev(p, "class", "svelte-iy3uej");
+    			attr_dev(p, "class", "svelte-1sei1pw");
     			add_location(p, file$g, 17, 12, 692);
-    			attr_dev(div, "class", "favorite svelte-iy3uej");
+    			attr_dev(div, "class", "favorite svelte-1sei1pw");
     			toggle_class(div, "used", !!/*fav*/ ctx[6]);
     			toggle_class(div, "selected", /*curInd*/ ctx[1] === /*i*/ ctx[8]);
     			add_location(div, file$g, 16, 8, 607);
@@ -29149,7 +29149,7 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(div, "class", "Favorites svelte-iy3uej");
+    			attr_dev(div, "class", "Favorites svelte-1sei1pw");
     			add_location(div, file$g, 14, 0, 489);
     		},
     		l: function claim(nodes) {
@@ -29570,7 +29570,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			if_block.c();
-    			attr_dev(div, "class", "IntervalModeIndicator svelte-hna8xf");
+    			attr_dev(div, "class", "IntervalModeIndicator svelte-5ygx2t");
     			add_location(div, file$e, 20, 0, 720);
     		},
     		l: function claim(nodes) {
