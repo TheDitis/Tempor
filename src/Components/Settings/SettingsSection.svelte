@@ -8,9 +8,11 @@
         <slot/>
     </div>
 
-    <div class="buttonSection">
-        <slot name="buttons"/>
-    </div>
+    {#if $$slots.buttons}
+        <div class="buttonSection">
+            <slot name="buttons"/>
+        </div>
+    {/if}
 </div>
 
 
@@ -31,6 +33,8 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        max-height: 200px;
+        overflow-y: scroll;
     }
     .buttonSection {
         margin-top: 25px;

@@ -47,3 +47,18 @@ body {
 h1, h2, h3, h4, h5, p {
     font-family: Roboto Regular;
 }
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    /*box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);*/
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    opacity: 0.1;
+    border-radius: 3px;
+    /*outline: 1px solid slategrey;*/
+}

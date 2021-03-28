@@ -3,10 +3,11 @@ import Color from "color";
 const fs = require("fs");
 const path = require("path");
 
+const audio = writable(new Audio());
 
 export const showFavorites = writable(false);
 
-export const settingsTab = writable("style");
+export const settingsTab = writable("sound");
 
 
 /// COLOR STATE ITEMS
@@ -40,7 +41,7 @@ export const maxSize = readable(Math.min(window.screen.height, window.screen.wid
 // });
 export const settingsHeight = writable(0);
 
-export const settingsOpen = writable(false);
+export const settingsOpen = writable(true);
 
 export const width = derived(
     [size, scaledBlur],
@@ -61,7 +62,7 @@ export const height = derived(
 )
 
 
-export const intervalMode = writable(false);
+export const intervalMode = writable(true);
 
 export const settings = writable({});
 
@@ -100,8 +101,16 @@ export const saveSettings = () => {
 
 
 export const playSound = (filename) => {
-    const sound = new Audio();
-    sound.src = "file://" + __dirname + "/sounds/" + filename;
-    sound.volume = get(volume);
-    sound.play();
+    if (filename && filename.includes(".wav")) {
+        const sound = get(audio)
+        sound.pause();
+        sound.src = "file://" + __dirname + "/sounds/" + filename;
+        sound.volume = get(volume);
+        sound.play();
+    }
 }
+
+
+export const listSoundFileNames = () => (
+    fs.readdirSync(path.join(__dirname, "/sounds/"))
+)

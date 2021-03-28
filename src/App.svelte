@@ -148,7 +148,6 @@
 		border-radius: var(--frameRadius);
 	}
 
-
 	.draggableArea {
 		position: absolute;
 		top: 0;
@@ -162,7 +161,6 @@
 	.timerSection {
 		/*width: 100vw;*/
 		margin: 0;
-		/*border: 2px solid red;*/
 		padding: 10px;
 		/*margin-top: 20px;*/
 		/*padding-bottom: 15px;*/
