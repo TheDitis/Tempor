@@ -146,10 +146,12 @@
 		padding: 0;
 		background: var(--appBg);
 		border-radius: var(--frameRadius);
+		box-sizing: border-box;
 	}
 
 	.draggableArea {
 		position: absolute;
+		box-sizing: border-box;
 		top: 0;
 		height: 20px;
 		width: 100vw;

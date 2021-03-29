@@ -33787,11 +33787,11 @@ var app = (function () {
     			if (if_block) if_block.c();
     			t6 = space();
     			create_component(mastercontrols.$$.fragment);
-    			attr_dev(div0, "class", "draggableArea svelte-1j7e34u");
+    			attr_dev(div0, "class", "draggableArea svelte-1foel1y");
     			add_location(div0, file, 120, 2, 3005);
-    			attr_dev(div1, "class", "timerSection svelte-1j7e34u");
+    			attr_dev(div1, "class", "timerSection svelte-1foel1y");
     			add_location(div1, file, 122, 2, 3042);
-    			attr_dev(div2, "class", "App svelte-1j7e34u");
+    			attr_dev(div2, "class", "App svelte-1foel1y");
     			add_location(div2, file, 119, 1, 2985);
     			set_style(main, "--size", /*$size*/ ctx[5]);
     			set_style(main, "--width", /*$width*/ ctx[3]);
@@ -33804,7 +33804,7 @@ var app = (function () {
     			set_style(main, "--activeButtonBg", /*$color*/ ctx[7].alpha(0.6).hsl().string());
     			set_style(main, "--appBg", /*appBg*/ ctx[6]);
     			set_style(main, "--frameRadius", /*$borderRadius*/ ctx[9] * (/*$width*/ ctx[3] / 2) / 100 + "px");
-    			attr_dev(main, "class", "svelte-1j7e34u");
+    			attr_dev(main, "class", "svelte-1foel1y");
     			add_location(main, file, 104, 0, 2563);
     		},
     		l: function claim(nodes) {
