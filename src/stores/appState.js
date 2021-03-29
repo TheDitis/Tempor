@@ -44,9 +44,9 @@ export const settingsHeight = writable(0);
 export const settingsOpen = writable(true);
 
 export const width = derived(
-    [size, scaledBlur],
-    ([$size, $scaledBlur]) => {
-        return Math.round($size + ($scaledBlur * 7))
+    [size, scaledBlur, lineThickness],
+    ([$size, $scaledBlur, $lineThickness]) => {
+        return Math.round($size + ($scaledBlur * 7) + ($lineThickness / 4))
     }
 );
 

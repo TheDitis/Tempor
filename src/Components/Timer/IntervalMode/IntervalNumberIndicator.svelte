@@ -42,6 +42,7 @@
         margin: 3px;
         background: var(--color);
         opacity: 0.2;
+        transition-property: opacity;
         transition-duration: 500ms;
     }
     .current {

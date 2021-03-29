@@ -3134,9 +3134,9 @@ var app = (function () {
     const settingsOpen = writable(true);
 
     const width = derived(
-        [size, scaledBlur],
-        ([$size, $scaledBlur]) => {
-            return Math.round($size + ($scaledBlur * 7))
+        [size, scaledBlur, lineThickness],
+        ([$size, $scaledBlur, $lineThickness]) => {
+            return Math.round($size + ($scaledBlur * 7) + ($lineThickness / 4))
         }
     );
 
@@ -29784,7 +29784,7 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			div = element("div");
-    			attr_dev(div, "class", "intervalItem svelte-4rxad0");
+    			attr_dev(div, "class", "intervalItem svelte-hxm37v");
     			toggle_class(div, "current", /*$intervalIndex*/ ctx[2] === /*ind*/ ctx[7]);
     			add_location(div, file$f, 25, 8, 724);
     		},
@@ -29832,7 +29832,7 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(div, "class", "IntervalNumberIndicator svelte-4rxad0");
+    			attr_dev(div, "class", "IntervalNumberIndicator svelte-hxm37v");
     			set_style(div, "--blink", /*opacity*/ ctx[0]);
     			add_location(div, file$f, 19, 0, 549);
     		},
