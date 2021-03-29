@@ -30,15 +30,15 @@ export const scaledBlur = derived(
     ([$blur, $size]) => $blur * ($size / 300)
 );
 
+// the roundness of the corners of the frame is (if there is a frame)
 export const borderRadius = writable(0);
+
+// how thick the timer circle is
+export const lineThickness = writable(1);
 
 
 export const maxSize = readable(Math.min(window.screen.height, window.screen.width))
 
-// export const settingsHeight = derived([size], $size => {
-//     if ($size >= 200) return Math.round($size / 1.2);
-//     else return Math.round(150)
-// });
 export const settingsHeight = writable(0);
 
 export const settingsOpen = writable(true);
@@ -74,8 +74,10 @@ export const currentFavInd = writable(null);
 
 export const currentFavInterval = writable(null);
 
+export const meme = writable(null);  // TODO: IT'S OVER 9000!!!
+
 export const loadSettings = () => {
-    // read settings file:
+    // read settings file and set relevant stores:
     const settingsData = JSON.parse(fs.readFileSync(path.join(__dirname, "./settings.json")));
     settings.set(settingsData);
     console.log("favs: ", settingsData.favorites)
@@ -84,6 +86,7 @@ export const loadSettings = () => {
     blur.set(settingsData.blur);
     borderRadius.set(settingsData.frame)
     volume.set(settingsData.volume);
+    lineThickness.set(settingsData.lineThickness);
 }
 
 
@@ -93,8 +96,9 @@ export const saveSettings = () => {
     const tempBlur = get(blur);
     const frame = get(borderRadius);
     const vol = get(volume);
+    const lineThik = get(lineThickness);
     let tempSettings = get(settings);
-    tempSettings = {...tempSettings, hue: tempHue, size: tempSize, blur: tempBlur, frame, volume: vol}
+    tempSettings = {...tempSettings, hue: tempHue, size: tempSize, blur: tempBlur, lineThickness: lineThik, frame, volume: vol}
     tempSettings = JSON.stringify(tempSettings, null, 2);
     fs.writeFileSync(path.join(__dirname, "./settings.json"), tempSettings)
 }

@@ -93,7 +93,7 @@
 
 	const themes = {
 		"transparent": "transparent",
-		"dark": "rgb(33, 33, 33)",
+		"dark": "#202020",
 		"light": "white",
 	}
 

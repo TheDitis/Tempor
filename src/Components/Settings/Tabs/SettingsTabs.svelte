@@ -1,6 +1,7 @@
 <script>
     import {faPalette, faPaintBrush, faVolumeUp} from "@fortawesome/free-solid-svg-icons";
     import SettingsTab from "./SettingsTab.svelte";
+    // TODO: icon ideas: stream
 </script>
 
 

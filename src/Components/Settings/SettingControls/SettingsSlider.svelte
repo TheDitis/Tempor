@@ -1,7 +1,7 @@
 <script>
-    export let value;
-    export let min;
-    export let max;
+    export let value = 0;
+    export let min = 0;
+    export let max = 100;
     export let label;
     export let step = 0.1
     export let onChange = () => null;

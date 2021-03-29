@@ -1,11 +1,12 @@
 {
   "hue": 49,
   "size": 250,
-  "blur": 3.4,
+  "blur": 0,
+  "lineThickness": 100,
   "fontWeight": "Regular",
   "alwaysOnTop": true,
   "theme": "dark",
-  "frame": 35.4,
+  "frame": 100,
   "volume": 0.87,
   "sounds": {
     "start": "sound (1).wav",
