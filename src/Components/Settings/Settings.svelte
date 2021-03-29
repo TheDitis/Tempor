@@ -1,8 +1,6 @@
 <script>
-    import {settingsHeight, settings, hue, color, blur, settingsTab} from "../../stores/appState";
-    import SettingsSlider from "./SettingControls/SettingsSlider.svelte";
-    import SettingsOptionButton from "./SettingControls/SettingsOptionButton.svelte";
-    import {faLayerGroup} from "@fortawesome/free-solid-svg-icons";
+    import {settingsHeight, color, settingsTab} from "../../stores/appState";
+    import IntervalSettings from "./IntervalSettings/IntervalSettings.svelte"
     import SaveButton from "./SaveButton.svelte";
     import {afterUpdate, onMount} from "svelte";
     import SettingsTabs from "./Tabs/SettingsTabs.svelte";
@@ -13,7 +11,8 @@
 
     const settingsPages = {
         "style": StyleSettings,
-        "sound": SoundSettings
+        "sound": SoundSettings,
+        "intervals": IntervalSettings
     }
 
 

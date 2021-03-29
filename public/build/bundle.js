@@ -27594,7 +27594,7 @@ var app = (function () {
     const { console: console_1$5 } = globals;
     const file$m = "src\\Components\\Timer\\TimeIndicator\\TimeInput.svelte";
 
-    function create_fragment$o(ctx) {
+    function create_fragment$p(ctx) {
     	let div;
     	let h1;
     	let t0;
@@ -27661,7 +27661,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$o.name,
+    		id: create_fragment$p.name,
     		type: "component",
     		source: "",
     		ctx
@@ -27670,7 +27670,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$o($$self, $$props, $$invalidate) {
+    function instance$p($$self, $$props, $$invalidate) {
     	let readableTime;
     	let $intervalMode;
     	let $tempDuration;
@@ -27889,13 +27889,13 @@ var app = (function () {
     class TimeInput extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$o, create_fragment$o, safe_not_equal, {});
+    		init(this, options, instance$p, create_fragment$p, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "TimeInput",
     			options,
-    			id: create_fragment$o.name
+    			id: create_fragment$p.name
     		});
     	}
     }
@@ -27991,7 +27991,7 @@ var app = (function () {
     	return block;
     }
 
-    function create_fragment$n(ctx) {
+    function create_fragment$o(ctx) {
     	let div;
     	let current_block_type_index;
     	let if_block;
@@ -28080,7 +28080,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$n.name,
+    		id: create_fragment$o.name,
     		type: "component",
     		source: "",
     		ctx
@@ -28091,7 +28091,7 @@ var app = (function () {
 
     const blinkInterval = 1000; // one second blinks
 
-    function instance$n($$self, $$props, $$invalidate) {
+    function instance$o($$self, $$props, $$invalidate) {
     	let opacity;
     	let $runState;
     	let $time;
@@ -28157,13 +28157,13 @@ var app = (function () {
     class TimeIndicator extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$n, create_fragment$n, safe_not_equal, {});
+    		init(this, options, instance$o, create_fragment$o, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "TimeIndicator",
     			options,
-    			id: create_fragment$n.name
+    			id: create_fragment$o.name
     		});
     	}
     }
@@ -28388,7 +28388,7 @@ var app = (function () {
     	return block;
     }
 
-    function create_fragment$m(ctx) {
+    function create_fragment$n(ctx) {
     	let if_block_anchor;
     	let if_block = /*i*/ ctx[8][4] && create_if_block$6(ctx);
 
@@ -28428,7 +28428,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$m.name,
+    		id: create_fragment$n.name,
     		type: "component",
     		source: "",
     		ctx
@@ -28437,7 +28437,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$m($$self, $$props, $$invalidate) {
+    function instance$n($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("Fa", slots, []);
     	let { class: clazz = "" } = $$props;
@@ -28661,7 +28661,7 @@ var app = (function () {
     	constructor(options) {
     		super(options);
 
-    		init(this, options, instance$m, create_fragment$m, safe_not_equal, {
+    		init(this, options, instance$n, create_fragment$n, safe_not_equal, {
     			class: 0,
     			id: 1,
     			style: 11,
@@ -28683,7 +28683,7 @@ var app = (function () {
     			component: this,
     			tagName: "Fa",
     			options,
-    			id: create_fragment$m.name
+    			id: create_fragment$n.name
     		});
 
     		const { ctx } = this.$$;
@@ -28849,6 +28849,11 @@ var app = (function () {
       iconName: 'cog',
       icon: [512, 512, [], "f013", "M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"]
     };
+    var faHourglassHalf = {
+      prefix: 'fas',
+      iconName: 'hourglass-half',
+      icon: [384, 512, [], "f252", "M360 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24 0 90.965 51.016 167.734 120.842 192C75.016 280.266 24 357.035 24 448c-13.255 0-24 10.745-24 24v16c0 13.255 10.745 24 24 24h336c13.255 0 24-10.745 24-24v-16c0-13.255-10.745-24-24-24 0-90.965-51.016-167.734-120.842-192C308.984 231.734 360 154.965 360 64c13.255 0 24-10.745 24-24V24c0-13.255-10.745-24-24-24zm-75.078 384H99.08c17.059-46.797 52.096-80 92.92-80 40.821 0 75.862 33.196 92.922 80zm.019-256H99.078C91.988 108.548 88 86.748 88 64h208c0 22.805-3.987 44.587-11.059 64z"]
+    };
     var faLayerGroup = {
       prefix: 'fas',
       iconName: 'layer-group',
@@ -28908,7 +28913,7 @@ var app = (function () {
     /* src\Components\Controls\PlayPauseControl.svelte generated by Svelte v3.35.0 */
     const file$j = "src\\Components\\Controls\\PlayPauseControl.svelte";
 
-    function create_fragment$l(ctx) {
+    function create_fragment$m(ctx) {
     	let button;
     	let fa;
     	let current;
@@ -28977,7 +28982,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$l.name,
+    		id: create_fragment$m.name,
     		type: "component",
     		source: "",
     		ctx
@@ -28986,7 +28991,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$l($$self, $$props, $$invalidate) {
+    function instance$m($$self, $$props, $$invalidate) {
     	let getRunStateItem;
     	let $runState;
     	validate_store(runState, "runState");
@@ -29055,13 +29060,13 @@ var app = (function () {
     class PlayPauseControl extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$l, create_fragment$l, safe_not_equal, { start: 0, pause: 1, resume: 2 });
+    		init(this, options, instance$m, create_fragment$m, safe_not_equal, { start: 0, pause: 1, resume: 2 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "PlayPauseControl",
     			options,
-    			id: create_fragment$l.name
+    			id: create_fragment$m.name
     		});
 
     		const { ctx } = this.$$;
@@ -29110,7 +29115,7 @@ var app = (function () {
     const { console: console_1$4 } = globals;
     const file$i = "src\\Components\\Timer\\Favorites\\Favorites.svelte";
 
-    function get_each_context$1(ctx, list, i) {
+    function get_each_context$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
     	child_ctx[6] = list[i];
     	child_ctx[8] = i;
@@ -29118,7 +29123,7 @@ var app = (function () {
     }
 
     // (16:4) {#each favsList as fav, i}
-    function create_each_block$1(ctx) {
+    function create_each_block$2(ctx) {
     	let div;
     	let p;
     	let t0_value = /*i*/ ctx[8] + 1 + "";
@@ -29160,7 +29165,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block$1.name,
+    		id: create_each_block$2.name,
     		type: "each",
     		source: "(16:4) {#each favsList as fav, i}",
     		ctx
@@ -29169,7 +29174,7 @@ var app = (function () {
     	return block;
     }
 
-    function create_fragment$k(ctx) {
+    function create_fragment$l(ctx) {
     	let div;
     	let div_intro;
     	let div_outro;
@@ -29179,7 +29184,7 @@ var app = (function () {
     	let each_blocks = [];
 
     	for (let i = 0; i < each_value.length; i += 1) {
-    		each_blocks[i] = create_each_block$1(get_each_context$1(ctx, each_value, i));
+    		each_blocks[i] = create_each_block$2(get_each_context$2(ctx, each_value, i));
     	}
 
     	const block = {
@@ -29212,12 +29217,12 @@ var app = (function () {
     				let i;
 
     				for (i = 0; i < each_value.length; i += 1) {
-    					const child_ctx = get_each_context$1(ctx, each_value, i);
+    					const child_ctx = get_each_context$2(ctx, each_value, i);
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(child_ctx, dirty);
     					} else {
-    						each_blocks[i] = create_each_block$1(child_ctx);
+    						each_blocks[i] = create_each_block$2(child_ctx);
     						each_blocks[i].c();
     						each_blocks[i].m(div, null);
     					}
@@ -29255,7 +29260,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$k.name,
+    		id: create_fragment$l.name,
     		type: "component",
     		source: "",
     		ctx
@@ -29264,7 +29269,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$k($$self, $$props, $$invalidate) {
+    function instance$l($$self, $$props, $$invalidate) {
     	let $intervalMode;
     	let $settings;
     	let $currentFavInterval;
@@ -29338,13 +29343,13 @@ var app = (function () {
     class Favorites extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$k, create_fragment$k, safe_not_equal, {});
+    		init(this, options, instance$l, create_fragment$l, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Favorites",
     			options,
-    			id: create_fragment$k.name
+    			id: create_fragment$l.name
     		});
     	}
     }
@@ -29353,7 +29358,7 @@ var app = (function () {
 
     const file$h = "src\\Components\\Icons\\TomatoIcon.svelte";
 
-    function create_fragment$j(ctx) {
+    function create_fragment$k(ctx) {
     	let svg;
     	let path0;
     	let path0_fill_value;
@@ -29410,7 +29415,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$j.name,
+    		id: create_fragment$k.name,
     		type: "component",
     		source: "",
     		ctx
@@ -29422,7 +29427,7 @@ var app = (function () {
     const tomatoRed = "rgb(252, 61, 3)";
     const stemGreen = "rgb(0, 163, 27)";
 
-    function instance$j($$self, $$props, $$invalidate) {
+    function instance$k($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("TomatoIcon", slots, []);
     	let { size = 10 } = $$props;
@@ -29455,13 +29460,13 @@ var app = (function () {
     class TomatoIcon extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$j, create_fragment$j, safe_not_equal, { size: 0, color: 1 });
+    		init(this, options, instance$k, create_fragment$k, safe_not_equal, { size: 0, color: 1 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "TomatoIcon",
     			options,
-    			id: create_fragment$j.name
+    			id: create_fragment$k.name
     		});
 
     		const { ctx } = this.$$;
@@ -29588,7 +29593,7 @@ var app = (function () {
     	return block;
     }
 
-    function create_fragment$i(ctx) {
+    function create_fragment$j(ctx) {
     	let div;
     	let current_block_type_index;
     	let if_block;
@@ -29682,7 +29687,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$i.name,
+    		id: create_fragment$j.name,
     		type: "component",
     		source: "",
     		ctx
@@ -29691,7 +29696,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$i($$self, $$props, $$invalidate) {
+    function instance$j($$self, $$props, $$invalidate) {
     	let $intervalDurations;
     	let $size;
     	let $color;
@@ -29756,13 +29761,13 @@ var app = (function () {
     class IntervalModeIndicator extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$i, create_fragment$i, safe_not_equal, {});
+    		init(this, options, instance$j, create_fragment$j, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "IntervalModeIndicator",
     			options,
-    			id: create_fragment$i.name
+    			id: create_fragment$j.name
     		});
     	}
     }
@@ -29770,7 +29775,7 @@ var app = (function () {
     /* src\Components\Timer\IntervalMode\IntervalNumberIndicator.svelte generated by Svelte v3.35.0 */
     const file$f = "src\\Components\\Timer\\IntervalMode\\IntervalNumberIndicator.svelte";
 
-    function get_each_context(ctx, list, i) {
+    function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
     	child_ctx[5] = list[i];
     	child_ctx[7] = i;
@@ -29778,7 +29783,7 @@ var app = (function () {
     }
 
     // (25:4) {#each $intervalDurations as duration, ind}
-    function create_each_block(ctx) {
+    function create_each_block$1(ctx) {
     	let div;
 
     	const block = {
@@ -29803,7 +29808,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block.name,
+    		id: create_each_block$1.name,
     		type: "each",
     		source: "(25:4) {#each $intervalDurations as duration, ind}",
     		ctx
@@ -29812,7 +29817,7 @@ var app = (function () {
     	return block;
     }
 
-    function create_fragment$h(ctx) {
+    function create_fragment$i(ctx) {
     	let div;
     	let div_transition;
     	let current;
@@ -29821,7 +29826,7 @@ var app = (function () {
     	let each_blocks = [];
 
     	for (let i = 0; i < each_value.length; i += 1) {
-    		each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+    		each_blocks[i] = create_each_block$1(get_each_context$1(ctx, each_value, i));
     	}
 
     	const block = {
@@ -29855,12 +29860,12 @@ var app = (function () {
     				let i;
 
     				for (i = 0; i < each_value.length; i += 1) {
-    					const child_ctx = get_each_context(ctx, each_value, i);
+    					const child_ctx = get_each_context$1(ctx, each_value, i);
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(child_ctx, dirty);
     					} else {
-    						each_blocks[i] = create_each_block(child_ctx);
+    						each_blocks[i] = create_each_block$1(child_ctx);
     						each_blocks[i].c();
     						each_blocks[i].m(div, null);
     					}
@@ -29901,7 +29906,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$h.name,
+    		id: create_fragment$i.name,
     		type: "component",
     		source: "",
     		ctx
@@ -29912,7 +29917,7 @@ var app = (function () {
 
     const blinkRate = 130;
 
-    function instance$h($$self, $$props, $$invalidate) {
+    function instance$i($$self, $$props, $$invalidate) {
     	let $runState;
     	let $time;
     	let $intervalDurations;
@@ -29976,13 +29981,13 @@ var app = (function () {
     class IntervalNumberIndicator extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$h, create_fragment$h, safe_not_equal, {});
+    		init(this, options, instance$i, create_fragment$i, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "IntervalNumberIndicator",
     			options,
-    			id: create_fragment$h.name
+    			id: create_fragment$i.name
     		});
     	}
     }
@@ -30079,7 +30084,7 @@ var app = (function () {
     	return block;
     }
 
-    function create_fragment$g(ctx) {
+    function create_fragment$h(ctx) {
     	let div;
     	let svg;
     	let circle;
@@ -30275,7 +30280,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$g.name,
+    		id: create_fragment$h.name,
     		type: "component",
     		source: "",
     		ctx
@@ -30284,7 +30289,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$g($$self, $$props, $$invalidate) {
+    function instance$h($$self, $$props, $$invalidate) {
     	let thickness;
     	let circleAngle;
     	let radius;
@@ -30436,13 +30441,13 @@ var app = (function () {
     class Timer extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$g, create_fragment$g, safe_not_equal, { start: 0, pause: 1, resume: 2 });
+    		init(this, options, instance$h, create_fragment$h, safe_not_equal, { start: 0, pause: 1, resume: 2 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Timer",
     			options,
-    			id: create_fragment$g.name
+    			id: create_fragment$h.name
     		});
 
     		const { ctx } = this.$$;
@@ -30489,7 +30494,7 @@ var app = (function () {
     /* src\Components\Controls\ResizeControl.svelte generated by Svelte v3.35.0 */
     const file$d = "src\\Components\\Controls\\ResizeControl.svelte";
 
-    function create_fragment$f(ctx) {
+    function create_fragment$g(ctx) {
     	let div;
     	let button0;
     	let fa0;
@@ -30573,7 +30578,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$f.name,
+    		id: create_fragment$g.name,
     		type: "component",
     		source: "",
     		ctx
@@ -30582,7 +30587,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$f($$self, $$props, $$invalidate) {
+    function instance$g($$self, $$props, $$invalidate) {
     	let $size;
     	let $maxSize;
     	validate_store(size, "size");
@@ -30621,13 +30626,13 @@ var app = (function () {
     class ResizeControl extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$f, create_fragment$f, safe_not_equal, {});
+    		init(this, options, instance$g, create_fragment$g, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "ResizeControl",
     			options,
-    			id: create_fragment$f.name
+    			id: create_fragment$g.name
     		});
     	}
     }
@@ -30635,7 +30640,7 @@ var app = (function () {
     /* src\Components\Settings\OpenSettingsButton.svelte generated by Svelte v3.35.0 */
     const file$c = "src\\Components\\Settings\\OpenSettingsButton.svelte";
 
-    function create_fragment$e(ctx) {
+    function create_fragment$f(ctx) {
     	let button;
     	let fa;
     	let current;
@@ -30683,7 +30688,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$e.name,
+    		id: create_fragment$f.name,
     		type: "component",
     		source: "",
     		ctx
@@ -30692,7 +30697,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$e($$self, $$props, $$invalidate) {
+    function instance$f($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("OpenSettingsButton", slots, []);
 
@@ -30713,11 +30718,199 @@ var app = (function () {
     class OpenSettingsButton extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$e, create_fragment$e, safe_not_equal, {});
+    		init(this, options, instance$f, create_fragment$f, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "OpenSettingsButton",
+    			options,
+    			id: create_fragment$f.name
+    		});
+    	}
+    }
+
+    /* src\Components\Settings\SettingsSection.svelte generated by Svelte v3.35.0 */
+
+    const file$b = "src\\Components\\Settings\\SettingsSection.svelte";
+    const get_buttons_slot_changes = dirty => ({});
+    const get_buttons_slot_context = ctx => ({});
+
+    // (11:4) {#if $$slots.buttons}
+    function create_if_block$3(ctx) {
+    	let div;
+    	let current;
+    	const buttons_slot_template = /*#slots*/ ctx[2].buttons;
+    	const buttons_slot = create_slot(buttons_slot_template, ctx, /*$$scope*/ ctx[1], get_buttons_slot_context);
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			if (buttons_slot) buttons_slot.c();
+    			attr_dev(div, "class", "buttonSection svelte-1mklmcn");
+    			add_location(div, file$b, 11, 8, 156);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+
+    			if (buttons_slot) {
+    				buttons_slot.m(div, null);
+    			}
+
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			if (buttons_slot) {
+    				if (buttons_slot.p && dirty & /*$$scope*/ 2) {
+    					update_slot(buttons_slot, buttons_slot_template, ctx, /*$$scope*/ ctx[1], dirty, get_buttons_slot_changes, get_buttons_slot_context);
+    				}
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(buttons_slot, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(buttons_slot, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			if (buttons_slot) buttons_slot.d(detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$3.name,
+    		type: "if",
+    		source: "(11:4) {#if $$slots.buttons}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$e(ctx) {
+    	let div1;
+    	let div0;
+    	let t;
+    	let current;
+    	const default_slot_template = /*#slots*/ ctx[2].default;
+    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[1], null);
+    	let if_block = /*$$slots*/ ctx[0].buttons && create_if_block$3(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			div0 = element("div");
+    			if (default_slot) default_slot.c();
+    			t = space();
+    			if (if_block) if_block.c();
+    			attr_dev(div0, "class", "mainControls svelte-1mklmcn");
+    			add_location(div0, file$b, 6, 4, 62);
+    			attr_dev(div1, "class", "SettingsSection svelte-1mklmcn");
+    			add_location(div1, file$b, 5, 0, 27);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, div0);
+
+    			if (default_slot) {
+    				default_slot.m(div0, null);
+    			}
+
+    			append_dev(div1, t);
+    			if (if_block) if_block.m(div1, null);
+    			current = true;
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (default_slot) {
+    				if (default_slot.p && dirty & /*$$scope*/ 2) {
+    					update_slot(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[1], dirty, null, null);
+    				}
+    			}
+
+    			if (/*$$slots*/ ctx[0].buttons) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+
+    					if (dirty & /*$$slots*/ 1) {
+    						transition_in(if_block, 1);
+    					}
+    				} else {
+    					if_block = create_if_block$3(ctx);
+    					if_block.c();
+    					transition_in(if_block, 1);
+    					if_block.m(div1, null);
+    				}
+    			} else if (if_block) {
+    				group_outros();
+
+    				transition_out(if_block, 1, 1, () => {
+    					if_block = null;
+    				});
+
+    				check_outros();
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(default_slot, local);
+    			transition_in(if_block);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(default_slot, local);
+    			transition_out(if_block);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+    			if (default_slot) default_slot.d(detaching);
+    			if (if_block) if_block.d();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$e.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$e($$self, $$props, $$invalidate) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots("SettingsSection", slots, ['default','buttons']);
+    	const $$slots = compute_slots(slots);
+    	const writable_props = [];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<SettingsSection> was created with unknown prop '${key}'`);
+    	});
+
+    	$$self.$$set = $$props => {
+    		if ("$$scope" in $$props) $$invalidate(1, $$scope = $$props.$$scope);
+    	};
+
+    	return [$$slots, $$scope, slots];
+    }
+
+    class SettingsSection extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$e, create_fragment$e, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "SettingsSection",
     			options,
     			id: create_fragment$e.name
     		});
@@ -30726,7 +30919,7 @@ var app = (function () {
 
     /* src\Components\Settings\SettingControls\SettingsSlider.svelte generated by Svelte v3.35.0 */
 
-    const file$b = "src\\Components\\Settings\\SettingControls\\SettingsSlider.svelte";
+    const file$a = "src\\Components\\Settings\\SettingControls\\SettingsSlider.svelte";
 
     function create_fragment$d(ctx) {
     	let div;
@@ -30745,15 +30938,15 @@ var app = (function () {
     			t1 = space();
     			input = element("input");
     			attr_dev(p, "class", "svelte-fy54l");
-    			add_location(p, file$b, 10, 4, 225);
+    			add_location(p, file$a, 10, 4, 225);
     			attr_dev(input, "type", "range");
     			attr_dev(input, "min", /*min*/ ctx[1]);
     			attr_dev(input, "max", /*max*/ ctx[2]);
     			attr_dev(input, "step", /*step*/ ctx[4]);
     			attr_dev(input, "class", "svelte-fy54l");
-    			add_location(input, file$b, 11, 4, 245);
+    			add_location(input, file$a, 11, 4, 245);
     			attr_dev(div, "class", "SettingsSlider svelte-fy54l");
-    			add_location(div, file$b, 9, 0, 191);
+    			add_location(div, file$a, 9, 0, 191);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -30949,72 +31142,225 @@ var app = (function () {
     	}
     }
 
-    /* src\Components\Settings\SettingControls\SettingsOptionButton.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Settings\IntervalSettings\IntervalSettings.svelte generated by Svelte v3.35.0 */
 
-    const { console: console_1$3 } = globals;
-    const file$a = "src\\Components\\Settings\\SettingControls\\SettingsOptionButton.svelte";
+    function get_each_context(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[3] = list[i];
+    	child_ctx[5] = i;
+    	return child_ctx;
+    }
+
+    // (12:4) {#each $intervalDurations as dur, ind}
+    function create_each_block(ctx) {
+    	let settingsslider;
+    	let updating_value;
+    	let current;
+
+    	function settingsslider_value_binding(value) {
+    		/*settingsslider_value_binding*/ ctx[2](value);
+    	}
+
+    	let settingsslider_props = {
+    		label: `Interval ${/*ind*/ ctx[5]} color`,
+    		min: "0",
+    		max: "360"
+    	};
+
+    	if (/*value*/ ctx[0] !== void 0) {
+    		settingsslider_props.value = /*value*/ ctx[0];
+    	}
+
+    	settingsslider = new SettingsSlider({
+    			props: settingsslider_props,
+    			$$inline: true
+    		});
+
+    	binding_callbacks.push(() => bind(settingsslider, "value", settingsslider_value_binding));
+
+    	const block = {
+    		c: function create() {
+    			create_component(settingsslider.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(settingsslider, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const settingsslider_changes = {};
+
+    			if (!updating_value && dirty & /*value*/ 1) {
+    				updating_value = true;
+    				settingsslider_changes.value = /*value*/ ctx[0];
+    				add_flush_callback(() => updating_value = false);
+    			}
+
+    			settingsslider.$set(settingsslider_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(settingsslider.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(settingsslider.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(settingsslider, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block.name,
+    		type: "each",
+    		source: "(12:4) {#each $intervalDurations as dur, ind}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (11:0) <SettingsSection>
+    function create_default_slot$2(ctx) {
+    	let each_1_anchor;
+    	let current;
+    	let each_value = /*$intervalDurations*/ ctx[1];
+    	validate_each_argument(each_value);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+    	}
+
+    	const out = i => transition_out(each_blocks[i], 1, 1, () => {
+    		each_blocks[i] = null;
+    	});
+
+    	const block = {
+    		c: function create() {
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			each_1_anchor = empty();
+    		},
+    		m: function mount(target, anchor) {
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(target, anchor);
+    			}
+
+    			insert_dev(target, each_1_anchor, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*value, $intervalDurations*/ 3) {
+    				each_value = /*$intervalDurations*/ ctx[1];
+    				validate_each_argument(each_value);
+    				let i;
+
+    				for (i = 0; i < each_value.length; i += 1) {
+    					const child_ctx = get_each_context(ctx, each_value, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    						transition_in(each_blocks[i], 1);
+    					} else {
+    						each_blocks[i] = create_each_block(child_ctx);
+    						each_blocks[i].c();
+    						transition_in(each_blocks[i], 1);
+    						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+    					}
+    				}
+
+    				group_outros();
+
+    				for (i = each_value.length; i < each_blocks.length; i += 1) {
+    					out(i);
+    				}
+
+    				check_outros();
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+
+    			for (let i = 0; i < each_value.length; i += 1) {
+    				transition_in(each_blocks[i]);
+    			}
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			each_blocks = each_blocks.filter(Boolean);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				transition_out(each_blocks[i]);
+    			}
+
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_each(each_blocks, detaching);
+    			if (detaching) detach_dev(each_1_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot$2.name,
+    		type: "slot",
+    		source: "(11:0) <SettingsSection>",
+    		ctx
+    	});
+
+    	return block;
+    }
 
     function create_fragment$c(ctx) {
-    	let button;
-    	let fa;
+    	let settingssection;
     	let current;
-    	let mounted;
-    	let dispose;
 
-    	fa = new Fa({
-    			props: { icon: /*icon*/ ctx[0] },
+    	settingssection = new SettingsSection({
+    			props: {
+    				$$slots: { default: [create_default_slot$2] },
+    				$$scope: { ctx }
+    			},
     			$$inline: true
     		});
 
     	const block = {
     		c: function create() {
-    			button = element("button");
-    			create_component(fa.$$.fragment);
-    			attr_dev(button, "class", "svelte-1ggjxpw");
-    			toggle_class(button, "on", /*$settings*/ ctx[2][/*option*/ ctx[1]]);
-    			toggle_class(button, "off", !/*$settings*/ ctx[2][/*option*/ ctx[1]]);
-    			add_location(button, file$a, 16, 0, 361);
+    			create_component(settingssection.$$.fragment);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, button, anchor);
-    			mount_component(fa, button, null);
+    			mount_component(settingssection, target, anchor);
     			current = true;
-
-    			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*toggle*/ ctx[3], false, false, false);
-    				mounted = true;
-    			}
     		},
     		p: function update(ctx, [dirty]) {
-    			const fa_changes = {};
-    			if (dirty & /*icon*/ 1) fa_changes.icon = /*icon*/ ctx[0];
-    			fa.$set(fa_changes);
+    			const settingssection_changes = {};
 
-    			if (dirty & /*$settings, option*/ 6) {
-    				toggle_class(button, "on", /*$settings*/ ctx[2][/*option*/ ctx[1]]);
+    			if (dirty & /*$$scope, $intervalDurations, value*/ 67) {
+    				settingssection_changes.$$scope = { dirty, ctx };
     			}
 
-    			if (dirty & /*$settings, option*/ 6) {
-    				toggle_class(button, "off", !/*$settings*/ ctx[2][/*option*/ ctx[1]]);
-    			}
+    			settingssection.$set(settingssection_changes);
     		},
     		i: function intro(local) {
     			if (current) return;
-    			transition_in(fa.$$.fragment, local);
+    			transition_in(settingssection.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
-    			transition_out(fa.$$.fragment, local);
+    			transition_out(settingssection.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(button);
-    			destroy_component(fa);
-    			mounted = false;
-    			dispose();
+    			destroy_component(settingssection, detaching);
     		}
     	};
 
@@ -31030,67 +31376,55 @@ var app = (function () {
     }
 
     function instance$c($$self, $$props, $$invalidate) {
-    	let $settings;
-    	validate_store(settings, "settings");
-    	component_subscribe($$self, settings, $$value => $$invalidate(2, $settings = $$value));
+    	let $intervalDurations;
+    	validate_store(intervalDurations, "intervalDurations");
+    	component_subscribe($$self, intervalDurations, $$value => $$invalidate(1, $intervalDurations = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
-    	validate_slots("SettingsOptionButton", slots, []);
-    	let { icon } = $$props;
-    	let { option } = $$props;
-    	let { label } = $$props;
-
-    	const toggle = () => {
-    		settings.set({
-    			...$settings,
-    			[option]: !$settings[option]
-    		});
-
-    		console.log("toggle clicked. value: ", $settings[option]);
-    	};
-
-    	const writable_props = ["icon", "option", "label"];
+    	validate_slots("IntervalSettings", slots, []);
+    	let { value } = $$props;
+    	const writable_props = ["value"];
 
     	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console_1$3.warn(`<SettingsOptionButton> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<IntervalSettings> was created with unknown prop '${key}'`);
     	});
 
+    	function settingsslider_value_binding(value$1) {
+    		value = value$1;
+    		$$invalidate(0, value);
+    	}
+
     	$$self.$$set = $$props => {
-    		if ("icon" in $$props) $$invalidate(0, icon = $$props.icon);
-    		if ("option" in $$props) $$invalidate(1, option = $$props.option);
-    		if ("label" in $$props) $$invalidate(4, label = $$props.label);
+    		if ("value" in $$props) $$invalidate(0, value = $$props.value);
     	};
 
     	$$self.$capture_state = () => ({
-    		Fa,
-    		settings,
-    		icon,
-    		option,
-    		label,
-    		toggle,
-    		$settings
+    		SettingsSection,
+    		hue,
+    		intervalDurations,
+    		SettingsSlider,
+    		value,
+    		$intervalDurations
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ("icon" in $$props) $$invalidate(0, icon = $$props.icon);
-    		if ("option" in $$props) $$invalidate(1, option = $$props.option);
-    		if ("label" in $$props) $$invalidate(4, label = $$props.label);
+    		if ("value" in $$props) $$invalidate(0, value = $$props.value);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [icon, option, $settings, toggle, label];
+    	return [value, $intervalDurations, settingsslider_value_binding];
     }
 
-    class SettingsOptionButton extends SvelteComponentDev {
+    class IntervalSettings extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$c, create_fragment$c, safe_not_equal, { icon: 0, option: 1, label: 4 });
+    		init(this, options, instance$c, create_fragment$c, safe_not_equal, { value: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
-    			tagName: "SettingsOptionButton",
+    			tagName: "IntervalSettings",
     			options,
     			id: create_fragment$c.name
     		});
@@ -31098,41 +31432,17 @@ var app = (function () {
     		const { ctx } = this.$$;
     		const props = options.props || {};
 
-    		if (/*icon*/ ctx[0] === undefined && !("icon" in props)) {
-    			console_1$3.warn("<SettingsOptionButton> was created without expected prop 'icon'");
-    		}
-
-    		if (/*option*/ ctx[1] === undefined && !("option" in props)) {
-    			console_1$3.warn("<SettingsOptionButton> was created without expected prop 'option'");
-    		}
-
-    		if (/*label*/ ctx[4] === undefined && !("label" in props)) {
-    			console_1$3.warn("<SettingsOptionButton> was created without expected prop 'label'");
+    		if (/*value*/ ctx[0] === undefined && !("value" in props)) {
+    			console.warn("<IntervalSettings> was created without expected prop 'value'");
     		}
     	}
 
-    	get icon() {
-    		throw new Error("<SettingsOptionButton>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	get value() {
+    		throw new Error("<IntervalSettings>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
-    	set icon(value) {
-    		throw new Error("<SettingsOptionButton>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	get option() {
-    		throw new Error("<SettingsOptionButton>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set option(value) {
-    		throw new Error("<SettingsOptionButton>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	get label() {
-    		throw new Error("<SettingsOptionButton>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set label(value) {
-    		throw new Error("<SettingsOptionButton>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	set value(value) {
+    		throw new Error("<IntervalSettings>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
 
@@ -31411,8 +31721,10 @@ var app = (function () {
     function create_fragment$9(ctx) {
     	let div;
     	let settingstab0;
-    	let t;
+    	let t0;
     	let settingstab1;
+    	let t1;
+    	let settingstab2;
     	let current;
 
     	settingstab0 = new SettingsTab({
@@ -31425,14 +31737,21 @@ var app = (function () {
     			$$inline: true
     		});
 
+    	settingstab2 = new SettingsTab({
+    			props: { name: "intervals", icon: faHourglassHalf },
+    			$$inline: true
+    		});
+
     	const block = {
     		c: function create() {
     			div = element("div");
     			create_component(settingstab0.$$.fragment);
-    			t = space();
+    			t0 = space();
     			create_component(settingstab1.$$.fragment);
+    			t1 = space();
+    			create_component(settingstab2.$$.fragment);
     			attr_dev(div, "class", "SettingsTabs svelte-11pq1u9");
-    			add_location(div, file$7, 7, 0, 203);
+    			add_location(div, file$7, 7, 0, 234);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -31440,8 +31759,10 @@ var app = (function () {
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     			mount_component(settingstab0, div, null);
-    			append_dev(div, t);
+    			append_dev(div, t0);
     			mount_component(settingstab1, div, null);
+    			append_dev(div, t1);
+    			mount_component(settingstab2, div, null);
     			current = true;
     		},
     		p: noop,
@@ -31449,17 +31770,20 @@ var app = (function () {
     			if (current) return;
     			transition_in(settingstab0.$$.fragment, local);
     			transition_in(settingstab1.$$.fragment, local);
+    			transition_in(settingstab2.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
     			transition_out(settingstab0.$$.fragment, local);
     			transition_out(settingstab1.$$.fragment, local);
+    			transition_out(settingstab2.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
     			destroy_component(settingstab0);
     			destroy_component(settingstab1);
+    			destroy_component(settingstab2);
     		}
     	};
 
@@ -31487,6 +31811,7 @@ var app = (function () {
     		faPalette,
     		faPaintBrush,
     		faVolumeUp,
+    		faHourglassHalf,
     		SettingsTab
     	});
 
@@ -31507,149 +31832,72 @@ var app = (function () {
     	}
     }
 
-    /* src\Components\Settings\SettingsSection.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Settings\SettingControls\SettingsOptionButton.svelte generated by Svelte v3.35.0 */
 
-    const file$6 = "src\\Components\\Settings\\SettingsSection.svelte";
-    const get_buttons_slot_changes = dirty => ({});
-    const get_buttons_slot_context = ctx => ({});
-
-    // (11:4) {#if $$slots.buttons}
-    function create_if_block$3(ctx) {
-    	let div;
-    	let current;
-    	const buttons_slot_template = /*#slots*/ ctx[2].buttons;
-    	const buttons_slot = create_slot(buttons_slot_template, ctx, /*$$scope*/ ctx[1], get_buttons_slot_context);
-
-    	const block = {
-    		c: function create() {
-    			div = element("div");
-    			if (buttons_slot) buttons_slot.c();
-    			attr_dev(div, "class", "buttonSection svelte-1mklmcn");
-    			add_location(div, file$6, 11, 8, 156);
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-
-    			if (buttons_slot) {
-    				buttons_slot.m(div, null);
-    			}
-
-    			current = true;
-    		},
-    		p: function update(ctx, dirty) {
-    			if (buttons_slot) {
-    				if (buttons_slot.p && dirty & /*$$scope*/ 2) {
-    					update_slot(buttons_slot, buttons_slot_template, ctx, /*$$scope*/ ctx[1], dirty, get_buttons_slot_changes, get_buttons_slot_context);
-    				}
-    			}
-    		},
-    		i: function intro(local) {
-    			if (current) return;
-    			transition_in(buttons_slot, local);
-    			current = true;
-    		},
-    		o: function outro(local) {
-    			transition_out(buttons_slot, local);
-    			current = false;
-    		},
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
-    			if (buttons_slot) buttons_slot.d(detaching);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_if_block$3.name,
-    		type: "if",
-    		source: "(11:4) {#if $$slots.buttons}",
-    		ctx
-    	});
-
-    	return block;
-    }
+    const { console: console_1$3 } = globals;
+    const file$6 = "src\\Components\\Settings\\SettingControls\\SettingsOptionButton.svelte";
 
     function create_fragment$8(ctx) {
-    	let div1;
-    	let div0;
-    	let t;
+    	let button;
+    	let fa;
     	let current;
-    	const default_slot_template = /*#slots*/ ctx[2].default;
-    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[1], null);
-    	let if_block = /*$$slots*/ ctx[0].buttons && create_if_block$3(ctx);
+    	let mounted;
+    	let dispose;
+
+    	fa = new Fa({
+    			props: { icon: /*icon*/ ctx[0] },
+    			$$inline: true
+    		});
 
     	const block = {
     		c: function create() {
-    			div1 = element("div");
-    			div0 = element("div");
-    			if (default_slot) default_slot.c();
-    			t = space();
-    			if (if_block) if_block.c();
-    			attr_dev(div0, "class", "mainControls svelte-1mklmcn");
-    			add_location(div0, file$6, 6, 4, 62);
-    			attr_dev(div1, "class", "SettingsSection svelte-1mklmcn");
-    			add_location(div1, file$6, 5, 0, 27);
+    			button = element("button");
+    			create_component(fa.$$.fragment);
+    			attr_dev(button, "class", "svelte-1ggjxpw");
+    			toggle_class(button, "on", /*$settings*/ ctx[2][/*option*/ ctx[1]]);
+    			toggle_class(button, "off", !/*$settings*/ ctx[2][/*option*/ ctx[1]]);
+    			add_location(button, file$6, 16, 0, 361);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div1, anchor);
-    			append_dev(div1, div0);
-
-    			if (default_slot) {
-    				default_slot.m(div0, null);
-    			}
-
-    			append_dev(div1, t);
-    			if (if_block) if_block.m(div1, null);
+    			insert_dev(target, button, anchor);
+    			mount_component(fa, button, null);
     			current = true;
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", /*toggle*/ ctx[3], false, false, false);
+    				mounted = true;
+    			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if (default_slot) {
-    				if (default_slot.p && dirty & /*$$scope*/ 2) {
-    					update_slot(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[1], dirty, null, null);
-    				}
+    			const fa_changes = {};
+    			if (dirty & /*icon*/ 1) fa_changes.icon = /*icon*/ ctx[0];
+    			fa.$set(fa_changes);
+
+    			if (dirty & /*$settings, option*/ 6) {
+    				toggle_class(button, "on", /*$settings*/ ctx[2][/*option*/ ctx[1]]);
     			}
 
-    			if (/*$$slots*/ ctx[0].buttons) {
-    				if (if_block) {
-    					if_block.p(ctx, dirty);
-
-    					if (dirty & /*$$slots*/ 1) {
-    						transition_in(if_block, 1);
-    					}
-    				} else {
-    					if_block = create_if_block$3(ctx);
-    					if_block.c();
-    					transition_in(if_block, 1);
-    					if_block.m(div1, null);
-    				}
-    			} else if (if_block) {
-    				group_outros();
-
-    				transition_out(if_block, 1, 1, () => {
-    					if_block = null;
-    				});
-
-    				check_outros();
+    			if (dirty & /*$settings, option*/ 6) {
+    				toggle_class(button, "off", !/*$settings*/ ctx[2][/*option*/ ctx[1]]);
     			}
     		},
     		i: function intro(local) {
     			if (current) return;
-    			transition_in(default_slot, local);
-    			transition_in(if_block);
+    			transition_in(fa.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
-    			transition_out(default_slot, local);
-    			transition_out(if_block);
+    			transition_out(fa.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div1);
-    			if (default_slot) default_slot.d(detaching);
-    			if (if_block) if_block.d();
+    			if (detaching) detach_dev(button);
+    			destroy_component(fa);
+    			mounted = false;
+    			dispose();
     		}
     	};
 
@@ -31665,33 +31913,109 @@ var app = (function () {
     }
 
     function instance$8($$self, $$props, $$invalidate) {
+    	let $settings;
+    	validate_store(settings, "settings");
+    	component_subscribe($$self, settings, $$value => $$invalidate(2, $settings = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
-    	validate_slots("SettingsSection", slots, ['default','buttons']);
-    	const $$slots = compute_slots(slots);
-    	const writable_props = [];
+    	validate_slots("SettingsOptionButton", slots, []);
+    	let { icon } = $$props;
+    	let { option } = $$props;
+    	let { label } = $$props;
+
+    	const toggle = () => {
+    		settings.set({
+    			...$settings,
+    			[option]: !$settings[option]
+    		});
+
+    		console.log("toggle clicked. value: ", $settings[option]);
+    	};
+
+    	const writable_props = ["icon", "option", "label"];
 
     	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<SettingsSection> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console_1$3.warn(`<SettingsOptionButton> was created with unknown prop '${key}'`);
     	});
 
     	$$self.$$set = $$props => {
-    		if ("$$scope" in $$props) $$invalidate(1, $$scope = $$props.$$scope);
+    		if ("icon" in $$props) $$invalidate(0, icon = $$props.icon);
+    		if ("option" in $$props) $$invalidate(1, option = $$props.option);
+    		if ("label" in $$props) $$invalidate(4, label = $$props.label);
     	};
 
-    	return [$$slots, $$scope, slots];
+    	$$self.$capture_state = () => ({
+    		Fa,
+    		settings,
+    		icon,
+    		option,
+    		label,
+    		toggle,
+    		$settings
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ("icon" in $$props) $$invalidate(0, icon = $$props.icon);
+    		if ("option" in $$props) $$invalidate(1, option = $$props.option);
+    		if ("label" in $$props) $$invalidate(4, label = $$props.label);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [icon, option, $settings, toggle, label];
     }
 
-    class SettingsSection extends SvelteComponentDev {
+    class SettingsOptionButton extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$8, create_fragment$8, safe_not_equal, {});
+    		init(this, options, instance$8, create_fragment$8, safe_not_equal, { icon: 0, option: 1, label: 4 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
-    			tagName: "SettingsSection",
+    			tagName: "SettingsOptionButton",
     			options,
     			id: create_fragment$8.name
     		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || {};
+
+    		if (/*icon*/ ctx[0] === undefined && !("icon" in props)) {
+    			console_1$3.warn("<SettingsOptionButton> was created without expected prop 'icon'");
+    		}
+
+    		if (/*option*/ ctx[1] === undefined && !("option" in props)) {
+    			console_1$3.warn("<SettingsOptionButton> was created without expected prop 'option'");
+    		}
+
+    		if (/*label*/ ctx[4] === undefined && !("label" in props)) {
+    			console_1$3.warn("<SettingsOptionButton> was created without expected prop 'label'");
+    		}
+    	}
+
+    	get icon() {
+    		throw new Error("<SettingsOptionButton>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set icon(value) {
+    		throw new Error("<SettingsOptionButton>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get option() {
+    		throw new Error("<SettingsOptionButton>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set option(value) {
+    		throw new Error("<SettingsOptionButton>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get label() {
+    		throw new Error("<SettingsOptionButton>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set label(value) {
+    		throw new Error("<SettingsOptionButton>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
 
@@ -32868,11 +33192,11 @@ var app = (function () {
     			div0 = element("div");
     			create_component(savebutton.$$.fragment);
     			attr_dev(div0, "class", "bottomRow svelte-7peeoh");
-    			add_location(div0, file$3, 40, 4, 1214);
+    			add_location(div0, file$3, 39, 4, 1081);
     			attr_dev(div1, "class", "Settings svelte-7peeoh");
     			set_style(div1, "--settingsHeight", /*$settingsHeight*/ ctx[1]);
     			set_style(div1, "--color2", /*$color*/ ctx[2].alpha(0.5).hsl().string() + "\r\n    ");
-    			add_location(div1, file$3, 28, 0, 945);
+    			add_location(div1, file$3, 27, 0, 812);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -32972,7 +33296,8 @@ var app = (function () {
 
     	const settingsPages = {
     		"style": StyleSettings,
-    		"sound": SoundSettings
+    		"sound": SoundSettings,
+    		"intervals": IntervalSettings
     	};
 
     	onMount(() => {
@@ -32998,14 +33323,9 @@ var app = (function () {
 
     	$$self.$capture_state = () => ({
     		settingsHeight,
-    		settings,
-    		hue,
     		color,
-    		blur,
     		settingsTab,
-    		SettingsSlider,
-    		SettingsOptionButton,
-    		faLayerGroup,
+    		IntervalSettings,
     		SaveButton,
     		afterUpdate,
     		onMount,
