@@ -89,6 +89,7 @@
         margin: 0;
         padding: 0;
         margin-bottom: 8px;
+        user-select: none;
     }
 
     .arrowButtonsSection {

@@ -50,6 +50,7 @@
 
 <div
     class="Timer"
+    style="--thickness: {thickness};"
     on:click={() => focused.set(false)}
 >
     <svg class="circle" width={$size} height={$size}>

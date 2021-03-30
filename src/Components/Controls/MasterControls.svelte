@@ -23,6 +23,7 @@
     export let makeSmaller;
     export let start, pause, resume;
 
+
     // runs when the time runs out
     export const handleEnd = () => {
         runState.set("finished");
