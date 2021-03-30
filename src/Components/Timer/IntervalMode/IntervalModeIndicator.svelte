@@ -30,7 +30,7 @@
 <style>
     .IntervalModeIndicator {
         position: absolute;
-        top: calc(var(--size) * 0.18 * 1px);
+        top: calc(var(--size) * 0.16 * 1px);
 
         filter: blur(calc(var(--textBlur) * 1px));
         color: var(--color);

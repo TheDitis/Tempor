@@ -77,12 +77,14 @@
         width: var(--size);
         height: var(--size);
         /*border: 2px solid purple;*/
+        margin: calc(var(--blur) * 3px + 10px);
+        position: relative;
 
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 0;
-        margin: 0;
+        /*margin: 0;*/
     }
     .circle {
         filter: blur(calc(var(--blur) * 1px));

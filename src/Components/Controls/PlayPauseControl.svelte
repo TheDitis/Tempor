@@ -40,7 +40,7 @@
 <style>
     .PlayPauseButton {
         position: absolute;
-        bottom: calc(var(--size) * 0.25 * 1px);
+        bottom: calc(var(--size) * 0.20 * 1px);
         background: transparent;
         border: none;
         font-size: calc(var(--size) * 0.10 * 1px);

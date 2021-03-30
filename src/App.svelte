@@ -163,7 +163,8 @@
 	.timerSection {
 		/*width: 100vw;*/
 		margin: 0;
-		padding: 10px;
+		padding: 0;
+		/*padding: 10px;*/
 		/*margin-top: 20px;*/
 		/*padding-bottom: 15px;*/
 		box-sizing: border-box;

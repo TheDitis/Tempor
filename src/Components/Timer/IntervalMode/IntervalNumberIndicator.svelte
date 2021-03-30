@@ -31,14 +31,14 @@
 <style>
     .IntervalNumberIndicator {
         position: absolute;
-        bottom: calc(var(--size) * 0.43 * 1px);
+        bottom: calc(var(--size) * 0.38 * 1px);
         display: flex;
         width: calc(var(--size) * 0.65 * 1px);
         filter: blur(calc(var(--textBlur) * 1px));
     }
     .intervalItem {
         width: 100%;
-        height: 5px;
+        height: calc(var(--size) / 45 * 1px);
         margin: 3px;
         background: var(--color);
         opacity: 0.2;

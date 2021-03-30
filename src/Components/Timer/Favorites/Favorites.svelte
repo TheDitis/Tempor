@@ -24,7 +24,7 @@
 <style>
     .Favorites {
         position: absolute;
-        top: calc(var(--size) * 0.33 * 1px);
+        top: calc(var(--size) * 0.31 * 1px);
         background: transparent;
         border: none;
         font-size: calc(var(--size) * 0.10 * 1px);

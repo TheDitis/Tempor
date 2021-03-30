@@ -46,7 +46,7 @@ export const settingsOpen = writable(true);
 export const width = derived(
     [size, scaledBlur, lineThickness],
     ([$size, $scaledBlur, $lineThickness]) => {
-        return Math.round($size + ($scaledBlur * 7) + ($lineThickness / 4))
+        return Math.round($size + ($scaledBlur * 7)) + 20// + ($lineThickness / 4))
     }
 );
 

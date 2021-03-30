@@ -27,6 +27,7 @@
         margin: 0;
         padding: 0 0 0 3px;
         /*padding-left: 3px;*/
+        user-select: none;
     }
 
     input[type=range] {
