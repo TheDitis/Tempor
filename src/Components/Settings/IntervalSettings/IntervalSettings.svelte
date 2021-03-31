@@ -42,7 +42,6 @@
 
     const onColorChange = (val) => {
         if (val) hue.set(val);
-        // console.log($intervalColors)
     }
 
     $: { onColorChange(hueValue) }

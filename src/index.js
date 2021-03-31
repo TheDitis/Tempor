@@ -38,7 +38,6 @@ const createWindow = () => {
   })
 
   ipcMain.on('stayontop', (e, value) => {
-    console.log("stayOnTop event heard. value: ", value)
     if (typeof value === "boolean") {
       console.log("setting stayOnTop to ", value);
       mainWindow.setAlwaysOnTop(value);

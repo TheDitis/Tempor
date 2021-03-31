@@ -16,7 +16,6 @@
         .then(res => {
             setTimeout(() => saved = true, 1000)
             console.log("saved");
-            // saved = true;
         })
     }
 

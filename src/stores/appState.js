@@ -86,7 +86,6 @@ export const loadSettings = () => {
     // read settings file and set relevant stores:
     const settingsData = JSON.parse(fs.readFileSync(path.join(__dirname, "./settings.json")));
     settings.set(settingsData);
-    console.log("favs: ", settingsData.favorites)
     hue.set(settingsData.hue);
     globalHue.set(settingsData.hue);
     size.set(settingsData.size);

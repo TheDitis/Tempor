@@ -50,12 +50,7 @@
         else ind = options.length - 1;
     }
 
-    const onkeyup = e => {
-        console.log("onkeyup called! e: ", e);
-        e.stopPropagation();
-    }
 </script>
-<svelte:window on:keydown={onkeyup}/>
 <div class="SelectDropdown">
     <p>{label}</p>
 <!--    <div class="selectList">-->

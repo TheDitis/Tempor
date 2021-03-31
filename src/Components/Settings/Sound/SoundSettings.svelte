@@ -7,7 +7,6 @@
     import {listSoundFileNames} from "../../../stores/appState";
 
     const changeSoundFile = eventName => filename => {
-        console.log(`updating ${eventName} sound to ${filename}`)
         const sounds = $settings.sounds;
         sounds[eventName] = filename;
         playSound(filename)

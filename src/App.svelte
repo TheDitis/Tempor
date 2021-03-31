@@ -44,8 +44,8 @@
 		ipcRenderer.send("resize", $width, $height);
 
 		ipcRenderer.on("size-data", (event, data) => {
-			console.log("size-data event recieved! event: ", event)
-			console.log("data: ", data)
+			// console.log("size-data event recieved! event: ", event)
+			// console.log("data: ", data)
 		})
 	})
 

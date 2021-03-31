@@ -25,7 +25,6 @@
         }
         else {
             settings.set({...$settings, [option]: !$settings[option]});
-            console.log("toggle clicked. value: ", $settings[option]);
         }
     }
 

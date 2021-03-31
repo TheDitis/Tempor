@@ -1,5 +1,4 @@
 <script>
-    import {onMount, tick} from "svelte";
     import SettingsSection from "../SettingsSection.svelte";
     import SettingsSlider from "../SettingControls/SettingsSlider.svelte";
     import SettingsOptionButton from "../SettingControls/SettingsOptionButton.svelte";
@@ -16,30 +15,14 @@
     } from "../../../stores/appState";
     import {intervalIndex} from "../../../stores/timerState";
 
-    // const onIntervalChange = async deps => {
-    //     console.log("onIntervalChange called")
-    //     if ($intervalMode && $intervalColors[$intervalIndex] !== null) {
-    //         hue.set($intervalColors[$intervalIndex])
-    //         await tick();
-    //         console.log("setting hue to interval color: ", $hue)
-    //     }
-    //     else {
-    //         hue.set($globalHue);
-    //         console.log("setting hue to global color")
-    //     }
-    // }
-
     const onHueUpdate = async (hueVal = null) => {
-        // await tick();
-        // console.log("onHueUpdate called")
-        hue.set($globalHue);
+        if ($intervalMode && $intervalColors[$intervalIndex]) {
+            hue.set($intervalColors[$intervalIndex])
+        }
+        else {
+            hue.set($globalHue);
+        }
     }
-
-
-    // onMount(() => {
-    //     console.log("StyleSettings mounted")
-    //     onIntervalChange(null)
-    // })
 
     const themeOptions = ["transparent", "dark", "light"];
 
@@ -52,7 +35,6 @@
     $: customColor = $intervalMode && $intervalColors[$intervalIndex] !== null;
 
     $: {onHueUpdate($globalHue)}
-    // $: {onIntervalChange($intervalIndex)}
 </script>
 
 

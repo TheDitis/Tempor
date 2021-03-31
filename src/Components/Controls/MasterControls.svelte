@@ -61,7 +61,6 @@
         if (!$focused) return
         // in normal mode:
         if (!$intervalMode) {
-            console.log("setting favorite: ", favKeyMap.set[key], " to ", $tempDuration)
             const tempFavorites = $settings.favorites;
             // if this value isn't already in a favorite slot
             if (!tempFavorites.includes($tempDuration)) {
@@ -87,11 +86,9 @@
     }
 
     const loadFavorite = async (key) => {
-        console.log("loadFavorite called")
         const favInd = favKeyMap.load[key];
         /// IF NOT IN INTERVAL MODE:
         if (!$intervalMode) {
-            console.log("loading non-interval setting.")
             const setting = $settings.favorites[favInd]
             if (!!setting && setting !== $tempDuration) {
                 if ($runState === "running") {
@@ -104,13 +101,11 @@
         }
         /// IF IN INTERVAL MODE:
         else {
-            console.log("loading interval setting ")
             const timeSetting = $settings.favoriteIntervals[favInd];
             let colorSetting = $settings.favoriteIntervalColors[favInd];
             if (colorSetting === null) {
                 colorSetting = [null, null, null, null, null];
             }
-            console.log("fav setting: ", timeSetting)
             if (!!timeSetting) {
                 focused.set(false);
                 if ($runState !== "running") {
@@ -237,14 +232,10 @@
                     })
                     await tick();
                     const intervalColor = $intervalColors[$intervalIndex];
-                    // console.log("intervalColor in arrow detector: ", intervalColor, "index: ", $intervalIndex)
                     if (intervalColor !== null) {
-                        // setting color
-                        console.log("setting hue to interval color in arrow listener")
                         hue.set(intervalColor)
                     }
                     else {
-                        console.log("setting color to global in arrow listener")
                         hue.set($globalHue)
                     }
                     focused.set(true);

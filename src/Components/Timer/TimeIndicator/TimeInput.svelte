@@ -46,7 +46,6 @@
 
     const updateTempDuration = () => {
         const duration = Duration.fromObject({hours, minutes, seconds})
-        console.log(duration.toMillis());
         tempDuration.set(duration.toMillis());
         if ($currentFavInd !== null && $settings.favorites[$currentFavInd] !== duration.toMillis()) {
             currentFavInd.set(null)
@@ -55,7 +54,6 @@
 
 
     const updateIntervalTime = () => {
-        console.log("favorite intervals: ", $settings.favoriteIntervals)
         const duration = Duration.fromObject({hours, minutes, seconds});
         const tempIntervalDurations = [...$intervalDurations];
         tempIntervalDurations[$intervalIndex] = duration.toMillis();

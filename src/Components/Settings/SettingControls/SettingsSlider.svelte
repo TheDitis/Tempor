@@ -1,5 +1,4 @@
 <script>
-    import {createEventDispatcher} from "svelte";
     export let value = 0;
     export let min = 0;
     export let max = 100;
@@ -8,8 +7,6 @@
     export let onChange = () => null;
     export let disabled = false;
 
-    // const dispatch = createEventDispatcher();
-    // dispatch("")
 </script>
 
 <div class="SettingsSlider" class:disabled={disabled}>
