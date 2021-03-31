@@ -1,5 +1,7 @@
 import {writable, derived, readable, get} from "svelte/store";
 import Color from "color";
+import {intervalDurations} from "./timerState";
+
 const fs = require("fs");
 const path = require("path");
 
@@ -7,11 +9,13 @@ const audio = writable(new Audio());
 
 export const showFavorites = writable(false);
 
-export const settingsTab = writable("sound");
+export const settingsTab = writable("intervals");
 
 
 /// COLOR STATE ITEMS
 export const hue = writable(180);
+
+export const globalHue = writable(180);
 
 export const color = derived(
     hue,
@@ -19,6 +23,8 @@ export const color = derived(
         return Color("rgb(255, 0, 0)").rotate($hue)
     }
 )
+
+export const intervalColors = writable([null, null, null, null, null])
 
 /// Timer Size
 export const size = writable(300);
@@ -82,6 +88,7 @@ export const loadSettings = () => {
     settings.set(settingsData);
     console.log("favs: ", settingsData.favorites)
     hue.set(settingsData.hue);
+    globalHue.set(settingsData.hue);
     size.set(settingsData.size);
     blur.set(settingsData.blur);
     borderRadius.set(settingsData.frame)

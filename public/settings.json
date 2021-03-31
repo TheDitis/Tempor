@@ -1,17 +1,17 @@
 {
-  "hue": 49,
+  "hue": 322.6,
   "size": 250,
-  "blur": 0,
-  "lineThickness": 100,
+  "blur": 2.2,
+  "lineThickness": 36.6,
   "fontWeight": "Regular",
   "alwaysOnTop": true,
   "theme": "dark",
-  "frame": 100,
+  "frame": 0,
   "volume": 0.87,
   "sounds": {
-    "start": "sound (1).wav",
-    "next": "sound (8).wav",
-    "end": "sound (10).wav"
+    "start": "sound (10).wav",
+    "next": "sound (10).wav",
+    "end": "sound (32).wav"
   },
   "favorites": [
     12000,
@@ -33,5 +33,6 @@
     null,
     null
   ],
+  "favoriteIntervalColors": [null, null, null, null, null],
   "repeatIntervalCycle": true
 }

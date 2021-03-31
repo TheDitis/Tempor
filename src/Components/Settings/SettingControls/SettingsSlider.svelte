@@ -1,15 +1,20 @@
 <script>
+    import {createEventDispatcher} from "svelte";
     export let value = 0;
     export let min = 0;
     export let max = 100;
     export let label;
     export let step = 0.1
     export let onChange = () => null;
+    export let disabled = false;
+
+    // const dispatch = createEventDispatcher();
+    // dispatch("")
 </script>
 
-<div class="SettingsSlider">
+<div class="SettingsSlider" class:disabled={disabled}>
     <p>{label}</p>
-    <input type="range" bind:value={value} {min} {max} {step} on:input={onChange}/>
+    <input type="range" {disabled} bind:value={value} {min} {max} {step} on:input={onChange}/>
 </div>
 
 <style>
@@ -19,6 +24,10 @@
         flex-direction: column;
         /*border: 2px solid var(--color);*/
         margin: 0;
+    }
+
+    .disabled {
+        opacity: 0.4;
     }
 
     p {

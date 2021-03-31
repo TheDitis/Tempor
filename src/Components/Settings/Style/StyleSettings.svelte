@@ -3,7 +3,15 @@
     import SettingsSlider from "../SettingControls/SettingsSlider.svelte";
     import SettingsOptionButton from "../SettingControls/SettingsOptionButton.svelte";
     import {faLayerGroup} from "@fortawesome/free-solid-svg-icons";
-    import {hue, blur, borderRadius, lineThickness, settings} from "../../../stores/appState";
+    import {hue, globalHue, blur, borderRadius, lineThickness, settings} from "../../../stores/appState";
+
+    const onHueUpdate = (hueVal) => {
+            globalHue.set(hueVal);
+    }
+
+    $: {
+            onHueUpdate($hue)
+    }
 </script>
 
 

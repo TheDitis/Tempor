@@ -12,9 +12,8 @@
     const settingsPages = {
         "style": StyleSettings,
         "sound": SoundSettings,
-        "intervals": IntervalSettings
+        "intervals": IntervalSettings,
     }
-
 
     onMount(() => {
         settingsHeight.set(settingsRef.clientHeight);
@@ -57,8 +56,6 @@
         padding-top: 0;
         /*box-shadow: 15px 0 15px -15px var(--color);*/
     }
-
-
 
     .bottomRow {
         margin-top: 30px;

@@ -83,6 +83,7 @@
         align-items: center;
         justify-content: center;
         width: 95%;
+
     }
 
     p {
@@ -98,7 +99,9 @@
         justify-content: space-between;
         align-items: center;
         width: 95%;
-
+        /*border: 1px solid var(--color);*/
+        box-shadow: 0 0 6px var(--color);
+        border-radius: 50px
     }
 
     .arrowButton {

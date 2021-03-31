@@ -36,6 +36,7 @@
     {/if}
     <div class="spacer"/>
     <SelectOption onChange={changeSoundFile("end")} value={endVal} label="End" options={listSoundFileNames()}/>
+    <div class="spacer"/>
 </SettingsSection>
 
 

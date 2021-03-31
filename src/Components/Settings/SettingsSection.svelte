@@ -1,6 +1,3 @@
-<script>
-
-</script>
 
 
 <div class="SettingsSection">
@@ -32,8 +29,9 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        max-height: 200px;
+        /*justify-content: center;*/
+        /*max-height: 200px;*/
+        max-height: calc(var(--size) * 2 * 1px);
         overflow-y: scroll;
     }
     .buttonSection {

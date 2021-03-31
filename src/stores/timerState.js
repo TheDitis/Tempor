@@ -1,5 +1,5 @@
 import {readable, derived, writable, get} from "svelte/store";
-import {settings, intervalMode, playSound} from "./appState";
+import {settings, intervalMode, playSound, hue, intervalColors, globalHue} from "./appState";
 
 
 export const focused = writable(true);
@@ -52,43 +52,43 @@ export const intervalDurations = writable([25000, 5000])
 export const intervalIndex = writable(0)
 
 
-// sets the duration, start time, and run-state of the timer
-export const start = () => {
-    const isIntervalMode = get(intervalMode);
-    let tempDur;
-    if (!isIntervalMode) {
-        tempDur = get(tempDuration);
-    }
-    else {
-        const tempIntervalDurations = get(intervalDurations);
-        const intervalInd = get(intervalIndex);
-        tempDur = tempIntervalDurations[intervalInd];
-    }
-    if (tempDur !== 0) {
-        startTime.set(Date.now())
-        duration.set(tempDur);
-        focused.set(false);
-        runState.set("running");
-        const sound = new Audio("file://" + __dirname + "/sounds/sound (2).wav");
-        sound.play();
-    }
-}
-
-// gets the current remaining time and sets the state to 'paused'
-export const pause = () => {
-    const remTime = get(remainingTime)
-    pausedRemainingTime.set(remTime);
-    runState.set("paused");
-}
-
-// calculates the new relative start-time based on how much time is remaining and sets the state back to running
-export const resume = () => {
-    const dur = get(duration);
-    const remTime = get(pausedRemainingTime)
-    startTime.set(Date.now() - (dur - remTime));
-    focused.set(false);
-    runState.set("running");
-}
+// // sets the duration, start time, and run-state of the timer
+// export const start = () => {
+//     const isIntervalMode = get(intervalMode);
+//     let tempDur;
+//     if (!isIntervalMode) {
+//         tempDur = get(tempDuration);
+//     }
+//     else {
+//         const tempIntervalDurations = get(intervalDurations);
+//         const intervalInd = get(intervalIndex);
+//         tempDur = tempIntervalDurations[intervalInd];
+//     }
+//     if (tempDur !== 0) {
+//         startTime.set(Date.now())
+//         duration.set(tempDur);
+//         focused.set(false);
+//         runState.set("running");
+//         const sound = new Audio("file://" + __dirname + "/sounds/sound (2).wav");
+//         sound.play();
+//     }
+// }
+//
+// // gets the current remaining time and sets the state to 'paused'
+// export const pause = () => {
+//     const remTime = get(remainingTime)
+//     pausedRemainingTime.set(remTime);
+//     runState.set("paused");
+// }
+//
+// // calculates the new relative start-time based on how much time is remaining and sets the state back to running
+// export const resume = () => {
+//     const dur = get(duration);
+//     const remTime = get(pausedRemainingTime)
+//     startTime.set(Date.now() - (dur - remTime));
+//     focused.set(false);
+//     runState.set("running");
+// }
 
 // runs when the time runs out
 export const handleEnd = () => {
@@ -107,6 +107,13 @@ export const handleEnd = () => {
         const currentInd = get(intervalIndex);
         const nextInd = (currentInd + 1) % tempDurations.length;
         intervalIndex.set(nextInd)
+        const intervalColor = get(intervalColors)[nextInd];
+        if (intervalColor !== null) {
+            hue.set(intervalColor)
+        }
+        else {
+            hue.set(get(globalHue))
+        }
         // if repeatIntervalCycle setting is on or we haven't reached the end of the list:
         if (curSettings.repeatIntervalCycle || nextInd > currentInd) {
             startTime.set(Date.now())

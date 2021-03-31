@@ -6,14 +6,21 @@
         intervalMode,
         settings,
         showFavorites,
+        intervalColors,
+        hue,
+        globalHue,
     } from "../../stores/appState";
     import {
         duration,
         focused,
-        intervalDurations, intervalIndex, pausedRemainingTime, remainingTime,
+        intervalDurations,
+        intervalIndex,
+        pausedRemainingTime,
+        remainingTime,
         // pause,
         // resume,
-        runState, startTime,
+        runState,
+        startTime,
         // start,
         tempDuration
     } from "../../stores/timerState";
@@ -64,9 +71,14 @@
             // in interval mode
             } else {
                 const tempFavorites = $settings.favoriteIntervals;
-
+                const tempFavoriteColors = $settings.favoriteIntervalColors;
                 tempFavorites[favKeyMap.set[key]] = $intervalDurations;
-                settings.set({...$settings, favoriteIntervals: tempFavorites});
+                tempFavoriteColors[favKeyMap.set[key]] = $intervalColors;
+                settings.set({
+                    ...$settings,
+                    favoriteIntervals: tempFavorites,
+                    favoriteIntervalColors: tempFavoriteColors
+                });
                 currentFavInterval.set(favKeyMap.set[key]);
             }
         }
@@ -198,10 +210,16 @@
                     intervalIndex.update(ind => {
                         let newInd = (ind + direction) % $intervalDurations.length;
                         if (newInd < 0) newInd = $intervalDurations.length - 1;
-                        console.log(newInd)
                         return newInd
                     })
                     await tick();
+                    const intervalColor = $intervalColors[$intervalIndex];
+                    if (intervalColor !== null) {
+                        hue.set(intervalColor)
+                    }
+                    else {
+                        hue.set($globalHue)
+                    }
                     focused.set(true);
                 }
                 break;
@@ -214,6 +232,7 @@
                     }
                     intervalDurations.set([...$intervalDurations, 0])
                     intervalIndex.set($intervalDurations.length - 1)
+                    hue.set($globalHue);
                     await tick();
                     focused.set(true);
                 }
@@ -232,6 +251,13 @@
                         return arr;
                     })
                     await tick();
+                    const intervalColor = $intervalColors[$intervalIndex];
+                    if (intervalColor !== null) {
+                        hue.set(intervalColor)
+                    }
+                    else {
+                        hue.set($globalHue)
+                    }
                     focused.set(true);
                 }
                 break;

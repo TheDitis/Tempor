@@ -147,23 +147,37 @@
 		background: var(--appBg);
 		border-radius: var(--frameRadius);
 		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
 	}
 
 	.draggableArea {
 		position: absolute;
 		box-sizing: border-box;
-		top: 0;
-		height: 20px;
-		width: 100vw;
+		top: 20px;
+		height: calc(var(--blur) * 3px + 10px);
+		/*height: 20px;*/
+		/*width: 100vw;*/
+		width: calc(var(--size) / 2 * 1px);
 		margin: 0;
 		padding: 0;
 		-webkit-app-region: drag;
+		/*border: 2px solid rgb(255, 255, 255);*/
+		/*opacity: 0;*/
+		cursor: pointer;
+		z-index: 10000;
+	}
+	.draggableArea:hover {
+		background: rgba(255, 255, 255, 0.2);
 	}
 
 	.timerSection {
 		/*width: 100vw;*/
 		margin: 0;
 		padding: 0;
+		/*z-index: 100;*/
 		/*padding: 10px;*/
 		/*margin-top: 20px;*/
 		/*padding-bottom: 15px;*/
