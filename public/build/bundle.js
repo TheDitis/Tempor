@@ -3261,6 +3261,8 @@ var app = (function () {
     // the index of the current interval duration
     const intervalIndex = writable(0);
 
+    const playingIntervalIndex = writable(0);
+
 
     // // sets the duration, start time, and run-state of the timer
     // export const start = () => {
@@ -31636,12 +31638,12 @@ var app = (function () {
     			attr_dev(h3, "class", "svelte-1uaoi25");
     			add_location(h3, file$9, 43, 4, 1358);
     			attr_dev(h4, "class", "svelte-1uaoi25");
-    			add_location(h4, file$9, 44, 4, 1390);
+    			add_location(h4, file$9, 45, 4, 1392);
     			attr_dev(button, "class", "unlinkButton svelte-1uaoi25");
-    			add_location(button, file$9, 45, 4, 1434);
-    			add_location(br0, file$9, 52, 4, 1633);
-    			add_location(br1, file$9, 52, 9, 1638);
-    			add_location(br2, file$9, 60, 4, 1838);
+    			add_location(button, file$9, 46, 4, 1436);
+    			add_location(br0, file$9, 53, 4, 1635);
+    			add_location(br1, file$9, 53, 9, 1640);
+    			add_location(br2, file$9, 61, 4, 1840);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h3, anchor);
@@ -31722,7 +31724,7 @@ var app = (function () {
     	return block;
     }
 
-    // (63:4) 
+    // (64:4) 
     function create_buttons_slot$1(ctx) {
     	let settingsoptionbutton;
     	let current;
@@ -31764,7 +31766,7 @@ var app = (function () {
     		block,
     		id: create_buttons_slot$1.name,
     		type: "slot",
-    		source: "(63:4) ",
+    		source: "(64:4) ",
     		ctx
     	});
 
@@ -34139,8 +34141,6 @@ var app = (function () {
     				await tick();
     				const intervalColor = $intervalColors[$intervalIndex];
     				if (intervalColor) hue.set(intervalColor); else hue.set($globalHue);
-
-    				// updateColor(null)
     				focused.set(true);
     			}
     		}
@@ -34480,7 +34480,7 @@ var app = (function () {
 
     const file = "src\\App.svelte";
 
-    // (142:2) {#if $settingsOpen}
+    // (143:2) {#if $settingsOpen}
     function create_if_block(ctx) {
     	let settings_1;
     	let current;
@@ -34512,7 +34512,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(142:2) {#if $settingsOpen}",
+    		source: "(143:2) {#if $settingsOpen}",
     		ctx
     	});
 
@@ -34588,11 +34588,11 @@ var app = (function () {
     			t6 = space();
     			create_component(mastercontrols.$$.fragment);
     			attr_dev(div0, "class", "draggableArea svelte-1fz8pzh");
-    			add_location(div0, file, 131, 2, 3166);
+    			add_location(div0, file, 132, 2, 3284);
     			attr_dev(div1, "class", "timerSection svelte-1fz8pzh");
-    			add_location(div1, file, 133, 2, 3203);
+    			add_location(div1, file, 134, 2, 3321);
     			attr_dev(div2, "class", "App svelte-1fz8pzh");
-    			add_location(div2, file, 130, 1, 3146);
+    			add_location(div2, file, 131, 1, 3264);
     			set_style(main, "--size", /*$size*/ ctx[5]);
     			set_style(main, "--width", /*$width*/ ctx[3]);
     			set_style(main, "--color", /*$color*/ ctx[7].hsl().string());
@@ -34605,7 +34605,7 @@ var app = (function () {
     			set_style(main, "--appBg", /*appBg*/ ctx[6]);
     			set_style(main, "--frameRadius", /*$borderRadius*/ ctx[9] * (/*$width*/ ctx[3] / 2) / 100 + "px");
     			attr_dev(main, "class", "svelte-1fz8pzh");
-    			add_location(main, file, 115, 0, 2724);
+    			add_location(main, file, 116, 0, 2842);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -34751,7 +34751,9 @@ var app = (function () {
     	let $tempDuration;
     	let $intervalDurations;
     	let $settings;
+    	let $intervalIndex;
     	let $remainingTime;
+    	let $playingIntervalIndex;
     	let $duration;
     	let $pausedRemainingTime;
     	let $size;
@@ -34774,16 +34776,20 @@ var app = (function () {
     	component_subscribe($$self, intervalDurations, $$value => $$invalidate(17, $intervalDurations = $$value));
     	validate_store(settings, "settings");
     	component_subscribe($$self, settings, $$value => $$invalidate(4, $settings = $$value));
+    	validate_store(intervalIndex, "intervalIndex");
+    	component_subscribe($$self, intervalIndex, $$value => $$invalidate(18, $intervalIndex = $$value));
     	validate_store(remainingTime, "remainingTime");
-    	component_subscribe($$self, remainingTime, $$value => $$invalidate(18, $remainingTime = $$value));
+    	component_subscribe($$self, remainingTime, $$value => $$invalidate(19, $remainingTime = $$value));
+    	validate_store(playingIntervalIndex, "playingIntervalIndex");
+    	component_subscribe($$self, playingIntervalIndex, $$value => $$invalidate(20, $playingIntervalIndex = $$value));
     	validate_store(duration, "duration");
-    	component_subscribe($$self, duration, $$value => $$invalidate(19, $duration = $$value));
+    	component_subscribe($$self, duration, $$value => $$invalidate(21, $duration = $$value));
     	validate_store(pausedRemainingTime, "pausedRemainingTime");
-    	component_subscribe($$self, pausedRemainingTime, $$value => $$invalidate(20, $pausedRemainingTime = $$value));
+    	component_subscribe($$self, pausedRemainingTime, $$value => $$invalidate(22, $pausedRemainingTime = $$value));
     	validate_store(size, "size");
     	component_subscribe($$self, size, $$value => $$invalidate(5, $size = $$value));
     	validate_store(maxSize, "maxSize");
-    	component_subscribe($$self, maxSize, $$value => $$invalidate(21, $maxSize = $$value));
+    	component_subscribe($$self, maxSize, $$value => $$invalidate(23, $maxSize = $$value));
     	validate_store(color, "color");
     	component_subscribe($$self, color, $$value => $$invalidate(7, $color = $$value));
     	validate_store(scaledBlur, "scaledBlur");
@@ -34806,7 +34812,7 @@ var app = (function () {
     		});
     	});
 
-    	const start = () => {
+    	const start = async () => {
     		let tempDur;
 
     		if (!$intervalMode) {
@@ -34826,11 +34832,13 @@ var app = (function () {
     	};
 
     	const pause = () => {
+    		playingIntervalIndex.set($intervalIndex);
     		pausedRemainingTime.set($remainingTime);
     		runState.set("paused");
     	};
 
     	const resume = () => {
+    		intervalIndex.set($playingIntervalIndex);
     		startTime.set(Date.now() - ($duration - $pausedRemainingTime));
     		focused.set(false);
     		runState.set("running");
@@ -34888,6 +34896,7 @@ var app = (function () {
     		focused,
     		intervalDurations,
     		intervalIndex,
+    		playingIntervalIndex,
     		pausedRemainingTime,
     		remainingTime,
     		runState,
@@ -34906,7 +34915,9 @@ var app = (function () {
     		$tempDuration,
     		$intervalDurations,
     		$settings,
+    		$intervalIndex,
     		$remainingTime,
+    		$playingIntervalIndex,
     		$duration,
     		$pausedRemainingTime,
     		$size,

@@ -132,9 +132,8 @@
                 await tick();
                 const intervalColor = $intervalColors[$intervalIndex];
                 if (intervalColor) hue.set(intervalColor);
-
                 else hue.set($globalHue);
-                // updateColor(null)
+
                 focused.set(true);
             }
         }

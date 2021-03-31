@@ -42,6 +42,7 @@
 
 <SettingsSection>
     <h3>Interval Settings</h3>
+
     <h4>Interval {$intervalIndex + 1}</h4>
     <button
         class="unlinkButton"

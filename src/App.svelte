@@ -28,7 +28,10 @@
 		duration,
 		focused,
 		intervalDurations,
-		intervalIndex, pausedRemainingTime, remainingTime,
+		intervalIndex,
+		playingIntervalIndex,
+		pausedRemainingTime,
+		remainingTime,
 		runState,
 		startTime,
 		tempDuration
@@ -46,9 +49,6 @@
 	})
 
 
-
-
-
 	// any time the window size changes, send the signal to electron
 	$: { ipcRenderer.send("resize", $width, $height) }
 	// tell the window whether to stay on top or not when that setting changes
@@ -57,7 +57,7 @@
 
 
 	// sets the duration, start time, and run-state of the timer
-	export const start = () => {
+	export const start = async () => {
 		let tempDur;
 		if (!$intervalMode) {
 			tempDur = $tempDuration;
@@ -65,7 +65,6 @@
 		else {
 			intervalIndex.set(0);
 			tempDur = $intervalDurations[0];
-
 		}
 		if (tempDur !== 0) {
 			startTime.set(Date.now())
@@ -78,12 +77,14 @@
 
 	// gets the current remaining time and sets the state to 'paused'
 	export const pause = () => {
+		playingIntervalIndex.set($intervalIndex);
 		pausedRemainingTime.set($remainingTime);
 		runState.set("paused");
 	}
 
 	// calculates the new relative start-time based on how much time is remaining and sets the state back to running
 	export const resume = () => {
+		intervalIndex.set($playingIntervalIndex);
 		startTime.set(Date.now() - ($duration - $pausedRemainingTime));
 		focused.set(false);
 		runState.set("running");

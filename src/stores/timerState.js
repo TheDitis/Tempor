@@ -49,7 +49,9 @@ export const remainingTime = derived(
 export const intervalDurations = writable([25000, 5000])
 
 // the index of the current interval duration
-export const intervalIndex = writable(0)
+export const intervalIndex = writable(0);
+
+export const playingIntervalIndex = writable(0);
 
 
 // // sets the duration, start time, and run-state of the timer
