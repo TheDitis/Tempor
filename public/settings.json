@@ -1,5 +1,5 @@
 {
-  "hue": 322.6,
+  "hue": 18.6,
   "size": 250,
   "blur": 2.2,
   "lineThickness": 36.6,
@@ -33,6 +33,18 @@
     null,
     null
   ],
-  "favoriteIntervalColors": [null, null, null, null, null],
+  "favoriteIntervalColors": [
+    [
+      18.6,
+      77.2,
+      null,
+      null,
+      null
+    ],
+    null,
+    null,
+    null,
+    null
+  ],
   "repeatIntervalCycle": true
 }

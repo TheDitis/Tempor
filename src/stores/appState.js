@@ -98,7 +98,7 @@ export const loadSettings = () => {
 
 
 export const saveSettings = () => {
-    const tempHue = get(hue);
+    const tempHue = get(globalHue);
     const tempSize = get(size);
     const tempBlur = get(blur);
     const frame = get(borderRadius);

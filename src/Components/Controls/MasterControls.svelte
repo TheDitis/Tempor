@@ -31,6 +31,16 @@
     export let start, pause, resume;
 
 
+    const updateColor = (deps) => {
+        if ($intervalMode && $intervalColors && intervalColors[$intervalIndex]) {
+            hue.set($intervalColors[$intervalIndex]);
+        }
+        else {
+            hue.set($globalHue);
+        }
+    }
+
+
     // runs when the time runs out
     export const handleEnd = () => {
         runState.set("finished");
@@ -57,31 +67,32 @@
     }
 
     const setFavorite = (key) => {
-        if ($focused) {
-            // in normal mode:
-            if (!$intervalMode) {
-                console.log("setting favorite: ", favKeyMap.set[key], " to ", $tempDuration)
-                const tempFavorites = $settings.favorites;
-                // if this value isn't already in a favorite slot
-                if (!tempFavorites.includes($tempDuration)) {
-                    tempFavorites[favKeyMap.set[key]] = $tempDuration > 0 ? $tempDuration : null;
-                    settings.set({...$settings, favorites: tempFavorites})
-                    currentFavInd.set(favKeyMap.set[key]);
-                }
-            // in interval mode
-            } else {
-                const tempFavorites = $settings.favoriteIntervals;
-                const tempFavoriteColors = $settings.favoriteIntervalColors;
-                tempFavorites[favKeyMap.set[key]] = $intervalDurations;
-                tempFavoriteColors[favKeyMap.set[key]] = $intervalColors;
-                settings.set({
-                    ...$settings,
-                    favoriteIntervals: tempFavorites,
-                    favoriteIntervalColors: tempFavoriteColors
-                });
-                currentFavInterval.set(favKeyMap.set[key]);
+        if (!$focused) return
+        // in normal mode:
+        if (!$intervalMode) {
+            console.log("setting favorite: ", favKeyMap.set[key], " to ", $tempDuration)
+            const tempFavorites = $settings.favorites;
+            // if this value isn't already in a favorite slot
+            if (!tempFavorites.includes($tempDuration)) {
+                tempFavorites[favKeyMap.set[key]] = $tempDuration > 0 ? $tempDuration : null;
+                settings.set({...$settings, favorites: tempFavorites})
+                currentFavInd.set(favKeyMap.set[key]);
             }
         }
+        // in interval mode
+        else {
+            const tempFavorites = $settings.favoriteIntervals;
+            const tempFavoriteColors = $settings.favoriteIntervalColors;
+            tempFavorites[favKeyMap.set[key]] = $intervalDurations;
+            tempFavoriteColors[favKeyMap.set[key]] = $intervalColors;
+            settings.set({
+                ...$settings,
+                favoriteIntervals: tempFavorites,
+                favoriteIntervalColors: tempFavoriteColors
+            });
+            currentFavInterval.set(favKeyMap.set[key]);
+        }
+
     }
 
     const loadFavorite = async (key) => {
@@ -103,21 +114,35 @@
         /// IF IN INTERVAL MODE:
         else {
             console.log("loading interval setting ")
-            const setting = $settings.favoriteIntervals[favInd];
-            console.log("fav setting: ", setting)
-            if (!!setting) {
+            const timeSetting = $settings.favoriteIntervals[favInd];
+            let colorSetting = $settings.favoriteIntervalColors[favInd];
+            if (colorSetting === null) {
+                colorSetting = [null, null, null, null, null];
+            }
+            console.log("fav setting: ", timeSetting)
+            if (!!timeSetting) {
                 focused.set(false);
                 if ($runState !== "running") {
                     pause();
                 }
                 intervalIndex.set(0);
-                intervalDurations.set(setting);
+                intervalDurations.set(timeSetting);
+                intervalColors.set(colorSetting);
                 currentFavInterval.set(favInd);
-                await tick()
+                await tick();
+                const intervalColor = $intervalColors[$intervalIndex];
+                if (intervalColor) hue.set(intervalColor);
+
+                else hue.set($globalHue);
+                // updateColor(null)
                 focused.set(true);
             }
         }
     }
+
+
+
+    // $: {updateColor($intervalColors)}
 
     const handleKeyDown = async (e) => {
         const key = e.key;

@@ -15,6 +15,7 @@
 		settingsOpen,
 		loadSettings,
 		intervalMode,
+		intervalColors,
 		playSound
 	} from "./stores/appState";
 	import ResizeControl from "./Components/Controls/ResizeControl.svelte";
@@ -46,10 +47,13 @@
 
 
 
+
+
 	// any time the window size changes, send the signal to electron
 	$: { ipcRenderer.send("resize", $width, $height) }
 	// tell the window whether to stay on top or not when that setting changes
 	$: { ipcRenderer.send("stayontop", $stayOnTop) }
+
 
 
 	// sets the duration, start time, and run-state of the timer
