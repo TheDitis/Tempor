@@ -9,7 +9,7 @@
   "frame": 0,
   "volume": 1,
   "sounds": {
-    "start": "sound (10).wav",
+    "start": "sound (6).wav",
     "next": "sound (10).wav",
     "end": "sound (32).wav"
   },

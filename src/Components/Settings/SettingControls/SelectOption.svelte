@@ -11,7 +11,7 @@
     // so that the onChange function will be called only when the buttons are pressed, not on initial mount
     let callChangeHandler = false;
     // the index of the current value in the options list provided
-    let ind;
+    let ind = null;
 
 
     onMount(async () => {
@@ -61,7 +61,7 @@
         <button class="arrowButton" on:click={prev}>
             <Fa icon={faCaretLeft}/>
         </button>
-        {#if ind}
+        {#if ind !== null}
             <p>{withoutExtension(value)}</p>
         {/if}
         <button class="arrowButton" on:click={next}>

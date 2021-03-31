@@ -28,17 +28,21 @@
 
 <SettingsSection>
     <SettingsSlider label="Volume" bind:value={$volume} min="0" max="1" step="0.01"/>
-    <br/>
-    {#if startVal}
-        <SelectOption onChange={changeSoundFile("start")} bind:value={startVal} label="Start" options={fileList}/>
-    {/if}
-    {#if $intervalMode && nextVal}
+    {#if fileList.length > 0}
         <br/>
-        <SelectOption onChange={changeSoundFile("next")} bind:value={nextVal} label="Next" options={fileList}/>
-    {/if}
-    {#if endVal}
-        <br/>
-        <SelectOption onChange={changeSoundFile("end")} bind:value={endVal} label="End" options={fileList}/>
+        {#if startVal}
+            <SelectOption onChange={changeSoundFile("start")} bind:value={startVal} label="Start" options={fileList}/>
+        {/if}
+        {#if $intervalMode && nextVal}
+            <br/>
+            <SelectOption onChange={changeSoundFile("next")} bind:value={nextVal} label="Next" options={fileList}/>
+        {/if}
+        {#if endVal}
+            <br/>
+            <SelectOption onChange={changeSoundFile("end")} bind:value={endVal} label="End" options={fileList}/>
+        {/if}
+    {:else}
+        <h2>No sound files found</h2>
     {/if}
     <br/>
 </SettingsSection>

@@ -85,7 +85,6 @@ export const meme = writable(null);  // TODO: IT'S OVER 9000!!!
 export const loadSettings = () => {
     // read settings file and set relevant stores:
     const settingsData = JSON.parse(fs.readFileSync(path.join(__dirname, "./settings.json")));
-    settings.set(settingsData);
     hue.set(settingsData.hue);
     globalHue.set(settingsData.hue);
     size.set(settingsData.size);
@@ -93,6 +92,20 @@ export const loadSettings = () => {
     borderRadius.set(settingsData.frame)
     volume.set(settingsData.volume);
     lineThickness.set(settingsData.lineThickness);
+
+    // HANDLE MISSING SOUND FILES
+    const soundFiles = listSoundFileNames();
+    for (let soundName of Object.keys(settingsData.sounds)) {
+        const sound = settingsData.sounds[soundName];
+        const found = soundFiles.includes(settingsData.sounds[soundName])
+        console.log("sound: ", sound, " found: ", found)
+        if (!found) {
+            settingsData.sounds[soundName] = soundFiles[0];
+            console.log("setting default sound for ", soundName, " sound: ", soundFiles[0])
+        }
+    }
+
+    settings.set(settingsData);
 }
 
 

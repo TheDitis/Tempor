@@ -7,10 +7,8 @@
       <change beforePath="$PROJECT_DIR$/public/build/bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/build/bundle.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/build/bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/build/bundle.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Settings/SettingControls/SelectOption.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/SettingControls/SelectOption.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Settings/Sound/SoundSettings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/Sound/SoundSettings.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stores/appState.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/appState.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +128,7 @@
       <workItem from="1616465888340" duration="491000" />
       <workItem from="1616466762411" duration="2202000" />
       <workItem from="1616542385164" duration="136060000" />
-      <workItem from="1616882342802" duration="91567000" />
+      <workItem from="1616882342802" duration="92512000" />
     </task>
     <servers />
   </component>
