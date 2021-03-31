@@ -5,7 +5,7 @@
     import Color from "color";
 
     const blinkRate = 130;
-    let opacity
+    let opacity, colors
 
     $:{
         if ($runState === "running") {
@@ -13,9 +13,24 @@
             const curTime = ($time / (blinkRate / oneCycle));
             // get the y position and scale between 0.5 & 1
             opacity = (Math.sin(curTime / oneCycle) + 1) / 2 + 0.2;
-            // console.log("opacity: ", opacity)
         }
         else opacity = 1;
+    }
+
+    const updateColors = (deps) => {
+        colors = $intervalColors.map(val => {
+            if (val !== null) {
+                return Color('rgb(255, 0, 0)').rotate(val)
+            } else {
+                return Color('rgb(255, 0, 0)').rotate($globalHue)
+            }
+        })
+        // console.log("colors updated: ", colors)
+    }
+
+
+    $: {
+        updateColors($intervalColors, $globalHue)
     }
 </script>
 
@@ -28,7 +43,7 @@
     {#each $intervalDurations as duration, ind}
         <div
             class="intervalItem"
-            style="background: {$intervalColors[ind] !== null ? Color('rgb(255, 0, 0)').rotate($intervalColors[ind]) : Color('rgb(255, 0, 0)').rotate($globalHue)}"
+            style="background: {colors[ind]}"
             class:current={$intervalIndex === ind}
         ></div>
     {/each}

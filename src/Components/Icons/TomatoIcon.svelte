@@ -9,7 +9,6 @@
     let color1, color2;
     const updateColors = (deps) => {
         if (colors && (colors[0] !== null || colors[1] !== null)) {
-            console.log("got colors: ", colors)
             if (colors[0]) {
                 color1 = Color('rgb(255, 0, 0)').rotate(colors[0]);
             }

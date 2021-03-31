@@ -32,16 +32,6 @@
     export let start, pause, resume;
 
 
-    const updateColor = (deps) => {
-        if ($intervalMode && $intervalColors && intervalColors[$intervalIndex]) {
-            hue.set($intervalColors[$intervalIndex]);
-        }
-        else {
-            hue.set($globalHue);
-        }
-    }
-
-
     // runs when the time runs out
     export const handleEnd = () => {
         runState.set("finished");
@@ -147,7 +137,6 @@
     const handleKeyDown = async (e) => {
         const key = e.key;
         if (e.repeat) return;
-        // console.log(key)
         switch (key) {
             /// MAIN PAUSE/PLAY CONTROLS
             case " ":
@@ -248,10 +237,14 @@
                     })
                     await tick();
                     const intervalColor = $intervalColors[$intervalIndex];
+                    // console.log("intervalColor in arrow detector: ", intervalColor, "index: ", $intervalIndex)
                     if (intervalColor !== null) {
+                        // setting color
+                        console.log("setting hue to interval color in arrow listener")
                         hue.set(intervalColor)
                     }
                     else {
+                        console.log("setting color to global in arrow listener")
                         hue.set($globalHue)
                     }
                     focused.set(true);

@@ -1,4 +1,5 @@
 <script>
+    import {onMount, tick} from "svelte";
     import SettingsSection from "../SettingsSection.svelte";
     import SettingsSlider from "../SettingControls/SettingsSlider.svelte";
     import SettingsOptionButton from "../SettingControls/SettingsOptionButton.svelte";
@@ -10,15 +11,35 @@
         borderRadius,
         lineThickness,
         settings,
-        intervalColors
+        intervalColors,
+        intervalMode
     } from "../../../stores/appState";
     import {intervalIndex} from "../../../stores/timerState";
 
-    const onHueUpdate = (hueVal) => {
-        if (!($intervalColors && $intervalColors[$intervalIndex])) {
-            globalHue.set(hueVal);
-        }
+    // const onIntervalChange = async deps => {
+    //     console.log("onIntervalChange called")
+    //     if ($intervalMode && $intervalColors[$intervalIndex] !== null) {
+    //         hue.set($intervalColors[$intervalIndex])
+    //         await tick();
+    //         console.log("setting hue to interval color: ", $hue)
+    //     }
+    //     else {
+    //         hue.set($globalHue);
+    //         console.log("setting hue to global color")
+    //     }
+    // }
+
+    const onHueUpdate = async (hueVal = null) => {
+        // await tick();
+        // console.log("onHueUpdate called")
+        hue.set($globalHue);
     }
+
+
+    // onMount(() => {
+    //     console.log("StyleSettings mounted")
+    //     onIntervalChange(null)
+    // })
 
     const themeOptions = ["transparent", "dark", "light"];
 
@@ -28,14 +49,15 @@
         settings.update(opts => ({...opts, theme: nextTheme}))
     }
 
-    $: {
-        onHueUpdate($hue)
-    }
+    $: customColor = $intervalMode && $intervalColors[$intervalIndex] !== null;
+
+    $: {onHueUpdate($globalHue)}
+    // $: {onIntervalChange($intervalIndex)}
 </script>
 
 
 <SettingsSection>
-    <SettingsSlider label="Color" bind:value={$hue} min="0" max="360"/>
+    <SettingsSlider label="Color" bind:value={$globalHue} min="0" max="360" disabled={customColor}/>
     <SettingsSlider label="Line Width" bind:value={$lineThickness} min="0" max="100"/>
     <SettingsSlider label="Blur" bind:value={$blur} min="0" max="10"/>
     {#if $settings.theme !== "transparent"}

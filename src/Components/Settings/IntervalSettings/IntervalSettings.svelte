@@ -29,7 +29,6 @@
 
 
     const onClick = (e) => {
-        console.log("onClick: ");
         const tempIntervalColors = [...$intervalColors];
         if (hueValue === null) {
             tempIntervalColors[$intervalIndex] = $globalHue
@@ -43,7 +42,7 @@
 
     const onColorChange = (val) => {
         if (val) hue.set(val);
-        console.log($intervalColors)
+        // console.log($intervalColors)
     }
 
     $: { onColorChange(hueValue) }

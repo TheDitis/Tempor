@@ -13,8 +13,6 @@
     let input;
 
     onMount(() => {
-        console.log("mounting input")
-
         if (!$intervalMode && $tempDuration !== 0 && $runState !== "running") {
             numbers = formatTimeMs($tempDuration).replaceAll(":", "")
             numsStrToHrsMinsSecs();

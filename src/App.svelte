@@ -4,6 +4,7 @@
 	const {ipcRenderer} = require("electron");
 	import {
 		size,
+		hue,
 		width,
 		height,
 		color,
@@ -21,7 +22,7 @@
 	import ResizeControl from "./Components/Controls/ResizeControl.svelte";
 	import OpenSettingsButton from "./Components/Settings/OpenSettingsButton.svelte";
 	import Settings from "./Components/Settings/Settings.svelte";
-	import ThemeCycleButton from "./Components/Controls/ThemeCycleButton.svelte";
+	// import ThemeCycleButton from "./Components/Controls/ThemeCycleButton.svelte";
 	import IntervalModeButton from "./Components/Controls/IntervalModeButton.svelte";
 	import MasterControls from "./Components/Controls/MasterControls.svelte";
 	import {
@@ -55,7 +56,6 @@
 	$: { ipcRenderer.send("stayontop", $stayOnTop) }
 
 
-
 	// sets the duration, start time, and run-state of the timer
 	export const start = async () => {
 		let tempDur;
@@ -65,6 +65,9 @@
 		else {
 			intervalIndex.set(0);
 			tempDur = $intervalDurations[0];
+			if ($intervalColors[0]) {
+				hue.set($intervalColors[0])
+			}
 		}
 		if (tempDur !== 0) {
 			startTime.set(Date.now())
@@ -141,7 +144,7 @@
 			<Timer start={start} pause={pause} resume={resume}/>
 			<ResizeControl on:sizeUp={makeBigger} on:sizeDown={makeSmaller}/>
 			<OpenSettingsButton/>
-			<ThemeCycleButton/>
+<!--			<ThemeCycleButton/>-->
 			<IntervalModeButton/>
 		</div>
 

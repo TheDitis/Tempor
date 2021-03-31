@@ -7,7 +7,6 @@
 
     $: {
         favsList = $intervalMode ? $settings.favoriteIntervals : $settings.favorites
-        console.log("favsList: ", favsList);
     }
     $: curInd = $intervalMode ? $currentFavInterval : $currentFavInd;
 </script>
