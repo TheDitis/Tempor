@@ -5,10 +5,16 @@
     export let icon;
     export let option;
     export let label;
+    export let onChange;
 
     const toggle = () => {
-        settings.set({...$settings, [option]: !$settings[option]});
-        console.log("toggle clicked. value: ", $settings[option]);
+        if (onChange) {
+            onChange()
+        }
+        else {
+            settings.set({...$settings, [option]: !$settings[option]});
+            console.log("toggle clicked. value: ", $settings[option]);
+        }
     }
 
 </script>
@@ -29,9 +35,7 @@
         position: relative;
         height: calc(var(--size) / 7 * 1px);
         width: calc(var(--size) / 7 * 1px);
-        /*min-height: 50px;*/
-        /*min-width: 50px;*/
-        /*min-font-size: 25px;*/
+
         font-size: calc(var(--size) / 14 * 1px);
         outline: none;
         border: none;

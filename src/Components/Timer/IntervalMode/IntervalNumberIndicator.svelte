@@ -38,7 +38,7 @@
 <style>
     .IntervalNumberIndicator {
         position: absolute;
-        bottom: calc(var(--size) * 0.39 * 1px);
+        bottom: calc(var(--size) * 0.38 * 1px);
         display: flex;
         width: calc(var(--size) * 0.65 * 1px);
         filter: blur(calc(var(--textBlur) * 1px));
@@ -47,13 +47,17 @@
         width: 100%;
         height: calc(var(--size) / 45 * 1px);
         margin: 3px;
-        /*background: var(--color);*/
-        opacity: 0.2;
-        transition-property: opacity;
+        opacity: 0.4;
+        position: relative;
+        transition-property: opacity, transform, margin;
         transition-duration: 500ms;
     }
     .current {
         /*opacity: 1;*/
+        /*top: 100%;*/
+        transform: scaleY(1.6);
+    /*translateY(25%);*/
+
         opacity: var(--blink);
     }
 </style>

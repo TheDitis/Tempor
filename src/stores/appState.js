@@ -103,9 +103,9 @@ export const saveSettings = () => {
     const tempBlur = get(blur);
     const frame = get(borderRadius);
     const vol = get(volume);
-    const lineThik = get(lineThickness);
+    const lineThikniss = get(lineThickness);
     let tempSettings = get(settings);
-    tempSettings = {...tempSettings, hue: tempHue, size: tempSize, blur: tempBlur, lineThickness: lineThik, frame, volume: vol}
+    tempSettings = {...tempSettings, hue: tempHue, size: tempSize, blur: tempBlur, lineThickness: lineThikniss, frame, volume: vol}
     tempSettings = JSON.stringify(tempSettings, null, 2);
     fs.writeFileSync(path.join(__dirname, "./settings.json"), tempSettings)
 }

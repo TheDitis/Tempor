@@ -36,8 +36,15 @@
 
 	onMount(() => {
 		loadSettings();
-		ipcRenderer.send("resize", $width, $height)
+		ipcRenderer.send("resize", $width, $height);
+
+		ipcRenderer.on("size-data", (event, data) => {
+			console.log("size-data event recieved! event: ", event)
+			console.log("data: ", data)
+		})
 	})
+
+
 
 	// any time the window size changes, send the signal to electron
 	$: { ipcRenderer.send("resize", $width, $height) }
@@ -186,5 +193,9 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+
+	:global(h1, h2, h3, h4, h5, p) {
+		color: var(--color)
 	}
 </style>

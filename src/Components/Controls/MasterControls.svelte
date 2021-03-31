@@ -163,6 +163,12 @@
             case "p":
                 if (!($runState === "running")) {
                     focused.set(false);
+                    if ($intervalMode) {
+                        hue.set($globalHue);
+                    }
+                    else if ($intervalColors[$intervalIndex] !== null) {
+                        hue.set($intervalColors[$intervalIndex])
+                    }
                     intervalMode.set(!$intervalMode);
                     currentFavInd.set(null);
                     currentFavInterval.set(null);

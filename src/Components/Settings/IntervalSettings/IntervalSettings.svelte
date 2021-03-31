@@ -4,7 +4,8 @@
     import {hue, globalHue, intervalColors, settingsHeight} from "../../../stores/appState";
     import {intervalDurations, intervalIndex} from "../../../stores/timerState";
     import SettingsSlider from "../SettingControls/SettingsSlider.svelte";
-
+    import {faSyncAlt} from "@fortawesome/free-solid-svg-icons";
+    import SettingsOptionButton from "../SettingControls/SettingsOptionButton.svelte";
 
     onMount(async () => {
         if ($intervalColors === null) {
@@ -40,12 +41,13 @@
 
 
 <SettingsSection>
-    <h3>Interval {$intervalIndex + 1}</h3>
+    <h3>Interval Settings</h3>
+    <h4>Interval {$intervalIndex + 1}</h4>
     <button
         class="unlinkButton"
         on:click={onClick}
     >
-        {hueValue === null ? "Unlink Color" : "Use Default Color"}
+        {hueValue === null ? "Use Custom Color" : "Use Default Color"}
     </button>
 <!--    <div class="spacer"/>-->
     <br/><br/>
@@ -56,7 +58,9 @@
         min="0"
         max="360"
     />
+    <br/>
 
+    <SettingsOptionButton slot="buttons" icon={faSyncAlt} option="repeatIntervalCycle" label="Repeat Cycle"/>
 </SettingsSection>
 
 
@@ -74,7 +78,11 @@
 
     }
     h3 {
-        color: var(--color);
+        margin-bottom: 10px;
+    }
+    h4 {
+        margin-top: 5px;
+        /*color: var(--color);*/
     }
     .spacer {
         height: 20px;
