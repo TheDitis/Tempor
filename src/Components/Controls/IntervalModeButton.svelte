@@ -4,11 +4,17 @@
     // import {} from "../../stores/appState";
     import Fa from "svelte-fa";
     import {faSyncAlt} from "@fortawesome/free-solid-svg-icons";
-    import {intervalMode, size} from "../../stores/appState";
-    import {focused} from "../../stores/timerState";
+    import {globalHue, hue, intervalColors, intervalMode, size} from "../../stores/appState";
+    import {focused, intervalIndex} from "../../stores/timerState";
 
     const toggleIntervalMode = async () => {
         focused.set(false)
+        if ($intervalMode) {
+            hue.set($globalHue);
+        }
+        else if ($intervalColors[$intervalIndex] !== null) {
+            hue.set($intervalColors[$intervalIndex])
+        }
         intervalMode.set(!$intervalMode);
         await tick();
         focused.set(true)
