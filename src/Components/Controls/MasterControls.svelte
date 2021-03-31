@@ -9,6 +9,7 @@
         intervalColors,
         hue,
         globalHue,
+        settingsTab,
     } from "../../stores/appState";
     import {
         duration,
@@ -192,6 +193,9 @@
                     }
                     else if ($intervalColors[$intervalIndex] !== null) {
                         hue.set($intervalColors[$intervalIndex])
+                    }
+                    if ($settingsTab === "intervals") {
+                        settingsTab.set("style");
                     }
                     intervalMode.set(!$intervalMode);
                     currentFavInd.set(null);

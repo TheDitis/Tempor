@@ -1,7 +1,7 @@
 <script>
     import {fade} from "svelte/transition";
     import TomatoIcon from "../../Icons/TomatoIcon.svelte";
-    import {color, globalHue, hue, intervalColors, intervalMode, size} from "../../../stores/appState";
+    import {color, globalHue, hue, intervalColors, intervalMode, size, settingsTab} from "../../../stores/appState";
     import {focused, intervalDurations, intervalIndex} from "../../../stores/timerState";
     import {tick} from "svelte";
     import Fa from "svelte-fa";
@@ -11,7 +11,9 @@
         focused.set(false);
         intervalMode.set(false);
         hue.set($globalHue);
-
+        if ($settingsTab === "intervals") {
+            settingsTab.set("style");
+        }
         await tick();
         focused.set(true);
     }

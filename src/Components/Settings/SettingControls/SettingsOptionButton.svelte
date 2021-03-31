@@ -2,7 +2,6 @@
     import Fa from "svelte-fa";
     import {fade} from "svelte/transition";
     import {settings, color} from "../../../stores/appState";
-    import SvelteTooltip from "svelte-tooltip";
 
     export let icon;
     export let option;
@@ -39,9 +38,9 @@
     on:mouseleave={mouseOut}
 >
         <button
-                class:on={$settings[option]}
-                class:off={!$settings[option]}
-                on:click={toggle}
+            class:on={$settings[option]}
+            class:off={!$settings[option]}
+            on:click={toggle}
         >
 
             <Fa {icon}/>

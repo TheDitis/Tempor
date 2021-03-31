@@ -1,5 +1,7 @@
 <script>
     import {beforeUpdate, afterUpdate, onMount, tick} from "svelte";
+    import Fa from "svelte-fa";
+    import {faCaretLeft, faCaretRight} from "@fortawesome/free-solid-svg-icons";
     import SettingsSection from "../SettingsSection.svelte";
     import {hue, globalHue, intervalColors, settingsHeight} from "../../../stores/appState";
     import {intervalDurations, intervalIndex} from "../../../stores/timerState";
@@ -13,6 +15,15 @@
         }
     })
 
+    const prev = () => {
+        const e = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key : "ArrowLeft", shiftKey : true});
+        document.dispatchEvent(e)
+    }
+
+    const next = () => {
+        const e = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key : "ArrowRight", shiftKey : true});
+        document.dispatchEvent(e)
+    }
 
     $: hueValue = $intervalColors[$intervalIndex];
 
@@ -41,26 +52,36 @@
 
 
 <SettingsSection>
+
     <h3>Interval Settings</h3>
 
-    <h4>Interval {$intervalIndex + 1}</h4>
-    <button
-        class="unlinkButton"
-        on:click={onClick}
-    >
-        {hueValue === null ? "Use Custom Color" : "Use Default Color"}
-    </button>
-<!--    <div class="spacer"/>-->
-    <br/><br/>
-    <SettingsSlider
-        disabled={hueValue === null}
-        label="Interval Color"
-        bind:value={$intervalColors[$intervalIndex]}
-        min="0"
-        max="360"
-    />
-    <br/>
+    <div class="intervalColorSection">
+        <div class="titleRow">
+            <button class="arrowButton" on:click={prev}>
+                <Fa icon={faCaretLeft}/>
+            </button>
+            <h4>Interval {$intervalIndex + 1}</h4>
+            <button class="arrowButton" on:click={next}>
+                <Fa icon={faCaretRight}/>
+            </button>
 
+        </div>
+        <button
+                class="unlinkButton"
+                on:click={onClick}
+        >
+            {hueValue === null ? "Use Custom Color" : "Use Default Color"}
+        </button>
+        <br/><br/>
+        <SettingsSlider
+                disabled={hueValue === null}
+                label="Interval Color"
+                bind:value={$intervalColors[$intervalIndex]}
+                min="0"
+                max="360"
+        />
+        <br/>
+    </div>
     <SettingsOptionButton slot="buttons" icon={faSyncAlt} option="repeatIntervalCycle" label="Repeat Cycle"/>
 </SettingsSection>
 
@@ -78,11 +99,42 @@
         /*display: flex;*/
 
     }
+    .intervalColorSection {
+        border: 2px solid var(--color);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        width: 90%;
+    }
+    .titleRow {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 95%;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+    .arrowButton {
+        background: transparent;
+        color: var(--color);
+        border: none;
+        outline: none;
+        font-size: calc(var(--size) / 8 * 1px);
+    }
+
+
+
     h3 {
+
+        font-size: calc(var(--size) * 0.09 * 1px);
         margin-bottom: 10px;
     }
     h4 {
-        margin-top: 5px;
+        font-size: calc(var(--size) * 0.07 * 1px);
+        margin: 0;
+        /*margin-top: 5px;*/
         /*color: var(--color);*/
     }
     .spacer {
