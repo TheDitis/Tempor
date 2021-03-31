@@ -1,11 +1,24 @@
 <script>
     import Fa from "svelte-fa";
-    import {settings} from "../../../stores/appState";
+    import {fade} from "svelte/transition";
+    import {settings, color} from "../../../stores/appState";
+    import SvelteTooltip from "svelte-tooltip";
 
     export let icon;
     export let option;
-    export let label;
+    export let label = "";
     export let onChange;
+
+    let showHint = false;
+    let timeout;
+
+
+    const mouseIn = () => timeout = setTimeout(() => showHint = true, 1000)
+    const mouseOut = () => {
+        clearTimeout(timeout);
+        showHint = false;
+    }
+
 
     const toggle = () => {
         if (onChange) {
@@ -19,18 +32,36 @@
 
 </script>
 
-
-<button
-    class:on={$settings[option]}
-    class:off={!$settings[option]}
-    on:click={toggle}
+<div
+    class="SettingsOptionButton"
+    style="color: {$color.hex()}; font-family: Roboto Regular;"
+    on:mouseenter={mouseIn}
+    on:mouseleave={mouseOut}
 >
+        <button
+                class:on={$settings[option]}
+                class:off={!$settings[option]}
+                on:click={toggle}
+        >
 
-    <Fa {icon}/>
-</button>
+            <Fa {icon}/>
+        </button>
+    {#if showHint}
+        <div class="hint" transition:fade>
+            <p>{label}</p>
+        </div>
+    {/if}
 
+</div>
 
 <style>
+    .SettingsOptionButton {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
     button {
         position: relative;
         height: calc(var(--size) / 7 * 1px);
@@ -47,6 +78,11 @@
         text-align: center;
         border-radius: 100px;
         box-shadow: none;
+    }
+
+    .hint {
+        position: absolute;
+        top: calc(var(--size) / 8 * 1px);
     }
 
     @media (max-width: 200px) {

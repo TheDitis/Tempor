@@ -39,6 +39,7 @@
         width: 100%;
         display: flex;
         justify-content: space-evenly;
+        position: relative;
     }
 
 </style>
