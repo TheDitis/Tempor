@@ -75,12 +75,14 @@
 		}
 	}
 
+
 	// gets the current remaining time and sets the state to 'paused'
 	export const pause = () => {
 		playingIntervalIndex.set($intervalIndex);
 		pausedRemainingTime.set($remainingTime);
 		runState.set("paused");
 	}
+
 
 	// calculates the new relative start-time based on how much time is remaining and sets the state back to running
 	export const resume = () => {
@@ -97,17 +99,20 @@
 		}
 	}
 
+
 	const makeBigger = () => {
 		if ($size < $maxSize) {
 			size.update(v => v + 50)
 		}
 	}
 
+
 	const themes = {
 		"transparent": "transparent",
 		"dark": "#202020",
 		"light": "white",
 	}
+
 
 	$: appBg = themes[$settings.theme];
 	// $: borderRadius = ($settings.frame === "round") ? `${$width}px` : "40px"

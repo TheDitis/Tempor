@@ -65,6 +65,7 @@
     "sirv": "^1.0.11",
     "sound-play": "^1.1.0",
     "svelte-fa": "^2.2.0",
+    "svelte-loading-spinners": "^0.1.4",
     "svelte-preprocess": "^4.6.9",
     "svg-partial-circle": "^1.0.0"
   },

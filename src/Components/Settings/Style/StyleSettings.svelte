@@ -3,10 +3,21 @@
     import SettingsSlider from "../SettingControls/SettingsSlider.svelte";
     import SettingsOptionButton from "../SettingControls/SettingsOptionButton.svelte";
     import {faLayerGroup} from "@fortawesome/free-solid-svg-icons";
-    import {hue, globalHue, blur, borderRadius, lineThickness, settings} from "../../../stores/appState";
+    import {
+            hue,
+            globalHue,
+            blur,
+            borderRadius,
+            lineThickness,
+            settings,
+            intervalColors
+    } from "../../../stores/appState";
+    import {intervalIndex} from "../../../stores/timerState";
 
     const onHueUpdate = (hueVal) => {
-            globalHue.set(hueVal);
+            if (!($intervalColors && $intervalColors[$intervalIndex])) {
+                    globalHue.set(hueVal);
+            }
     }
 
     $: {
