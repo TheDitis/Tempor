@@ -67,18 +67,18 @@
 
         </div>
         <button
-                class="unlinkButton"
-                on:click={onClick}
+            class="unlinkButton"
+            on:click={onClick}
         >
             {hueValue === null ? "Use Custom Color" : "Use Default Color"}
         </button>
         <br/><br/>
         <SettingsSlider
-                disabled={hueValue === null}
-                label="Interval Color"
-                bind:value={$intervalColors[$intervalIndex]}
-                min="0"
-                max="360"
+            disabled={hueValue === null}
+            label="Interval Color"
+            bind:value={$intervalColors[$intervalIndex]}
+            min="0"
+            max="360"
         />
         <br/>
     </div>
