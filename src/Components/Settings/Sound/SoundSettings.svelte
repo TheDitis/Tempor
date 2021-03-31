@@ -1,7 +1,7 @@
 <script>
     import SettingsSection from "../SettingsSection.svelte";
     import SettingsSlider from "../SettingControls/SettingsSlider.svelte";
-    import {onMount} from "svelte";
+
     import {settings, volume, playSound, intervalMode} from "../../../stores/appState";
     import SelectOption from "../SettingControls/SelectOption.svelte";
     import {listSoundFileNames} from "../../../stores/appState";
@@ -13,6 +13,7 @@
         settings.set({...$settings, sounds})
     }
 
+    let fileList = listSoundFileNames();
     let startVal, nextVal, endVal;
 
     $: {
@@ -27,20 +28,18 @@
 
 <SettingsSection>
     <SettingsSlider label="Volume" bind:value={$volume} min="0" max="1" step="0.01"/>
-    <div class="spacer"/>
-    <SelectOption onChange={changeSoundFile("start")} value={startVal} label="Start" options={listSoundFileNames()}/>
-    {#if $intervalMode}
-        <div class="spacer"/>
-        <SelectOption onChange={changeSoundFile("next")} value={nextVal} label="Next" options={listSoundFileNames()}/>
+    <br/>
+    {#if startVal}
+        <SelectOption onChange={changeSoundFile("start")} bind:value={startVal} label="Start" options={fileList}/>
     {/if}
-    <div class="spacer"/>
-    <SelectOption onChange={changeSoundFile("end")} value={endVal} label="End" options={listSoundFileNames()}/>
-    <div class="spacer"/>
+    {#if $intervalMode && nextVal}
+        <br/>
+        <SelectOption onChange={changeSoundFile("next")} bind:value={nextVal} label="Next" options={fileList}/>
+    {/if}
+    {#if endVal}
+        <br/>
+        <SelectOption onChange={changeSoundFile("end")} bind:value={endVal} label="End" options={fileList}/>
+    {/if}
+    <br/>
 </SettingsSection>
 
-
-<style>
-    .spacer {
-        height: 20px;
-    }
-</style>

@@ -55,6 +55,7 @@ const createWindow = () => {
 
 
   const devtools = new BrowserWindow();
+
   mainWindow.webContents.setDevToolsWebContents(devtools.webContents);
   mainWindow.webContents.openDevTools({ mode: 'detach' });
   mainWindow.webContents.once('did-finish-load', function () {
@@ -62,10 +63,7 @@ const createWindow = () => {
     devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
     devtools.setSize(windowBounds.width, windowBounds.height);
   });
-  // mainWindow.on('move', () => {
-  //   var windowBounds = mainWindow.getBounds();
-  //   devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
-  // });
+
 
 
 };

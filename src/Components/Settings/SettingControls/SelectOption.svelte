@@ -1,51 +1,55 @@
 <script>
     import Fa from "svelte-fa";
-    import {faCaretUp, faCaretDown, faCaretLeft, faCaretRight} from "@fortawesome/free-solid-svg-icons";
-    import {onMount, beforeUpdate, afterUpdate} from "svelte";
-    export let label;
-    export let options = ["sound (1).wav", "sound (2).wav", "sound (3).wav"];
-    export let onChange = (_val) => {null};
+    import {faCaretLeft, faCaretRight} from "@fortawesome/free-solid-svg-icons";
+    import {onMount, beforeUpdate, afterUpdate, tick} from "svelte";
+
+    export let label = "";
+    export let options = [];
+    export let onChange = (val) => null;
     export let value;
 
-    let ind = 0;
+    // so that the onChange function will be called only when the buttons are pressed, not on initial mount
+    let callChangeHandler = false;
+    // the index of the current value in the options list provided
+    let ind;
 
 
-    onMount(() => {
-        if (value && ind && options) {
-            ind = options.indexOf(value);
-            if (ind < 0) ind = 0;
+    onMount(async () => {
+        /// ON MOUNT, WAIT FOR VALUE PROP AND FIND ITS INDEX IN THE OPTIONS LIST
+        await tick()
+        if (options && value) {
+            let index = options.indexOf(value);
+            if (index < 0) ind = 0;
+            else ind = index;
         }
     })
-
-    // beforeUpdate(() => {
-    $: value = options[ind];
 
     beforeUpdate(() => {
-        if (value && ind && options) {
-            onChange(value);
-            const valInd = options.indexOf(value);
-            if (valInd !== ind) {
-                ind = valInd;
-            }
+        /// when the values update, call the change handler
+        if (value && callChangeHandler) {
+                onChange(value);
         }
     })
 
-    afterUpdate(() => {
-        if (value && ind && options) {
+    // update the value when index changes.
+    $: value = options[ind];
 
-        }
-    })
 
     const withoutExtension = (filename) => (
+        // strip the file extension
         filename.slice(0, filename.lastIndexOf("."))
     )
 
     const next = () => {
+        /// GET THE NEXT ITEM, WRAPPING IF NECESSARY
+        if (!callChangeHandler) callChangeHandler = true;
         if (ind < options.length - 1) ind = ind + 1;
         else ind = 0;
     }
 
     const prev = () => {
+        /// GET THE PREVIOUS ITEM, WRAPPING IF NECESSARY
+        if (!callChangeHandler) callChangeHandler = true;
         if (ind > 0) ind = ind - 1;
         else ind = options.length - 1;
     }
@@ -53,16 +57,13 @@
 </script>
 <div class="SelectDropdown">
     <p>{label}</p>
-<!--    <div class="selectList">-->
-        <!--{#each options as item}-->
-        <!--    <option value={item}>{withoutExtension(item)}</option>-->
-        <!--{/each}-->
-<!--    </div>-->
     <div class="arrowButtonsSection">
         <button class="arrowButton" on:click={prev}>
             <Fa icon={faCaretLeft}/>
         </button>
-        <p>{withoutExtension(value)}</p>
+        {#if ind}
+            <p>{withoutExtension(value)}</p>
+        {/if}
         <button class="arrowButton" on:click={next}>
             <Fa icon={faCaretRight}/>
         </button>

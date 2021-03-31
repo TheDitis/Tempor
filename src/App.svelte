@@ -1,5 +1,5 @@
 <script>
-	import {onMount} from "svelte";
+	import {onMount, onDestroy} from "svelte";
 	import Timer from "./Components/Timer/Timer.svelte";
 	const {ipcRenderer} = require("electron");
 	import {
@@ -48,7 +48,6 @@
 			// console.log("data: ", data)
 		})
 	})
-
 
 	// any time the window size changes, send the signal to electron
 	$: { ipcRenderer.send("resize", $width, $height) }

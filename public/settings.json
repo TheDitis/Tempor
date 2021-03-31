@@ -7,7 +7,7 @@
   "alwaysOnTop": true,
   "theme": "dark",
   "frame": 0,
-  "volume": 0.87,
+  "volume": 1,
   "sounds": {
     "start": "sound (10).wav",
     "next": "sound (10).wav",

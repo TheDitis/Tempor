@@ -280,6 +280,9 @@ var app = (function () {
     function afterUpdate(fn) {
         get_current_component().$$.after_update.push(fn);
     }
+    function onDestroy(fn) {
+        get_current_component().$$.on_destroy.push(fn);
+    }
     function createEventDispatcher() {
         const component = get_current_component();
         return (type, detail) => {
@@ -28005,7 +28008,7 @@ var app = (function () {
     }
 
     // (29:4) {#if $focused}
-    function create_if_block$a(ctx) {
+    function create_if_block$b(ctx) {
     	let timeinput;
     	let current;
     	timeinput = new TimeInput({ $$inline: true });
@@ -28035,7 +28038,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$a.name,
+    		id: create_if_block$b.name,
     		type: "if",
     		source: "(29:4) {#if $focused}",
     		ctx
@@ -28051,7 +28054,7 @@ var app = (function () {
     	let current;
     	let mounted;
     	let dispose;
-    	const if_block_creators = [create_if_block$a, create_else_block$2];
+    	const if_block_creators = [create_if_block$b, create_else_block$2];
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
@@ -28226,14 +28229,14 @@ var app = (function () {
     const file$o = "node_modules\\svelte-fa\\src\\fa.svelte";
 
     // (104:0) {#if i[4]}
-    function create_if_block$9(ctx) {
+    function create_if_block$a(ctx) {
     	let svg;
     	let g1;
     	let g0;
     	let svg_viewBox_value;
 
     	function select_block_type(ctx, dirty) {
-    		if (typeof /*i*/ ctx[8][4] == "string") return create_if_block_1$1;
+    		if (typeof /*i*/ ctx[8][4] == "string") return create_if_block_1$2;
     		return create_else_block$1;
     	}
 
@@ -28306,7 +28309,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$9.name,
+    		id: create_if_block$a.name,
     		type: "if",
     		source: "(104:0) {#if i[4]}",
     		ctx
@@ -28400,7 +28403,7 @@ var app = (function () {
     }
 
     // (118:8) {#if typeof i[4] == 'string'}
-    function create_if_block_1$1(ctx) {
+    function create_if_block_1$2(ctx) {
     	let path;
     	let path_d_value;
     	let path_fill_value;
@@ -28432,7 +28435,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$1.name,
+    		id: create_if_block_1$2.name,
     		type: "if",
     		source: "(118:8) {#if typeof i[4] == 'string'}",
     		ctx
@@ -28443,7 +28446,7 @@ var app = (function () {
 
     function create_fragment$p(ctx) {
     	let if_block_anchor;
-    	let if_block = /*i*/ ctx[8][4] && create_if_block$9(ctx);
+    	let if_block = /*i*/ ctx[8][4] && create_if_block$a(ctx);
 
     	const block = {
     		c: function create() {
@@ -28462,7 +28465,7 @@ var app = (function () {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block$9(ctx);
+    					if_block = create_if_block$a(ctx);
     					if_block.c();
     					if_block.m(if_block_anchor.parentNode, if_block_anchor);
     				}
@@ -28877,11 +28880,6 @@ var app = (function () {
       iconName: 'adjust',
       icon: [512, 512, [], "f042", "M8 256c0 136.966 111.033 248 248 248s248-111.034 248-248S392.966 8 256 8 8 119.033 8 256zm248 184V72c101.705 0 184 82.311 184 184 0 101.705-82.311 184-184 184z"]
     };
-    var faCaretDown = {
-      prefix: 'fas',
-      iconName: 'caret-down',
-      icon: [320, 512, [], "f0d7", "M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"]
-    };
     var faCaretLeft = {
       prefix: 'fas',
       iconName: 'caret-left',
@@ -28891,11 +28889,6 @@ var app = (function () {
       prefix: 'fas',
       iconName: 'caret-right',
       icon: [192, 512, [], "f0da", "M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"]
-    };
-    var faCaretUp = {
-      prefix: 'fas',
-      iconName: 'caret-up',
-      icon: [320, 512, [], "f0d8", "M288.662 352H31.338c-17.818 0-26.741-21.543-14.142-34.142l128.662-128.662c7.81-7.81 20.474-7.81 28.284 0l128.662 128.662c12.6 12.599 3.676 34.142-14.142 34.142z"]
     };
     var faCog = {
       prefix: 'fas',
@@ -29644,7 +29637,7 @@ var app = (function () {
     }
 
     // (31:4) {#if isPomodoro}
-    function create_if_block$8(ctx) {
+    function create_if_block$9(ctx) {
     	let tomatoicon;
     	let current;
 
@@ -29688,7 +29681,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$8.name,
+    		id: create_if_block$9.name,
     		type: "if",
     		source: "(31:4) {#if isPomodoro}",
     		ctx
@@ -29705,7 +29698,7 @@ var app = (function () {
     	let current;
     	let mounted;
     	let dispose;
-    	const if_block_creators = [create_if_block$8, create_else_block];
+    	const if_block_creators = [create_if_block$9, create_else_block];
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
@@ -30185,7 +30178,7 @@ var app = (function () {
     const file$i = "src\\Components\\Timer\\Timer.svelte";
 
     // (62:4) {#if $showFavorites && $settings.favorites}
-    function create_if_block_1(ctx) {
+    function create_if_block_1$1(ctx) {
     	let favorites;
     	let current;
     	favorites = new Favorites({ $$inline: true });
@@ -30214,7 +30207,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1.name,
+    		id: create_if_block_1$1.name,
     		type: "if",
     		source: "(62:4) {#if $showFavorites && $settings.favorites}",
     		ctx
@@ -30224,7 +30217,7 @@ var app = (function () {
     }
 
     // (66:4) {#if $intervalMode}
-    function create_if_block$7(ctx) {
+    function create_if_block$8(ctx) {
     	let intervalmodeindicator;
     	let t;
     	let intervalnumberindicator;
@@ -30264,7 +30257,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$7.name,
+    		id: create_if_block$8.name,
     		type: "if",
     		source: "(66:4) {#if $intervalMode}",
     		ctx
@@ -30290,8 +30283,8 @@ var app = (function () {
     	let current;
     	let mounted;
     	let dispose;
-    	let if_block0 = /*$showFavorites*/ ctx[8] && /*$settings*/ ctx[9].favorites && create_if_block_1(ctx);
-    	let if_block1 = /*$intervalMode*/ ctx[10] && create_if_block$7(ctx);
+    	let if_block0 = /*$showFavorites*/ ctx[8] && /*$settings*/ ctx[9].favorites && create_if_block_1$1(ctx);
+    	let if_block1 = /*$intervalMode*/ ctx[10] && create_if_block$8(ctx);
     	timeindicatorinput = new TimeIndicator({ $$inline: true });
 
     	playpausecontrol = new PlayPauseControl({
@@ -30400,7 +30393,7 @@ var app = (function () {
     						transition_in(if_block0, 1);
     					}
     				} else {
-    					if_block0 = create_if_block_1(ctx);
+    					if_block0 = create_if_block_1$1(ctx);
     					if_block0.c();
     					transition_in(if_block0, 1);
     					if_block0.m(div, t1);
@@ -30421,7 +30414,7 @@ var app = (function () {
     						transition_in(if_block1, 1);
     					}
     				} else {
-    					if_block1 = create_if_block$7(ctx);
+    					if_block1 = create_if_block$8(ctx);
     					if_block1.c();
     					transition_in(if_block1, 1);
     					if_block1.m(div, t2);
@@ -30930,7 +30923,7 @@ var app = (function () {
     const get_buttons_slot_context = ctx => ({});
 
     // (8:4) {#if $$slots.buttons}
-    function create_if_block$6(ctx) {
+    function create_if_block$7(ctx) {
     	let div;
     	let current;
     	const buttons_slot_template = /*#slots*/ ctx[2].buttons;
@@ -30976,7 +30969,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$6.name,
+    		id: create_if_block$7.name,
     		type: "if",
     		source: "(8:4) {#if $$slots.buttons}",
     		ctx
@@ -30992,7 +30985,7 @@ var app = (function () {
     	let current;
     	const default_slot_template = /*#slots*/ ctx[2].default;
     	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[1], null);
-    	let if_block = /*$$slots*/ ctx[0].buttons && create_if_block$6(ctx);
+    	let if_block = /*$$slots*/ ctx[0].buttons && create_if_block$7(ctx);
 
     	const block = {
     		c: function create() {
@@ -31036,7 +31029,7 @@ var app = (function () {
     						transition_in(if_block, 1);
     					}
     				} else {
-    					if_block = create_if_block$6(ctx);
+    					if_block = create_if_block$7(ctx);
     					if_block.c();
     					transition_in(if_block, 1);
     					if_block.m(div1, null);
@@ -31370,7 +31363,7 @@ var app = (function () {
     const file$d = "src\\Components\\Settings\\SettingControls\\SettingsOptionButton.svelte";
 
     // (47:4) {#if showHint}
-    function create_if_block$5(ctx) {
+    function create_if_block$6(ctx) {
     	let div;
     	let p;
     	let t;
@@ -31418,7 +31411,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$5.name,
+    		id: create_if_block$6.name,
     		type: "if",
     		source: "(47:4) {#if showHint}",
     		ctx
@@ -31441,7 +31434,7 @@ var app = (function () {
     			$$inline: true
     		});
 
-    	let if_block = /*showHint*/ ctx[3] && create_if_block$5(ctx);
+    	let if_block = /*showHint*/ ctx[3] && create_if_block$6(ctx);
 
     	const block = {
     		c: function create() {
@@ -31501,7 +31494,7 @@ var app = (function () {
     						transition_in(if_block, 1);
     					}
     				} else {
-    					if_block = create_if_block$5(ctx);
+    					if_block = create_if_block$6(ctx);
     					if_block.c();
     					transition_in(if_block, 1);
     					if_block.m(div, null);
@@ -32886,7 +32879,7 @@ var app = (function () {
     const file$8 = "src\\Components\\Settings\\SaveButton.svelte";
 
     // (35:4) {#if !saved}
-    function create_if_block$4(ctx) {
+    function create_if_block$5(ctx) {
     	let div;
     	let jumper;
     	let div_transition;
@@ -32944,7 +32937,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$4.name,
+    		id: create_if_block$5.name,
     		type: "if",
     		source: "(35:4) {#if !saved}",
     		ctx
@@ -32963,7 +32956,7 @@ var app = (function () {
     	let mounted;
     	let dispose;
     	fa = new Fa({ props: { icon: faSave }, $$inline: true });
-    	let if_block = !/*saved*/ ctx[0] && create_if_block$4(ctx);
+    	let if_block = !/*saved*/ ctx[0] && create_if_block$5(ctx);
 
     	const block = {
     		c: function create() {
@@ -33001,7 +32994,7 @@ var app = (function () {
     						transition_in(if_block, 1);
     					}
     				} else {
-    					if_block = create_if_block$4(ctx);
+    					if_block = create_if_block$5(ctx);
     					if_block.c();
     					transition_in(if_block, 1);
     					if_block.m(button, null);
@@ -33317,7 +33310,7 @@ var app = (function () {
     const file$6 = "src\\Components\\Settings\\Tabs\\SettingsTabs.svelte";
 
     // (12:4) {#if $intervalMode}
-    function create_if_block$3(ctx) {
+    function create_if_block$4(ctx) {
     	let settingstab;
     	let current;
 
@@ -33351,7 +33344,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$3.name,
+    		id: create_if_block$4.name,
     		type: "if",
     		source: "(12:4) {#if $intervalMode}",
     		ctx
@@ -33378,7 +33371,7 @@ var app = (function () {
     			$$inline: true
     		});
 
-    	let if_block = /*$intervalMode*/ ctx[0] && create_if_block$3(ctx);
+    	let if_block = /*$intervalMode*/ ctx[0] && create_if_block$4(ctx);
 
     	const block = {
     		c: function create() {
@@ -33412,7 +33405,7 @@ var app = (function () {
     						transition_in(if_block, 1);
     					}
     				} else {
-    					if_block = create_if_block$3(ctx);
+    					if_block = create_if_block$4(ctx);
     					if_block.c();
     					transition_in(if_block, 1);
     					if_block.m(div, null);
@@ -33502,7 +33495,7 @@ var app = (function () {
     const file$5 = "src\\Components\\Settings\\Style\\StyleSettings.svelte";
 
     // (45:4) {#if $settings.theme !== "transparent"}
-    function create_if_block$2(ctx) {
+    function create_if_block$3(ctx) {
     	let settingsslider;
     	let updating_value;
     	let current;
@@ -33559,7 +33552,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$2.name,
+    		id: create_if_block$3.name,
     		type: "if",
     		source: "(45:4) {#if $settings.theme !== \\\"transparent\\\"}",
     		ctx
@@ -33641,7 +33634,7 @@ var app = (function () {
     		});
 
     	binding_callbacks.push(() => bind(settingsslider2, "value", settingsslider2_value_binding));
-    	let if_block = /*$settings*/ ctx[1].theme !== "transparent" && create_if_block$2(ctx);
+    	let if_block = /*$settings*/ ctx[1].theme !== "transparent" && create_if_block$3(ctx);
 
     	const block = {
     		c: function create() {
@@ -33703,7 +33696,7 @@ var app = (function () {
     						transition_in(if_block, 1);
     					}
     				} else {
-    					if_block = create_if_block$2(ctx);
+    					if_block = create_if_block$3(ctx);
     					if_block.c();
     					transition_in(if_block, 1);
     					if_block.m(if_block_anchor.parentNode, if_block_anchor);
@@ -34044,19 +34037,52 @@ var app = (function () {
     /* src\Components\Settings\SettingControls\SelectOption.svelte generated by Svelte v3.35.0 */
     const file$4 = "src\\Components\\Settings\\SettingControls\\SelectOption.svelte";
 
+    // (64:8) {#if ind}
+    function create_if_block$2(ctx) {
+    	let p;
+    	let t_value = /*withoutExtension*/ ctx[3](/*value*/ ctx[0]) + "";
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			p = element("p");
+    			t = text(t_value);
+    			attr_dev(p, "class", "svelte-5jv5lh");
+    			add_location(p, file$4, 64, 12, 1961);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, p, anchor);
+    			append_dev(p, t);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*value*/ 1 && t_value !== (t_value = /*withoutExtension*/ ctx[3](/*value*/ ctx[0]) + "")) set_data_dev(t, t_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(p);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$2.name,
+    		type: "if",
+    		source: "(64:8) {#if ind}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
     function create_fragment$5(ctx) {
     	let div1;
-    	let p0;
+    	let p;
     	let t0;
     	let t1;
     	let div0;
     	let button0;
     	let fa0;
     	let t2;
-    	let p1;
-    	let t3_value = /*withoutExtension*/ ctx[2](/*value*/ ctx[0]) + "";
     	let t3;
-    	let t4;
     	let button1;
     	let fa1;
     	let current;
@@ -34068,6 +34094,8 @@ var app = (function () {
     			$$inline: true
     		});
 
+    	let if_block = /*ind*/ ctx[2] && create_if_block$2(ctx);
+
     	fa1 = new Fa({
     			props: { icon: faCaretRight },
     			$$inline: true
@@ -34076,54 +34104,50 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			div1 = element("div");
-    			p0 = element("p");
+    			p = element("p");
     			t0 = text(/*label*/ ctx[1]);
     			t1 = space();
     			div0 = element("div");
     			button0 = element("button");
     			create_component(fa0.$$.fragment);
     			t2 = space();
-    			p1 = element("p");
-    			t3 = text(t3_value);
-    			t4 = space();
+    			if (if_block) if_block.c();
+    			t3 = space();
     			button1 = element("button");
     			create_component(fa1.$$.fragment);
-    			attr_dev(p0, "class", "svelte-5jv5lh");
-    			add_location(p0, file$4, 54, 4, 1344);
+    			attr_dev(p, "class", "svelte-5jv5lh");
+    			add_location(p, file$4, 58, 4, 1764);
     			attr_dev(button0, "class", "arrowButton svelte-5jv5lh");
-    			add_location(button0, file$4, 61, 8, 1602);
-    			attr_dev(p1, "class", "svelte-5jv5lh");
-    			add_location(p1, file$4, 64, 8, 1713);
+    			add_location(button0, file$4, 60, 8, 1827);
     			attr_dev(button1, "class", "arrowButton svelte-5jv5lh");
-    			add_location(button1, file$4, 65, 8, 1755);
+    			add_location(button1, file$4, 66, 8, 2018);
     			attr_dev(div0, "class", "arrowButtonsSection svelte-5jv5lh");
-    			add_location(div0, file$4, 60, 4, 1559);
+    			add_location(div0, file$4, 59, 4, 1784);
     			attr_dev(div1, "class", "SelectDropdown svelte-5jv5lh");
-    			add_location(div1, file$4, 53, 0, 1310);
+    			add_location(div1, file$4, 57, 0, 1730);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
-    			append_dev(div1, p0);
-    			append_dev(p0, t0);
+    			append_dev(div1, p);
+    			append_dev(p, t0);
     			append_dev(div1, t1);
     			append_dev(div1, div0);
     			append_dev(div0, button0);
     			mount_component(fa0, button0, null);
     			append_dev(div0, t2);
-    			append_dev(div0, p1);
-    			append_dev(p1, t3);
-    			append_dev(div0, t4);
+    			if (if_block) if_block.m(div0, null);
+    			append_dev(div0, t3);
     			append_dev(div0, button1);
     			mount_component(fa1, button1, null);
     			current = true;
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(button0, "click", /*prev*/ ctx[4], false, false, false),
-    					listen_dev(button1, "click", /*next*/ ctx[3], false, false, false)
+    					listen_dev(button0, "click", /*prev*/ ctx[5], false, false, false),
+    					listen_dev(button1, "click", /*next*/ ctx[4], false, false, false)
     				];
 
     				mounted = true;
@@ -34131,7 +34155,19 @@ var app = (function () {
     		},
     		p: function update(ctx, [dirty]) {
     			if (!current || dirty & /*label*/ 2) set_data_dev(t0, /*label*/ ctx[1]);
-    			if ((!current || dirty & /*value*/ 1) && t3_value !== (t3_value = /*withoutExtension*/ ctx[2](/*value*/ ctx[0]) + "")) set_data_dev(t3, t3_value);
+
+    			if (/*ind*/ ctx[2]) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+    				} else {
+    					if_block = create_if_block$2(ctx);
+    					if_block.c();
+    					if_block.m(div0, t3);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -34147,6 +34183,7 @@ var app = (function () {
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div1);
     			destroy_component(fa0);
+    			if (if_block) if_block.d();
     			destroy_component(fa1);
     			mounted = false;
     			run_all(dispose);
@@ -34167,44 +34204,49 @@ var app = (function () {
     function instance$5($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("SelectOption", slots, []);
-    	let { label } = $$props;
-    	let { options = ["sound (1).wav", "sound (2).wav", "sound (3).wav"] } = $$props;
-
-    	let { onChange = _val => {
-    	} } = $$props;
-
+    	let { label = "" } = $$props;
+    	let { options = [] } = $$props;
+    	let { onChange = val => null } = $$props;
     	let { value } = $$props;
-    	let ind = 0;
 
-    	onMount(() => {
-    		if (value && ind && options) {
-    			$$invalidate(7, ind = options.indexOf(value));
-    			if (ind < 0) $$invalidate(7, ind = 0);
+    	// so that the onChange function will be called only when the buttons are pressed, not on initial mount
+    	let callChangeHandler = false;
+
+    	// the index of the current value in the options list provided
+    	let ind;
+
+    	onMount(async () => {
+    		/// ON MOUNT, WAIT FOR VALUE PROP AND FIND ITS INDEX IN THE OPTIONS LIST
+    		await tick();
+
+    		if (options && value) {
+    			let index = options.indexOf(value);
+    			if (index < 0) $$invalidate(2, ind = 0); else $$invalidate(2, ind = index);
     		}
     	});
 
     	beforeUpdate(() => {
-    		if (value && ind && options) {
+    		/// when the values update, call the change handler
+    		if (value && callChangeHandler) {
     			onChange(value);
-    			const valInd = options.indexOf(value);
-
-    			if (valInd !== ind) {
-    				$$invalidate(7, ind = valInd);
-    			}
     		}
     	});
 
-    	afterUpdate(() => {
-    	});
-
-    	const withoutExtension = filename => filename.slice(0, filename.lastIndexOf("."));
+    	const withoutExtension = filename => // strip the file extension
+    	filename.slice(0, filename.lastIndexOf("."));
 
     	const next = () => {
-    		if (ind < options.length - 1) $$invalidate(7, ind = ind + 1); else $$invalidate(7, ind = 0);
+    		/// GET THE NEXT ITEM, WRAPPING IF NECESSARY
+    		if (!callChangeHandler) callChangeHandler = true;
+
+    		if (ind < options.length - 1) $$invalidate(2, ind = ind + 1); else $$invalidate(2, ind = 0);
     	};
 
     	const prev = () => {
-    		if (ind > 0) $$invalidate(7, ind = ind - 1); else $$invalidate(7, ind = options.length - 1);
+    		/// GET THE PREVIOUS ITEM, WRAPPING IF NECESSARY
+    		if (!callChangeHandler) callChangeHandler = true;
+
+    		if (ind > 0) $$invalidate(2, ind = ind - 1); else $$invalidate(2, ind = options.length - 1);
     	};
 
     	const writable_props = ["label", "options", "onChange", "value"];
@@ -34215,24 +34257,24 @@ var app = (function () {
 
     	$$self.$$set = $$props => {
     		if ("label" in $$props) $$invalidate(1, label = $$props.label);
-    		if ("options" in $$props) $$invalidate(5, options = $$props.options);
-    		if ("onChange" in $$props) $$invalidate(6, onChange = $$props.onChange);
+    		if ("options" in $$props) $$invalidate(6, options = $$props.options);
+    		if ("onChange" in $$props) $$invalidate(7, onChange = $$props.onChange);
     		if ("value" in $$props) $$invalidate(0, value = $$props.value);
     	};
 
     	$$self.$capture_state = () => ({
     		Fa,
-    		faCaretUp,
-    		faCaretDown,
     		faCaretLeft,
     		faCaretRight,
     		onMount,
     		beforeUpdate,
     		afterUpdate,
+    		tick,
     		label,
     		options,
     		onChange,
     		value,
+    		callChangeHandler,
     		ind,
     		withoutExtension,
     		next,
@@ -34241,10 +34283,11 @@ var app = (function () {
 
     	$$self.$inject_state = $$props => {
     		if ("label" in $$props) $$invalidate(1, label = $$props.label);
-    		if ("options" in $$props) $$invalidate(5, options = $$props.options);
-    		if ("onChange" in $$props) $$invalidate(6, onChange = $$props.onChange);
+    		if ("options" in $$props) $$invalidate(6, options = $$props.options);
+    		if ("onChange" in $$props) $$invalidate(7, onChange = $$props.onChange);
     		if ("value" in $$props) $$invalidate(0, value = $$props.value);
-    		if ("ind" in $$props) $$invalidate(7, ind = $$props.ind);
+    		if ("callChangeHandler" in $$props) callChangeHandler = $$props.callChangeHandler;
+    		if ("ind" in $$props) $$invalidate(2, ind = $$props.ind);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -34252,13 +34295,13 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*options, ind*/ 160) {
-    			// beforeUpdate(() => {
+    		if ($$self.$$.dirty & /*options, ind*/ 68) {
+    			// update the value when index changes.
     			$$invalidate(0, value = options[ind]);
     		}
     	};
 
-    	return [value, label, withoutExtension, next, prev, options, onChange, ind];
+    	return [value, label, ind, withoutExtension, next, prev, options, onChange];
     }
 
     class SelectOption extends SvelteComponentDev {
@@ -34267,8 +34310,8 @@ var app = (function () {
 
     		init(this, options, instance$5, create_fragment$5, safe_not_equal, {
     			label: 1,
-    			options: 5,
-    			onChange: 6,
+    			options: 6,
+    			onChange: 7,
     			value: 0
     		});
 
@@ -34281,10 +34324,6 @@ var app = (function () {
 
     		const { ctx } = this.$$;
     		const props = options.props || {};
-
-    		if (/*label*/ ctx[1] === undefined && !("label" in props)) {
-    			console.warn("<SelectOption> was created without expected prop 'label'");
-    		}
 
     		if (/*value*/ ctx[0] === undefined && !("value" in props)) {
     			console.warn("<SelectOption> was created without expected prop 'value'");
@@ -34327,40 +34366,50 @@ var app = (function () {
     /* src\Components\Settings\Sound\SoundSettings.svelte generated by Svelte v3.35.0 */
     const file$3 = "src\\Components\\Settings\\Sound\\SoundSettings.svelte";
 
-    // (32:4) {#if $intervalMode}
-    function create_if_block$1(ctx) {
-    	let div;
-    	let t;
+    // (32:4) {#if startVal}
+    function create_if_block_2(ctx) {
     	let selectoption;
+    	let updating_value;
     	let current;
 
+    	function selectoption_value_binding(value) {
+    		/*selectoption_value_binding*/ ctx[9](value);
+    	}
+
+    	let selectoption_props = {
+    		onChange: /*changeSoundFile*/ ctx[5]("start"),
+    		label: "Start",
+    		options: /*fileList*/ ctx[6]
+    	};
+
+    	if (/*startVal*/ ctx[0] !== void 0) {
+    		selectoption_props.value = /*startVal*/ ctx[0];
+    	}
+
     	selectoption = new SelectOption({
-    			props: {
-    				onChange: /*changeSoundFile*/ ctx[5]("next"),
-    				value: /*nextVal*/ ctx[1],
-    				label: "Next",
-    				options: listSoundFileNames()
-    			},
+    			props: selectoption_props,
     			$$inline: true
     		});
 
+    	binding_callbacks.push(() => bind(selectoption, "value", selectoption_value_binding));
+
     	const block = {
     		c: function create() {
-    			div = element("div");
-    			t = space();
     			create_component(selectoption.$$.fragment);
-    			attr_dev(div, "class", "spacer svelte-16ycp57");
-    			add_location(div, file$3, 32, 8, 1171);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-    			insert_dev(target, t, anchor);
     			mount_component(selectoption, target, anchor);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
     			const selectoption_changes = {};
-    			if (dirty & /*nextVal*/ 2) selectoption_changes.value = /*nextVal*/ ctx[1];
+
+    			if (!updating_value && dirty & /*startVal*/ 1) {
+    				updating_value = true;
+    				selectoption_changes.value = /*startVal*/ ctx[0];
+    				add_flush_callback(() => updating_value = false);
+    			}
+
     			selectoption.$set(selectoption_changes);
     		},
     		i: function intro(local) {
@@ -34373,7 +34422,165 @@ var app = (function () {
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
+    			destroy_component(selectoption, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_2.name,
+    		type: "if",
+    		source: "(32:4) {#if startVal}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (35:4) {#if $intervalMode && nextVal}
+    function create_if_block_1(ctx) {
+    	let br;
+    	let t;
+    	let selectoption;
+    	let updating_value;
+    	let current;
+
+    	function selectoption_value_binding_1(value) {
+    		/*selectoption_value_binding_1*/ ctx[10](value);
+    	}
+
+    	let selectoption_props = {
+    		onChange: /*changeSoundFile*/ ctx[5]("next"),
+    		label: "Next",
+    		options: /*fileList*/ ctx[6]
+    	};
+
+    	if (/*nextVal*/ ctx[1] !== void 0) {
+    		selectoption_props.value = /*nextVal*/ ctx[1];
+    	}
+
+    	selectoption = new SelectOption({
+    			props: selectoption_props,
+    			$$inline: true
+    		});
+
+    	binding_callbacks.push(() => bind(selectoption, "value", selectoption_value_binding_1));
+
+    	const block = {
+    		c: function create() {
+    			br = element("br");
+    			t = space();
+    			create_component(selectoption.$$.fragment);
+    			add_location(br, file$3, 35, 8, 1201);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, br, anchor);
+    			insert_dev(target, t, anchor);
+    			mount_component(selectoption, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const selectoption_changes = {};
+
+    			if (!updating_value && dirty & /*nextVal*/ 2) {
+    				updating_value = true;
+    				selectoption_changes.value = /*nextVal*/ ctx[1];
+    				add_flush_callback(() => updating_value = false);
+    			}
+
+    			selectoption.$set(selectoption_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(selectoption.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(selectoption.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(br);
+    			if (detaching) detach_dev(t);
+    			destroy_component(selectoption, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1.name,
+    		type: "if",
+    		source: "(35:4) {#if $intervalMode && nextVal}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (39:4) {#if endVal}
+    function create_if_block$1(ctx) {
+    	let br;
+    	let t;
+    	let selectoption;
+    	let updating_value;
+    	let current;
+
+    	function selectoption_value_binding_2(value) {
+    		/*selectoption_value_binding_2*/ ctx[11](value);
+    	}
+
+    	let selectoption_props = {
+    		onChange: /*changeSoundFile*/ ctx[5]("end"),
+    		label: "End",
+    		options: /*fileList*/ ctx[6]
+    	};
+
+    	if (/*endVal*/ ctx[2] !== void 0) {
+    		selectoption_props.value = /*endVal*/ ctx[2];
+    	}
+
+    	selectoption = new SelectOption({
+    			props: selectoption_props,
+    			$$inline: true
+    		});
+
+    	binding_callbacks.push(() => bind(selectoption, "value", selectoption_value_binding_2));
+
+    	const block = {
+    		c: function create() {
+    			br = element("br");
+    			t = space();
+    			create_component(selectoption.$$.fragment);
+    			add_location(br, file$3, 39, 8, 1358);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, br, anchor);
+    			insert_dev(target, t, anchor);
+    			mount_component(selectoption, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const selectoption_changes = {};
+
+    			if (!updating_value && dirty & /*endVal*/ 4) {
+    				updating_value = true;
+    				selectoption_changes.value = /*endVal*/ ctx[2];
+    				add_flush_callback(() => updating_value = false);
+    			}
+
+    			selectoption.$set(selectoption_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(selectoption.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(selectoption.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(br);
     			if (detaching) detach_dev(t);
     			destroy_component(selectoption, detaching);
     		}
@@ -34383,32 +34590,28 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(32:4) {#if $intervalMode}",
+    		source: "(39:4) {#if endVal}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (28:0) <SettingsSection>
+    // (29:0) <SettingsSection>
     function create_default_slot(ctx) {
     	let settingsslider;
     	let updating_value;
     	let t0;
-    	let div0;
+    	let br0;
     	let t1;
-    	let selectoption0;
     	let t2;
     	let t3;
-    	let div1;
     	let t4;
-    	let selectoption1;
-    	let t5;
-    	let div2;
+    	let br1;
     	let current;
 
     	function settingsslider_value_binding(value) {
-    		/*settingsslider_value_binding*/ ctx[7](value);
+    		/*settingsslider_value_binding*/ ctx[8](value);
     	}
 
     	let settingsslider_props = {
@@ -34428,65 +34631,38 @@ var app = (function () {
     		});
 
     	binding_callbacks.push(() => bind(settingsslider, "value", settingsslider_value_binding));
-
-    	selectoption0 = new SelectOption({
-    			props: {
-    				onChange: /*changeSoundFile*/ ctx[5]("start"),
-    				value: /*startVal*/ ctx[0],
-    				label: "Start",
-    				options: listSoundFileNames()
-    			},
-    			$$inline: true
-    		});
-
-    	let if_block = /*$intervalMode*/ ctx[4] && create_if_block$1(ctx);
-
-    	selectoption1 = new SelectOption({
-    			props: {
-    				onChange: /*changeSoundFile*/ ctx[5]("end"),
-    				value: /*endVal*/ ctx[2],
-    				label: "End",
-    				options: listSoundFileNames()
-    			},
-    			$$inline: true
-    		});
+    	let if_block0 = /*startVal*/ ctx[0] && create_if_block_2(ctx);
+    	let if_block1 = /*$intervalMode*/ ctx[4] && /*nextVal*/ ctx[1] && create_if_block_1(ctx);
+    	let if_block2 = /*endVal*/ ctx[2] && create_if_block$1(ctx);
 
     	const block = {
     		c: function create() {
     			create_component(settingsslider.$$.fragment);
     			t0 = space();
-    			div0 = element("div");
+    			br0 = element("br");
     			t1 = space();
-    			create_component(selectoption0.$$.fragment);
+    			if (if_block0) if_block0.c();
     			t2 = space();
-    			if (if_block) if_block.c();
+    			if (if_block1) if_block1.c();
     			t3 = space();
-    			div1 = element("div");
+    			if (if_block2) if_block2.c();
     			t4 = space();
-    			create_component(selectoption1.$$.fragment);
-    			t5 = space();
-    			div2 = element("div");
-    			attr_dev(div0, "class", "spacer svelte-16ycp57");
-    			add_location(div0, file$3, 29, 4, 996);
-    			attr_dev(div1, "class", "spacer svelte-16ycp57");
-    			add_location(div1, file$3, 35, 4, 1329);
-    			attr_dev(div2, "class", "spacer svelte-16ycp57");
-    			add_location(div2, file$3, 37, 4, 1469);
+    			br1 = element("br");
+    			add_location(br0, file$3, 30, 4, 1003);
+    			add_location(br1, file$3, 42, 4, 1490);
     		},
     		m: function mount(target, anchor) {
     			mount_component(settingsslider, target, anchor);
     			insert_dev(target, t0, anchor);
-    			insert_dev(target, div0, anchor);
+    			insert_dev(target, br0, anchor);
     			insert_dev(target, t1, anchor);
-    			mount_component(selectoption0, target, anchor);
+    			if (if_block0) if_block0.m(target, anchor);
     			insert_dev(target, t2, anchor);
-    			if (if_block) if_block.m(target, anchor);
+    			if (if_block1) if_block1.m(target, anchor);
     			insert_dev(target, t3, anchor);
-    			insert_dev(target, div1, anchor);
+    			if (if_block2) if_block2.m(target, anchor);
     			insert_dev(target, t4, anchor);
-    			mount_component(selectoption1, target, anchor);
-    			insert_dev(target, t5, anchor);
-    			insert_dev(target, div2, anchor);
+    			insert_dev(target, br1, anchor);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
@@ -34499,66 +34675,103 @@ var app = (function () {
     			}
 
     			settingsslider.$set(settingsslider_changes);
-    			const selectoption0_changes = {};
-    			if (dirty & /*startVal*/ 1) selectoption0_changes.value = /*startVal*/ ctx[0];
-    			selectoption0.$set(selectoption0_changes);
 
-    			if (/*$intervalMode*/ ctx[4]) {
-    				if (if_block) {
-    					if_block.p(ctx, dirty);
+    			if (/*startVal*/ ctx[0]) {
+    				if (if_block0) {
+    					if_block0.p(ctx, dirty);
 
-    					if (dirty & /*$intervalMode*/ 16) {
-    						transition_in(if_block, 1);
+    					if (dirty & /*startVal*/ 1) {
+    						transition_in(if_block0, 1);
     					}
     				} else {
-    					if_block = create_if_block$1(ctx);
-    					if_block.c();
-    					transition_in(if_block, 1);
-    					if_block.m(t3.parentNode, t3);
+    					if_block0 = create_if_block_2(ctx);
+    					if_block0.c();
+    					transition_in(if_block0, 1);
+    					if_block0.m(t2.parentNode, t2);
     				}
-    			} else if (if_block) {
+    			} else if (if_block0) {
     				group_outros();
 
-    				transition_out(if_block, 1, 1, () => {
-    					if_block = null;
+    				transition_out(if_block0, 1, 1, () => {
+    					if_block0 = null;
     				});
 
     				check_outros();
     			}
 
-    			const selectoption1_changes = {};
-    			if (dirty & /*endVal*/ 4) selectoption1_changes.value = /*endVal*/ ctx[2];
-    			selectoption1.$set(selectoption1_changes);
+    			if (/*$intervalMode*/ ctx[4] && /*nextVal*/ ctx[1]) {
+    				if (if_block1) {
+    					if_block1.p(ctx, dirty);
+
+    					if (dirty & /*$intervalMode, nextVal*/ 18) {
+    						transition_in(if_block1, 1);
+    					}
+    				} else {
+    					if_block1 = create_if_block_1(ctx);
+    					if_block1.c();
+    					transition_in(if_block1, 1);
+    					if_block1.m(t3.parentNode, t3);
+    				}
+    			} else if (if_block1) {
+    				group_outros();
+
+    				transition_out(if_block1, 1, 1, () => {
+    					if_block1 = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			if (/*endVal*/ ctx[2]) {
+    				if (if_block2) {
+    					if_block2.p(ctx, dirty);
+
+    					if (dirty & /*endVal*/ 4) {
+    						transition_in(if_block2, 1);
+    					}
+    				} else {
+    					if_block2 = create_if_block$1(ctx);
+    					if_block2.c();
+    					transition_in(if_block2, 1);
+    					if_block2.m(t4.parentNode, t4);
+    				}
+    			} else if (if_block2) {
+    				group_outros();
+
+    				transition_out(if_block2, 1, 1, () => {
+    					if_block2 = null;
+    				});
+
+    				check_outros();
+    			}
     		},
     		i: function intro(local) {
     			if (current) return;
     			transition_in(settingsslider.$$.fragment, local);
-    			transition_in(selectoption0.$$.fragment, local);
-    			transition_in(if_block);
-    			transition_in(selectoption1.$$.fragment, local);
+    			transition_in(if_block0);
+    			transition_in(if_block1);
+    			transition_in(if_block2);
     			current = true;
     		},
     		o: function outro(local) {
     			transition_out(settingsslider.$$.fragment, local);
-    			transition_out(selectoption0.$$.fragment, local);
-    			transition_out(if_block);
-    			transition_out(selectoption1.$$.fragment, local);
+    			transition_out(if_block0);
+    			transition_out(if_block1);
+    			transition_out(if_block2);
     			current = false;
     		},
     		d: function destroy(detaching) {
     			destroy_component(settingsslider, detaching);
     			if (detaching) detach_dev(t0);
-    			if (detaching) detach_dev(div0);
+    			if (detaching) detach_dev(br0);
     			if (detaching) detach_dev(t1);
-    			destroy_component(selectoption0, detaching);
+    			if (if_block0) if_block0.d(detaching);
     			if (detaching) detach_dev(t2);
-    			if (if_block) if_block.d(detaching);
+    			if (if_block1) if_block1.d(detaching);
     			if (detaching) detach_dev(t3);
-    			if (detaching) detach_dev(div1);
+    			if (if_block2) if_block2.d(detaching);
     			if (detaching) detach_dev(t4);
-    			destroy_component(selectoption1, detaching);
-    			if (detaching) detach_dev(t5);
-    			if (detaching) detach_dev(div2);
+    			if (detaching) detach_dev(br1);
     		}
     	};
 
@@ -34566,7 +34779,7 @@ var app = (function () {
     		block,
     		id: create_default_slot.name,
     		type: "slot",
-    		source: "(28:0) <SettingsSection>",
+    		source: "(29:0) <SettingsSection>",
     		ctx
     	});
 
@@ -34599,7 +34812,7 @@ var app = (function () {
     		p: function update(ctx, [dirty]) {
     			const settingssection_changes = {};
 
-    			if (dirty & /*$$scope, endVal, nextVal, $intervalMode, startVal, $volume*/ 287) {
+    			if (dirty & /*$$scope, endVal, nextVal, $intervalMode, startVal, $volume*/ 4127) {
     				settingssection_changes.$$scope = { dirty, ctx };
     			}
 
@@ -34635,7 +34848,7 @@ var app = (function () {
     	let $volume;
     	let $intervalMode;
     	validate_store(settings, "settings");
-    	component_subscribe($$self, settings, $$value => $$invalidate(6, $settings = $$value));
+    	component_subscribe($$self, settings, $$value => $$invalidate(7, $settings = $$value));
     	validate_store(volume, "volume");
     	component_subscribe($$self, volume, $$value => $$invalidate(3, $volume = $$value));
     	validate_store(intervalMode, "intervalMode");
@@ -34650,6 +34863,7 @@ var app = (function () {
     		settings.set({ ...$settings, sounds });
     	};
 
+    	let fileList = listSoundFileNames();
     	let startVal, nextVal, endVal;
     	const writable_props = [];
 
@@ -34662,10 +34876,24 @@ var app = (function () {
     		volume.set($volume);
     	}
 
+    	function selectoption_value_binding(value) {
+    		startVal = value;
+    		($$invalidate(0, startVal), $$invalidate(7, $settings));
+    	}
+
+    	function selectoption_value_binding_1(value) {
+    		nextVal = value;
+    		($$invalidate(1, nextVal), $$invalidate(7, $settings));
+    	}
+
+    	function selectoption_value_binding_2(value) {
+    		endVal = value;
+    		($$invalidate(2, endVal), $$invalidate(7, $settings));
+    	}
+
     	$$self.$capture_state = () => ({
     		SettingsSection,
     		SettingsSlider,
-    		onMount,
     		settings,
     		volume,
     		playSound,
@@ -34673,6 +34901,7 @@ var app = (function () {
     		SelectOption,
     		listSoundFileNames,
     		changeSoundFile,
+    		fileList,
     		startVal,
     		nextVal,
     		endVal,
@@ -34682,6 +34911,7 @@ var app = (function () {
     	});
 
     	$$self.$inject_state = $$props => {
+    		if ("fileList" in $$props) $$invalidate(6, fileList = $$props.fileList);
     		if ("startVal" in $$props) $$invalidate(0, startVal = $$props.startVal);
     		if ("nextVal" in $$props) $$invalidate(1, nextVal = $$props.nextVal);
     		if ("endVal" in $$props) $$invalidate(2, endVal = $$props.endVal);
@@ -34692,7 +34922,7 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*$settings*/ 64) {
+    		if ($$self.$$.dirty & /*$settings*/ 128) {
     			{
     				if ($settings.sounds) {
     					$$invalidate(0, startVal = $settings.sounds.start);
@@ -34710,8 +34940,12 @@ var app = (function () {
     		$volume,
     		$intervalMode,
     		changeSoundFile,
+    		fileList,
     		$settings,
-    		settingsslider_value_binding
+    		settingsslider_value_binding,
+    		selectoption_value_binding,
+    		selectoption_value_binding_1,
+    		selectoption_value_binding_2
     	];
     }
 
@@ -35597,7 +35831,7 @@ var app = (function () {
 
     const file = "src\\App.svelte";
 
-    // (151:2) {#if $settingsOpen}
+    // (150:2) {#if $settingsOpen}
     function create_if_block(ctx) {
     	let settings_1;
     	let current;
@@ -35629,7 +35863,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(151:2) {#if $settingsOpen}",
+    		source: "(150:2) {#if $settingsOpen}",
     		ctx
     	});
 
@@ -35700,11 +35934,11 @@ var app = (function () {
     			t5 = space();
     			create_component(mastercontrols.$$.fragment);
     			attr_dev(div0, "class", "draggableArea svelte-1fz8pzh");
-    			add_location(div0, file, 140, 2, 3370);
+    			add_location(div0, file, 139, 2, 3380);
     			attr_dev(div1, "class", "timerSection svelte-1fz8pzh");
-    			add_location(div1, file, 142, 2, 3407);
+    			add_location(div1, file, 141, 2, 3417);
     			attr_dev(div2, "class", "App svelte-1fz8pzh");
-    			add_location(div2, file, 139, 1, 3350);
+    			add_location(div2, file, 138, 1, 3360);
     			set_style(main, "--size", /*$size*/ ctx[5]);
     			set_style(main, "--width", /*$width*/ ctx[3]);
     			set_style(main, "--color", /*$color*/ ctx[7].hsl().string());
@@ -35717,7 +35951,7 @@ var app = (function () {
     			set_style(main, "--appBg", /*appBg*/ ctx[6]);
     			set_style(main, "--frameRadius", /*$borderRadius*/ ctx[9] * (/*$width*/ ctx[3] / 2) / 100 + "px");
     			attr_dev(main, "class", "svelte-1fz8pzh");
-    			add_location(main, file, 124, 0, 2928);
+    			add_location(main, file, 123, 0, 2938);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -35984,6 +36218,7 @@ var app = (function () {
 
     	$$self.$capture_state = () => ({
     		onMount,
+    		onDestroy,
     		Timer,
     		ipcRenderer,
     		size,
