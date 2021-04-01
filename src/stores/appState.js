@@ -5,11 +5,13 @@ import {intervalDurations} from "./timerState";
 const fs = require("fs");
 const path = require("path");
 
+export const inputRef = writable(null);
+
 const audio = writable(new Audio());
 
 export const showFavorites = writable(false);
 
-export const settingsTab = writable("intervals");
+export const settingsTab = writable("style");
 
 
 /// COLOR STATE ITEMS

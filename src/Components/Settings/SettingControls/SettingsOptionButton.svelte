@@ -1,7 +1,7 @@
 <script>
     import Fa from "svelte-fa";
     import {fade} from "svelte/transition";
-    import {settings, color} from "../../../stores/appState";
+    import {settings, color, inputRef} from "../../../stores/appState";
 
     export let icon;
     export let option;
@@ -19,12 +19,17 @@
     }
 
 
-    const toggle = () => {
-        if (onChange) {
-            onChange()
-        }
-        else {
-            settings.set({...$settings, [option]: !$settings[option]});
+    const toggle = (e) => {
+        if (e.clientX && e.clientY) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log(" ", e)
+            if (onChange) {
+                onChange()
+            } else {
+                settings.set({...$settings, [option]: !$settings[option]});
+            }
+            if ($inputRef) $inputRef.focus();
         }
     }
 

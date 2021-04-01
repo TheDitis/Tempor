@@ -2,15 +2,16 @@
     import {onMount, afterUpdate} from "svelte";
     import {formatTime, formatTimeMs, arraysEqual} from "../../../utils/utils";
     import {tempDuration, runState, focused, intervalDurations, intervalIndex} from "../../../stores/timerState";
-    import {currentFavInd, settings, intervalMode, currentFavInterval} from "../../../stores/appState";
+    import {currentFavInd, settings, intervalMode, currentFavInterval, inputRef} from "../../../stores/appState";
     import {Duration} from "luxon";
     import _ from "lodash";
 
+    // let inputRef;
     let hours = 0;
     let minutes = 0;
     let seconds = 0;
     let numbers = ""
-    let input;
+
 
     onMount(() => {
         if (!$intervalMode && $tempDuration !== 0 && $runState !== "running") {
@@ -21,6 +22,9 @@
         if ($intervalMode && $intervalDurations[$intervalIndex]) {
             numbers = formatTimeMs($intervalDurations[$intervalIndex]).replaceAll(":", "")
             numsStrToHrsMinsSecs();
+        }
+        if ($inputRef) {
+            $inputRef.focus()
         }
     })
 
@@ -36,6 +40,9 @@
                 numbers = formatTimeMs($intervalDurations[$intervalIndex]).replaceAll(":", "")
                 numsStrToHrsMinsSecs();
             }
+        }
+        if ($inputRef) {
+            $inputRef.focus()
         }
     }
 
@@ -97,10 +104,11 @@
 </script>
 
 
-<div class="TimeInput" on:click={() => input.focus()}>
+<div class="TimeInput" on:click={() => $inputRef.focus()}>
 <h1>{readableTime}</h1>
-<input bind:this={input} class="hiddenInput" type="text" bind:value={numbers} on:input={handleChange}/>
+<input bind:this={$inputRef} class="hiddenInput" type="text" bind:value={numbers} on:input={handleChange} autofocus/>
 </div>
+
 
 
 <style>

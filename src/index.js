@@ -61,15 +61,15 @@ const createWindow = () => {
   // mainWindow.setAlwaysOnTop(true)
 
 
-  // const devtools = new BrowserWindow();
-  //
-  // mainWindow.webContents.setDevToolsWebContents(devtools.webContents);
-  // mainWindow.webContents.openDevTools({ mode: 'detach' });
-  // mainWindow.webContents.once('did-finish-load', function () {
-  //   var windowBounds = mainWindow.getBounds();
-  //   devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
-  //   devtools.setSize(windowBounds.width, windowBounds.height);
-  // });
+  const devtools = new BrowserWindow();
+
+  mainWindow.webContents.setDevToolsWebContents(devtools.webContents);
+  mainWindow.webContents.openDevTools({ mode: 'detach' });
+  mainWindow.webContents.once('did-finish-load', function () {
+    var windowBounds = mainWindow.getBounds();
+    devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
+    devtools.setSize(windowBounds.width, windowBounds.height);
+  });
 
 
 

@@ -1,4 +1,6 @@
 <script>
+    import {inputRef} from "../../../stores/appState";
+
     export let value = 0;
     export let min = 0;
     export let max = 100;
@@ -7,11 +9,16 @@
     export let onChange = () => null;
     export let disabled = false;
 
+    const handleChange = (e) => {
+        onChange();
+        if ($inputRef) $inputRef.focus();
+    }
+
 </script>
 
 <div class="SettingsSlider" class:disabled={disabled}>
     <p>{label}</p>
-    <input type="range" {disabled} bind:value={value} {min} {max} {step} on:input={onChange}/>
+    <input type="range" {disabled} bind:value={value} {min} {max} {step} on:input={handleChange}/>
 </div>
 
 <style>

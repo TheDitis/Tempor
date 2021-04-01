@@ -1,8 +1,17 @@
 <script>
     import {fade} from "svelte/transition";
     import TomatoIcon from "../../Icons/TomatoIcon.svelte";
-    import {color, globalHue, hue, intervalColors, intervalMode, size, settingsTab} from "../../../stores/appState";
-    import {focused, intervalDurations, intervalIndex} from "../../../stores/timerState";
+    import {
+        color,
+        globalHue,
+        hue,
+        intervalColors,
+        intervalMode,
+        size,
+        settingsTab,
+        inputRef
+    } from "../../../stores/appState";
+    import {focused, intervalDurations} from "../../../stores/timerState";
     import {tick} from "svelte";
     import Fa from "svelte-fa";
     import {faSyncAlt} from "@fortawesome/free-solid-svg-icons";
@@ -16,6 +25,7 @@
         }
         await tick();
         focused.set(true);
+        if ($inputRef) $inputRef.focus();
     }
     let isPomodoro;
     $: isPomodoro = ($intervalDurations.length === 2 && $intervalDurations[0] === 1500000 && $intervalDurations[1] === 300000)

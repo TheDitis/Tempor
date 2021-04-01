@@ -4,7 +4,7 @@
     // import {} from "../../stores/appState";
     import Fa from "svelte-fa";
     import {faSyncAlt} from "@fortawesome/free-solid-svg-icons";
-    import {globalHue, hue, intervalColors, intervalMode, size, settingsTab} from "../../stores/appState";
+    import {globalHue, hue, intervalColors, intervalMode, size, settingsTab, inputRef} from "../../stores/appState";
     import {focused, intervalIndex} from "../../stores/timerState";
 
 
@@ -21,6 +21,7 @@
         }
         intervalMode.set(!$intervalMode);
         await tick();
+        if ($inputRef) $inputRef.focus();
         focused.set(true)
     }
 </script>

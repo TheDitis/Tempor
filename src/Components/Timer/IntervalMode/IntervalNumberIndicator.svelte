@@ -25,6 +25,7 @@
                 return Color('rgb(255, 0, 0)').rotate($globalHue)
             }
         })
+        // console.log("colors updated: ", colors)
     }
 
 
@@ -67,10 +68,7 @@
         transition-duration: 500ms;
     }
     .current {
-        /*opacity: 1;*/
-        /*top: 100%;*/
         transform: scaleY(1.6);
-    /*translateY(25%);*/
 
         opacity: var(--blink);
     }

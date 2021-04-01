@@ -2,8 +2,6 @@
     import {remainingTime, runState, time, focused} from "../../../stores/timerState";
     import TimeInput from "./TimeInput.svelte";
     import {formatTimeMs} from "../../../utils/utils";
-    import {fade} from "svelte/transition";
-
 
 
     /// this makes the timer blink when paused

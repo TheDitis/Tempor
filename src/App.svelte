@@ -17,7 +17,8 @@
 		loadSettings,
 		intervalMode,
 		intervalColors,
-		playSound
+		playSound,
+		inputRef
 	} from "./stores/appState";
 	import ResizeControl from "./Components/Controls/ResizeControl.svelte";
 	import OpenSettingsButton from "./Components/Settings/OpenSettingsButton.svelte";
@@ -52,6 +53,7 @@
 	$: { ipcRenderer.send("resize", $width, $height) }
 	// tell the window whether to stay on top or not when that setting changes
 	$: { ipcRenderer.send("stayontop", $stayOnTop) }
+
 
 
 	// sets the duration, start time, and run-state of the timer
@@ -98,6 +100,7 @@
 		if ($size > 100) {
 			size.update(v => v - 50);
 		}
+		if ($inputRef) $inputRef.focus();
 	}
 
 
@@ -105,6 +108,7 @@
 		if ($size < $maxSize) {
 			size.update(v => v + 50)
 		}
+		if ($inputRef) $inputRef.focus();
 	}
 
 
@@ -138,7 +142,7 @@
 	<div class="App">
 		<div class="draggableArea"></div>
 
-		<div class="timerSection">
+		<div class="timerSection" >
 			<Timer start={start} pause={pause} resume={resume}/>
 			<ResizeControl on:sizeUp={makeBigger} on:sizeDown={makeSmaller}/>
 			<OpenSettingsButton/>

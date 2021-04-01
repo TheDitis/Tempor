@@ -3,32 +3,42 @@
     import Fa from "svelte-fa";
     import {faCaretLeft, faCaretRight} from "@fortawesome/free-solid-svg-icons";
     import SettingsSection from "../SettingsSection.svelte";
-    import {hue, globalHue, intervalColors, settingsHeight} from "../../../stores/appState";
+    import {hue, globalHue, intervalColors, inputRef} from "../../../stores/appState";
     import {intervalDurations, intervalIndex} from "../../../stores/timerState";
     import SettingsSlider from "../SettingControls/SettingsSlider.svelte";
     import {faSyncAlt} from "@fortawesome/free-solid-svg-icons";
     import SettingsOptionButton from "../SettingControls/SettingsOptionButton.svelte";
+    import Color from "color";
 
     onMount(async () => {
+        await tick();
         if ($intervalColors === null) {
             intervalColors.set([null, null, null, null, null]);
         }
+        await tick();
     })
 
-    const prev = () => {
+    const prev = (event) => {
+        event.stopPropagation();
+        event.preventDefault();
         const e = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key : "ArrowLeft", shiftKey : true});
-        document.dispatchEvent(e)
+        document.dispatchEvent(e);
     }
 
-    const next = () => {
+    const next = (event) => {
+        event.stopPropagation();
+        event.preventDefault();
         const e = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key : "ArrowRight", shiftKey : true});
-        document.dispatchEvent(e)
+        document.dispatchEvent(e);
     }
 
+    let hueValue;
     $: hueValue = $intervalColors[$intervalIndex];
 
 
-    const onClick = (e) => {
+    const onUnlinkClick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         const tempIntervalColors = [...$intervalColors];
         if (hueValue === null) {
             tempIntervalColors[$intervalIndex] = $globalHue
@@ -38,10 +48,56 @@
             hue.set($globalHue)
         }
         intervalColors.set(tempIntervalColors);
+        // await tick();
+        if ($inputRef) $inputRef.focus();
     }
 
     const onColorChange = (val) => {
         if (val) hue.set(val);
+    }
+
+
+
+    let colors, intervalColorVars;
+    const updateColorsTick = async (deps) => {
+        // await tick();
+        updateColors()
+    }
+    const updateColors = (deps) => {
+        // await tick();
+        const cols = $intervalColors.map(val => {
+            console.log("hue: ", $hue, " globalHue: ", $globalHue)
+            if (val !== null) {
+                console.log("setting color to val")
+                return new Color('rgb(255, 0, 0)').rotate(val)
+            } else {
+                console.log("setting color to global")
+                return new Color('rgb(255, 0, 0)').rotate($globalHue)
+            }
+        })
+        colors = cols
+        return colors
+    }
+
+    const createCssColorVars = (deps) => {
+        intervalColorVars = updateColors($intervalColors)
+            .map((val, index) => `--intervalColor${index + 1}:${val.hex()}`)
+            .join(';');
+        console.log("intervalColorVars: ", intervalColorVars)
+    }
+
+    const onNumberClick = (i) => e => {
+        intervalIndex.set(i)
+        if ($inputRef) $inputRef.focus();
+    }
+
+
+    $: {
+        updateColorsTick();
+    }
+
+    $: {
+        createCssColorVars([colors, $intervalColors, $hue, $globalHue])
     }
 
     $: { onColorChange(hueValue) }
@@ -59,13 +115,15 @@
                 <Fa icon={faCaretLeft}/>
             </button>
 
-            <div class="intervals">
-                {#each $intervalDurations as fav, i}
-                    <div class="intervalNumber" class:selected={$intervalIndex === i}>
-                        <p>{i + 1}</p>
-                    </div>
-                {/each}
-            </div>
+            {#if colors}
+                <div class="intervals" style={intervalColorVars}>
+                    {#each $intervalDurations as fav, i}
+                        <div class="intervalNumber"  class:selected={$intervalIndex === i} on:click={onNumberClick(i)}>
+                            <p style="color: {`var(--intervalColor${i + 1})`};">{i + 1}</p>
+                        </div>
+                    {/each}
+                </div>
+            {/if}
 
 <!--            <h4>Interval {$intervalIndex + 1}</h4>-->
             <button class="arrowButton" on:click={next}>
@@ -75,7 +133,7 @@
         </div>
         <button
             class="unlinkButton"
-            on:click={onClick}
+            on:click={onUnlinkClick}
         >
             {hueValue === null ? "Use Custom Color" : "Use Default Color"}
         </button>
@@ -130,13 +188,14 @@
         background: transparent;
         border: none;
         font-size: calc(var(--size) * 0.08 * 1px);
-        color: var(--color);
+        /*color: var(--color);*/
         filter: blur(calc(var(--textBlur) * 0.8 * 1px));
         width: 90%;
         display: flex;
         justify-content: space-evenly;
     }
     .intervalNumber {
+        --col1: "white";
         margin: 0;
         padding: 0;
         height: calc(var(--size) * 0.11 * 1px);
@@ -147,12 +206,32 @@
         text-align: center;
         border-radius: 1000px;
         box-sizing: border-box;
-        transition-duration: 800ms;
+        /*color: var(--intervalColor);*/
+        /*border: 0 solid var(--color);*/
+        /*box-shadow: 0 0 0 var(--color);*/
         transition-property: border, box-shadow;
+        transition-duration: 800ms;
+        /*, box-shadow;*/
     }
-    .selected {
-        border: 2px solid var(--color);
-        box-shadow: 0 0 10px var(--color);
+    .selected:nth-of-type(1) {
+        border: 2px solid var(--intervalColor1);
+        box-shadow: 0 0 10px var(--intervalColor1);
+    }
+    .selected:nth-of-type(2) {
+        border: 2px solid var(--intervalColor2);
+        box-shadow: 0 0 10px var(--intervalColor2);
+    }
+    .selected:nth-of-type(3) {
+        border: 2px solid var(--intervalColor3);
+        box-shadow: 0 0 10px var(--intervalColor3);
+    }
+    .selected:nth-of-type(4) {
+        border: 2px solid var(--intervalColor4);
+        box-shadow: 0 0 10px var(--intervalColor4);
+    }
+    .selected:nth-of-type(5) {
+        border: 2px solid var(--intervalColor5);
+        box-shadow: 0 0 10px var(--intervalColor5);
     }
     .arrowButton {
         background: transparent;

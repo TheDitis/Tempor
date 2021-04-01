@@ -1,10 +1,11 @@
 <script>
-    import {settingsOpen} from "../../stores/appState";
+    import {inputRef, settingsOpen} from "../../stores/appState";
     import {faCog} from "@fortawesome/free-solid-svg-icons";
     import Fa from "svelte-fa";
 
     const toggleSettings = () => {
         settingsOpen.update(isOpen => !isOpen)
+        if ($inputRef) $inputRef.focus();
     }
 </script>
 

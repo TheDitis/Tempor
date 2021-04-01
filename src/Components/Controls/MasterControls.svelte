@@ -10,6 +10,7 @@
         hue,
         globalHue,
         settingsTab,
+        inputRef
     } from "../../stores/appState";
     import {
         duration,
@@ -75,7 +76,6 @@
             });
             currentFavInterval.set(favKeyMap.set[key]);
         }
-
     }
 
     const loadFavorite = async (key) => {
@@ -215,6 +215,8 @@
             // navigating between existing cycles
             case "ArrowLeft":
             case "ArrowRight":
+                e.preventDefault();
+                e.stopPropagation();
                 if ($intervalMode && $runState !== "running") {
                     focused.set(false);
                     const direction = key === "ArrowLeft" ? -1 : 1;
@@ -232,10 +234,14 @@
                         hue.set($globalHue)
                     }
                     focused.set(true);
+                    if ($inputRef) $inputRef.focus();
+                    await tick();
                 }
                 break;
             // adding/subtracting cycles
             case "ArrowUp":
+                e.preventDefault();
+                e.stopPropagation();
                 if ($intervalMode && $intervalDurations.length < 5 && $runState !== "running") {
                     focused.set(false);
                     if ($currentFavInterval !== null) {
@@ -246,6 +252,7 @@
                     hue.set($globalHue);
                     await tick();
                     focused.set(true);
+                    if ($inputRef) $inputRef.focus();
                 }
                 break;
             case "ArrowDown":
@@ -264,12 +271,13 @@
                     await tick();
                     const intervalColor = $intervalColors[$intervalIndex];
                     if (intervalColor !== null) {
-                        hue.set(intervalColor)
+                        hue.set(intervalColor);
                     }
                     else {
-                        hue.set($globalHue)
+                        hue.set($globalHue);
                     }
                     focused.set(true);
+                    if ($inputRef) $inputRef.focus();
                 }
                 break;
             default:
