@@ -1,5 +1,5 @@
 <script>
-	import {onMount, onDestroy} from "svelte";
+	import {onMount} from "svelte";
 	import Timer from "./Components/Timer/Timer.svelte";
 	const {ipcRenderer} = require("electron");
 	import {
@@ -22,7 +22,6 @@
 	import ResizeControl from "./Components/Controls/ResizeControl.svelte";
 	import OpenSettingsButton from "./Components/Settings/OpenSettingsButton.svelte";
 	import Settings from "./Components/Settings/Settings.svelte";
-	// import ThemeCycleButton from "./Components/Controls/ThemeCycleButton.svelte";
 	import IntervalModeButton from "./Components/Controls/IntervalModeButton.svelte";
 	import MasterControls from "./Components/Controls/MasterControls.svelte";
 	import {

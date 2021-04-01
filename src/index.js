@@ -1,17 +1,22 @@
 const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 const path = require('path');
-const sound = require('sound-play');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
-  app.quit();
+// if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
+//   app.quit();
+// }
+function isDev() {
+  return !app.isPackaged;
 }
 
+if (isDev()) {
 //live reload
-require('electron-reload')(__dirname, {
-  electron: path.join(__dirname, '../node_modules', '.bin', 'electron'),
-  awaitWriteFinish: true,
-})
+  require('electron-reload')(__dirname, {
+    electron: path.join(__dirname, '../node_modules', '.bin', 'electron'),
+    awaitWriteFinish: true,
+  })
+}
+
 
 
 const createWindow = () => {
@@ -25,6 +30,8 @@ const createWindow = () => {
       nodeIntegration: true,
       contextIsolation: false
     },
+    icon: path.join(__dirname, '../public/favicon.png')
+    // icon: isDev() ? path.join(process.cwd(), 'public/favicon.png') : path.join(__dirname, 'public/favicon.png'),
 
   });
 
@@ -54,15 +61,15 @@ const createWindow = () => {
   // mainWindow.setAlwaysOnTop(true)
 
 
-  const devtools = new BrowserWindow();
-
-  mainWindow.webContents.setDevToolsWebContents(devtools.webContents);
-  mainWindow.webContents.openDevTools({ mode: 'detach' });
-  mainWindow.webContents.once('did-finish-load', function () {
-    var windowBounds = mainWindow.getBounds();
-    devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
-    devtools.setSize(windowBounds.width, windowBounds.height);
-  });
+  // const devtools = new BrowserWindow();
+  //
+  // mainWindow.webContents.setDevToolsWebContents(devtools.webContents);
+  // mainWindow.webContents.openDevTools({ mode: 'detach' });
+  // mainWindow.webContents.once('did-finish-load', function () {
+  //   var windowBounds = mainWindow.getBounds();
+  //   devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
+  //   devtools.setSize(windowBounds.width, windowBounds.height);
+  // });
 
 
 

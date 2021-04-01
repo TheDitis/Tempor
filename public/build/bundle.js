@@ -280,9 +280,6 @@ var app = (function () {
     function afterUpdate(fn) {
         get_current_component().$$.after_update.push(fn);
     }
-    function onDestroy(fn) {
-        get_current_component().$$.on_destroy.push(fn);
-    }
     function createEventDispatcher() {
         const component = get_current_component();
         return (type, detail) => {
@@ -35931,7 +35928,7 @@ var app = (function () {
 
     const file = "src\\App.svelte";
 
-    // (150:2) {#if $settingsOpen}
+    // (149:2) {#if $settingsOpen}
     function create_if_block(ctx) {
     	let settings_1;
     	let current;
@@ -35963,7 +35960,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(150:2) {#if $settingsOpen}",
+    		source: "(149:2) {#if $settingsOpen}",
     		ctx
     	});
 
@@ -36034,11 +36031,11 @@ var app = (function () {
     			t5 = space();
     			create_component(mastercontrols.$$.fragment);
     			attr_dev(div0, "class", "draggableArea svelte-1fz8pzh");
-    			add_location(div0, file, 139, 2, 3380);
+    			add_location(div0, file, 138, 2, 3287);
     			attr_dev(div1, "class", "timerSection svelte-1fz8pzh");
-    			add_location(div1, file, 141, 2, 3417);
+    			add_location(div1, file, 140, 2, 3324);
     			attr_dev(div2, "class", "App svelte-1fz8pzh");
-    			add_location(div2, file, 138, 1, 3360);
+    			add_location(div2, file, 137, 1, 3267);
     			set_style(main, "--size", /*$size*/ ctx[5]);
     			set_style(main, "--width", /*$width*/ ctx[3]);
     			set_style(main, "--color", /*$color*/ ctx[7].hsl().string());
@@ -36051,7 +36048,7 @@ var app = (function () {
     			set_style(main, "--appBg", /*appBg*/ ctx[6]);
     			set_style(main, "--frameRadius", /*$borderRadius*/ ctx[9] * (/*$width*/ ctx[3] / 2) / 100 + "px");
     			attr_dev(main, "class", "svelte-1fz8pzh");
-    			add_location(main, file, 123, 0, 2938);
+    			add_location(main, file, 122, 0, 2845);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -36318,7 +36315,6 @@ var app = (function () {
 
     	$$self.$capture_state = () => ({
     		onMount,
-    		onDestroy,
     		Timer,
     		ipcRenderer,
     		size,
