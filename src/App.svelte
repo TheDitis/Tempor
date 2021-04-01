@@ -39,6 +39,8 @@
 		tempDuration
 	} from "./stores/timerState";
 
+	// TODO: Add sounds to favorites
+	// TODO: Make clicking on file name in sound selector play the current sound
 	// TODO: Add other sounds
 	// TODO: Rename sounds
 	// TODO: Look into the angling of the bottom corners after closing settings with border radius

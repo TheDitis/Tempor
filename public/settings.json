@@ -9,28 +9,48 @@
   "frame": 0,
   "volume": 1,
   "sounds": {
-    "start": "sound (7).wav",
-    "next": "sound (11).wav",
-    "end": "sound (33).wav"
+    "start": "sound (9).wav",
+    "next": "sound (10).wav",
+    "end": "sound (11).wav"
   },
   "favorites": [
-    12000,
+    42000,
     62000,
+    null,
+    null,
+    null
+  ],
+  "favoritesSounds": [
+    {
+      "start": "sound (4).wav",
+      "end": "sound (6).wav"
+    },
+    null,
     null,
     null,
     null
   ],
   "favoriteIntervals": [
     [
-      20000,
-      10000
+      170000,
+      5000
     ],
-    null,
+    [
+      25000,
+      5000
+    ],
     null,
     null,
     null
   ],
   "favoriteIntervalColors": [
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "favoriteIntervalSounds": [
     null,
     null,
     null,

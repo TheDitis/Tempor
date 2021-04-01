@@ -3189,6 +3189,10 @@ var app = (function () {
 
     const meme = writable(null);
 
+    const globalSounds = writable(null);
+
+    // export const sounds = writable(null);
+
     const loadSettings = () => {
         // read settings file and set relevant stores:
         const settingsData = JSON.parse(fs.readFileSync(path.join(__dirname, "./settings.json")));
@@ -3212,6 +3216,7 @@ var app = (function () {
             }
         }
 
+        globalSounds.set({...settingsData}.sounds);
         settings.set(settingsData);
     };
 
@@ -3224,7 +3229,26 @@ var app = (function () {
         const vol = get_store_value(volume);
         const lineThikniss = get_store_value(lineThickness);
         let tempSettings = get_store_value(settings);
-        tempSettings = {...tempSettings, hue: tempHue, size: tempSize, blur: tempBlur, lineThickness: lineThikniss, frame, volume: vol};
+        const curFav = get_store_value(intervalMode) ? get_store_value(currentFavInterval) : get_store_value(currentFavInd);
+        const glblSounds = get_store_value(globalSounds);
+        console.log("curFav: ", curFav);
+        const sounds = curFav !== null ? glblSounds : tempSettings.sounds;
+        console.log("sounds: ", sounds);
+        /// so that not too much space is taken up by arrays full of null
+        const tempFavIntervalColors = tempSettings.favoriteIntervalColors.map( item => {
+            return (item !== null && item.length && item.some(val => val !== null)) ? item : null;
+        });
+        tempSettings = {
+            ...tempSettings,
+            hue: tempHue,
+            size: tempSize,
+            blur: tempBlur,
+            lineThickness: lineThikniss,
+            frame,
+            volume: vol,
+            sounds,
+            favoriteIntervalColors: tempFavIntervalColors
+        };
         tempSettings = JSON.stringify(tempSettings, null, 2);
 
         try {
@@ -35739,6 +35763,7 @@ var app = (function () {
     	let $intervalDurations;
     	let $intervalColors;
     	let $inputRef;
+    	let $globalSounds;
     	let $runState;
     	let $intervalIndex;
     	let $globalHue;
@@ -35760,20 +35785,22 @@ var app = (function () {
     	component_subscribe($$self, intervalColors, $$value => $$invalidate(13, $intervalColors = $$value));
     	validate_store(inputRef, "inputRef");
     	component_subscribe($$self, inputRef, $$value => $$invalidate(14, $inputRef = $$value));
+    	validate_store(globalSounds, "globalSounds");
+    	component_subscribe($$self, globalSounds, $$value => $$invalidate(15, $globalSounds = $$value));
     	validate_store(runState, "runState");
-    	component_subscribe($$self, runState, $$value => $$invalidate(15, $runState = $$value));
+    	component_subscribe($$self, runState, $$value => $$invalidate(16, $runState = $$value));
     	validate_store(intervalIndex, "intervalIndex");
-    	component_subscribe($$self, intervalIndex, $$value => $$invalidate(16, $intervalIndex = $$value));
+    	component_subscribe($$self, intervalIndex, $$value => $$invalidate(17, $intervalIndex = $$value));
     	validate_store(globalHue, "globalHue");
-    	component_subscribe($$self, globalHue, $$value => $$invalidate(17, $globalHue = $$value));
+    	component_subscribe($$self, globalHue, $$value => $$invalidate(18, $globalHue = $$value));
     	validate_store(currentFavInd, "currentFavInd");
-    	component_subscribe($$self, currentFavInd, $$value => $$invalidate(18, $currentFavInd = $$value));
+    	component_subscribe($$self, currentFavInd, $$value => $$invalidate(19, $currentFavInd = $$value));
     	validate_store(duration, "duration");
-    	component_subscribe($$self, duration, $$value => $$invalidate(19, $duration = $$value));
+    	component_subscribe($$self, duration, $$value => $$invalidate(20, $duration = $$value));
     	validate_store(settingsTab, "settingsTab");
-    	component_subscribe($$self, settingsTab, $$value => $$invalidate(20, $settingsTab = $$value));
+    	component_subscribe($$self, settingsTab, $$value => $$invalidate(21, $settingsTab = $$value));
     	validate_store(currentFavInterval, "currentFavInterval");
-    	component_subscribe($$self, currentFavInterval, $$value => $$invalidate(21, $currentFavInterval = $$value));
+    	component_subscribe($$self, currentFavInterval, $$value => $$invalidate(22, $currentFavInterval = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("MasterControls", slots, []);
     	let { makeBigger } = $$props;
@@ -35789,31 +35816,44 @@ var app = (function () {
 
     	const setFavorite = async key => {
     		if (!$focused) return;
+    		const favoriteIndex = favKeyMap.set[key];
     		focused.set(false);
 
+    		// IN NORMAL TIMER MODE
     		if (!$intervalMode) {
-    			const tempFavorites = $settings.favorites;
+    			const favorites = $settings.favorites;
+    			const favoritesSounds = $settings.favoritesSounds;
 
     			// if this value isn't already in a favorite slot
-    			if (!tempFavorites.includes($tempDuration)) {
-    				tempFavorites[favKeyMap.set[key]] = $tempDuration > 0 ? $tempDuration : null;
-    				settings.set({ ...$settings, favorites: tempFavorites });
-    				currentFavInd.set(favKeyMap.set[key]);
+    			const soundsDifferent = favoritesSounds[favoriteIndex] !== null && ($settings.sounds.start !== favoritesSounds[favoriteIndex].start || $settings.sounds.end !== favoritesSounds[favoriteIndex].end);
+
+    			// if we don't have a copy of this favorite already:
+    			if (!favorites.includes($tempDuration) || soundsDifferent) {
+    				favorites[favoriteIndex] = $tempDuration > 0 ? $tempDuration : null;
+
+    				/// set the sounds for the favorite
+    				favoritesSounds[favoriteIndex] = lodash.omit({ ...$settings.sounds }, "next");
+
+    				settings.set({ ...$settings, favorites, favoritesSounds });
+    				currentFavInd.set(favoriteIndex);
     			}
-    		} else // in interval mode
+    		} else // IN INTERVAL MODE
     		{
-    			const tempFavorites = $settings.favoriteIntervals;
-    			const tempFavoriteColors = $settings.favoriteIntervalColors;
-    			tempFavorites[favKeyMap.set[key]] = $intervalDurations;
-    			tempFavoriteColors[favKeyMap.set[key]] = $intervalColors;
+    			const favorites = $settings.favoriteIntervals;
+    			const favoriteColors = $settings.favoriteIntervalColors;
+    			const favoriteSounds = $settings.favoriteIntervalSounds;
+    			favorites[favoriteIndex] = $intervalDurations;
+    			favoriteColors[favoriteIndex] = $intervalColors;
+    			favoriteSounds[favoriteIndex] = { ...$settings.sounds };
 
     			settings.set({
     				...$settings,
-    				favoriteIntervals: tempFavorites,
-    				favoriteIntervalColors: tempFavoriteColors
+    				favoriteIntervals: favorites,
+    				favoriteIntervalColors: favoriteColors,
+    				favoriteIntervalSounds: favoriteSounds
     			});
 
-    			currentFavInterval.set(favKeyMap.set[key]);
+    			currentFavInterval.set(favoriteIndex);
     		}
 
     		await tick();
@@ -35824,9 +35864,26 @@ var app = (function () {
     	const loadFavorite = async key => {
     		const favInd = favKeyMap.load[key];
 
+    		const loadSounds = favSounds => {
+    			let sounds;
+
+    			if (favSounds !== null) {
+    				sounds = { ...$settings.sounds };
+    				sounds.start = favSounds.start;
+    				sounds.end = favSounds.end;
+    				if ("next" in favSounds) sounds.next = favSounds.next;
+    			} else {
+    				sounds = $globalSounds;
+    			}
+
+    			settings.set({ ...$settings, sounds });
+    		};
+
     		/// IF NOT IN INTERVAL MODE:
     		if (!$intervalMode) {
     			const setting = $settings.favorites[favInd];
+    			const favSounds = $settings.favoritesSounds[favInd];
+    			loadSounds(favSounds);
 
     			if (!!setting && setting !== $tempDuration) {
     				if ($runState === "running") {
@@ -35841,6 +35898,7 @@ var app = (function () {
     		{
     			const timeSetting = $settings.favoriteIntervals[favInd];
     			let colorSetting = $settings.favoriteIntervalColors[favInd];
+    			const favSounds = $settings.favoriteIntervalSounds[favInd];
 
     			if (colorSetting === null) {
     				colorSetting = [null, null, null, null, null];
@@ -35857,6 +35915,7 @@ var app = (function () {
     				intervalDurations.set(timeSetting);
     				intervalColors.set(colorSetting);
     				currentFavInterval.set(favInd);
+    				loadSounds(favSounds);
     				await tick();
     				const intervalColor = $intervalColors[$intervalIndex];
     				if (intervalColor) hue.set(intervalColor); else hue.set($globalHue);
@@ -36076,12 +36135,15 @@ var app = (function () {
     		settingsTab,
     		inputRef,
     		favKeyMap,
+    		globalSounds,
     		duration,
     		focused,
     		intervalDurations,
     		intervalIndex,
     		runState,
     		tempDuration,
+    		_: lodash,
+    		arraysEqual,
     		makeBigger,
     		makeSmaller,
     		start,
@@ -36099,6 +36161,7 @@ var app = (function () {
     		$intervalDurations,
     		$intervalColors,
     		$inputRef,
+    		$globalSounds,
     		$runState,
     		$intervalIndex,
     		$globalHue,
@@ -36229,7 +36292,7 @@ var app = (function () {
 
     const file = "src\\App.svelte";
 
-    // (161:2) {#if $settingsOpen}
+    // (163:2) {#if $settingsOpen}
     function create_if_block(ctx) {
     	let settings_1;
     	let current;
@@ -36261,7 +36324,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(161:2) {#if $settingsOpen}",
+    		source: "(163:2) {#if $settingsOpen}",
     		ctx
     	});
 
@@ -36332,11 +36395,11 @@ var app = (function () {
     			t5 = space();
     			create_component(mastercontrols.$$.fragment);
     			attr_dev(div0, "class", "draggableArea svelte-1fz8pzh");
-    			add_location(div0, file, 150, 2, 3620);
+    			add_location(div0, file, 152, 2, 3732);
     			attr_dev(div1, "class", "timerSection svelte-1fz8pzh");
-    			add_location(div1, file, 152, 2, 3657);
+    			add_location(div1, file, 154, 2, 3769);
     			attr_dev(div2, "class", "App svelte-1fz8pzh");
-    			add_location(div2, file, 149, 1, 3600);
+    			add_location(div2, file, 151, 1, 3712);
     			set_style(main, "--size", /*$size*/ ctx[5]);
     			set_style(main, "--width", /*$width*/ ctx[3]);
     			set_style(main, "--color", /*$color*/ ctx[7].hsl().string());
@@ -36349,7 +36412,7 @@ var app = (function () {
     			set_style(main, "--appBg", /*appBg*/ ctx[6]);
     			set_style(main, "--frameRadius", /*$borderRadius*/ ctx[9] * (/*$width*/ ctx[3] / 2) / 100 + "px");
     			attr_dev(main, "class", "svelte-1fz8pzh");
-    			add_location(main, file, 134, 0, 3178);
+    			add_location(main, file, 136, 0, 3290);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -36550,6 +36613,8 @@ var app = (function () {
     	validate_slots("App", slots, []);
     	const { ipcRenderer } = require("electron");
 
+    	// TODO: Add sounds to favorites
+    	// TODO: Make clicking on file name in sound selector play the current sound
     	// TODO: Add other sounds
     	// TODO: Rename sounds
     	// TODO: Look into the angling of the bottom corners after closing settings with border radius

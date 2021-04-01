@@ -101,6 +101,10 @@ export const currentFavInterval = writable(null);
 
 export const meme = writable(null);
 
+export const globalSounds = writable(null);
+
+// export const sounds = writable(null);
+
 export const loadSettings = () => {
     // read settings file and set relevant stores:
     const settingsData = JSON.parse(fs.readFileSync(path.join(__dirname, "./settings.json")));
@@ -108,7 +112,7 @@ export const loadSettings = () => {
     globalHue.set(settingsData.hue);
     size.set(settingsData.size);
     blur.set(settingsData.blur);
-    borderRadius.set(settingsData.frame)
+    borderRadius.set(settingsData.frame);
     volume.set(settingsData.volume);
     lineThickness.set(settingsData.lineThickness);
 
@@ -116,14 +120,15 @@ export const loadSettings = () => {
     const soundFiles = listSoundFileNames();
     for (let soundName of Object.keys(settingsData.sounds)) {
         const sound = settingsData.sounds[soundName];
-        const found = soundFiles.includes(settingsData.sounds[soundName])
-        console.log("sound: ", sound, " found: ", found)
+        const found = soundFiles.includes(settingsData.sounds[soundName]);
+        console.log("sound: ", sound, " found: ", found);
         if (!found) {
             settingsData.sounds[soundName] = soundFiles[0];
-            console.log("setting default sound for ", soundName, " sound: ", soundFiles[0])
+            console.log("setting default sound for ", soundName, " sound: ", soundFiles[0]);
         }
     }
 
+    globalSounds.set({...settingsData}.sounds);
     settings.set(settingsData);
 }
 
@@ -136,7 +141,26 @@ export const saveSettings = async () => {
     const vol = get(volume);
     const lineThikniss = get(lineThickness);
     let tempSettings = get(settings);
-    tempSettings = {...tempSettings, hue: tempHue, size: tempSize, blur: tempBlur, lineThickness: lineThikniss, frame, volume: vol}
+    const curFav = get(intervalMode) ? get(currentFavInterval) : get(currentFavInd)
+    const glblSounds = get(globalSounds)
+    console.log("curFav: ", curFav)
+    const sounds = curFav !== null ? glblSounds : tempSettings.sounds;
+    console.log("sounds: ", sounds)
+    /// so that not too much space is taken up by arrays full of null
+    const tempFavIntervalColors = tempSettings.favoriteIntervalColors.map( item => {
+        return (item !== null && item.length && item.some(val => val !== null)) ? item : null;
+    })
+    tempSettings = {
+        ...tempSettings,
+        hue: tempHue,
+        size: tempSize,
+        blur: tempBlur,
+        lineThickness: lineThikniss,
+        frame,
+        volume: vol,
+        sounds,
+        favoriteIntervalColors: tempFavIntervalColors
+    };
     tempSettings = JSON.stringify(tempSettings, null, 2);
 
     try {

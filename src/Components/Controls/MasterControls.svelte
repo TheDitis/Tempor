@@ -11,7 +11,8 @@
         globalHue,
         settingsTab,
         inputRef,
-        favKeyMap
+        favKeyMap,
+        globalSounds
     } from "../../stores/appState";
     import {
         duration,
@@ -21,6 +22,9 @@
         runState,
         tempDuration
     } from "../../stores/timerState";
+    import _ from "lodash";
+    import {arraysEqual} from "../../utils/utils";
+
 
     export let makeBigger;
     export let makeSmaller;
@@ -37,29 +41,44 @@
 
 
     const setFavorite = async (key) => {
-        if (!$focused) return
+        if (!$focused) return;
+        const favoriteIndex = favKeyMap.set[key];
         focused.set(false);
+        // IN NORMAL TIMER MODE
         if (!$intervalMode) {
-            const tempFavorites = $settings.favorites;
+            const favorites = $settings.favorites;
+            const favoritesSounds = $settings.favoritesSounds;
             // if this value isn't already in a favorite slot
-            if (!tempFavorites.includes($tempDuration)) {
-                tempFavorites[favKeyMap.set[key]] = $tempDuration > 0 ? $tempDuration : null;
-                settings.set({...$settings, favorites: tempFavorites})
-                currentFavInd.set(favKeyMap.set[key]);
+            const soundsDifferent = favoritesSounds[favoriteIndex] !== null && (
+                $settings.sounds.start !== favoritesSounds[favoriteIndex].start
+                || $settings.sounds.end !== favoritesSounds[favoriteIndex].end
+            )
+            // if we don't have a copy of this favorite already:
+            if (!favorites.includes($tempDuration) || soundsDifferent) {
+                favorites[favoriteIndex] = $tempDuration > 0 ? $tempDuration : null;
+                /// set the sounds for the favorite
+                favoritesSounds[favoriteIndex] = _.omit({...($settings.sounds)}, "next");
+
+
+                settings.set({...$settings, favorites: favorites, favoritesSounds})
+                currentFavInd.set(favoriteIndex);
             }
         }
-        // in interval mode
+        // IN INTERVAL MODE
         else {
-            const tempFavorites = $settings.favoriteIntervals;
-            const tempFavoriteColors = $settings.favoriteIntervalColors;
-            tempFavorites[favKeyMap.set[key]] = $intervalDurations;
-            tempFavoriteColors[favKeyMap.set[key]] = $intervalColors;
+            const favorites = $settings.favoriteIntervals;
+            const favoriteColors = $settings.favoriteIntervalColors;
+            const favoriteSounds = $settings.favoriteIntervalSounds;
+            favorites[favoriteIndex] = $intervalDurations;
+            favoriteColors[favoriteIndex] = $intervalColors;
+            favoriteSounds[favoriteIndex] = {...($settings.sounds)};
             settings.set({
                 ...$settings,
-                favoriteIntervals: tempFavorites,
-                favoriteIntervalColors: tempFavoriteColors
+                favoriteIntervals: favorites,
+                favoriteIntervalColors: favoriteColors,
+                favoriteIntervalSounds: favoriteSounds
             });
-            currentFavInterval.set(favKeyMap.set[key]);
+            currentFavInterval.set(favoriteIndex);
         }
         await tick();
         focused.set(true);
@@ -68,9 +87,26 @@
 
     const loadFavorite = async (key) => {
         const favInd = favKeyMap.load[key];
+
+        const loadSounds = (favSounds) => {
+            let sounds;
+            if (favSounds !== null) {
+                sounds = {...($settings.sounds)};
+                sounds.start = favSounds.start;
+                sounds.end = favSounds.end;
+                if ("next" in favSounds) sounds.next = favSounds.next;
+            }
+            else {
+                sounds = $globalSounds;
+            }
+            settings.set({...$settings, sounds});
+        }
+
         /// IF NOT IN INTERVAL MODE:
         if (!$intervalMode) {
-            const setting = $settings.favorites[favInd]
+            const setting = $settings.favorites[favInd];
+            const favSounds = $settings.favoritesSounds[favInd];
+            loadSounds(favSounds);
             if (!!setting && setting !== $tempDuration) {
                 if ($runState === "running") {
                     pause();
@@ -84,6 +120,7 @@
         else {
             const timeSetting = $settings.favoriteIntervals[favInd];
             let colorSetting = $settings.favoriteIntervalColors[favInd];
+            const favSounds = $settings.favoriteIntervalSounds[favInd];
             if (colorSetting === null) {
                 colorSetting = [null, null, null, null, null];
             }
@@ -96,6 +133,7 @@
                 intervalDurations.set(timeSetting);
                 intervalColors.set(colorSetting);
                 currentFavInterval.set(favInd);
+                loadSounds(favSounds);
                 await tick();
                 const intervalColor = $intervalColors[$intervalIndex];
                 if (intervalColor) hue.set(intervalColor);
