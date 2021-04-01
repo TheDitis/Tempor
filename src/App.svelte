@@ -18,7 +18,8 @@
 		intervalMode,
 		intervalColors,
 		playSound,
-		inputRef
+		inputRef,
+		meme
 	} from "./stores/appState";
 	import ResizeControl from "./Components/Controls/ResizeControl.svelte";
 	import OpenSettingsButton from "./Components/Settings/OpenSettingsButton.svelte";
@@ -38,7 +39,6 @@
 		tempDuration
 	} from "./stores/timerState";
 
-	// TODO: Meme indicator
 	// TODO: Add other sounds
 	// TODO: Rename sounds
 	// TODO: Look into the angling of the bottom corners after closing settings with border radius
@@ -82,6 +82,7 @@
 			runState.set("running");
 			playSound($settings.sounds.start);
 		}
+		if ($meme) meme.set(null);
 	}
 
 
@@ -97,6 +98,7 @@
 	export const resume = () => {
 		intervalIndex.set($playingIntervalIndex);
 		startTime.set(Date.now() - ($duration - $pausedRemainingTime));
+		if ($meme) meme.set(null);
 		focused.set(false);
 		runState.set("running");
 	}

@@ -8,11 +8,12 @@
         focused,
         tempDuration,
     } from "../../stores/timerState";
-    import {color, size, settings, showFavorites, intervalMode, lineThickness} from "../../stores/appState";
+    import {color, size, settings, showFavorites, intervalMode, lineThickness, meme} from "../../stores/appState";
     import PlayPauseControl from "../Controls/PlayPauseControl.svelte";
     import Favorites from "./Favorites/Favorites.svelte";
     import IntervalModeIndicator from "./IntervalMode/IntervalModeIndicator.svelte";
     import IntervalNumberIndicator from "./IntervalMode/IntervalNumberIndicator.svelte";
+    import MemeIndicator from "../Icons/MemeIndicator.svelte";
 
     export let start, pause, resume;
 
@@ -63,6 +64,9 @@
         <Favorites/>
     {/if}
 
+    {#if $meme !== null}
+        <MemeIndicator/>
+    {/if}
     {#if $intervalMode}
         <IntervalModeIndicator/>
         <IntervalNumberIndicator/>

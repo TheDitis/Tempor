@@ -2,7 +2,7 @@
     import {onMount, afterUpdate} from "svelte";
     import {formatTime, formatTimeMs, arraysEqual} from "../../../utils/utils";
     import {tempDuration, runState, focused, intervalDurations, intervalIndex} from "../../../stores/timerState";
-    import {currentFavInd, settings, intervalMode, currentFavInterval, inputRef} from "../../../stores/appState";
+    import {currentFavInd, settings, intervalMode, currentFavInterval, inputRef, meme} from "../../../stores/appState";
     import {Duration} from "luxon";
     import _ from "lodash";
 
@@ -70,6 +70,20 @@
         }
     }
 
+    const memeDetector = (deps) => {
+        const secString = seconds.toString()
+        if (secString.length === 2 && secString[0] === "6" && secString[1] === "9") {
+            meme.set("wink");
+            return;
+        }
+        const minString = minutes.toString();
+        if (minString[minString.length - 1] === "4" && secString === "20") {
+            meme.set("leaf");
+            return;
+        }
+        meme.set(null);
+    }
+
     const numsStrToHrsMinsSecs = () => {
         /// create 6 digit string, split into pairs (hr, min, sec) and parse each into integers
         let sixNums = _.padStart(numbers, 6, "0");
@@ -101,6 +115,8 @@
             updateIntervalTime();
         }
     }
+
+    $: { memeDetector([hours, minutes, seconds]) }
 </script>
 
 

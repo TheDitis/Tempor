@@ -152,10 +152,13 @@
             // switch to interval (or Pomodoro) mode
             case "p":
                 if (!($runState === "running")) {
+                    // set times and colors to pomodoro values (25 min, 5 min) (red, green)
                     intervalDurations.set([1500000, 300000]);
                     intervalColors.set([18.6, 77.2, null, null, null]);
                     intervalIndex.set(0)
                     if ($intervalMode) {
+                        // if already in interval mode, we don't want to run the 'i' block since it will take us out of interval mode
+                        // so we do the basic things we need to do to have it update here and then break.
                         focused.set(false)
                         await tick();
                         hue.set($intervalColors[$intervalIndex])

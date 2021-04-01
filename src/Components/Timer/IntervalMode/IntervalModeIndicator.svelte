@@ -9,7 +9,7 @@
         intervalMode,
         size,
         settingsTab,
-        inputRef
+        meme
     } from "../../../stores/appState";
     import {focused, intervalDurations} from "../../../stores/timerState";
     import {tick} from "svelte";
@@ -27,23 +27,22 @@
         focused.set(true);
         await tick();
     }
-    let isPomodoro;
+
     $: isPomodoro = ($intervalDurations.length === 2 && $intervalDurations[0] === 1500000 && $intervalDurations[1] === 300000)
 
-    let intervalCols;
-    $: {
-        intervalCols = [$intervalColors[0], $intervalColors[1]]
-    }
+    $: intervalCols = [$intervalColors[0], $intervalColors[1]]
+
 </script>
 
-
-<div class="IntervalModeIndicator" transition:fade={{duration: 100}} on:click={turnOff}>
-    {#if isPomodoro}
-        <TomatoIcon size={$size / 10} color={$color.hex()} colors={intervalCols}/>
-    {:else}
-        <Fa icon={faSyncAlt}/>
-    {/if}
-</div>
+{#if !$meme}
+    <div class="IntervalModeIndicator" transition:fade={{duration: 100}} on:click={turnOff}>
+        {#if isPomodoro}
+            <TomatoIcon size={$size / 10} color={$color.hex()} colors={intervalCols}/>
+        {:else}
+            <Fa icon={faSyncAlt}/>
+        {/if}
+    </div>
+{/if}
 
 
 <style>

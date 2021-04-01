@@ -99,7 +99,7 @@ export const currentFavInd = writable(null);
 
 export const currentFavInterval = writable(null);
 
-export const meme = writable(null);  // TODO: IT'S OVER 9000!!!
+export const meme = writable(null);
 
 export const loadSettings = () => {
     // read settings file and set relevant stores:
