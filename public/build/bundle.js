@@ -3090,8 +3090,11 @@ var app = (function () {
 
     var color$1 = Color;
 
+    const v8 = require("v8");
     const fs = require("fs");
     const path = require("path");
+
+    const cloneObj = obj => v8.deserialize(v8.serialize(obj));
 
     const inputRef = writable(null);
 
@@ -3215,9 +3218,10 @@ var app = (function () {
                 console.log("setting default sound for ", soundName, " sound: ", soundFiles[0]);
             }
         }
-
-        globalSounds.set({...settingsData}.sounds);
-        settings.set(settingsData);
+        const soundObj = cloneObj({...(settingsData.sounds)});
+        const settingsClone = cloneObj({...settingsData});
+        globalSounds.set(soundObj);
+        settings.set(settingsClone);
     };
 
 
@@ -3229,11 +3233,11 @@ var app = (function () {
         const vol = get_store_value(volume);
         const lineThikniss = get_store_value(lineThickness);
         let tempSettings = get_store_value(settings);
-        const curFav = get_store_value(intervalMode) ? get_store_value(currentFavInterval) : get_store_value(currentFavInd);
-        const glblSounds = get_store_value(globalSounds);
-        console.log("curFav: ", curFav);
-        const sounds = curFav !== null ? glblSounds : tempSettings.sounds;
-        console.log("sounds: ", sounds);
+        // const curFav = get(intervalMode) ? get(currentFavInterval) : get(currentFavInd)
+        // const glblSounds = get(globalSounds)
+        // console.log("curFav: ", curFav)
+        // const sounds = curFav !== null ? glblSounds : tempSettings.sounds;
+        // console.log("sounds: ", sounds)
         /// so that not too much space is taken up by arrays full of null
         const tempFavIntervalColors = tempSettings.favoriteIntervalColors.map( item => {
             return (item !== null && item.length && item.some(val => val !== null)) ? item : null;
@@ -3246,7 +3250,7 @@ var app = (function () {
             lineThickness: lineThikniss,
             frame,
             volume: vol,
-            sounds,
+            // sounds,
             favoriteIntervalColors: tempFavIntervalColors
         };
         tempSettings = JSON.stringify(tempSettings, null, 2);
@@ -35763,7 +35767,6 @@ var app = (function () {
     	let $intervalDurations;
     	let $intervalColors;
     	let $inputRef;
-    	let $globalSounds;
     	let $runState;
     	let $intervalIndex;
     	let $globalHue;
@@ -35785,22 +35788,20 @@ var app = (function () {
     	component_subscribe($$self, intervalColors, $$value => $$invalidate(13, $intervalColors = $$value));
     	validate_store(inputRef, "inputRef");
     	component_subscribe($$self, inputRef, $$value => $$invalidate(14, $inputRef = $$value));
-    	validate_store(globalSounds, "globalSounds");
-    	component_subscribe($$self, globalSounds, $$value => $$invalidate(15, $globalSounds = $$value));
     	validate_store(runState, "runState");
-    	component_subscribe($$self, runState, $$value => $$invalidate(16, $runState = $$value));
+    	component_subscribe($$self, runState, $$value => $$invalidate(15, $runState = $$value));
     	validate_store(intervalIndex, "intervalIndex");
-    	component_subscribe($$self, intervalIndex, $$value => $$invalidate(17, $intervalIndex = $$value));
+    	component_subscribe($$self, intervalIndex, $$value => $$invalidate(16, $intervalIndex = $$value));
     	validate_store(globalHue, "globalHue");
-    	component_subscribe($$self, globalHue, $$value => $$invalidate(18, $globalHue = $$value));
+    	component_subscribe($$self, globalHue, $$value => $$invalidate(17, $globalHue = $$value));
     	validate_store(currentFavInd, "currentFavInd");
-    	component_subscribe($$self, currentFavInd, $$value => $$invalidate(19, $currentFavInd = $$value));
+    	component_subscribe($$self, currentFavInd, $$value => $$invalidate(18, $currentFavInd = $$value));
     	validate_store(duration, "duration");
-    	component_subscribe($$self, duration, $$value => $$invalidate(20, $duration = $$value));
+    	component_subscribe($$self, duration, $$value => $$invalidate(19, $duration = $$value));
     	validate_store(settingsTab, "settingsTab");
-    	component_subscribe($$self, settingsTab, $$value => $$invalidate(21, $settingsTab = $$value));
+    	component_subscribe($$self, settingsTab, $$value => $$invalidate(20, $settingsTab = $$value));
     	validate_store(currentFavInterval, "currentFavInterval");
-    	component_subscribe($$self, currentFavInterval, $$value => $$invalidate(22, $currentFavInterval = $$value));
+    	component_subscribe($$self, currentFavInterval, $$value => $$invalidate(21, $currentFavInterval = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("MasterControls", slots, []);
     	let { makeBigger } = $$props;
@@ -35816,42 +35817,65 @@ var app = (function () {
 
     	const setFavorite = async key => {
     		if (!$focused) return;
+
+    		// const getFavSounds = (omitNext = false) => {
+    		//     console.log("globalSounds: ", $globalSounds);
+    		//     console.log("settings.sounds: ", $settings.sounds)
+    		//     if (
+    		//         $settings.sounds.start !== $globalSounds.start
+    		//         || $settings.sounds.end !== $globalSounds.end
+    		//         || (!omitNext && $settings.sounds.next !== $globalSounds.next)
+    		//     ) {
+    		//         const sounds = {...($settings.sounds)}
+    		//         if (omitNext) delete sounds.next;
+    		//         return sounds
+    		//     } else {
+    		//         return null;
+    		//     }
+    		// }
     		const favoriteIndex = favKeyMap.set[key];
+
     		focused.set(false);
 
     		// IN NORMAL TIMER MODE
     		if (!$intervalMode) {
     			const favorites = $settings.favorites;
-    			const favoritesSounds = $settings.favoritesSounds;
 
-    			// if this value isn't already in a favorite slot
-    			const soundsDifferent = favoritesSounds[favoriteIndex] !== null && ($settings.sounds.start !== favoritesSounds[favoriteIndex].start || $settings.sounds.end !== favoritesSounds[favoriteIndex].end);
-
+    			// const favoritesSounds = $settings.favoritesSounds;
+    			// // if this value isn't already in a favorite slot
+    			// const soundsDifferent = favoritesSounds[favoriteIndex] !== null && (
+    			//     $settings.sounds.start !== favoritesSounds[favoriteIndex].start
+    			//     || $settings.sounds.end !== favoritesSounds[favoriteIndex].end
+    			// )
     			// if we don't have a copy of this favorite already:
-    			if (!favorites.includes($tempDuration) || soundsDifferent) {
+    			if (!favorites.includes($tempDuration)) {
+    				// || soundsDifferent) {
     				favorites[favoriteIndex] = $tempDuration > 0 ? $tempDuration : null;
 
-    				/// set the sounds for the favorite
-    				favoritesSounds[favoriteIndex] = lodash.omit({ ...$settings.sounds }, "next");
+    				// /// set the sounds for the favorite
+    				// const tempSounds = getFavSounds(true);
+    				// console.log("tempSounds: ", tempSounds);
+    				// favoritesSounds[favoriteIndex] = tempSounds
+    				settings.set({ ...$settings, favorites }); // favoritesSounds
 
-    				settings.set({ ...$settings, favorites, favoritesSounds });
     				currentFavInd.set(favoriteIndex);
     			}
     		} else // IN INTERVAL MODE
     		{
     			const favorites = $settings.favoriteIntervals;
     			const favoriteColors = $settings.favoriteIntervalColors;
-    			const favoriteSounds = $settings.favoriteIntervalSounds;
-    			favorites[favoriteIndex] = $intervalDurations;
-    			favoriteColors[favoriteIndex] = $intervalColors;
-    			favoriteSounds[favoriteIndex] = { ...$settings.sounds };
 
+    			// const favoriteSounds = $settings.favoriteIntervalSounds;
+    			favorites[favoriteIndex] = $intervalDurations;
+
+    			favoriteColors[favoriteIndex] = $intervalColors;
+
+    			// favoriteSounds[favoriteIndex] = getFavSounds();
     			settings.set({
     				...$settings,
     				favoriteIntervals: favorites,
-    				favoriteIntervalColors: favoriteColors,
-    				favoriteIntervalSounds: favoriteSounds
-    			});
+    				favoriteIntervalColors: favoriteColors
+    			}); // favoriteIntervalSounds: favoriteSounds
 
     			currentFavInterval.set(favoriteIndex);
     		}
@@ -35864,27 +35888,25 @@ var app = (function () {
     	const loadFavorite = async key => {
     		const favInd = favKeyMap.load[key];
 
-    		const loadSounds = favSounds => {
-    			let sounds;
-
-    			if (favSounds !== null) {
-    				sounds = { ...$settings.sounds };
-    				sounds.start = favSounds.start;
-    				sounds.end = favSounds.end;
-    				if ("next" in favSounds) sounds.next = favSounds.next;
-    			} else {
-    				sounds = $globalSounds;
-    			}
-
-    			settings.set({ ...$settings, sounds });
-    		};
-
+    		// const loadSounds = (favSounds) => {
+    		//     let sounds;
+    		//     if (favSounds !== null) {
+    		//         sounds = {...($settings.sounds)};
+    		//         sounds.start = favSounds.start;
+    		//         sounds.end = favSounds.end;
+    		//         if ("next" in favSounds) sounds.next = favSounds.next;
+    		//     }
+    		//     else {
+    		//         sounds = $globalSounds;
+    		//     }
+    		//     settings.set({...$settings, sounds});
+    		// }
     		/// IF NOT IN INTERVAL MODE:
     		if (!$intervalMode) {
     			const setting = $settings.favorites[favInd];
-    			const favSounds = $settings.favoritesSounds[favInd];
-    			loadSounds(favSounds);
+    			$settings.favoritesSounds[favInd];
 
+    			// loadSounds(favSounds);
     			if (!!setting && setting !== $tempDuration) {
     				if ($runState === "running") {
     					pause();
@@ -35898,8 +35920,8 @@ var app = (function () {
     		{
     			const timeSetting = $settings.favoriteIntervals[favInd];
     			let colorSetting = $settings.favoriteIntervalColors[favInd];
-    			const favSounds = $settings.favoriteIntervalSounds[favInd];
 
+    			// const favSounds = $settings.favoriteIntervalSounds[favInd];
     			if (colorSetting === null) {
     				colorSetting = [null, null, null, null, null];
     			}
@@ -35915,8 +35937,10 @@ var app = (function () {
     				intervalDurations.set(timeSetting);
     				intervalColors.set(colorSetting);
     				currentFavInterval.set(favInd);
-    				loadSounds(favSounds);
+
+    				// loadSounds(favSounds);
     				await tick();
+
     				const intervalColor = $intervalColors[$intervalIndex];
     				if (intervalColor) hue.set(intervalColor); else hue.set($globalHue);
     				focused.set(true);
@@ -36161,7 +36185,6 @@ var app = (function () {
     		$intervalDurations,
     		$intervalColors,
     		$inputRef,
-    		$globalSounds,
     		$runState,
     		$intervalIndex,
     		$globalHue,

@@ -7,7 +7,6 @@
       <change beforePath="$PROJECT_DIR$/public/build/bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/build/bundle.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/build/bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/build/bundle.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/stores/appState.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/appState.js" afterDir="false" />
     </list>
@@ -130,7 +129,7 @@
       <workItem from="1616466762411" duration="2202000" />
       <workItem from="1616542385164" duration="136060000" />
       <workItem from="1616882342802" duration="98233000" />
-      <workItem from="1617242183268" duration="31057000" />
+      <workItem from="1617242183268" duration="33731000" />
     </task>
     <servers />
   </component>

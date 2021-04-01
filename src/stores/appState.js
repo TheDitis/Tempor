@@ -2,8 +2,11 @@ import {writable, derived, readable, get} from "svelte/store";
 import Color from "color";
 import {intervalDurations} from "./timerState";
 
+const v8 = require("v8");
 const fs = require("fs");
 const path = require("path");
+
+const cloneObj = obj => v8.deserialize(v8.serialize(obj));
 
 export const inputRef = writable(null);
 
@@ -127,9 +130,10 @@ export const loadSettings = () => {
             console.log("setting default sound for ", soundName, " sound: ", soundFiles[0]);
         }
     }
-
-    globalSounds.set({...settingsData}.sounds);
-    settings.set(settingsData);
+    const soundObj = cloneObj({...(settingsData.sounds)})
+    const settingsClone = cloneObj({...settingsData});
+    globalSounds.set(soundObj);
+    settings.set(settingsClone);
 }
 
 
@@ -141,11 +145,11 @@ export const saveSettings = async () => {
     const vol = get(volume);
     const lineThikniss = get(lineThickness);
     let tempSettings = get(settings);
-    const curFav = get(intervalMode) ? get(currentFavInterval) : get(currentFavInd)
-    const glblSounds = get(globalSounds)
-    console.log("curFav: ", curFav)
-    const sounds = curFav !== null ? glblSounds : tempSettings.sounds;
-    console.log("sounds: ", sounds)
+    // const curFav = get(intervalMode) ? get(currentFavInterval) : get(currentFavInd)
+    // const glblSounds = get(globalSounds)
+    // console.log("curFav: ", curFav)
+    // const sounds = curFav !== null ? glblSounds : tempSettings.sounds;
+    // console.log("sounds: ", sounds)
     /// so that not too much space is taken up by arrays full of null
     const tempFavIntervalColors = tempSettings.favoriteIntervalColors.map( item => {
         return (item !== null && item.length && item.some(val => val !== null)) ? item : null;
@@ -158,7 +162,7 @@ export const saveSettings = async () => {
         lineThickness: lineThikniss,
         frame,
         volume: vol,
-        sounds,
+        // sounds,
         favoriteIntervalColors: tempFavIntervalColors
     };
     tempSettings = JSON.stringify(tempSettings, null, 2);
