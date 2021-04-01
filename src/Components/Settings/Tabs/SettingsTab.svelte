@@ -1,13 +1,16 @@
 <script>
     import Fa from "svelte-fa";
-    import {settingsTab} from "../../../stores/appState";
+    import {inputRef, settingsTab} from "../../../stores/appState";
 
     export let name;
     export let icon;
 
     $: isCurrent = $settingsTab === name;
 
-    const onClick = () => settingsTab.set(name);
+    const onClick = () => {
+        settingsTab.set(name);
+        if ($inputRef) $inputRef.focus();
+    };
 </script>
 
 

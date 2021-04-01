@@ -9,9 +9,12 @@
       <change beforePath="$PROJECT_DIR$/src/App.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Controls/IntervalModeButton.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/IntervalModeButton.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Controls/ThemeCycleButton.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/ThemeCycleButton.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Settings/IntervalSettings/IntervalSettings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/IntervalSettings/IntervalSettings.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Settings/OpenSettingsButton.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/OpenSettingsButton.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Settings/SettingControls/SettingsOptionButton.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/SettingControls/SettingsOptionButton.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Settings/SettingControls/SettingsSlider.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/SettingControls/SettingsSlider.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Timer/IntervalMode/IntervalModeIndicator.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/IntervalMode/IntervalModeIndicator.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Timer/IntervalMode/IntervalNumberIndicator.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/IntervalMode/IntervalNumberIndicator.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeIndicator.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeIndicator.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeInput.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeInput.svelte" afterDir="false" />
@@ -137,7 +140,7 @@
       <workItem from="1616466762411" duration="2202000" />
       <workItem from="1616542385164" duration="136060000" />
       <workItem from="1616882342802" duration="98233000" />
-      <workItem from="1617242183268" duration="14287000" />
+      <workItem from="1617242183268" duration="14670000" />
     </task>
     <servers />
   </component>

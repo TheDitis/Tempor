@@ -2,9 +2,9 @@
     import Fa from "svelte-fa";
     import {fade} from "svelte/transition";
     import {faSave} from "@fortawesome/free-solid-svg-icons";
-    import {saveSettings, color, size, width} from "../../stores/appState";
+    import {saveSettings, color, size, width, inputRef} from "../../stores/appState";
     import {tick} from "svelte";
-    import {DoubleBounce, Jumper, Jellyfish} from "svelte-loading-spinners";
+    import {Jumper} from "svelte-loading-spinners";
 
     let saved = true;
 
@@ -13,10 +13,11 @@
         saved = false;
         await tick();
         saveSettings()
-        .then(res => {
-            setTimeout(() => saved = true, 1000)
-            console.log("saved");
-        })
+            .then(res => {
+                setTimeout(() => saved = true, 1000)
+                console.log("saved");
+            })
+        if ($inputRef) $inputRef.focus();
     }
 
 </script>
@@ -26,12 +27,10 @@
     on:click={onClick}
 >
 
-    <!--{:else}-->
-        <div transition:fade>
-            <Fa icon={faSave}/>
-        </div>
+    <div transition:fade>
+        <Fa icon={faSave}/>
+    </div>
 
-    <!--{/if}-->
     {#if !saved}
         <div class="loading" transition:fade>
             <Jumper color={$color.hex()} size={$width < 200 ? 26 : $size / 5}/>
