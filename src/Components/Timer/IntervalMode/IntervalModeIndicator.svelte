@@ -25,7 +25,7 @@
         }
         await tick();
         focused.set(true);
-        if ($inputRef) $inputRef.focus();
+        await tick();
     }
     let isPomodoro;
     $: isPomodoro = ($intervalDurations.length === 2 && $intervalDurations[0] === 1500000 && $intervalDurations[1] === 300000)

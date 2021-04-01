@@ -10,7 +10,8 @@
         hue,
         globalHue,
         settingsTab,
-        inputRef
+        inputRef,
+        favKeyMap
     } from "../../stores/appState";
     import {
         duration,
@@ -34,26 +35,10 @@
         focused.set(true)
     }
 
-    const favKeyMap = {
-        set: {
-            Q: 0,
-            W: 1,
-            E: 2,
-            R: 3,
-            T: 4
-        },
-        load: {
-            "!": 0,
-            "@": 1,
-            "#": 2,
-            "$": 3,
-            "%": 4
-        }
-    }
 
-    const setFavorite = (key) => {
+    const setFavorite = async (key) => {
         if (!$focused) return
-        // in normal mode:
+        focused.set(false);
         if (!$intervalMode) {
             const tempFavorites = $settings.favorites;
             // if this value isn't already in a favorite slot
@@ -76,6 +61,9 @@
             });
             currentFavInterval.set(favKeyMap.set[key]);
         }
+        await tick();
+        focused.set(true);
+        if ($inputRef) $inputRef.focus();
     }
 
     const loadFavorite = async (key) => {
@@ -125,6 +113,7 @@
     const handleKeyDown = async (e) => {
         const key = e.key;
         if (e.repeat) return;
+        console.log("key event: ", key)
         switch (key) {
             /// MAIN PAUSE/PLAY CONTROLS
             case " ":
@@ -192,6 +181,7 @@
             case "E":
             case "R":
             case "T":
+                console.log("setting favorite")
                 setFavorite(key);
                 break;
             // keys for loading favorites
@@ -200,6 +190,7 @@
             case "#":
             case "$":
             case "%":
+                console.log("loading favorite")
                 loadFavorite(key);
                 break;
 

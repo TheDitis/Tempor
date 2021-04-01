@@ -70,13 +70,30 @@ export const height = derived(
 )
 
 
-export const intervalMode = writable(true);
+export const intervalMode = writable(false);
 
 export const settings = writable({});
 
 export const volume = writable(0);
 
 export const stayOnTop = derived(settings, $settings => $settings.alwaysOnTop);
+
+export const favKeyMap = {
+    set: {
+        Q: 0,
+        W: 1,
+        E: 2,
+        R: 3,
+        T: 4
+    },
+    load: {
+        "!": 0,
+        "@": 1,
+        "#": 2,
+        "$": 3,
+        "%": 4
+    }
+}
 
 export const currentFavInd = writable(null);
 

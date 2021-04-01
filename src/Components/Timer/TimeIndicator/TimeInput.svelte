@@ -117,6 +117,7 @@
         justify-content: center;
     }
     h1 {
+        margin: 0;
         color: var(--color);
         font-size: var(--fontSize);
         font-family: var(--fontFamily);

@@ -38,8 +38,12 @@
         position: absolute;
         filter: blur(calc(var(--textBlur) * 1px));
         user-select: none;
+        z-index: 50;
+        padding: 0;
     }
     h1 {
+        padding: 0;
+        margin: 0;
         color: var(--color);
         font-size: var(--fontSize);
         font-family: var(--fontFamily);
