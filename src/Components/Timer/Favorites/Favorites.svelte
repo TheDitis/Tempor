@@ -1,25 +1,21 @@
 <script>
-    import {settings, currentFavInd, intervalMode, currentFavInterval, inputRef, favKeyMap} from "../../../stores/appState";
-    import {focused} from "../../../stores/timerState";
+    import {settings, currentFavInd, intervalMode, currentFavInterval, favKeyMap} from "../../../stores/appState";
     import _ from "lodash";
 
-    import {fade} from "svelte/transition"
-    // import {intervalIndex} from "../../../stores/timerState";
+    import {fade} from "svelte/transition";
     let favsList, curInd;
 
-    const handleClick = (fav, i) => event => {
-        // TODO: HERE!!
-        let key;
-        if (!!fav) key = _.invert(favKeyMap.load)[i]
-        else key = _.invert(favKeyMap.set)[i]
-        console.log("sending event with key: ", key)
+    const handleClick = (fav, i) => clickEvent => {
+        /// Get the key that we need to fake to trigger our setter/getter function
+        const keyMap = !!fav ? favKeyMap.load : favKeyMap.set;
+        const key = _.invert(keyMap)[i];
 
-        event.preventDefault();
-        event.stopPropagation();
+        // stop event so that it doesn't remove focus from the input
+        clickEvent.preventDefault();
+        clickEvent.stopPropagation();
+        // Trigger the relevant function in our key listener in MasterControls
         const e = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key, shiftKey : false});
         document.dispatchEvent(e);
-        e.preventDefault();
-        e.stopPropagation();
     }
 
     $: { favsList = $intervalMode ? $settings.favoriteIntervals : $settings.favorites }
