@@ -46,7 +46,7 @@
         <SettingsSlider label="Border" bind:value={$borderRadius} min="0" max="100"/>
     {/if}
     <div class="buttonSection" slot="buttons">
-        <SettingsOptionButton icon={faLayerGroup} option="alwaysOnTop" label="Stay on top"/>
+        <SettingsOptionButton icon={faLayerGroup} option="alwaysOnTop" label="Always on top"/>
         <SettingsOptionButton icon={faAdjust} onChange={cycleTheme} label="Background"/>
     </div>
 </SettingsSection>

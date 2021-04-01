@@ -33671,7 +33671,7 @@ var app = (function () {
     			props: {
     				icon: faLayerGroup,
     				option: "alwaysOnTop",
-    				label: "Stay on top"
+    				label: "Always on top"
     			},
     			$$inline: true
     		});
@@ -35532,8 +35532,21 @@ var app = (function () {
     				e.stopPropagation();
     				focused.set(!$focused);
     				break;
-    			case "i":
     			case "p":
+    				if (!($runState === "running")) {
+    					intervalDurations.set([1500000, 300000]);
+    					intervalColors.set([18.6, 77.2, null, null, null]);
+    					intervalIndex.set(0);
+
+    					if ($intervalMode) {
+    						focused.set(false);
+    						await tick();
+    						hue.set($intervalColors[$intervalIndex]);
+    						focused.set(true);
+    						break;
+    					}
+    				}
+    			case "i":
     				if (!($runState === "running")) {
     					focused.set(false);
 
