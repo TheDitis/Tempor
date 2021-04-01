@@ -25,7 +25,6 @@
                 return Color('rgb(255, 0, 0)').rotate($globalHue)
             }
         })
-        // console.log("colors updated: ", colors)
     }
 
 

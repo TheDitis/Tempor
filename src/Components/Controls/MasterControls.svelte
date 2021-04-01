@@ -16,16 +16,9 @@
         focused,
         intervalDurations,
         intervalIndex,
-        pausedRemainingTime,
-        remainingTime,
-        // pause,
-        // resume,
         runState,
-        startTime,
-        // start,
         tempDuration
     } from "../../stores/timerState";
-    // import {get} from "svelte/store";
 
     export let makeBigger;
     export let makeSmaller;

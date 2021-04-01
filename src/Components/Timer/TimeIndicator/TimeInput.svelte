@@ -99,7 +99,7 @@
 
 <div class="TimeInput" on:click={() => input.focus()}>
 <h1>{readableTime}</h1>
-<input bind:this={input} class="hiddenInput" type="text" bind:value={numbers} on:input={handleChange} autofocus/>
+<input bind:this={input} class="hiddenInput" type="text" bind:value={numbers} on:input={handleChange}/>
 </div>
 
 

@@ -9,9 +9,9 @@
   "frame": 0,
   "volume": 1,
   "sounds": {
-    "start": "sound (6).wav",
-    "next": "sound (10).wav",
-    "end": "sound (32).wav"
+    "start": "sound (7).wav",
+    "next": "sound (11).wav",
+    "end": "sound (33).wav"
   },
   "favorites": [
     12000,

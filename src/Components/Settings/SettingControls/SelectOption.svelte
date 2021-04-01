@@ -85,8 +85,9 @@
     p {
         margin: 0;
         padding: 0;
-        margin-bottom: 8px;
+        /*margin-bottom: 8px;*/
         user-select: none;
+        font-size: calc(var(--size) / 14 * 1px);
     }
 
     .arrowButtonsSection {
@@ -106,5 +107,7 @@
         border: none;
         outline: none;
         font-size: calc(var(--size) / 8 * 1px);
+        display: flex;
+        align-items: center;
     }
 </style>

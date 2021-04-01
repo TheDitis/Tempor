@@ -51,14 +51,23 @@
 
 <SettingsSection>
 
-    <h3>Interval Settings</h3>
+    <h3>Intervals</h3>
 
     <div class="intervalColorSection">
         <div class="titleRow">
             <button class="arrowButton" on:click={prev}>
                 <Fa icon={faCaretLeft}/>
             </button>
-            <h4>Interval {$intervalIndex + 1}</h4>
+
+            <div class="intervals">
+                {#each $intervalDurations as fav, i}
+                    <div class="intervalNumber" class:selected={$intervalIndex === i}>
+                        <p>{i + 1}</p>
+                    </div>
+                {/each}
+            </div>
+
+<!--            <h4>Interval {$intervalIndex + 1}</h4>-->
             <button class="arrowButton" on:click={next}>
                 <Fa icon={faCaretRight}/>
             </button>
@@ -94,6 +103,7 @@
         border: 2px solid var(--color);
         outline: none;
         border-radius: 40px;
+        font-size: calc(var(--size) / 16 * 1px);
         /*display: flex;*/
 
     }
@@ -114,12 +124,44 @@
         margin-top: 10px;
         margin-bottom: 20px;
     }
+    .intervals {
+        /*position: absolute;*/
+        /*top: calc((var(--size) + (var(--thickness) * 2)) * 0.24 * 1px);*/
+        background: transparent;
+        border: none;
+        font-size: calc(var(--size) * 0.08 * 1px);
+        color: var(--color);
+        filter: blur(calc(var(--textBlur) * 0.8 * 1px));
+        width: 90%;
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .intervalNumber {
+        margin: 0;
+        padding: 0;
+        height: calc(var(--size) * 0.11 * 1px);
+        width: calc(var(--size) * 0.11 * 1px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border-radius: 1000px;
+        box-sizing: border-box;
+        transition-duration: 800ms;
+        transition-property: border, box-shadow;
+    }
+    .selected {
+        border: 2px solid var(--color);
+        box-shadow: 0 0 10px var(--color);
+    }
     .arrowButton {
         background: transparent;
         color: var(--color);
         border: none;
         outline: none;
         font-size: calc(var(--size) / 8 * 1px);
+        display: flex;
+        align-items: center;
     }
 
 
@@ -130,7 +172,7 @@
         margin-bottom: 10px;
     }
     h4 {
-        font-size: calc(var(--size) * 0.07 * 1px);
+        font-size: calc(var(--size) * 0.08 * 1px);
         margin: 0;
         /*margin-top: 5px;*/
         /*color: var(--color);*/
