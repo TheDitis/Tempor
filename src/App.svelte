@@ -19,7 +19,7 @@
 		intervalColors,
 		playSound,
 		inputRef,
-		meme, globalHue
+		meme, globalHue, settingsHeight
 	} from "./stores/appState";
 	import ResizeControl from "./Components/Controls/ResizeControl.svelte";
 	import OpenSettingsButton from "./Components/Settings/OpenSettingsButton.svelte";
@@ -50,13 +50,13 @@
 		ipcRenderer.send("resize", $width, $height);
 	})
 	const resize = async (deps) => {
-		await tick();
+		// await tick();
 		console.log("resize called!")
 		ipcRenderer.send("resize", $width, $height)
 	}
 	// any time the window size changes, send the signal to electron
 	$: {
-		resize([$width, $height, $settingsOpen])
+		resize([$width, $height])
 	}
 	// tell the window whether to stay on top or not when that setting changes
 	$: { ipcRenderer.send("stayontop", $stayOnTop) }
@@ -179,7 +179,6 @@
 	}
 
 	.App {
-		margin-top: 20px;
 		padding: 0;
 		background: var(--appBg);
 		border-radius: var(--frameRadius);
@@ -193,7 +192,7 @@
 	.draggableArea {
 		position: absolute;
 		box-sizing: border-box;
-		top: 20px;
+		top: 0;
 		height: calc(var(--blur) * 3px + 10px);
 		width: calc(var(--size) / 2 * 1px);
 		margin: 0;

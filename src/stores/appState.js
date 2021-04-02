@@ -47,11 +47,12 @@ export const borderRadius = writable(0);
 // how thick the timer circle is
 export const lineThickness = writable(1);
 
+export const intervalMode = writable(false);
 
 export const maxSize = readable(Math.min(window.screen.height, window.screen.width))
 
-
 export const settingsHeight = writable(0);
+
 
 export const settingsOpen = writable(true);
 
@@ -69,13 +70,17 @@ export const height = derived(
         // main area height is size + blur + draggable-bar
         const mainSectionSize = Math.round($size + ($scaledBlur * 7)) + 20;
         console.log("settingsOpen: ", $settingsOpen, " settingsHeight: ", $settingsHeight);
-        if ($settingsOpen) return mainSectionSize + $settingsHeight + 20;
+
+        if ($settingsOpen) {
+            const res = mainSectionSize + $settingsHeight + 20;
+            console.log("height: ", res)
+            return res
+        }
         else return mainSectionSize
     }
 )
 
 
-export const intervalMode = writable(false);
 
 export const settings = writable({});
 

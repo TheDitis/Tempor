@@ -42,8 +42,7 @@
         },
         {
           "name": "@electron-forge/maker-deb",
-          "config": {
-          }
+          "config": {}
         },
         {
           "name": "@electron-forge/maker-rpm",
@@ -90,6 +89,7 @@
     "svelte-fa": "^2.2.0",
     "svelte-loading-spinners": "^0.1.4",
     "svelte-preprocess": "^4.6.9",
+    "svelte-watch-resize": "^1.0.3",
     "svg-partial-circle": "^1.0.0"
   }
 }

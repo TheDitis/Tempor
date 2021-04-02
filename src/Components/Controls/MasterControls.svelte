@@ -302,9 +302,9 @@
                 break;
             case "s":
             case "S":
-                if ($settingsOpen) {
-                    settingsHeight.set(0);
-                }
+                // if ($settingsOpen) {
+                //     settingsHeight.set(0);
+                // }
                 settingsOpen.set(!$settingsOpen);
                 break;
             case "b":

@@ -1,14 +1,14 @@
 <script>
     import {color, settingsHeight, settingsTab} from "../../stores/appState";
+    import {watchResize} from "svelte-watch-resize";
     import IntervalSettings from "./IntervalSettings/IntervalSettings.svelte"
     import SaveButton from "./SaveButton.svelte";
-    import {afterUpdate, onMount, onDestroy} from "svelte";
     import {fade} from "svelte/transition";
     import SettingsTabs from "./Tabs/SettingsTabs.svelte";
     import StyleSettings from "./Style/StyleSettings.svelte";
     import SoundSettings from "./Sound/SoundSettings.svelte"
 
-    let settingsRef;
+    // let settingsRef;
 
     const settingsPages = {
         "style": StyleSettings,
@@ -16,21 +16,15 @@
         "intervals": IntervalSettings,
     }
 
-    onMount(() => {
-        settingsHeight.set(settingsRef.clientHeight);
-    })
-    // onDestroy(() => {
-    //     console.log("ondestroy called!")
-    //     settingsHeight.set(0);
-    // })
-    afterUpdate(() => {
-        settingsHeight.set(settingsRef.clientHeight);
-    })
+    const handleResize = (node) => {
+        console.log("handleResize called. node: ", node)
+        settingsHeight.set(node.clientHeight);
+    }
 </script>
 
 
 <div
-    bind:this={settingsRef}
+    use:watchResize={handleResize}
     transition:fade={{duration: 0}}
     class="Settings"
     style="

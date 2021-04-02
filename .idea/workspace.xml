@@ -2,15 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b7b0175-f98d-43b3-b351-86c5c407840e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/electron-timer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/electron-timer.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/build/bundle.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/build/bundle.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/build/bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/build/bundle.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/build/bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/build/bundle.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Settings/OpenSettingsButton.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/OpenSettingsButton.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Settings/SaveButton.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/SaveButton.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Settings/Settings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/Settings.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/stores/appState.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/appState.js" afterDir="false" />
@@ -134,7 +133,7 @@
       <workItem from="1616466762411" duration="2202000" />
       <workItem from="1616542385164" duration="136060000" />
       <workItem from="1616882342802" duration="98233000" />
-      <workItem from="1617242183268" duration="48552000" />
+      <workItem from="1617242183268" duration="50381000" />
     </task>
     <servers />
   </component>
