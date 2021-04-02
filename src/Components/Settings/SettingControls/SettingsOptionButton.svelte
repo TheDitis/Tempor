@@ -1,12 +1,12 @@
 <script>
     import Fa from "svelte-fa";
     import {fade} from "svelte/transition";
-    import {settings, color, inputRef} from "../../../stores/appState";
+    import {color, inputRef, settings} from "../../../stores/appState";
 
     export let icon;
-    export let option;
+    export let option = null;
     export let label = "";
-    export let onChange;
+    export let onChange = null;
 
     let showHint = false;
     let timeout;
@@ -23,7 +23,6 @@
         if (e.clientX && e.clientY) {
             e.preventDefault();
             e.stopPropagation();
-            console.log(" ", e)
             if (onChange) {
                 onChange()
             } else {

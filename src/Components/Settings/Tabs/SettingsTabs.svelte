@@ -1,5 +1,5 @@
 <script>
-    import {faPalette, faPaintBrush, faVolumeUp, faHourglassHalf} from "@fortawesome/free-solid-svg-icons";
+    import {faHourglassHalf, faPalette, faVolumeUp} from "@fortawesome/free-solid-svg-icons";
     import SettingsTab from "./SettingsTab.svelte";
     import {intervalMode} from "../../../stores/appState";
     // TODO: icon ideas: stream, link, unlink

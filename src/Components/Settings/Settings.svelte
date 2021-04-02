@@ -1,5 +1,5 @@
 <script>
-    import {settingsHeight, color, settingsTab} from "../../stores/appState";
+    import {color, settingsHeight, settingsTab} from "../../stores/appState";
     import IntervalSettings from "./IntervalSettings/IntervalSettings.svelte"
     import SaveButton from "./SaveButton.svelte";
     import {afterUpdate, onMount} from "svelte";

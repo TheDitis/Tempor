@@ -2,7 +2,7 @@
     import Fa from "svelte-fa";
     import {fade} from "svelte/transition";
     import {faSave} from "@fortawesome/free-solid-svg-icons";
-    import {saveSettings, color, size, width, inputRef} from "../../stores/appState";
+    import {color, inputRef, saveSettings, size, width} from "../../stores/appState";
     import {tick} from "svelte";
     import {Jumper} from "svelte-loading-spinners";
 

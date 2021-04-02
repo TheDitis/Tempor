@@ -2,9 +2,8 @@
     import SettingsSection from "../SettingsSection.svelte";
     import SettingsSlider from "../SettingControls/SettingsSlider.svelte";
 
-    import {settings, inputRef, volume, playSound, intervalMode} from "../../../stores/appState";
+    import {inputRef, intervalMode, listSoundFileNames, playSound, settings, volume} from "../../../stores/appState";
     import SelectOption from "../SettingControls/SelectOption.svelte";
-    import {listSoundFileNames} from "../../../stores/appState";
 
     const changeSoundFile = eventName => filename => {
         const sounds = $settings.sounds;

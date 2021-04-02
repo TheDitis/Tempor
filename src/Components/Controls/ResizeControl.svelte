@@ -1,8 +1,8 @@
 <script>
     import {createEventDispatcher} from "svelte";
-    import {size, maxSize} from "../../stores/appState";
+    import {maxSize, size} from "../../stores/appState";
 
-    import {faPlus, faMinus} from "@fortawesome/free-solid-svg-icons";
+    import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons";
     import Fa from "svelte-fa";
 
     const dispatch = createEventDispatcher();

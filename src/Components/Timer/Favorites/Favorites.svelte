@@ -1,8 +1,9 @@
 <script>
-    import {settings, currentFavInd, intervalMode, currentFavInterval, favKeyMap} from "../../../stores/appState";
+    import {currentFavInd, currentFavInterval, favKeyMap, intervalMode, settings} from "../../../stores/appState";
     import _ from "lodash";
 
     import {fade} from "svelte/transition";
+
     let favsList, curInd;
 
     const handleClick = (fav, i) => clickEvent => {

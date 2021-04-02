@@ -14,7 +14,7 @@ export const time = readable(Date.now(), (set) => {
 })
 
 // set when pause is hit and returned by remaining time until resumed
-export const pausedRemainingTime = writable(10000);
+export const pausedRemainingTime = writable(0);
 
 // running, paused, stopped, finished
 export const runState = writable("finished");
@@ -53,44 +53,6 @@ export const intervalIndex = writable(0);
 
 export const playingIntervalIndex = writable(0);
 
-
-// // sets the duration, start time, and run-state of the timer
-// export const start = () => {
-//     const isIntervalMode = get(intervalMode);
-//     let tempDur;
-//     if (!isIntervalMode) {
-//         tempDur = get(tempDuration);
-//     }
-//     else {
-//         const tempIntervalDurations = get(intervalDurations);
-//         const intervalInd = get(intervalIndex);
-//         tempDur = tempIntervalDurations[intervalInd];
-//     }
-//     if (tempDur !== 0) {
-//         startTime.set(Date.now())
-//         duration.set(tempDur);
-//         focused.set(false);
-//         runState.set("running");
-//         const sound = new Audio("file://" + __dirname + "/sounds/sound (2).wav");
-//         sound.play();
-//     }
-// }
-//
-// // gets the current remaining time and sets the state to 'paused'
-// export const pause = () => {
-//     const remTime = get(remainingTime)
-//     pausedRemainingTime.set(remTime);
-//     runState.set("paused");
-// }
-//
-// // calculates the new relative start-time based on how much time is remaining and sets the state back to running
-// export const resume = () => {
-//     const dur = get(duration);
-//     const remTime = get(pausedRemainingTime)
-//     startTime.set(Date.now() - (dur - remTime));
-//     focused.set(false);
-//     runState.set("running");
-// }
 
 // runs when the time runs out
 export const handleEnd = () => {

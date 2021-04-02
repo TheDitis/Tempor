@@ -1,7 +1,8 @@
 <script>
     import Fa from "svelte-fa";
+    import {inputRef} from "../../../stores/appState";
     import {faCaretLeft, faCaretRight} from "@fortawesome/free-solid-svg-icons";
-    import {onMount, beforeUpdate, afterUpdate, tick} from "svelte";
+    import {beforeUpdate, onMount, tick} from "svelte";
 
     export let label = "";
     export let options = [];
@@ -46,6 +47,7 @@
         if (!callChangeHandler) callChangeHandler = true;
         if (ind < options.length - 1) ind = ind + 1;
         else ind = 0;
+        if ($inputRef) $inputRef.focus()
     }
 
     const prev = () => {
@@ -53,6 +55,7 @@
         if (!callChangeHandler) callChangeHandler = true;
         if (ind > 0) ind = ind - 1;
         else ind = options.length - 1;
+        if ($inputRef) $inputRef.focus()
     }
 
 </script>
@@ -63,7 +66,15 @@
             <Fa icon={faCaretLeft}/>
         </button>
         {#if ind !== null}
-            <p class="itemName" on:click={() => onClick(value)}>{withoutExtension(value)}</p>
+            <p
+                class="itemName"
+                on:click={() => {
+                    onClick(value);
+                    if ($inputRef) $inputRef.focus();
+                }}
+            >
+                {withoutExtension(value)}
+            </p>
         {/if}
         <button class="arrowButton" on:click={next}>
             <Fa icon={faCaretRight}/>

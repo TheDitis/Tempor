@@ -1,9 +1,9 @@
 <script>
     import {runState} from "../../stores/timerState";
-
-
     import Fa from "svelte-fa"
-    import {faPlay, faPause} from '@fortawesome/free-solid-svg-icons'
+    import {faPause, faPlay} from '@fortawesome/free-solid-svg-icons'
+
+    export let start, pause, resume
 
 
     $: getRunStateItem = (stoppedResult, runningResult, pausedResult) => {
@@ -12,7 +12,7 @@
                 return runningResult;
             case "paused":
                 return pausedResult;
-            case "stopped":
+            case "finished":
                 return stoppedResult;
             default:
                 return stoppedResult;

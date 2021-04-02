@@ -1,12 +1,11 @@
 <script>
-    import {beforeUpdate, afterUpdate, onMount, tick} from "svelte";
+    import {onMount, tick} from "svelte";
     import Fa from "svelte-fa";
-    import {faCaretLeft, faCaretRight} from "@fortawesome/free-solid-svg-icons";
+    import {faCaretLeft, faCaretRight, faSyncAlt} from "@fortawesome/free-solid-svg-icons";
     import SettingsSection from "../SettingsSection.svelte";
-    import {hue, globalHue, intervalColors, inputRef} from "../../../stores/appState";
+    import {globalHue, hue, inputRef, intervalColors} from "../../../stores/appState";
     import {intervalDurations, intervalIndex} from "../../../stores/timerState";
     import SettingsSlider from "../SettingControls/SettingsSlider.svelte";
-    import {faSyncAlt} from "@fortawesome/free-solid-svg-icons";
     import SettingsOptionButton from "../SettingControls/SettingsOptionButton.svelte";
     import Color from "color";
 
@@ -66,12 +65,9 @@
     const updateColors = (deps) => {
         // await tick();
         const cols = $intervalColors.map(val => {
-            console.log("hue: ", $hue, " globalHue: ", $globalHue)
             if (val !== null) {
-                console.log("setting color to val")
                 return new Color('rgb(255, 0, 0)').rotate(val)
             } else {
-                console.log("setting color to global")
                 return new Color('rgb(255, 0, 0)').rotate($globalHue)
             }
         })
@@ -83,7 +79,6 @@
         intervalColorVars = updateColors($intervalColors)
             .map((val, index) => `--intervalColor${index + 1}:${val.hex()}`)
             .join(';');
-        console.log("intervalColorVars: ", intervalColorVars)
     }
 
     const onNumberClick = (i) => e => {
@@ -249,14 +244,5 @@
 
         font-size: calc(var(--size) * 0.09 * 1px);
         margin-bottom: 10px;
-    }
-    h4 {
-        font-size: calc(var(--size) * 0.08 * 1px);
-        margin: 0;
-        /*margin-top: 5px;*/
-        /*color: var(--color);*/
-    }
-    .spacer {
-        height: 20px;
     }
 </style>

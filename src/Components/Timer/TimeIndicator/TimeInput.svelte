@@ -1,8 +1,8 @@
 <script>
-    import {onMount, afterUpdate} from "svelte";
-    import {formatTime, formatTimeMs, arraysEqual} from "../../../utils/utils";
-    import {tempDuration, runState, focused, intervalDurations, intervalIndex} from "../../../stores/timerState";
-    import {currentFavInd, settings, intervalMode, currentFavInterval, inputRef, meme} from "../../../stores/appState";
+    import {onMount} from "svelte";
+    import {arraysEqual, formatTime, formatTimeMs} from "../../../utils/utils";
+    import {intervalDurations, intervalIndex, runState, tempDuration} from "../../../stores/timerState";
+    import {currentFavInd, currentFavInterval, inputRef, intervalMode, meme, settings} from "../../../stores/appState";
     import {Duration} from "luxon";
     import _ from "lodash";
 
@@ -122,7 +122,7 @@
 
 <div class="TimeInput" on:click={() => $inputRef.focus()}>
 <h1>{readableTime}</h1>
-<input bind:this={$inputRef} class="hiddenInput" type="text" bind:value={numbers} on:input={handleChange} autofocus/>
+<input bind:this={$inputRef} class="hiddenInput" type="text" bind:value={numbers} on:input={handleChange}/>
 </div>
 
 

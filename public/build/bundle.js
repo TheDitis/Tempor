@@ -3207,12 +3207,9 @@ var app = (function () {
         // HANDLE MISSING SOUND FILES
         const soundFiles = listSoundFileNames();
         for (let soundName of Object.keys(settingsData.sounds)) {
-            const sound = settingsData.sounds[soundName];
             const found = soundFiles.includes(settingsData.sounds[soundName]);
-            console.log("sound: ", sound, " found: ", found);
             if (!found) {
                 settingsData.sounds[soundName] = soundFiles[0];
-                console.log("setting default sound for ", soundName, " sound: ", soundFiles[0]);
             }
         }
         const settingsClone = cloneObj({...settingsData});
@@ -3281,7 +3278,7 @@ var app = (function () {
     });
 
     // set when pause is hit and returned by remaining time until resumed
-    const pausedRemainingTime = writable(10000);
+    const pausedRemainingTime = writable(0);
 
     // running, paused, stopped, finished
     const runState = writable("finished");
@@ -3320,44 +3317,6 @@ var app = (function () {
 
     const playingIntervalIndex = writable(0);
 
-
-    // // sets the duration, start time, and run-state of the timer
-    // export const start = () => {
-    //     const isIntervalMode = get(intervalMode);
-    //     let tempDur;
-    //     if (!isIntervalMode) {
-    //         tempDur = get(tempDuration);
-    //     }
-    //     else {
-    //         const tempIntervalDurations = get(intervalDurations);
-    //         const intervalInd = get(intervalIndex);
-    //         tempDur = tempIntervalDurations[intervalInd];
-    //     }
-    //     if (tempDur !== 0) {
-    //         startTime.set(Date.now())
-    //         duration.set(tempDur);
-    //         focused.set(false);
-    //         runState.set("running");
-    //         const sound = new Audio("file://" + __dirname + "/sounds/sound (2).wav");
-    //         sound.play();
-    //     }
-    // }
-    //
-    // // gets the current remaining time and sets the state to 'paused'
-    // export const pause = () => {
-    //     const remTime = get(remainingTime)
-    //     pausedRemainingTime.set(remTime);
-    //     runState.set("paused");
-    // }
-    //
-    // // calculates the new relative start-time based on how much time is remaining and sets the state back to running
-    // export const resume = () => {
-    //     const dur = get(duration);
-    //     const remTime = get(pausedRemainingTime)
-    //     startTime.set(Date.now() - (dur - remTime));
-    //     focused.set(false);
-    //     runState.set("running");
-    // }
 
     // runs when the time runs out
     const handleEnd = () => {
@@ -27719,13 +27678,12 @@ var app = (function () {
     			t1 = space();
     			input = element("input");
     			attr_dev(h1, "class", "svelte-hvd7h2");
-    			add_location(h1, file$p, 123, 0, 4153);
+    			add_location(h1, file$p, 123, 0, 4131);
     			attr_dev(input, "class", "hiddenInput svelte-hvd7h2");
     			attr_dev(input, "type", "text");
-    			input.autofocus = true;
-    			add_location(input, file$p, 124, 0, 4178);
+    			add_location(input, file$p, 124, 0, 4156);
     			attr_dev(div, "class", "TimeInput svelte-hvd7h2");
-    			add_location(div, file$p, 122, 0, 4093);
+    			add_location(div, file$p, 122, 0, 4071);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -27738,7 +27696,6 @@ var app = (function () {
     			append_dev(div, input);
     			/*input_binding*/ ctx[9](input);
     			set_input_value(input, /*numbers*/ ctx[0]);
-    			input.focus();
 
     			if (!mounted) {
     				dispose = [
@@ -27941,21 +27898,19 @@ var app = (function () {
 
     	$$self.$capture_state = () => ({
     		onMount,
-    		afterUpdate,
+    		arraysEqual,
     		formatTime,
     		formatTimeMs,
-    		arraysEqual,
-    		tempDuration,
-    		runState,
-    		focused,
     		intervalDurations,
     		intervalIndex,
+    		runState,
+    		tempDuration,
     		currentFavInd,
-    		settings,
-    		intervalMode,
     		currentFavInterval,
     		inputRef,
+    		intervalMode,
     		meme,
+    		settings,
     		Duration,
     		_: lodash,
     		hours,
@@ -28249,10 +28204,10 @@ var app = (function () {
     	});
 
     	$$self.$capture_state = () => ({
+    		focused,
     		remainingTime,
     		runState,
     		time,
-    		focused,
     		TimeInput,
     		formatTimeMs,
     		blinkInterval,
@@ -28993,11 +28948,6 @@ var app = (function () {
       iconName: 'minus',
       icon: [448, 512, [], "f068", "M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"]
     };
-    var faPaintBrush = {
-      prefix: 'fas',
-      iconName: 'paint-brush',
-      icon: [512, 512, [], "f1fc", "M167.02 309.34c-40.12 2.58-76.53 17.86-97.19 72.3-2.35 6.21-8 9.98-14.59 9.98-11.11 0-45.46-27.67-55.25-34.35C0 439.62 37.93 512 128 512c75.86 0 128-43.77 128-120.19 0-3.11-.65-6.08-.97-9.13l-88.01-73.34zM457.89 0c-15.16 0-29.37 6.71-40.21 16.45C213.27 199.05 192 203.34 192 257.09c0 13.7 3.25 26.76 8.73 38.7l63.82 53.18c7.21 1.8 14.64 3.03 22.39 3.03 62.11 0 98.11-45.47 211.16-256.46 7.38-14.35 13.9-29.85 13.9-45.99C512 20.64 486 0 457.89 0z"]
-    };
     var faPalette = {
       prefix: 'fas',
       iconName: 'palette',
@@ -29046,7 +28996,7 @@ var app = (function () {
 
     	fa = new Fa({
     			props: {
-    				icon: /*getRunStateItem*/ ctx[0](faPlay, faPause, faPlay)
+    				icon: /*getRunStateItem*/ ctx[3](faPlay, faPause, faPlay)
     			},
     			$$inline: true
     		});
@@ -29056,7 +29006,7 @@ var app = (function () {
     			button = element("button");
     			create_component(fa.$$.fragment);
     			attr_dev(button, "class", "PlayPauseButton svelte-17r4cza");
-    			add_location(button, file$m, 23, 4, 582);
+    			add_location(button, file$m, 23, 4, 618);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -29071,7 +29021,7 @@ var app = (function () {
     					button,
     					"click",
     					function () {
-    						if (is_function(/*getRunStateItem*/ ctx[0](start, pause, resume))) /*getRunStateItem*/ ctx[0](start, pause, resume).apply(this, arguments);
+    						if (is_function(/*getRunStateItem*/ ctx[3](/*start*/ ctx[0], /*pause*/ ctx[1], /*resume*/ ctx[2]))) /*getRunStateItem*/ ctx[3](/*start*/ ctx[0], /*pause*/ ctx[1], /*resume*/ ctx[2]).apply(this, arguments);
     					},
     					false,
     					false,
@@ -29084,7 +29034,7 @@ var app = (function () {
     		p: function update(new_ctx, [dirty]) {
     			ctx = new_ctx;
     			const fa_changes = {};
-    			if (dirty & /*getRunStateItem*/ 1) fa_changes.icon = /*getRunStateItem*/ ctx[0](faPlay, faPause, faPlay);
+    			if (dirty & /*getRunStateItem*/ 8) fa_changes.icon = /*getRunStateItem*/ ctx[3](faPlay, faPause, faPlay);
     			fa.$set(fa_changes);
     		},
     		i: function intro(local) {
@@ -29119,26 +29069,39 @@ var app = (function () {
     	let getRunStateItem;
     	let $runState;
     	validate_store(runState, "runState");
-    	component_subscribe($$self, runState, $$value => $$invalidate(1, $runState = $$value));
+    	component_subscribe($$self, runState, $$value => $$invalidate(4, $runState = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("PlayPauseControl", slots, []);
-    	const writable_props = [];
+    	let { start } = $$props, { pause } = $$props, { resume } = $$props;
+    	const writable_props = ["start", "pause", "resume"];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<PlayPauseControl> was created with unknown prop '${key}'`);
     	});
 
+    	$$self.$$set = $$props => {
+    		if ("start" in $$props) $$invalidate(0, start = $$props.start);
+    		if ("pause" in $$props) $$invalidate(1, pause = $$props.pause);
+    		if ("resume" in $$props) $$invalidate(2, resume = $$props.resume);
+    	};
+
     	$$self.$capture_state = () => ({
     		runState,
     		Fa,
-    		faPlay,
     		faPause,
+    		faPlay,
+    		start,
+    		pause,
+    		resume,
     		getRunStateItem,
     		$runState
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ("getRunStateItem" in $$props) $$invalidate(0, getRunStateItem = $$props.getRunStateItem);
+    		if ("start" in $$props) $$invalidate(0, start = $$props.start);
+    		if ("pause" in $$props) $$invalidate(1, pause = $$props.pause);
+    		if ("resume" in $$props) $$invalidate(2, resume = $$props.resume);
+    		if ("getRunStateItem" in $$props) $$invalidate(3, getRunStateItem = $$props.getRunStateItem);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -29146,14 +29109,14 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*$runState*/ 2) {
-    			$$invalidate(0, getRunStateItem = (stoppedResult, runningResult, pausedResult) => {
+    		if ($$self.$$.dirty & /*$runState*/ 16) {
+    			$$invalidate(3, getRunStateItem = (stoppedResult, runningResult, pausedResult) => {
     				switch ($runState) {
     					case "running":
     						return runningResult;
     					case "paused":
     						return pausedResult;
-    					case "stopped":
+    					case "finished":
     						return stoppedResult;
     					default:
     						return stoppedResult;
@@ -29162,13 +29125,13 @@ var app = (function () {
     		}
     	};
 
-    	return [getRunStateItem, $runState];
+    	return [start, pause, resume, getRunStateItem, $runState];
     }
 
     class PlayPauseControl extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$n, create_fragment$n, safe_not_equal, {});
+    		init(this, options, instance$n, create_fragment$n, safe_not_equal, { start: 0, pause: 1, resume: 2 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -29176,6 +29139,45 @@ var app = (function () {
     			options,
     			id: create_fragment$n.name
     		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || {};
+
+    		if (/*start*/ ctx[0] === undefined && !("start" in props)) {
+    			console.warn("<PlayPauseControl> was created without expected prop 'start'");
+    		}
+
+    		if (/*pause*/ ctx[1] === undefined && !("pause" in props)) {
+    			console.warn("<PlayPauseControl> was created without expected prop 'pause'");
+    		}
+
+    		if (/*resume*/ ctx[2] === undefined && !("resume" in props)) {
+    			console.warn("<PlayPauseControl> was created without expected prop 'resume'");
+    		}
+    	}
+
+    	get start() {
+    		throw new Error("<PlayPauseControl>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set start(value) {
+    		throw new Error("<PlayPauseControl>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get pause() {
+    		throw new Error("<PlayPauseControl>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set pause(value) {
+    		throw new Error("<PlayPauseControl>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get resume() {
+    		throw new Error("<PlayPauseControl>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set resume(value) {
+    		throw new Error("<PlayPauseControl>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
 
@@ -29199,7 +29201,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (26:4) {#each favsList as fav, i}
+    // (27:4) {#each favsList as fav, i}
     function create_each_block$3(ctx) {
     	let div;
     	let p;
@@ -29216,11 +29218,11 @@ var app = (function () {
     			t0 = text(t0_value);
     			t1 = space();
     			attr_dev(p, "class", "svelte-1pq8vgl");
-    			add_location(p, file$l, 27, 12, 1268);
+    			add_location(p, file$l, 28, 12, 1270);
     			attr_dev(div, "class", "favorite svelte-1pq8vgl");
     			toggle_class(div, "used", !!/*fav*/ ctx[7]);
     			toggle_class(div, "selected", /*curInd*/ ctx[1] === /*i*/ ctx[9]);
-    			add_location(div, file$l, 26, 8, 1152);
+    			add_location(div, file$l, 27, 8, 1154);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -29277,7 +29279,7 @@ var app = (function () {
     		block,
     		id: create_each_block$3.name,
     		type: "each",
-    		source: "(26:4) {#each favsList as fav, i}",
+    		source: "(27:4) {#each favsList as fav, i}",
     		ctx
     	});
 
@@ -29306,7 +29308,7 @@ var app = (function () {
     			}
 
     			attr_dev(div, "class", "Favorites svelte-1pq8vgl");
-    			add_location(div, file$l, 24, 0, 1034);
+    			add_location(div, file$l, 25, 0, 1036);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -29426,11 +29428,11 @@ var app = (function () {
     	});
 
     	$$self.$capture_state = () => ({
-    		settings,
     		currentFavInd,
-    		intervalMode,
     		currentFavInterval,
     		favKeyMap,
+    		intervalMode,
+    		settings,
     		_: lodash,
     		fade,
     		favsList,
@@ -29688,7 +29690,7 @@ var app = (function () {
     /* src\Components\Timer\IntervalMode\IntervalModeIndicator.svelte generated by Svelte v3.35.0 */
     const file$j = "src\\Components\\Timer\\IntervalMode\\IntervalModeIndicator.svelte";
 
-    // (26:0) {#if !$meme}
+    // (21:0) {#if !$meme}
     function create_if_block$b(ctx) {
     	let div;
     	let current_block_type_index;
@@ -29713,7 +29715,7 @@ var app = (function () {
     			div = element("div");
     			if_block.c();
     			attr_dev(div, "class", "IntervalModeIndicator svelte-7n66ks");
-    			add_location(div, file$j, 26, 4, 831);
+    			add_location(div, file$j, 21, 4, 788);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -29782,14 +29784,14 @@ var app = (function () {
     		block,
     		id: create_if_block$b.name,
     		type: "if",
-    		source: "(26:0) {#if !$meme}",
+    		source: "(21:0) {#if !$meme}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (30:8) {:else}
+    // (25:8) {:else}
     function create_else_block$1(ctx) {
     	let fa;
     	let current;
@@ -29826,14 +29828,14 @@ var app = (function () {
     		block,
     		id: create_else_block$1.name,
     		type: "else",
-    		source: "(30:8) {:else}",
+    		source: "(25:8) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (28:8) {#if isPomodoro}
+    // (23:8) {#if isPomodoro}
     function create_if_block_1$2(ctx) {
     	let tomatoicon;
     	let current;
@@ -29880,7 +29882,7 @@ var app = (function () {
     		block,
     		id: create_if_block_1$2.name,
     		type: "if",
-    		source: "(28:8) {#if isPomodoro}",
+    		source: "(23:8) {#if isPomodoro}",
     		ctx
     	});
 
@@ -29999,8 +30001,8 @@ var app = (function () {
     		TomatoIcon,
     		color,
     		intervalColors,
-    		size,
     		meme,
+    		size,
     		intervalDurations,
     		Fa,
     		faSyncAlt,
@@ -30251,10 +30253,10 @@ var app = (function () {
     	$$self.$capture_state = () => ({
     		intervalDurations,
     		intervalIndex,
-    		time,
     		runState,
-    		intervalColors,
+    		time,
     		globalHue,
+    		intervalColors,
     		fade,
     		Color: color$1,
     		blinkRate,
@@ -30327,7 +30329,7 @@ var app = (function () {
     /* src\Components\Icons\MemeIndicator.svelte generated by Svelte v3.35.0 */
     const file$h = "src\\Components\\Icons\\MemeIndicator.svelte";
 
-    // (17:4) {#if $meme in faIconMap}
+    // (16:4) {#if $meme in faIconMap}
     function create_if_block$a(ctx) {
     	let fa;
     	let current;
@@ -30372,7 +30374,7 @@ var app = (function () {
     		block,
     		id: create_if_block$a.name,
     		type: "if",
-    		source: "(17:4) {#if $meme in faIconMap}",
+    		source: "(16:4) {#if $meme in faIconMap}",
     		ctx
     	});
 
@@ -30390,7 +30392,7 @@ var app = (function () {
     			div = element("div");
     			if (if_block) if_block.c();
     			attr_dev(div, "class", "MemeIndicator svelte-139ngbu");
-    			add_location(div, file$h, 15, 0, 371);
+    			add_location(div, file$h, 14, 0, 328);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -30479,9 +30481,9 @@ var app = (function () {
     		fade,
     		Fa,
     		color,
+    		meme,
     		faCannabis,
     		faGrinWink,
-    		meme,
     		faIconMap,
     		$meme,
     		$color
@@ -30507,7 +30509,7 @@ var app = (function () {
     /* src\Components\Timer\Timer.svelte generated by Svelte v3.35.0 */
     const file$g = "src\\Components\\Timer\\Timer.svelte";
 
-    // (63:4) {#if $showFavorites && $settings.favorites}
+    // (57:4) {#if $showFavorites && $settings.favorites}
     function create_if_block_2$1(ctx) {
     	let favorites;
     	let current;
@@ -30539,14 +30541,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2$1.name,
     		type: "if",
-    		source: "(63:4) {#if $showFavorites && $settings.favorites}",
+    		source: "(57:4) {#if $showFavorites && $settings.favorites}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (67:4) {#if $meme !== null}
+    // (61:4) {#if $meme !== null}
     function create_if_block_1$1(ctx) {
     	let memeindicator;
     	let current;
@@ -30578,14 +30580,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1$1.name,
     		type: "if",
-    		source: "(67:4) {#if $meme !== null}",
+    		source: "(61:4) {#if $meme !== null}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (70:4) {#if $intervalMode}
+    // (64:4) {#if $intervalMode}
     function create_if_block$9(ctx) {
     	let intervalmodeindicator;
     	let t;
@@ -30628,7 +30630,7 @@ var app = (function () {
     		block,
     		id: create_if_block$9.name,
     		type: "if",
-    		source: "(70:4) {#if $intervalMode}",
+    		source: "(64:4) {#if $intervalMode}",
     		ctx
     	});
 
@@ -30689,20 +30691,20 @@ var app = (function () {
     			attr_dev(circle, "fill", "transparent");
     			attr_dev(circle, "stroke-width", /*thickness*/ ctx[3]);
     			attr_dev(circle, "stroke", circle_stroke_value = /*$color*/ ctx[7].alpha(0.08).hsl().string());
-    			add_location(circle, file$g, 57, 8, 1863);
+    			add_location(circle, file$g, 51, 8, 1797);
     			attr_dev(path_1, "d", path_1_d_value = `${/*path*/ ctx[6]}`);
     			attr_dev(path_1, "stroke-width", /*thickness*/ ctx[3]);
     			attr_dev(path_1, "stroke", path_1_stroke_value = /*$color*/ ctx[7].hsl().string());
     			attr_dev(path_1, "stroke-linecap", "round");
     			attr_dev(path_1, "fill", "transparent");
-    			add_location(path_1, file$g, 59, 8, 2023);
+    			add_location(path_1, file$g, 53, 8, 1957);
     			attr_dev(svg, "class", "circle svelte-6nu1j3");
     			attr_dev(svg, "width", /*$size*/ ctx[4]);
     			attr_dev(svg, "height", /*$size*/ ctx[4]);
-    			add_location(svg, file$g, 56, 4, 1804);
+    			add_location(svg, file$g, 50, 4, 1738);
     			attr_dev(div, "class", "Timer svelte-6nu1j3");
     			set_style(div, "--thickness", /*thickness*/ ctx[3]);
-    			add_location(div, file$g, 51, 0, 1692);
+    			add_location(div, file$g, 45, 0, 1626);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -30939,18 +30941,17 @@ var app = (function () {
     	$$self.$capture_state = () => ({
     		partialCircle: svgPartialCircle,
     		TimeIndicatorInput: TimeIndicator,
-    		remainingTime,
     		duration,
-    		runState,
     		focused,
-    		tempDuration,
+    		remainingTime,
+    		runState,
     		color,
-    		size,
-    		settings,
-    		showFavorites,
     		intervalMode,
     		lineThickness,
     		meme,
+    		settings,
+    		showFavorites,
+    		size,
     		PlayPauseControl,
     		Favorites,
     		IntervalModeIndicator,
@@ -31223,10 +31224,10 @@ var app = (function () {
 
     	$$self.$capture_state = () => ({
     		createEventDispatcher,
-    		size,
     		maxSize,
-    		faPlus,
+    		size,
     		faMinus,
+    		faPlus,
     		Fa,
     		dispatch,
     		sizeDown,
@@ -31811,11 +31812,9 @@ var app = (function () {
     }
 
     /* src\Components\Settings\SettingControls\SettingsOptionButton.svelte generated by Svelte v3.35.0 */
-
-    const { console: console_1$3 } = globals;
     const file$b = "src\\Components\\Settings\\SettingControls\\SettingsOptionButton.svelte";
 
-    // (52:4) {#if showHint}
+    // (51:4) {#if showHint}
     function create_if_block$7(ctx) {
     	let div;
     	let p;
@@ -31828,9 +31827,9 @@ var app = (function () {
     			div = element("div");
     			p = element("p");
     			t = text(/*label*/ ctx[2]);
-    			add_location(p, file$b, 53, 12, 1345);
+    			add_location(p, file$b, 52, 12, 1326);
     			attr_dev(div, "class", "hint svelte-w95qv6");
-    			add_location(div, file$b, 52, 8, 1297);
+    			add_location(div, file$b, 51, 8, 1278);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -31866,7 +31865,7 @@ var app = (function () {
     		block,
     		id: create_if_block$7.name,
     		type: "if",
-    		source: "(52:4) {#if showHint}",
+    		source: "(51:4) {#if showHint}",
     		ctx
     	});
 
@@ -31899,11 +31898,11 @@ var app = (function () {
     			attr_dev(button, "class", "svelte-w95qv6");
     			toggle_class(button, "on", /*$settings*/ ctx[4][/*option*/ ctx[1]]);
     			toggle_class(button, "off", !/*$settings*/ ctx[4][/*option*/ ctx[1]]);
-    			add_location(button, file$b, 43, 8, 1085);
+    			add_location(button, file$b, 42, 8, 1066);
     			attr_dev(div, "class", "SettingsOptionButton svelte-w95qv6");
     			set_style(div, "color", /*$color*/ ctx[5].hex());
     			set_style(div, "font-family", "Roboto Regular");
-    			add_location(div, file$b, 37, 0, 910);
+    			add_location(div, file$b, 36, 0, 891);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -32010,9 +32009,9 @@ var app = (function () {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("SettingsOptionButton", slots, []);
     	let { icon } = $$props;
-    	let { option } = $$props;
+    	let { option = null } = $$props;
     	let { label = "" } = $$props;
-    	let { onChange } = $$props;
+    	let { onChange = null } = $$props;
     	let showHint = false;
     	let timeout;
     	const mouseIn = () => timeout = setTimeout(() => $$invalidate(3, showHint = true), 1000);
@@ -32026,7 +32025,6 @@ var app = (function () {
     		if (e.clientX && e.clientY) {
     			e.preventDefault();
     			e.stopPropagation();
-    			console.log(" ", e);
 
     			if (onChange) {
     				onChange();
@@ -32044,7 +32042,7 @@ var app = (function () {
     	const writable_props = ["icon", "option", "label", "onChange"];
 
     	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console_1$3.warn(`<SettingsOptionButton> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<SettingsOptionButton> was created with unknown prop '${key}'`);
     	});
 
     	$$self.$$set = $$props => {
@@ -32057,9 +32055,9 @@ var app = (function () {
     	$$self.$capture_state = () => ({
     		Fa,
     		fade,
-    		settings,
     		color,
     		inputRef,
+    		settings,
     		icon,
     		option,
     		label,
@@ -32123,15 +32121,7 @@ var app = (function () {
     		const props = options.props || {};
 
     		if (/*icon*/ ctx[0] === undefined && !("icon" in props)) {
-    			console_1$3.warn("<SettingsOptionButton> was created without expected prop 'icon'");
-    		}
-
-    		if (/*option*/ ctx[1] === undefined && !("option" in props)) {
-    			console_1$3.warn("<SettingsOptionButton> was created without expected prop 'option'");
-    		}
-
-    		if (/*onChange*/ ctx[9] === undefined && !("onChange" in props)) {
-    			console_1$3.warn("<SettingsOptionButton> was created without expected prop 'onChange'");
+    			console.warn("<SettingsOptionButton> was created without expected prop 'icon'");
     		}
     	}
 
@@ -32169,8 +32159,6 @@ var app = (function () {
     }
 
     /* src\Components\Settings\IntervalSettings\IntervalSettings.svelte generated by Svelte v3.35.0 */
-
-    const { console: console_1$2 } = globals;
     const file$a = "src\\Components\\Settings\\IntervalSettings\\IntervalSettings.svelte";
 
     function get_each_context$1(ctx, list, i) {
@@ -32180,7 +32168,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (118:12) {#if colors}
+    // (113:12) {#if colors}
     function create_if_block$6(ctx) {
     	let div;
     	let each_value = /*$intervalDurations*/ ctx[5];
@@ -32199,9 +32187,9 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(div, "class", "intervals svelte-1bidg9s");
+    			attr_dev(div, "class", "intervals svelte-n4m3z8");
     			attr_dev(div, "style", /*intervalColorVars*/ ctx[4]);
-    			add_location(div, file$a, 118, 16, 3669);
+    			add_location(div, file$a, 113, 16, 3347);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -32249,14 +32237,14 @@ var app = (function () {
     		block,
     		id: create_if_block$6.name,
     		type: "if",
-    		source: "(118:12) {#if colors}",
+    		source: "(113:12) {#if colors}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (120:20) {#each $intervalDurations as fav, i}
+    // (115:20) {#each $intervalDurations as fav, i}
     function create_each_block$1(ctx) {
     	let div;
     	let p;
@@ -32273,10 +32261,10 @@ var app = (function () {
     			t0 = text(t0_value);
     			t1 = space();
     			set_style(p, "color", `var(--intervalColor${/*i*/ ctx[20] + 1})`);
-    			add_location(p, file$a, 121, 28, 3927);
-    			attr_dev(div, "class", "intervalNumber svelte-1bidg9s");
+    			add_location(p, file$a, 116, 28, 3605);
+    			attr_dev(div, "class", "intervalNumber svelte-n4m3z8");
     			toggle_class(div, "selected", /*$intervalIndex*/ ctx[3] === /*i*/ ctx[20]);
-    			add_location(div, file$a, 120, 24, 3802);
+    			add_location(div, file$a, 115, 24, 3480);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -32307,14 +32295,14 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(120:20) {#each $intervalDurations as fav, i}",
+    		source: "(115:20) {#each $intervalDurations as fav, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (108:0) <SettingsSection>
+    // (103:0) <SettingsSection>
     function create_default_slot$2(ctx) {
     	let h3;
     	let t1;
@@ -32404,21 +32392,21 @@ var app = (function () {
     			create_component(settingsslider.$$.fragment);
     			t8 = space();
     			br2 = element("br");
-    			attr_dev(h3, "class", "svelte-1bidg9s");
-    			add_location(h3, file$a, 109, 4, 3408);
-    			attr_dev(button0, "class", "arrowButton svelte-1bidg9s");
-    			add_location(button0, file$a, 113, 12, 3514);
-    			attr_dev(button1, "class", "arrowButton svelte-1bidg9s");
-    			add_location(button1, file$a, 128, 12, 4169);
-    			attr_dev(div0, "class", "titleRow svelte-1bidg9s");
-    			add_location(div0, file$a, 112, 8, 3478);
-    			attr_dev(button2, "class", "unlinkButton svelte-1bidg9s");
-    			add_location(button2, file$a, 133, 8, 4307);
-    			add_location(br0, file$a, 139, 8, 4502);
-    			add_location(br1, file$a, 139, 13, 4507);
-    			add_location(br2, file$a, 147, 8, 4739);
-    			attr_dev(div1, "class", "intervalColorSection svelte-1bidg9s");
-    			add_location(div1, file$a, 111, 4, 3434);
+    			attr_dev(h3, "class", "svelte-n4m3z8");
+    			add_location(h3, file$a, 104, 4, 3086);
+    			attr_dev(button0, "class", "arrowButton svelte-n4m3z8");
+    			add_location(button0, file$a, 108, 12, 3192);
+    			attr_dev(button1, "class", "arrowButton svelte-n4m3z8");
+    			add_location(button1, file$a, 123, 12, 3847);
+    			attr_dev(div0, "class", "titleRow svelte-n4m3z8");
+    			add_location(div0, file$a, 107, 8, 3156);
+    			attr_dev(button2, "class", "unlinkButton svelte-n4m3z8");
+    			add_location(button2, file$a, 128, 8, 3985);
+    			add_location(br0, file$a, 134, 8, 4180);
+    			add_location(br1, file$a, 134, 13, 4185);
+    			add_location(br2, file$a, 142, 8, 4417);
+    			attr_dev(div1, "class", "intervalColorSection svelte-n4m3z8");
+    			add_location(div1, file$a, 106, 4, 3112);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h3, anchor);
@@ -32513,14 +32501,14 @@ var app = (function () {
     		block,
     		id: create_default_slot$2.name,
     		type: "slot",
-    		source: "(108:0) <SettingsSection>",
+    		source: "(103:0) <SettingsSection>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (150:4) 
+    // (145:4) 
     function create_buttons_slot$1(ctx) {
     	let settingsoptionbutton;
     	let current;
@@ -32562,7 +32550,7 @@ var app = (function () {
     		block,
     		id: create_buttons_slot$1.name,
     		type: "slot",
-    		source: "(150:4) ",
+    		source: "(145:4) ",
     		ctx
     	});
 
@@ -32725,13 +32713,9 @@ var app = (function () {
     	const updateColors = deps => {
     		// await tick();
     		const cols = $intervalColors.map(val => {
-    			console.log("hue: ", $hue, " globalHue: ", $globalHue);
-
     			if (val !== null) {
-    				console.log("setting color to val");
     				return new color$1("rgb(255, 0, 0)").rotate(val);
     			} else {
-    				console.log("setting color to global");
     				return new color$1("rgb(255, 0, 0)").rotate($globalHue);
     			}
     		});
@@ -32742,7 +32726,6 @@ var app = (function () {
 
     	const createCssColorVars = deps => {
     		$$invalidate(4, intervalColorVars = updateColors().map((val, index) => `--intervalColor${index + 1}:${val.hex()}`).join(";"));
-    		console.log("intervalColorVars: ", intervalColorVars);
     	};
 
     	const onNumberClick = i => e => {
@@ -32753,7 +32736,7 @@ var app = (function () {
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console_1$2.warn(`<IntervalSettings> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<IntervalSettings> was created with unknown prop '${key}'`);
     	});
 
     	function settingsslider_value_binding(value) {
@@ -32764,22 +32747,20 @@ var app = (function () {
     	}
 
     	$$self.$capture_state = () => ({
-    		beforeUpdate,
-    		afterUpdate,
     		onMount,
     		tick,
     		Fa,
     		faCaretLeft,
     		faCaretRight,
+    		faSyncAlt,
     		SettingsSection,
-    		hue,
     		globalHue,
-    		intervalColors,
+    		hue,
     		inputRef,
+    		intervalColors,
     		intervalDurations,
     		intervalIndex,
     		SettingsSlider,
-    		faSyncAlt,
     		SettingsOptionButton,
     		Color: color$1,
     		prev,
@@ -33096,7 +33077,7 @@ var app = (function () {
 
     /* src\Components\Settings\SaveButton.svelte generated by Svelte v3.35.0 */
 
-    const { console: console_1$1 } = globals;
+    const { console: console_1 } = globals;
     const file$8 = "src\\Components\\Settings\\SaveButton.svelte";
 
     // (34:4) {#if !saved}
@@ -33303,18 +33284,18 @@ var app = (function () {
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console_1$1.warn(`<SaveButton> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console_1.warn(`<SaveButton> was created with unknown prop '${key}'`);
     	});
 
     	$$self.$capture_state = () => ({
     		Fa,
     		fade,
     		faSave,
-    		saveSettings,
     		color,
+    		inputRef,
+    		saveSettings,
     		size,
     		width,
-    		inputRef,
     		tick,
     		Jumper,
     		saved,
@@ -33618,7 +33599,7 @@ var app = (function () {
     			t1 = space();
     			if (if_block) if_block.c();
     			attr_dev(div, "class", "SettingsTabs svelte-11pq1u9");
-    			add_location(div, file$6, 8, 0, 294);
+    			add_location(div, file$6, 8, 0, 280);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -33701,10 +33682,9 @@ var app = (function () {
     	});
 
     	$$self.$capture_state = () => ({
-    		faPalette,
-    		faPaintBrush,
-    		faVolumeUp,
     		faHourglassHalf,
+    		faPalette,
+    		faVolumeUp,
     		SettingsTab,
     		intervalMode,
     		$intervalMode
@@ -34193,16 +34173,16 @@ var app = (function () {
     		SettingsSection,
     		SettingsSlider,
     		SettingsOptionButton,
-    		faLayerGroup,
     		faAdjust,
-    		hue,
-    		globalHue,
+    		faLayerGroup,
     		blur,
     		borderRadius,
-    		lineThickness,
-    		settings,
+    		globalHue,
+    		hue,
     		intervalColors,
     		intervalMode,
+    		lineThickness,
+    		settings,
     		intervalIndex,
     		onHueUpdate,
     		themeOptions,
@@ -34273,10 +34253,10 @@ var app = (function () {
     /* src\Components\Settings\SettingControls\SelectOption.svelte generated by Svelte v3.35.0 */
     const file$4 = "src\\Components\\Settings\\SettingControls\\SelectOption.svelte";
 
-    // (65:8) {#if ind !== null}
+    // (68:8) {#if ind !== null}
     function create_if_block$2(ctx) {
     	let p;
-    	let t_value = /*withoutExtension*/ ctx[4](/*value*/ ctx[0]) + "";
+    	let t_value = /*withoutExtension*/ ctx[5](/*value*/ ctx[0]) + "";
     	let t;
     	let mounted;
     	let dispose;
@@ -34286,19 +34266,19 @@ var app = (function () {
     			p = element("p");
     			t = text(t_value);
     			attr_dev(p, "class", "itemName svelte-ptf0yl");
-    			add_location(p, file$4, 65, 12, 2024);
+    			add_location(p, file$4, 68, 12, 2151);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
     			append_dev(p, t);
 
     			if (!mounted) {
-    				dispose = listen_dev(p, "click", /*click_handler*/ ctx[9], false, false, false);
+    				dispose = listen_dev(p, "click", /*click_handler*/ ctx[10], false, false, false);
     				mounted = true;
     			}
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*value*/ 1 && t_value !== (t_value = /*withoutExtension*/ ctx[4](/*value*/ ctx[0]) + "")) set_data_dev(t, t_value);
+    			if (dirty & /*value*/ 1 && t_value !== (t_value = /*withoutExtension*/ ctx[5](/*value*/ ctx[0]) + "")) set_data_dev(t, t_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(p);
@@ -34311,7 +34291,7 @@ var app = (function () {
     		block,
     		id: create_if_block$2.name,
     		type: "if",
-    		source: "(65:8) {#if ind !== null}",
+    		source: "(68:8) {#if ind !== null}",
     		ctx
     	});
 
@@ -34361,15 +34341,15 @@ var app = (function () {
     			button1 = element("button");
     			create_component(fa1.$$.fragment);
     			attr_dev(p, "class", "label svelte-ptf0yl");
-    			add_location(p, file$4, 59, 4, 1804);
+    			add_location(p, file$4, 62, 4, 1931);
     			attr_dev(button0, "class", "arrowButton svelte-ptf0yl");
-    			add_location(button0, file$4, 61, 8, 1881);
+    			add_location(button0, file$4, 64, 8, 2008);
     			attr_dev(button1, "class", "arrowButton svelte-ptf0yl");
-    			add_location(button1, file$4, 67, 8, 2130);
+    			add_location(button1, file$4, 78, 8, 2435);
     			attr_dev(div0, "class", "arrowButtonsSection svelte-ptf0yl");
-    			add_location(div0, file$4, 60, 4, 1838);
+    			add_location(div0, file$4, 63, 4, 1965);
     			attr_dev(div1, "class", "SelectDropdown svelte-ptf0yl");
-    			add_location(div1, file$4, 58, 0, 1770);
+    			add_location(div1, file$4, 61, 0, 1897);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -34391,8 +34371,8 @@ var app = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(button0, "click", /*prev*/ ctx[6], false, false, false),
-    					listen_dev(button1, "click", /*next*/ ctx[5], false, false, false)
+    					listen_dev(button0, "click", /*prev*/ ctx[7], false, false, false),
+    					listen_dev(button1, "click", /*next*/ ctx[6], false, false, false)
     				];
 
     				mounted = true;
@@ -34447,6 +34427,9 @@ var app = (function () {
     }
 
     function instance$5($$self, $$props, $$invalidate) {
+    	let $inputRef;
+    	validate_store(inputRef, "inputRef");
+    	component_subscribe($$self, inputRef, $$value => $$invalidate(4, $inputRef = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("SelectOption", slots, []);
     	let { label = "" } = $$props;
@@ -34486,6 +34469,7 @@ var app = (function () {
     		if (!callChangeHandler) callChangeHandler = true;
 
     		if (ind < options.length - 1) $$invalidate(3, ind = ind + 1); else $$invalidate(3, ind = 0);
+    		if ($inputRef) $inputRef.focus();
     	};
 
     	const prev = () => {
@@ -34493,6 +34477,7 @@ var app = (function () {
     		if (!callChangeHandler) callChangeHandler = true;
 
     		if (ind > 0) $$invalidate(3, ind = ind - 1); else $$invalidate(3, ind = options.length - 1);
+    		if ($inputRef) $inputRef.focus();
     	};
 
     	const writable_props = ["label", "options", "onChange", "onClick", "value"];
@@ -34501,23 +34486,26 @@ var app = (function () {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<SelectOption> was created with unknown prop '${key}'`);
     	});
 
-    	const click_handler = () => onClick(value);
+    	const click_handler = () => {
+    		onClick(value);
+    		if ($inputRef) $inputRef.focus();
+    	};
 
     	$$self.$$set = $$props => {
     		if ("label" in $$props) $$invalidate(1, label = $$props.label);
-    		if ("options" in $$props) $$invalidate(7, options = $$props.options);
-    		if ("onChange" in $$props) $$invalidate(8, onChange = $$props.onChange);
+    		if ("options" in $$props) $$invalidate(8, options = $$props.options);
+    		if ("onChange" in $$props) $$invalidate(9, onChange = $$props.onChange);
     		if ("onClick" in $$props) $$invalidate(2, onClick = $$props.onClick);
     		if ("value" in $$props) $$invalidate(0, value = $$props.value);
     	};
 
     	$$self.$capture_state = () => ({
     		Fa,
+    		inputRef,
     		faCaretLeft,
     		faCaretRight,
-    		onMount,
     		beforeUpdate,
-    		afterUpdate,
+    		onMount,
     		tick,
     		label,
     		options,
@@ -34528,13 +34516,14 @@ var app = (function () {
     		ind,
     		withoutExtension,
     		next,
-    		prev
+    		prev,
+    		$inputRef
     	});
 
     	$$self.$inject_state = $$props => {
     		if ("label" in $$props) $$invalidate(1, label = $$props.label);
-    		if ("options" in $$props) $$invalidate(7, options = $$props.options);
-    		if ("onChange" in $$props) $$invalidate(8, onChange = $$props.onChange);
+    		if ("options" in $$props) $$invalidate(8, options = $$props.options);
+    		if ("onChange" in $$props) $$invalidate(9, onChange = $$props.onChange);
     		if ("onClick" in $$props) $$invalidate(2, onClick = $$props.onClick);
     		if ("value" in $$props) $$invalidate(0, value = $$props.value);
     		if ("callChangeHandler" in $$props) callChangeHandler = $$props.callChangeHandler;
@@ -34546,7 +34535,7 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*options, ind*/ 136) {
+    		if ($$self.$$.dirty & /*options, ind*/ 264) {
     			// update the value when index changes.
     			$$invalidate(0, value = options[ind]);
     		}
@@ -34557,6 +34546,7 @@ var app = (function () {
     		label,
     		onClick,
     		ind,
+    		$inputRef,
     		withoutExtension,
     		next,
     		prev,
@@ -34572,8 +34562,8 @@ var app = (function () {
 
     		init(this, options, instance$5, create_fragment$5, safe_not_equal, {
     			label: 1,
-    			options: 7,
-    			onChange: 8,
+    			options: 8,
+    			onChange: 9,
     			onClick: 2,
     			value: 0
     		});
@@ -34637,7 +34627,7 @@ var app = (function () {
     /* src\Components\Settings\Sound\SoundSettings.svelte generated by Svelte v3.35.0 */
     const file$3 = "src\\Components\\Settings\\Sound\\SoundSettings.svelte";
 
-    // (51:4) {:else}
+    // (50:4) {:else}
     function create_else_block(ctx) {
     	let h2;
 
@@ -34645,7 +34635,7 @@ var app = (function () {
     		c: function create() {
     			h2 = element("h2");
     			h2.textContent = "No sound files found";
-    			add_location(h2, file$3, 51, 8, 1772);
+    			add_location(h2, file$3, 50, 8, 1726);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -34662,14 +34652,14 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(51:4) {:else}",
+    		source: "(50:4) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (38:4) {#if fileList.length > 0}
+    // (37:4) {#if fileList.length > 0}
     function create_if_block$1(ctx) {
     	let br;
     	let t0;
@@ -34691,7 +34681,7 @@ var app = (function () {
     			t2 = space();
     			if (if_block2) if_block2.c();
     			if_block2_anchor = empty();
-    			add_location(br, file$3, 38, 8, 1170);
+    			add_location(br, file$3, 37, 8, 1124);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, br, anchor);
@@ -34803,14 +34793,14 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(38:4) {#if fileList.length > 0}",
+    		source: "(37:4) {#if fileList.length > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (40:8) {#if startVal}
+    // (39:8) {#if startVal}
     function create_if_block_3(ctx) {
     	let selectoption;
     	let updating_value;
@@ -34875,14 +34865,14 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(40:8) {#if startVal}",
+    		source: "(39:8) {#if startVal}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (43:8) {#if $intervalMode && nextVal}
+    // (42:8) {#if $intervalMode && nextVal}
     function create_if_block_2(ctx) {
     	let br;
     	let t;
@@ -34917,7 +34907,7 @@ var app = (function () {
     			br = element("br");
     			t = space();
     			create_component(selectoption.$$.fragment);
-    			add_location(br, file$3, 43, 12, 1406);
+    			add_location(br, file$3, 42, 12, 1360);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, br, anchor);
@@ -34956,14 +34946,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(43:8) {#if $intervalMode && nextVal}",
+    		source: "(42:8) {#if $intervalMode && nextVal}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (47:8) {#if endVal}
+    // (46:8) {#if endVal}
     function create_if_block_1(ctx) {
     	let br;
     	let t;
@@ -34998,7 +34988,7 @@ var app = (function () {
     			br = element("br");
     			t = space();
     			create_component(selectoption.$$.fragment);
-    			add_location(br, file$3, 47, 12, 1597);
+    			add_location(br, file$3, 46, 12, 1551);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, br, anchor);
@@ -35037,14 +35027,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(47:8) {#if endVal}",
+    		source: "(46:8) {#if endVal}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (36:0) <SettingsSection>
+    // (35:0) <SettingsSection>
     function create_default_slot(ctx) {
     	let settingsslider;
     	let updating_value;
@@ -35094,7 +35084,7 @@ var app = (function () {
     			if_block.c();
     			t1 = space();
     			br = element("br");
-    			add_location(br, file$3, 53, 4, 1818);
+    			add_location(br, file$3, 52, 4, 1772);
     		},
     		m: function mount(target, anchor) {
     			mount_component(settingsslider, target, anchor);
@@ -35140,7 +35130,7 @@ var app = (function () {
     		block,
     		id: create_default_slot.name,
     		type: "slot",
-    		source: "(36:0) <SettingsSection>",
+    		source: "(35:0) <SettingsSection>",
     		ctx
     	});
 
@@ -35263,13 +35253,13 @@ var app = (function () {
     	$$self.$capture_state = () => ({
     		SettingsSection,
     		SettingsSlider,
-    		settings,
     		inputRef,
-    		volume,
-    		playSound,
     		intervalMode,
-    		SelectOption,
     		listSoundFileNames,
+    		playSound,
+    		settings,
+    		volume,
+    		SelectOption,
     		changeSoundFile,
     		onClick,
     		fileList,
@@ -35501,8 +35491,8 @@ var app = (function () {
     	}
 
     	$$self.$capture_state = () => ({
-    		settingsHeight,
     		color,
+    		settingsHeight,
     		settingsTab,
     		IntervalSettings,
     		SaveButton,
@@ -35655,8 +35645,6 @@ var app = (function () {
     }
 
     /* src\Components\Controls\MasterControls.svelte generated by Svelte v3.35.0 */
-
-    const { console: console_1 } = globals;
 
     function create_fragment$1(ctx) {
     	let mounted;
@@ -35849,7 +35837,6 @@ var app = (function () {
     	const handleKeyDown = async e => {
     		const key = e.key;
     		if (e.repeat) return;
-    		console.log("key event: ", key);
 
     		switch (key) {
     			case " ":
@@ -35875,6 +35862,7 @@ var app = (function () {
     				e.stopPropagation();
     				focused.set(!$focused);
     				break;
+    			case "P":
     			case "p":
     				if (!($runState === "running")) {
     					// set times and colors to pomodoro values (25 min, 5 min) (red, green)
@@ -35895,6 +35883,7 @@ var app = (function () {
     						break;
     					}
     				}
+    			case "I":
     			case "i":
     				if (!($runState === "running")) {
     					runState.set("finished");
@@ -35925,20 +35914,23 @@ var app = (function () {
     			case "E":
     			case "R":
     			case "T":
-    				console.log("setting favorite");
-    				setFavorite(key);
+    				// prevent accidental favorite setting with caps lock on
+    				if (e.shiftKey) {
+    					setFavorite(key);
+    				}
     				break;
     			case "!":
     			case "@":
     			case "#":
     			case "$":
     			case "%":
-    				console.log("loading favorite");
     				loadFavorite(key);
     				break;
     			case "-":
+    			case "_":
     				makeSmaller();
     				break;
+    			case "+":
     			case "=":
     				makeBigger();
     				break;
@@ -36042,7 +36034,7 @@ var app = (function () {
     	const writable_props = ["makeBigger", "makeSmaller", "start", "pause", "resume"];
 
     	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console_1.warn(`<MasterControls> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<MasterControls> was created with unknown prop '${key}'`);
     	});
 
     	$$self.$$set = $$props => {
@@ -36057,16 +36049,16 @@ var app = (function () {
     		tick,
     		currentFavInd,
     		currentFavInterval,
+    		favKeyMap,
+    		globalHue,
+    		hue,
+    		inputRef,
+    		intervalColors,
     		intervalMode,
     		settings,
-    		showFavorites,
-    		intervalColors,
-    		hue,
-    		globalHue,
-    		settingsTab,
-    		inputRef,
-    		favKeyMap,
     		settingsOpen,
+    		settingsTab,
+    		showFavorites,
     		duration,
     		focused,
     		intervalDurations,
@@ -36139,23 +36131,23 @@ var app = (function () {
     		const props = options.props || {};
 
     		if (/*makeBigger*/ ctx[2] === undefined && !("makeBigger" in props)) {
-    			console_1.warn("<MasterControls> was created without expected prop 'makeBigger'");
+    			console.warn("<MasterControls> was created without expected prop 'makeBigger'");
     		}
 
     		if (/*makeSmaller*/ ctx[3] === undefined && !("makeSmaller" in props)) {
-    			console_1.warn("<MasterControls> was created without expected prop 'makeSmaller'");
+    			console.warn("<MasterControls> was created without expected prop 'makeSmaller'");
     		}
 
     		if (/*start*/ ctx[4] === undefined && !("start" in props)) {
-    			console_1.warn("<MasterControls> was created without expected prop 'start'");
+    			console.warn("<MasterControls> was created without expected prop 'start'");
     		}
 
     		if (/*pause*/ ctx[5] === undefined && !("pause" in props)) {
-    			console_1.warn("<MasterControls> was created without expected prop 'pause'");
+    			console.warn("<MasterControls> was created without expected prop 'pause'");
     		}
 
     		if (/*resume*/ ctx[6] === undefined && !("resume" in props)) {
-    			console_1.warn("<MasterControls> was created without expected prop 'resume'");
+    			console.warn("<MasterControls> was created without expected prop 'resume'");
     		}
     	}
 
@@ -36771,10 +36763,7 @@ var app = (function () {
 
     const app = new App({
     	target: document.body,
-    	props: {
-    		width: 300,
-    		height: 400,
-    	}
+    	props: {}
     });
 
     return app;

@@ -1,9 +1,8 @@
 <script>
     import {fade} from "svelte/transition";
     import Fa from "svelte-fa";
-    import {color} from "../../stores/appState";
+    import {color, meme} from "../../stores/appState";
     import {faCannabis, faGrinWink} from "@fortawesome/free-solid-svg-icons";
-    import {meme} from "../../stores/appState";
 
     const faIconMap = {
         leaf: faCannabis,

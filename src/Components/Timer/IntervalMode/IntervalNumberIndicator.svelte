@@ -1,6 +1,6 @@
 <script>
-    import {intervalDurations, intervalIndex, time, runState} from "../../../stores/timerState";
-    import {intervalColors, globalHue} from "../../../stores/appState";
+    import {intervalDurations, intervalIndex, runState, time} from "../../../stores/timerState";
+    import {globalHue, intervalColors} from "../../../stores/appState";
     import {fade} from "svelte/transition";
     import Color from "color";
 

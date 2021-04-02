@@ -1,14 +1,8 @@
 <script>
     import partialCircle from "svg-partial-circle";
     import TimeIndicatorInput from "./TimeIndicator/TimeIndicator.svelte"
-    import {
-        remainingTime,
-        duration,
-        runState,
-        focused,
-        tempDuration,
-    } from "../../stores/timerState";
-    import {color, size, settings, showFavorites, intervalMode, lineThickness, meme} from "../../stores/appState";
+    import {duration, focused, remainingTime, runState,} from "../../stores/timerState";
+    import {color, intervalMode, lineThickness, meme, settings, showFavorites, size} from "../../stores/appState";
     import PlayPauseControl from "../Controls/PlayPauseControl.svelte";
     import Favorites from "./Favorites/Favorites.svelte";
     import IntervalModeIndicator from "./IntervalMode/IntervalModeIndicator.svelte";

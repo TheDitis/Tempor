@@ -2,16 +2,16 @@
     import SettingsSection from "../SettingsSection.svelte";
     import SettingsSlider from "../SettingControls/SettingsSlider.svelte";
     import SettingsOptionButton from "../SettingControls/SettingsOptionButton.svelte";
-    import {faLayerGroup, faAdjust} from "@fortawesome/free-solid-svg-icons";
+    import {faAdjust, faLayerGroup} from "@fortawesome/free-solid-svg-icons";
     import {
-        hue,
-        globalHue,
         blur,
         borderRadius,
-        lineThickness,
-        settings,
+        globalHue,
+        hue,
         intervalColors,
-        intervalMode
+        intervalMode,
+        lineThickness,
+        settings
     } from "../../../stores/appState";
     import {intervalIndex} from "../../../stores/timerState";
 

@@ -27,8 +27,10 @@ const createWindow = () => {
     transparent: true,
     frame: false,
     webPreferences: {
+      webSecurity: true,
       nodeIntegration: true,
-      contextIsolation: false
+      contextIsolation: false,
+      nodeIntegrationInWorker: true
     },
     icon: path.join(__dirname, '../public/favicon.png')
     // icon: isDev() ? path.join(process.cwd(), 'public/favicon.png') : path.join(__dirname, 'public/favicon.png'),

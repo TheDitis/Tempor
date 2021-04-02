@@ -3,25 +3,18 @@
     import {
         currentFavInd,
         currentFavInterval,
+        favKeyMap,
+        globalHue,
+        hue,
+        inputRef,
+        intervalColors,
         intervalMode,
         settings,
-        showFavorites,
-        intervalColors,
-        hue,
-        globalHue,
+        settingsOpen,
         settingsTab,
-        inputRef,
-        favKeyMap,
-        settingsOpen
+        showFavorites
     } from "../../stores/appState";
-    import {
-        duration,
-        focused,
-        intervalDurations,
-        intervalIndex,
-        runState,
-        tempDuration
-    } from "../../stores/timerState";
+    import {duration, focused, intervalDurations, intervalIndex, runState, tempDuration} from "../../stores/timerState";
 
 
     export let makeBigger;
@@ -126,7 +119,6 @@
     const handleKeyDown = async (e) => {
         const key = e.key;
         if (e.repeat) return;
-        console.log("key event: ", key)
         switch (key) {
             /// MAIN PAUSE/PLAY CONTROLS
             case " ":
@@ -163,6 +155,7 @@
                 break;
 
             // switch to interval (or Pomodoro) mode
+            case "P":
             case "p":
                 if (!($runState === "running")) {
                     // set times and colors to pomodoro values (25 min, 5 min) (red, green)
@@ -181,7 +174,7 @@
                     }
 
                 }
-
+            case "I":
             case "i":
                 if (!($runState === "running")) {
                     runState.set("finished")
@@ -213,8 +206,10 @@
             case "E":
             case "R":
             case "T":
-                console.log("setting favorite")
-                setFavorite(key);
+                // prevent accidental favorite setting with caps lock on
+                if (e.shiftKey) {
+                    setFavorite(key);
+                }
                 break;
             // keys for loading favorites
             case "!":
@@ -222,14 +217,15 @@
             case "#":
             case "$":
             case "%":
-                console.log("loading favorite")
                 loadFavorite(key);
                 break;
 
             /// WINDOW SIZING CONTROLS:
             case "-":
+            case "_":
                 makeSmaller();
                 break;
+            case "+":
             case "=":
                 makeBigger();
                 break;

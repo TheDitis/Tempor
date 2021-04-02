@@ -1,12 +1,7 @@
 <script>
     import {fade} from "svelte/transition";
     import TomatoIcon from "../../Icons/TomatoIcon.svelte";
-    import {
-        color,
-        intervalColors,
-        size,
-        meme
-    } from "../../../stores/appState";
+    import {color, intervalColors, meme, size} from "../../../stores/appState";
     import {intervalDurations} from "../../../stores/timerState";
     import Fa from "svelte-fa";
     import {faSyncAlt} from "@fortawesome/free-solid-svg-icons";
