@@ -27,12 +27,12 @@
     on:click={onClick}
 >
 
-    <div transition:fade>
+    <div>
         <Fa icon={faSave}/>
     </div>
 
     {#if !saved}
-        <div class="loading" transition:fade>
+        <div class="loading" transition:fade|local>
             <Jumper color={$color.hex()} size={$width < 200 ? 26 : $size / 5}/>
         </div>
     {/if}

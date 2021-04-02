@@ -43,7 +43,7 @@ const createWindow = () => {
   /// custom listeners
   ipcMain.on("resize", (event, width, height) => {
     mainWindow.setSize(width, height + 20) // add 20 for the draggable bar
-    mainWindow.webContents.send("size-data", {width, height: height + 20})  // TODO: this is how you send data between windows
+    // mainWindow.webContents.send("size-data", {width, height: height + 20})  // TODO: this is how you send data between windows
   })
 
   ipcMain.on('stayontop', (e, value) => {

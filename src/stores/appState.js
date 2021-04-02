@@ -67,6 +67,7 @@ export const height = derived(
     ([$settingsHeight, $settingsOpen, $size, $scaledBlur]) => {
         // main area height is size + blur + draggable-bar
         const mainSectionSize = Math.round($size + ($scaledBlur * 7)) + 20;
+        console.log("settingsOpen: ", $settingsOpen, " settingsHeight: ", $settingsHeight);
         if ($settingsOpen) return mainSectionSize + $settingsHeight + 20;
         else return mainSectionSize
     }

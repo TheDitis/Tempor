@@ -1,5 +1,5 @@
 <script>
-	import {onMount} from "svelte";
+	import {onMount, tick} from "svelte";
 	import Timer from "./Components/Timer/Timer.svelte";
 	const {ipcRenderer} = require("electron");
 	import {
@@ -48,18 +48,18 @@
 	onMount(() => {
 		loadSettings();
 		ipcRenderer.send("resize", $width, $height);
-
-		ipcRenderer.on("size-data", (event, data) => {
-			// console.log("size-data event recieved! event: ", event)
-			// console.log("data: ", data)
-		})
 	})
-
+	const resize = async (deps) => {
+		await tick();
+		console.log("resize called!")
+		ipcRenderer.send("resize", $width, $height)
+	}
 	// any time the window size changes, send the signal to electron
-	$: { ipcRenderer.send("resize", $width, $height) }
+	$: {
+		resize([$width, $height, $settingsOpen])
+	}
 	// tell the window whether to stay on top or not when that setting changes
 	$: { ipcRenderer.send("stayontop", $stayOnTop) }
-
 
 
 	// sets the duration, start time, and run-state of the timer
@@ -162,7 +162,6 @@
 			<Timer start={start} pause={pause} resume={resume}/>
 			<ResizeControl />
 			<OpenSettingsButton/>
-<!--			<ThemeCycleButton/>-->
 			<IntervalModeButton/>
 		</div>
 

@@ -12,6 +12,7 @@
         settings,
         settingsOpen,
         settingsTab,
+        settingsHeight,
         showFavorites
     } from "../../stores/appState";
     import {duration, focused, intervalDurations, intervalIndex, runState, tempDuration} from "../../stores/timerState";
@@ -301,6 +302,9 @@
                 break;
             case "s":
             case "S":
+                if ($settingsOpen) {
+                    settingsHeight.set(0);
+                }
                 settingsOpen.set(!$settingsOpen);
                 break;
             case "b":

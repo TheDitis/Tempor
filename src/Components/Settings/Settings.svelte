@@ -2,7 +2,8 @@
     import {color, settingsHeight, settingsTab} from "../../stores/appState";
     import IntervalSettings from "./IntervalSettings/IntervalSettings.svelte"
     import SaveButton from "./SaveButton.svelte";
-    import {afterUpdate, onMount} from "svelte";
+    import {afterUpdate, onMount, onDestroy} from "svelte";
+    import {fade} from "svelte/transition";
     import SettingsTabs from "./Tabs/SettingsTabs.svelte";
     import StyleSettings from "./Style/StyleSettings.svelte";
     import SoundSettings from "./Sound/SoundSettings.svelte"
@@ -18,6 +19,10 @@
     onMount(() => {
         settingsHeight.set(settingsRef.clientHeight);
     })
+    // onDestroy(() => {
+    //     console.log("ondestroy called!")
+    //     settingsHeight.set(0);
+    // })
     afterUpdate(() => {
         settingsHeight.set(settingsRef.clientHeight);
     })
@@ -26,9 +31,9 @@
 
 <div
     bind:this={settingsRef}
+    transition:fade={{duration: 0}}
     class="Settings"
     style="
-        --settingsHeight: {$settingsHeight};
         --color2: {$color.alpha(0.5).hsl().string()}
     "
 >
@@ -46,7 +51,6 @@
     .Settings {
         position: relative;
         width: calc(var(--width) * 1px);
-        /*height: calc(var(--settingsHeight) * 1px);*/
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -54,7 +58,6 @@
         padding-bottom: 20px;
         box-sizing: border-box;
         padding-top: 0;
-        /*box-shadow: 15px 0 15px -15px var(--color);*/
     }
 
     .bottomRow {

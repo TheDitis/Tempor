@@ -1,11 +1,10 @@
 <script>
-    import {inputRef, settingsOpen} from "../../stores/appState";
     import {faCog} from "@fortawesome/free-solid-svg-icons";
     import Fa from "svelte-fa";
 
     const toggleSettings = () => {
-        settingsOpen.update(isOpen => !isOpen)
-        if ($inputRef) $inputRef.focus();
+        const e = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key: 's', shiftKey : false});
+        document.dispatchEvent(e);
     }
 </script>
 
