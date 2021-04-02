@@ -42,15 +42,10 @@
 
 <style>
     .SaveButton {
-        /*position: relative;*/
-        /*height: calc(var(--size) / 7 * 1px);*/
-        /*width: calc(var(--size) / 7 * 1px);*/
         font-size: calc(var(--size) / 13 * 1px);
         outline: none;
         border: none;
         background: transparent;
-        /*background: var(--buttonBg);*/
-        /*color: white;*/
         display: flex;
         align-items: center;
         justify-content: center;

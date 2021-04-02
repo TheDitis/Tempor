@@ -144,9 +144,6 @@
 
     .hiddenInput {
         position: absolute;
-        /*visibility: hidden;*/
         opacity: 0;
-        /*width: 0;*/
-        /*height: 0;*/
     }
 </style>

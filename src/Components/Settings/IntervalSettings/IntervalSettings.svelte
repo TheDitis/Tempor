@@ -150,14 +150,12 @@
 <style>
     .unlinkButton {
         background: none;
-        /*height: 30px;*/
         padding: 5px 10px;
         color: var(--color);
         border: 2px solid var(--color);
         outline: none;
         border-radius: 40px;
         font-size: calc(var(--size) / 16 * 1px);
-        /*display: flex;*/
 
     }
     .intervalColorSection {
@@ -178,12 +176,9 @@
         margin-bottom: 20px;
     }
     .intervals {
-        /*position: absolute;*/
-        /*top: calc((var(--size) + (var(--thickness) * 2)) * 0.24 * 1px);*/
         background: transparent;
         border: none;
         font-size: calc(var(--size) * 0.08 * 1px);
-        /*color: var(--color);*/
         filter: blur(calc(var(--textBlur) * 0.8 * 1px));
         width: 90%;
         display: flex;
@@ -201,12 +196,8 @@
         text-align: center;
         border-radius: 1000px;
         box-sizing: border-box;
-        /*color: var(--intervalColor);*/
-        /*border: 0 solid var(--color);*/
-        /*box-shadow: 0 0 0 var(--color);*/
         transition-property: border, box-shadow;
         transition-duration: 800ms;
-        /*, box-shadow;*/
     }
     .selected:nth-of-type(1) {
         border: 2px solid var(--intervalColor1);

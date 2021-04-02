@@ -3141,6 +3141,7 @@ var app = (function () {
 
     const maxSize = readable(Math.min(window.screen.height, window.screen.width));
 
+
     const settingsHeight = writable(0);
 
     const settingsOpen = writable(true);
@@ -27681,12 +27682,12 @@ var app = (function () {
     			t0 = text(/*readableTime*/ ctx[2]);
     			t1 = space();
     			input = element("input");
-    			attr_dev(h1, "class", "svelte-hvd7h2");
+    			attr_dev(h1, "class", "svelte-194xtpq");
     			add_location(h1, file$p, 123, 0, 4131);
-    			attr_dev(input, "class", "hiddenInput svelte-hvd7h2");
+    			attr_dev(input, "class", "hiddenInput svelte-194xtpq");
     			attr_dev(input, "type", "text");
     			add_location(input, file$p, 124, 0, 4156);
-    			attr_dev(div, "class", "TimeInput svelte-hvd7h2");
+    			attr_dev(div, "class", "TimeInput svelte-194xtpq");
     			add_location(div, file$p, 122, 0, 4071);
     		},
     		l: function claim(nodes) {
@@ -31564,16 +31565,16 @@ var app = (function () {
     			t0 = text(/*label*/ ctx[3]);
     			t1 = space();
     			input = element("input");
-    			attr_dev(p, "class", "svelte-15byk4");
+    			attr_dev(p, "class", "svelte-ztowy");
     			add_location(p, file$c, 19, 4, 453);
     			attr_dev(input, "type", "range");
     			input.disabled = /*disabled*/ ctx[5];
     			attr_dev(input, "min", /*min*/ ctx[1]);
     			attr_dev(input, "max", /*max*/ ctx[2]);
     			attr_dev(input, "step", /*step*/ ctx[4]);
-    			attr_dev(input, "class", "svelte-15byk4");
+    			attr_dev(input, "class", "svelte-ztowy");
     			add_location(input, file$c, 20, 4, 473);
-    			attr_dev(div, "class", "SettingsSlider svelte-15byk4");
+    			attr_dev(div, "class", "SettingsSlider svelte-ztowy");
     			toggle_class(div, "disabled", /*disabled*/ ctx[5]);
     			add_location(div, file$c, 18, 0, 393);
     		},
@@ -32187,7 +32188,7 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(div, "class", "intervals svelte-n4m3z8");
+    			attr_dev(div, "class", "intervals svelte-hrv038");
     			attr_dev(div, "style", /*intervalColorVars*/ ctx[4]);
     			add_location(div, file$a, 113, 16, 3347);
     		},
@@ -32262,7 +32263,7 @@ var app = (function () {
     			t1 = space();
     			set_style(p, "color", `var(--intervalColor${/*i*/ ctx[20] + 1})`);
     			add_location(p, file$a, 116, 28, 3605);
-    			attr_dev(div, "class", "intervalNumber svelte-n4m3z8");
+    			attr_dev(div, "class", "intervalNumber svelte-hrv038");
     			toggle_class(div, "selected", /*$intervalIndex*/ ctx[3] === /*i*/ ctx[20]);
     			add_location(div, file$a, 115, 24, 3480);
     		},
@@ -32392,20 +32393,20 @@ var app = (function () {
     			create_component(settingsslider.$$.fragment);
     			t8 = space();
     			br2 = element("br");
-    			attr_dev(h3, "class", "svelte-n4m3z8");
+    			attr_dev(h3, "class", "svelte-hrv038");
     			add_location(h3, file$a, 104, 4, 3086);
-    			attr_dev(button0, "class", "arrowButton svelte-n4m3z8");
+    			attr_dev(button0, "class", "arrowButton svelte-hrv038");
     			add_location(button0, file$a, 108, 12, 3192);
-    			attr_dev(button1, "class", "arrowButton svelte-n4m3z8");
+    			attr_dev(button1, "class", "arrowButton svelte-hrv038");
     			add_location(button1, file$a, 123, 12, 3847);
-    			attr_dev(div0, "class", "titleRow svelte-n4m3z8");
+    			attr_dev(div0, "class", "titleRow svelte-hrv038");
     			add_location(div0, file$a, 107, 8, 3156);
-    			attr_dev(button2, "class", "unlinkButton svelte-n4m3z8");
+    			attr_dev(button2, "class", "unlinkButton svelte-hrv038");
     			add_location(button2, file$a, 128, 8, 3985);
     			add_location(br0, file$a, 134, 8, 4180);
     			add_location(br1, file$a, 134, 13, 4185);
     			add_location(br2, file$a, 142, 8, 4417);
-    			attr_dev(div1, "class", "intervalColorSection svelte-n4m3z8");
+    			attr_dev(div1, "class", "intervalColorSection svelte-hrv038");
     			add_location(div1, file$a, 106, 4, 3112);
     		},
     		m: function mount(target, anchor) {
@@ -33099,7 +33100,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			create_component(jumper.$$.fragment);
-    			attr_dev(div, "class", "loading svelte-16nle2q");
+    			attr_dev(div, "class", "loading svelte-13pvo9u");
     			add_location(div, file$8, 34, 8, 834);
     		},
     		m: function mount(target, anchor) {
@@ -33173,7 +33174,7 @@ var app = (function () {
     			t = space();
     			if (if_block) if_block.c();
     			add_location(div, file$8, 29, 4, 758);
-    			attr_dev(button, "class", "SaveButton svelte-16nle2q");
+    			attr_dev(button, "class", "SaveButton svelte-13pvo9u");
     			add_location(button, file$8, 24, 0, 692);
     		},
     		l: function claim(nodes) {
@@ -36298,11 +36299,11 @@ var app = (function () {
     			if (if_block) if_block.c();
     			t5 = space();
     			create_component(mastercontrols.$$.fragment);
-    			attr_dev(div0, "class", "draggableArea svelte-1fz8pzh");
+    			attr_dev(div0, "class", "draggableArea svelte-1qnv41i");
     			add_location(div0, file, 158, 2, 3789);
-    			attr_dev(div1, "class", "timerSection svelte-1fz8pzh");
+    			attr_dev(div1, "class", "timerSection svelte-1qnv41i");
     			add_location(div1, file, 160, 2, 3826);
-    			attr_dev(div2, "class", "App svelte-1fz8pzh");
+    			attr_dev(div2, "class", "App svelte-1qnv41i");
     			add_location(div2, file, 157, 1, 3769);
     			set_style(main, "--size", /*$size*/ ctx[6]);
     			set_style(main, "--width", /*$width*/ ctx[3]);
@@ -36315,7 +36316,7 @@ var app = (function () {
     			set_style(main, "--activeButtonBg", /*$color*/ ctx[8].alpha(0.6).hsl().string());
     			set_style(main, "--appBg", /*appBg*/ ctx[7]);
     			set_style(main, "--frameRadius", /*$borderRadius*/ ctx[10] * (/*$width*/ ctx[3] / 2) / 100 + "px");
-    			attr_dev(main, "class", "svelte-1fz8pzh");
+    			attr_dev(main, "class", "svelte-1qnv41i");
     			add_location(main, file, 142, 0, 3347);
     		},
     		l: function claim(nodes) {

@@ -50,6 +50,7 @@ export const lineThickness = writable(1);
 
 export const maxSize = readable(Math.min(window.screen.height, window.screen.width))
 
+
 export const settingsHeight = writable(0);
 
 export const settingsOpen = writable(true);
