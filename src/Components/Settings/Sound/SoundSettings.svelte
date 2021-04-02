@@ -2,7 +2,7 @@
     import SettingsSection from "../SettingsSection.svelte";
     import SettingsSlider from "../SettingControls/SettingsSlider.svelte";
 
-    import {settings, volume, playSound, intervalMode} from "../../../stores/appState";
+    import {settings, inputRef, volume, playSound, intervalMode} from "../../../stores/appState";
     import SelectOption from "../SettingControls/SelectOption.svelte";
     import {listSoundFileNames} from "../../../stores/appState";
 
@@ -15,6 +15,7 @@
 
     const onClick = (filename) => {
         playSound(filename);
+        if ($inputRef) inputRef.focus();
     }
 
     let fileList = listSoundFileNames();

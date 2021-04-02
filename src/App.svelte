@@ -19,7 +19,7 @@
 		intervalColors,
 		playSound,
 		inputRef,
-		meme
+		meme, globalHue
 	} from "./stores/appState";
 	import ResizeControl from "./Components/Controls/ResizeControl.svelte";
 	import OpenSettingsButton from "./Components/Settings/OpenSettingsButton.svelte";
@@ -39,7 +39,6 @@
 		tempDuration
 	} from "./stores/timerState";
 
-	// TODO: Make clicking on file name in sound selector play the current sound
 	// TODO: Add other sounds
 	// TODO: Rename sounds
 	// TODO: Look into the angling of the bottom corners after closing settings with border radius
@@ -97,7 +96,15 @@
 
 	// calculates the new relative start-time based on how much time is remaining and sets the state back to running
 	export const resume = () => {
-		intervalIndex.set($playingIntervalIndex);
+		if ($intervalMode) {
+			intervalIndex.set($playingIntervalIndex);
+			if ($intervalColors[$playingIntervalIndex]) {
+				hue.set($intervalColors[$playingIntervalIndex]);
+			}
+			else {
+				hue.set($globalHue)
+			}
+		}
 		startTime.set(Date.now() - ($duration - $pausedRemainingTime));
 		if ($meme) meme.set(null);
 		focused.set(false);

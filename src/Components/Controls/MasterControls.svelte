@@ -12,7 +12,7 @@
         settingsTab,
         inputRef,
         favKeyMap,
-        globalSounds
+        settingsOpen
     } from "../../stores/appState";
     import {
         duration,
@@ -22,8 +22,6 @@
         runState,
         tempDuration
     } from "../../stores/timerState";
-    import _ from "lodash";
-    import {arraysEqual} from "../../utils/utils";
 
 
     export let makeBigger;
@@ -31,58 +29,29 @@
     export let start, pause, resume;
 
 
-    // runs when the time runs out
-    export const handleEnd = () => {
-        runState.set("finished");
-        const sound = new Audio("file://" + __dirname + "/sounds/endSound.wav");
-        sound.play();
-        focused.set(true)
+    const themeOptions = ["transparent", "dark", "light"];
+    const cycleTheme = () => {
+        const currentInd = themeOptions.indexOf($settings.theme);
+        const nextTheme = themeOptions[(currentInd + 1) % themeOptions.length];
+        settings.update(opts => ({...opts, theme: nextTheme}));
+        if ($inputRef) $inputRef.focus();
     }
 
 
     const setFavorite = async (key) => {
         if (!$focused) return;
 
-        // const getFavSounds = (omitNext = false) => {
-        //     console.log("globalSounds: ", $globalSounds);
-        //     console.log("settings.sounds: ", $settings.sounds)
-        //     if (
-        //         $settings.sounds.start !== $globalSounds.start
-        //         || $settings.sounds.end !== $globalSounds.end
-        //         || (!omitNext && $settings.sounds.next !== $globalSounds.next)
-        //     ) {
-        //         const sounds = {...($settings.sounds)}
-        //         if (omitNext) delete sounds.next;
-        //         return sounds
-        //     } else {
-        //         return null;
-        //     }
-        // }
-
         const favoriteIndex = favKeyMap.set[key];
         focused.set(false);
         // IN NORMAL TIMER MODE
         if (!$intervalMode) {
             const favorites = $settings.favorites;
-            // const favoritesSounds = $settings.favoritesSounds;
-            // // if this value isn't already in a favorite slot
-            // const soundsDifferent = favoritesSounds[favoriteIndex] !== null && (
-            //     $settings.sounds.start !== favoritesSounds[favoriteIndex].start
-            //     || $settings.sounds.end !== favoritesSounds[favoriteIndex].end
-            // )
             // if we don't have a copy of this favorite already:
             if (!favorites.includes($tempDuration)) { // || soundsDifferent) {
                 favorites[favoriteIndex] = $tempDuration > 0 ? $tempDuration : null;
-                // /// set the sounds for the favorite
-                // const tempSounds = getFavSounds(true);
-                // console.log("tempSounds: ", tempSounds);
-                // favoritesSounds[favoriteIndex] = tempSounds
-
-
                 settings.set({
                     ...$settings,
                     favorites: favorites,
-                    // favoritesSounds
                 })
                 currentFavInd.set(favoriteIndex);
             }
@@ -91,15 +60,12 @@
         else {
             const favorites = $settings.favoriteIntervals;
             const favoriteColors = $settings.favoriteIntervalColors;
-            // const favoriteSounds = $settings.favoriteIntervalSounds;
             favorites[favoriteIndex] = $intervalDurations;
             favoriteColors[favoriteIndex] = $intervalColors;
-            // favoriteSounds[favoriteIndex] = getFavSounds();
             settings.set({
                 ...$settings,
                 favoriteIntervals: favorites,
                 favoriteIntervalColors: favoriteColors,
-                // favoriteIntervalSounds: favoriteSounds
             });
             currentFavInterval.set(favoriteIndex);
         }
@@ -110,20 +76,6 @@
 
     const loadFavorite = async (key) => {
         const favInd = favKeyMap.load[key];
-
-        // const loadSounds = (favSounds) => {
-        //     let sounds;
-        //     if (favSounds !== null) {
-        //         sounds = {...($settings.sounds)};
-        //         sounds.start = favSounds.start;
-        //         sounds.end = favSounds.end;
-        //         if ("next" in favSounds) sounds.next = favSounds.next;
-        //     }
-        //     else {
-        //         sounds = $globalSounds;
-        //     }
-        //     settings.set({...$settings, sounds});
-        // }
 
         /// IF NOT IN INTERVAL MODE:
         if (!$intervalMode) {
@@ -184,7 +136,7 @@
                     (
                         // not paused or running
                         $runState === "finished"
-                        // of you just selected a favorite
+                        // or you just selected a favorite
                         || ($currentFavInd !== null && $tempDuration !== $duration)
                     )
                     && ($intervalMode || $tempDuration)
@@ -224,12 +176,15 @@
                         await tick();
                         hue.set($intervalColors[$intervalIndex])
                         focused.set(true);
+                        runState.set("finished")
                         break;
                     }
+
                 }
 
             case "i":
                 if (!($runState === "running")) {
+                    runState.set("finished")
                     focused.set(false);
                     if ($intervalMode) {
                         hue.set($globalHue);
@@ -347,6 +302,14 @@
                     focused.set(true);
                     if ($inputRef) $inputRef.focus();
                 }
+                break;
+            case "s":
+            case "S":
+                settingsOpen.set(!$settingsOpen);
+                break;
+            case "b":
+            case "B":
+                cycleTheme();
                 break;
             default:
                 break;

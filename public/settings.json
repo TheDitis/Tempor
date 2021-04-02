@@ -1,17 +1,17 @@
 {
-  "hue": 45.9,
+  "hue": 178,
   "size": 250,
   "blur": 2.2,
   "lineThickness": 36.6,
   "fontWeight": "Regular",
   "alwaysOnTop": true,
   "theme": "dark",
-  "frame": 0,
+  "frame": 100,
   "volume": 1,
   "sounds": {
-    "start": "sound (35).wav",
-    "next": "sound (17).wav",
-    "end": "sound (35).wav"
+    "start": "All The Bells.wav",
+    "next": "Chirp.wav",
+    "end": "And Whistles.wav"
   },
   "favorites": [
     1000,

@@ -104,9 +104,6 @@ export const currentFavInterval = writable(null);
 
 export const meme = writable(null);
 
-export const globalSounds = writable(null);
-
-// export const sounds = writable(null);
 
 export const loadSettings = () => {
     // read settings file and set relevant stores:
@@ -130,9 +127,7 @@ export const loadSettings = () => {
             console.log("setting default sound for ", soundName, " sound: ", soundFiles[0]);
         }
     }
-    const soundObj = cloneObj({...(settingsData.sounds)})
     const settingsClone = cloneObj({...settingsData});
-    globalSounds.set(soundObj);
     settings.set(settingsClone);
 }
 
@@ -145,11 +140,6 @@ export const saveSettings = async () => {
     const vol = get(volume);
     const lineThikniss = get(lineThickness);
     let tempSettings = get(settings);
-    // const curFav = get(intervalMode) ? get(currentFavInterval) : get(currentFavInd)
-    // const glblSounds = get(globalSounds)
-    // console.log("curFav: ", curFav)
-    // const sounds = curFav !== null ? glblSounds : tempSettings.sounds;
-    // console.log("sounds: ", sounds)
     /// so that not too much space is taken up by arrays full of null
     const tempFavIntervalColors = tempSettings.favoriteIntervalColors.map( item => {
         return (item !== null && item.length && item.some(val => val !== null)) ? item : null;
@@ -162,7 +152,6 @@ export const saveSettings = async () => {
         lineThickness: lineThikniss,
         frame,
         volume: vol,
-        // sounds,
         favoriteIntervalColors: tempFavIntervalColors
     };
     tempSettings = JSON.stringify(tempSettings, null, 2);
@@ -187,7 +176,7 @@ export const playSound = (filename) => {
 
 
 export const listSoundFileNames = () => {
-    const files = fs.readdirSync(path.join(__dirname, "/sounds/"))
+    const files = fs.readdirSync(path.join(__dirname, "/sounds/")).filter(name => name.includes(".wav") || name.includes(".mp3"))
     files.sort((a, b) => a.localeCompare(b, navigator.languages[0] || navigator.language, {numeric: true, ignorePunctuation: true}));
     return files
 }

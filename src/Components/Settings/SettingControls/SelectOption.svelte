@@ -28,7 +28,7 @@
     beforeUpdate(() => {
         /// when the values update, call the change handler
         if (value && callChangeHandler) {
-                onChange(value);
+            onChange(value);
         }
     })
 
@@ -63,7 +63,7 @@
             <Fa icon={faCaretLeft}/>
         </button>
         {#if ind !== null}
-            <p on:click={() => onClick(value)}>{withoutExtension(value)}</p>
+            <p class="itemName" on:click={() => onClick(value)}>{withoutExtension(value)}</p>
         {/if}
         <button class="arrowButton" on:click={next}>
             <Fa icon={faCaretRight}/>
@@ -85,23 +85,21 @@
 
     .label {
         margin-bottom: 10px;
+        font-size: calc(var(--size) / 15 * 1px);
     }
 
-    p {
+    .itemName {
         margin: 0;
         padding: 0;
-        /*margin-bottom: 8px;*/
-        user-select: none;
+        cursor: pointer;
         font-size: calc(var(--size) / 15 * 1px);
     }
 
     .arrowButtonsSection {
         display: flex;
-        /*flex-direction: column;*/
         justify-content: space-between;
         align-items: center;
         width: 95%;
-        /*border: 1px solid var(--color);*/
         box-shadow: 0 0 6px var(--color);
         border-radius: 50px
     }
