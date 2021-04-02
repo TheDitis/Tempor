@@ -39,9 +39,6 @@
 		tempDuration
 	} from "./stores/timerState";
 
-	// TODO: Add other sounds
-	// TODO: Rename sounds
-	// TODO: Look into the angling of the bottom corners after closing settings with border radius
 	// TODO: set settings to default
 
 

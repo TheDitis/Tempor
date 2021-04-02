@@ -37878,7 +37878,7 @@ var app = (function () {
 
     const file = "src\\App.svelte";
 
-    // (168:2) {#if $settingsOpen}
+    // (165:2) {#if $settingsOpen}
     function create_if_block(ctx) {
     	let settings_1;
     	let current;
@@ -37910,7 +37910,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(168:2) {#if $settingsOpen}",
+    		source: "(165:2) {#if $settingsOpen}",
     		ctx
     	});
 
@@ -37979,11 +37979,11 @@ var app = (function () {
     			t5 = space();
     			create_component(mastercontrols.$$.fragment);
     			attr_dev(div0, "class", "draggableArea svelte-1wq06lp");
-    			add_location(div0, file, 158, 2, 3793);
+    			add_location(div0, file, 155, 2, 3646);
     			attr_dev(div1, "class", "timerSection svelte-1wq06lp");
-    			add_location(div1, file, 160, 2, 3830);
+    			add_location(div1, file, 157, 2, 3683);
     			attr_dev(div2, "class", "App svelte-1wq06lp");
-    			add_location(div2, file, 157, 1, 3773);
+    			add_location(div2, file, 154, 1, 3626);
     			set_style(main, "--size", /*$size*/ ctx[5]);
     			set_style(main, "--width", /*$width*/ ctx[3]);
     			set_style(main, "--color", /*$color*/ ctx[7].hsl().string());
@@ -37996,7 +37996,7 @@ var app = (function () {
     			set_style(main, "--appBg", /*appBg*/ ctx[6]);
     			set_style(main, "--frameRadius", /*$borderRadius*/ ctx[9] * (/*$width*/ ctx[3] / 2) / 100 + "px");
     			attr_dev(main, "class", "svelte-1wq06lp");
-    			add_location(main, file, 142, 0, 3351);
+    			add_location(main, file, 139, 0, 3204);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -38200,9 +38200,6 @@ var app = (function () {
     	validate_slots("App", slots, []);
     	const { ipcRenderer } = require("electron");
 
-    	// TODO: Add other sounds
-    	// TODO: Rename sounds
-    	// TODO: Look into the angling of the bottom corners after closing settings with border radius
     	// TODO: set settings to default
     	onMount(() => {
     		loadSettings();
