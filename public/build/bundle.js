@@ -29023,11 +29023,6 @@ var app = (function () {
       iconName: 'save',
       icon: [448, 512, [], "f0c7", "M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM224 416c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64s64 28.654 64 64c0 35.346-28.654 64-64 64zm96-304.52V212c0 6.627-5.373 12-12 12H76c-6.627 0-12-5.373-12-12V108c0-6.627 5.373-12 12-12h228.52c3.183 0 6.235 1.264 8.485 3.515l3.48 3.48A11.996 11.996 0 0 1 320 111.48z"]
     };
-    var faStop = {
-      prefix: 'fas',
-      iconName: 'stop',
-      icon: [448, 512, [], "f04d", "M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48z"]
-    };
     var faSyncAlt = {
       prefix: 'fas',
       iconName: 'sync-alt',
@@ -29051,7 +29046,7 @@ var app = (function () {
 
     	fa = new Fa({
     			props: {
-    				icon: /*getRunStateItem*/ ctx[3](faPlay, faPause, faPlay)
+    				icon: /*getRunStateItem*/ ctx[0](faPlay, faPause, faPlay)
     			},
     			$$inline: true
     		});
@@ -29061,7 +29056,7 @@ var app = (function () {
     			button = element("button");
     			create_component(fa.$$.fragment);
     			attr_dev(button, "class", "PlayPauseButton svelte-17r4cza");
-    			add_location(button, file$m, 31, 4, 743);
+    			add_location(button, file$m, 23, 4, 582);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -29076,7 +29071,7 @@ var app = (function () {
     					button,
     					"click",
     					function () {
-    						if (is_function(/*getRunStateItem*/ ctx[3](/*start*/ ctx[0], /*pause*/ ctx[1], /*resume*/ ctx[2]))) /*getRunStateItem*/ ctx[3](/*start*/ ctx[0], /*pause*/ ctx[1], /*resume*/ ctx[2]).apply(this, arguments);
+    						if (is_function(/*getRunStateItem*/ ctx[0](start, pause, resume))) /*getRunStateItem*/ ctx[0](start, pause, resume).apply(this, arguments);
     					},
     					false,
     					false,
@@ -29089,7 +29084,7 @@ var app = (function () {
     		p: function update(new_ctx, [dirty]) {
     			ctx = new_ctx;
     			const fa_changes = {};
-    			if (dirty & /*getRunStateItem*/ 8) fa_changes.icon = /*getRunStateItem*/ ctx[3](faPlay, faPause, faPlay);
+    			if (dirty & /*getRunStateItem*/ 1) fa_changes.icon = /*getRunStateItem*/ ctx[0](faPlay, faPause, faPlay);
     			fa.$set(fa_changes);
     		},
     		i: function intro(local) {
@@ -29124,42 +29119,26 @@ var app = (function () {
     	let getRunStateItem;
     	let $runState;
     	validate_store(runState, "runState");
-    	component_subscribe($$self, runState, $$value => $$invalidate(4, $runState = $$value));
+    	component_subscribe($$self, runState, $$value => $$invalidate(1, $runState = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("PlayPauseControl", slots, []);
-    	let { start } = $$props, { pause } = $$props, { resume } = $$props;
-    	const writable_props = ["start", "pause", "resume"];
+    	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<PlayPauseControl> was created with unknown prop '${key}'`);
     	});
 
-    	$$self.$$set = $$props => {
-    		if ("start" in $$props) $$invalidate(0, start = $$props.start);
-    		if ("pause" in $$props) $$invalidate(1, pause = $$props.pause);
-    		if ("resume" in $$props) $$invalidate(2, resume = $$props.resume);
-    	};
-
     	$$self.$capture_state = () => ({
     		runState,
-    		focused,
-    		tempDuration,
-    		start,
-    		pause,
-    		resume,
     		Fa,
     		faPlay,
     		faPause,
-    		faStop,
     		getRunStateItem,
     		$runState
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ("start" in $$props) $$invalidate(0, start = $$props.start);
-    		if ("pause" in $$props) $$invalidate(1, pause = $$props.pause);
-    		if ("resume" in $$props) $$invalidate(2, resume = $$props.resume);
-    		if ("getRunStateItem" in $$props) $$invalidate(3, getRunStateItem = $$props.getRunStateItem);
+    		if ("getRunStateItem" in $$props) $$invalidate(0, getRunStateItem = $$props.getRunStateItem);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -29167,8 +29146,8 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*$runState*/ 16) {
-    			$$invalidate(3, getRunStateItem = (stoppedResult, runningResult, pausedResult) => {
+    		if ($$self.$$.dirty & /*$runState*/ 2) {
+    			$$invalidate(0, getRunStateItem = (stoppedResult, runningResult, pausedResult) => {
     				switch ($runState) {
     					case "running":
     						return runningResult;
@@ -29183,13 +29162,13 @@ var app = (function () {
     		}
     	};
 
-    	return [start, pause, resume, getRunStateItem, $runState];
+    	return [getRunStateItem, $runState];
     }
 
     class PlayPauseControl extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$n, create_fragment$n, safe_not_equal, { start: 0, pause: 1, resume: 2 });
+    		init(this, options, instance$n, create_fragment$n, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -29197,45 +29176,6 @@ var app = (function () {
     			options,
     			id: create_fragment$n.name
     		});
-
-    		const { ctx } = this.$$;
-    		const props = options.props || {};
-
-    		if (/*start*/ ctx[0] === undefined && !("start" in props)) {
-    			console.warn("<PlayPauseControl> was created without expected prop 'start'");
-    		}
-
-    		if (/*pause*/ ctx[1] === undefined && !("pause" in props)) {
-    			console.warn("<PlayPauseControl> was created without expected prop 'pause'");
-    		}
-
-    		if (/*resume*/ ctx[2] === undefined && !("resume" in props)) {
-    			console.warn("<PlayPauseControl> was created without expected prop 'resume'");
-    		}
-    	}
-
-    	get start() {
-    		throw new Error("<PlayPauseControl>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set start(value) {
-    		throw new Error("<PlayPauseControl>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	get pause() {
-    		throw new Error("<PlayPauseControl>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set pause(value) {
-    		throw new Error("<PlayPauseControl>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	get resume() {
-    		throw new Error("<PlayPauseControl>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set resume(value) {
-    		throw new Error("<PlayPauseControl>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
 
@@ -29748,7 +29688,7 @@ var app = (function () {
     /* src\Components\Timer\IntervalMode\IntervalModeIndicator.svelte generated by Svelte v3.35.0 */
     const file$j = "src\\Components\\Timer\\IntervalMode\\IntervalModeIndicator.svelte";
 
-    // (37:0) {#if !$meme}
+    // (26:0) {#if !$meme}
     function create_if_block$b(ctx) {
     	let div;
     	let current_block_type_index;
@@ -29773,7 +29713,7 @@ var app = (function () {
     			div = element("div");
     			if_block.c();
     			attr_dev(div, "class", "IntervalModeIndicator svelte-7n66ks");
-    			add_location(div, file$j, 37, 4, 1063);
+    			add_location(div, file$j, 26, 4, 831);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -29842,14 +29782,14 @@ var app = (function () {
     		block,
     		id: create_if_block$b.name,
     		type: "if",
-    		source: "(37:0) {#if !$meme}",
+    		source: "(26:0) {#if !$meme}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (41:8) {:else}
+    // (30:8) {:else}
     function create_else_block$1(ctx) {
     	let fa;
     	let current;
@@ -29886,14 +29826,14 @@ var app = (function () {
     		block,
     		id: create_else_block$1.name,
     		type: "else",
-    		source: "(41:8) {:else}",
+    		source: "(30:8) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (39:8) {#if isPomodoro}
+    // (28:8) {#if isPomodoro}
     function create_if_block_1$2(ctx) {
     	let tomatoicon;
     	let current;
@@ -29940,7 +29880,7 @@ var app = (function () {
     		block,
     		id: create_if_block_1$2.name,
     		type: "if",
-    		source: "(39:8) {#if isPomodoro}",
+    		source: "(28:8) {#if isPomodoro}",
     		ctx
     	});
 
@@ -30018,17 +29958,11 @@ var app = (function () {
     function instance$k($$self, $$props, $$invalidate) {
     	let isPomodoro;
     	let intervalCols;
-    	let $globalHue;
-    	let $settingsTab;
     	let $intervalDurations;
     	let $intervalColors;
     	let $meme;
     	let $size;
     	let $color;
-    	validate_store(globalHue, "globalHue");
-    	component_subscribe($$self, globalHue, $$value => $$invalidate(8, $globalHue = $$value));
-    	validate_store(settingsTab, "settingsTab");
-    	component_subscribe($$self, settingsTab, $$value => $$invalidate(9, $settingsTab = $$value));
     	validate_store(intervalDurations, "intervalDurations");
     	component_subscribe($$self, intervalDurations, $$value => $$invalidate(6, $intervalDurations = $$value));
     	validate_store(intervalColors, "intervalColors");
@@ -30043,17 +29977,15 @@ var app = (function () {
     	validate_slots("IntervalModeIndicator", slots, []);
 
     	const turnOff = async () => {
-    		focused.set(false);
-    		intervalMode.set(false);
-    		hue.set($globalHue);
+    		const e = new KeyboardEvent("keydown",
+    		{
+    				bubbles: true,
+    				cancelable: true,
+    				key: "i",
+    				shiftKey: false
+    			});
 
-    		if ($settingsTab === "intervals") {
-    			settingsTab.set("style");
-    		}
-
-    		await tick();
-    		focused.set(true);
-    		await tick();
+    		document.dispatchEvent(e);
     	};
 
     	const writable_props = [];
@@ -30066,21 +29998,13 @@ var app = (function () {
     		fade,
     		TomatoIcon,
     		color,
-    		globalHue,
-    		hue,
     		intervalColors,
-    		intervalMode,
     		size,
-    		settingsTab,
     		meme,
-    		focused,
     		intervalDurations,
-    		tick,
     		Fa,
     		faSyncAlt,
     		turnOff,
-    		$globalHue,
-    		$settingsTab,
     		isPomodoro,
     		$intervalDurations,
     		intervalCols,
@@ -31188,12 +31112,12 @@ var app = (function () {
     			create_component(fa1.$$.fragment);
     			attr_dev(button0, "class", "minusButton svelte-1w170g2");
     			button0.disabled = button0_disabled_value = /*$size*/ ctx[0] <= 100;
-    			add_location(button0, file$f, 16, 4, 428);
+    			add_location(button0, file$f, 22, 4, 699);
     			attr_dev(button1, "class", "plusButton svelte-1w170g2");
     			button1.disabled = button1_disabled_value = /*$size*/ ctx[0] >= /*$maxSize*/ ctx[1];
-    			add_location(button1, file$f, 24, 4, 586);
+    			add_location(button1, file$f, 30, 4, 857);
     			attr_dev(div, "class", "ResizeControl svelte-1w170g2");
-    			add_location(div, file$f, 15, 0, 395);
+    			add_location(div, file$f, 21, 0, 666);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -31209,8 +31133,8 @@ var app = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(button0, "click", /*sizeDown*/ ctx[3], false, false, false),
-    					listen_dev(button1, "click", /*sizeUp*/ ctx[2], false, false, false)
+    					listen_dev(button0, "click", /*sizeDown*/ ctx[2], false, false, false),
+    					listen_dev(button1, "click", /*sizeUp*/ ctx[3], false, false, false)
     				];
 
     				mounted = true;
@@ -31266,8 +31190,31 @@ var app = (function () {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("ResizeControl", slots, []);
     	const dispatch = createEventDispatcher();
-    	const sizeUp = () => dispatch("sizeUp");
-    	const sizeDown = () => dispatch("sizeDown");
+
+    	const sizeDown = () => {
+    		const e = new KeyboardEvent("keydown",
+    		{
+    				bubbles: true,
+    				cancelable: true,
+    				key: "-",
+    				shiftKey: false
+    			});
+
+    		document.dispatchEvent(e);
+    	};
+
+    	const sizeUp = () => {
+    		const e = new KeyboardEvent("keydown",
+    		{
+    				bubbles: true,
+    				cancelable: true,
+    				key: "=",
+    				shiftKey: false
+    			});
+
+    		document.dispatchEvent(e);
+    	};
+
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
@@ -31276,20 +31223,19 @@ var app = (function () {
 
     	$$self.$capture_state = () => ({
     		createEventDispatcher,
-    		color,
     		size,
     		maxSize,
     		faPlus,
     		faMinus,
     		Fa,
     		dispatch,
-    		sizeUp,
     		sizeDown,
+    		sizeUp,
     		$size,
     		$maxSize
     	});
 
-    	return [$size, $maxSize, sizeUp, sizeDown];
+    	return [$size, $maxSize, sizeDown, sizeUp];
     }
 
     class ResizeControl extends SvelteComponentDev {
@@ -35624,7 +35570,7 @@ var app = (function () {
     			button = element("button");
     			create_component(fa.$$.fragment);
     			attr_dev(button, "class", "IntervalModeButton svelte-1sc5q0");
-    			add_location(button, file$1, 28, 0, 979);
+    			add_location(button, file$1, 11, 0, 323);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -35669,44 +35615,19 @@ var app = (function () {
     }
 
     function instance$2($$self, $$props, $$invalidate) {
-    	let $intervalMode;
-    	let $globalHue;
-    	let $settingsTab;
-    	let $intervalColors;
-    	let $intervalIndex;
-    	let $inputRef;
-    	validate_store(intervalMode, "intervalMode");
-    	component_subscribe($$self, intervalMode, $$value => $$invalidate(1, $intervalMode = $$value));
-    	validate_store(globalHue, "globalHue");
-    	component_subscribe($$self, globalHue, $$value => $$invalidate(2, $globalHue = $$value));
-    	validate_store(settingsTab, "settingsTab");
-    	component_subscribe($$self, settingsTab, $$value => $$invalidate(3, $settingsTab = $$value));
-    	validate_store(intervalColors, "intervalColors");
-    	component_subscribe($$self, intervalColors, $$value => $$invalidate(4, $intervalColors = $$value));
-    	validate_store(intervalIndex, "intervalIndex");
-    	component_subscribe($$self, intervalIndex, $$value => $$invalidate(5, $intervalIndex = $$value));
-    	validate_store(inputRef, "inputRef");
-    	component_subscribe($$self, inputRef, $$value => $$invalidate(6, $inputRef = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("IntervalModeButton", slots, []);
 
-    	const toggleIntervalMode = async () => {
-    		focused.set(false);
+    	const toggleIntervalMode = () => {
+    		const e = new KeyboardEvent("keydown",
+    		{
+    				bubbles: true,
+    				cancelable: true,
+    				key: "i",
+    				shiftKey: false
+    			});
 
-    		if ($intervalMode) {
-    			hue.set($globalHue);
-
-    			if ($settingsTab === "intervals") {
-    				settingsTab.set("style");
-    			}
-    		} else if ($intervalColors[$intervalIndex] !== null) {
-    			hue.set($intervalColors[$intervalIndex]);
-    		}
-
-    		intervalMode.set(!$intervalMode);
-    		await tick();
-    		if ($inputRef) $inputRef.focus();
-    		focused.set(true);
+    		document.dispatchEvent(e);
     	};
 
     	const writable_props = [];
@@ -35715,29 +35636,7 @@ var app = (function () {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<IntervalModeButton> was created with unknown prop '${key}'`);
     	});
 
-    	$$self.$capture_state = () => ({
-    		tick,
-    		TomatoIcon,
-    		Fa,
-    		faSyncAlt,
-    		globalHue,
-    		hue,
-    		intervalColors,
-    		intervalMode,
-    		size,
-    		settingsTab,
-    		inputRef,
-    		focused,
-    		intervalIndex,
-    		toggleIntervalMode,
-    		$intervalMode,
-    		$globalHue,
-    		$settingsTab,
-    		$intervalColors,
-    		$intervalIndex,
-    		$inputRef
-    	});
-
+    	$$self.$capture_state = () => ({ Fa, faSyncAlt, toggleIntervalMode });
     	return [toggleIntervalMode];
     }
 
@@ -36372,8 +36271,6 @@ var app = (function () {
     		});
 
     	resizecontrol = new ResizeControl({ $$inline: true });
-    	resizecontrol.$on("sizeUp", /*makeBigger*/ ctx[12]);
-    	resizecontrol.$on("sizeDown", /*makeSmaller*/ ctx[11]);
     	opensettingsbutton = new OpenSettingsButton({ $$inline: true });
     	intervalmodebutton = new IntervalModeButton({ $$inline: true });
     	let if_block = /*$settingsOpen*/ ctx[10] && create_if_block(ctx);

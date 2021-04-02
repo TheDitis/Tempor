@@ -1,15 +1,13 @@
 <script>
     import {faAdjust} from "@fortawesome/free-solid-svg-icons";
     import Fa from "svelte-fa";
-    import {inputRef, settings} from "../../stores/appState";
 
     const themeOptions = ["transparent", "dark", "light"];
 
     const cycleTheme = () => {
-        const currentInd = themeOptions.indexOf($settings.theme);
-        const nextTheme = themeOptions[(currentInd + 1) % themeOptions.length];
-        settings.update(opts => ({...opts, theme: nextTheme}));
-        if ($inputRef) $inputRef.focus();
+        // send a background cycle key command to our main listener
+        const e = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key: 'b', shiftKey : false});
+        document.dispatchEvent(e);
     }
 </script>
 

@@ -1,14 +1,20 @@
 <script>
     import {createEventDispatcher} from "svelte";
-    import {color, size, maxSize} from "../../stores/appState";
+    import {size, maxSize} from "../../stores/appState";
 
     import {faPlus, faMinus} from "@fortawesome/free-solid-svg-icons";
     import Fa from "svelte-fa";
 
     const dispatch = createEventDispatcher();
 
-    const sizeUp = () => dispatch("sizeUp")
-    const sizeDown = () => dispatch("sizeDown")
+    const sizeDown = () => {
+        const e = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key: "-", shiftKey : false});
+        document.dispatchEvent(e);
+    }
+    const sizeUp = () => {
+        const e = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key: "=", shiftKey : false});
+        document.dispatchEvent(e);
+    }
 
 </script>
 

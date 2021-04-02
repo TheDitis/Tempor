@@ -160,7 +160,7 @@
 
 		<div class="timerSection" >
 			<Timer start={start} pause={pause} resume={resume}/>
-			<ResizeControl on:sizeUp={makeBigger} on:sizeDown={makeSmaller}/>
+			<ResizeControl />
 			<OpenSettingsButton/>
 <!--			<ThemeCycleButton/>-->
 			<IntervalModeButton/>

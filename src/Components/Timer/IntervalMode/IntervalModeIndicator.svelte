@@ -3,29 +3,18 @@
     import TomatoIcon from "../../Icons/TomatoIcon.svelte";
     import {
         color,
-        globalHue,
-        hue,
         intervalColors,
-        intervalMode,
         size,
-        settingsTab,
         meme
     } from "../../../stores/appState";
-    import {focused, intervalDurations} from "../../../stores/timerState";
-    import {tick} from "svelte";
+    import {intervalDurations} from "../../../stores/timerState";
     import Fa from "svelte-fa";
     import {faSyncAlt} from "@fortawesome/free-solid-svg-icons";
 
     const turnOff = async () => {
-        focused.set(false);
-        intervalMode.set(false);
-        hue.set($globalHue);
-        if ($settingsTab === "intervals") {
-            settingsTab.set("style");
-        }
-        await tick();
-        focused.set(true);
-        await tick();
+        const e = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key: "i", shiftKey : false});
+        document.dispatchEvent(e);
+
     }
 
     $: isPomodoro = ($intervalDurations.length === 2 && $intervalDurations[0] === 1500000 && $intervalDurations[1] === 300000)

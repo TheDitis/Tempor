@@ -3,81 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="2b7b0175-f98d-43b3-b351-86c5c407840e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/build/bundle.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/build/bundle.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/build/bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/build/bundle.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/build/bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/build/bundle.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (1).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (10).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (11).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (12).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (13).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (14).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (15).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (16).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (17).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (18).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (19).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (2).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (20).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (21).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (22).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (23).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (24).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (25).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (26).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (27).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (28).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (29).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (3).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (30).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (31).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (32).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (33).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (34).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (35).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (36).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (37).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (38).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (39).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (4).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (40).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (41).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (42).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (43).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (44).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (45).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (46).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (47).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (48).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (49).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (5).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (50).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (51).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (52).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (53).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (54).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (55).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (56).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (57).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (58).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (59).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (6).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (60).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (61).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (62).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (63).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (64).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (65).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (66).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (7).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (8).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/sound (9).wav" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Settings/SettingControls/SelectOption.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/SettingControls/SelectOption.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Settings/Sound/SoundSettings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/Sound/SoundSettings.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stores/appState.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/appState.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Controls/IntervalModeButton.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/IntervalModeButton.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Controls/PlayPauseControl.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/PlayPauseControl.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Controls/ResizeControl.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/ResizeControl.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Controls/ThemeCycleButton.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/ThemeCycleButton.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Timer/IntervalMode/IntervalModeIndicator.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/IntervalMode/IntervalModeIndicator.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +131,7 @@
       <workItem from="1616466762411" duration="2202000" />
       <workItem from="1616542385164" duration="136060000" />
       <workItem from="1616882342802" duration="98233000" />
-      <workItem from="1617242183268" duration="39720000" />
+      <workItem from="1617242183268" duration="41060000" />
     </task>
     <servers />
   </component>
