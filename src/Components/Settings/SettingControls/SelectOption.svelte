@@ -5,7 +5,8 @@
 
     export let label = "";
     export let options = [];
-    export let onChange = (val) => null;
+    export let onChange = val => null;
+    export let onClick = val => null;
     export let value;
 
     // so that the onChange function will be called only when the buttons are pressed, not on initial mount
@@ -56,13 +57,13 @@
 
 </script>
 <div class="SelectDropdown">
-    <p>{label}</p>
+    <p class="label">{label}</p>
     <div class="arrowButtonsSection">
         <button class="arrowButton" on:click={prev}>
             <Fa icon={faCaretLeft}/>
         </button>
         {#if ind !== null}
-            <p>{withoutExtension(value)}</p>
+            <p on:click={() => onClick(value)}>{withoutExtension(value)}</p>
         {/if}
         <button class="arrowButton" on:click={next}>
             <Fa icon={faCaretRight}/>
@@ -82,12 +83,16 @@
 
     }
 
+    .label {
+        margin-bottom: 10px;
+    }
+
     p {
         margin: 0;
         padding: 0;
         /*margin-bottom: 8px;*/
         user-select: none;
-        font-size: calc(var(--size) / 14 * 1px);
+        font-size: calc(var(--size) / 15 * 1px);
     }
 
     .arrowButtonsSection {

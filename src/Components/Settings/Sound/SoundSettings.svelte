@@ -13,6 +13,10 @@
         settings.set({...$settings, sounds})
     }
 
+    const onClick = (filename) => {
+        playSound(filename);
+    }
+
     let fileList = listSoundFileNames();
     let startVal, nextVal, endVal;
 
@@ -23,6 +27,8 @@
             endVal = $settings.sounds.end;
         }
     }
+
+
 </script>
 
 
@@ -31,15 +37,15 @@
     {#if fileList.length > 0}
         <br/>
         {#if startVal}
-            <SelectOption onChange={changeSoundFile("start")} bind:value={startVal} label="Start" options={fileList}/>
+            <SelectOption onChange={changeSoundFile("start")} onClick={onClick} bind:value={startVal} label="Start" options={fileList}/>
         {/if}
         {#if $intervalMode && nextVal}
             <br/>
-            <SelectOption onChange={changeSoundFile("next")} bind:value={nextVal} label="Next" options={fileList}/>
+            <SelectOption onChange={changeSoundFile("next")} onClick={onClick} bind:value={nextVal} label="Next" options={fileList}/>
         {/if}
         {#if endVal}
             <br/>
-            <SelectOption onChange={changeSoundFile("end")} bind:value={endVal} label="End" options={fileList}/>
+            <SelectOption onChange={changeSoundFile("end")} onClick={onClick} bind:value={endVal} label="End" options={fileList}/>
         {/if}
     {:else}
         <h2>No sound files found</h2>

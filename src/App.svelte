@@ -39,7 +39,6 @@
 		tempDuration
 	} from "./stores/timerState";
 
-	// TODO: Add sounds to favorites
 	// TODO: Make clicking on file name in sound selector play the current sound
 	// TODO: Add other sounds
 	// TODO: Rename sounds
