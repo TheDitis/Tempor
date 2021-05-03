@@ -1,11 +1,9 @@
 import svelte from 'rollup-plugin-svelte';
-// import preprocess from "svelte-preprocess"
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
-import * as electron from "electron";
 
 
 const production = !process.env.ROLLUP_WATCH;

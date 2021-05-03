@@ -12,11 +12,9 @@
         settings,
         settingsOpen,
         settingsTab,
-        settingsHeight,
         showFavorites
     } from "../../stores/appState";
     import {duration, focused, intervalDurations, intervalIndex, runState, tempDuration} from "../../stores/timerState";
-
 
     export let makeBigger;
     export let makeSmaller;
@@ -54,14 +52,22 @@
         else {
             const favorites = $settings.favoriteIntervals;
             const favoriteColors = $settings.favoriteIntervalColors;
-            favorites[favoriteIndex] = $intervalDurations;
-            favoriteColors[favoriteIndex] = $intervalColors;
+            if ($intervalDurations.some(val => val > 0)) {
+                favorites[favoriteIndex] = $intervalDurations;
+                favoriteColors[favoriteIndex] = $intervalColors;
+                currentFavInterval.set(favoriteIndex);
+            }
+            else {
+                favorites[favoriteIndex] = null;
+                favoriteColors[favoriteIndex] = null;
+            }
+
             settings.set({
                 ...$settings,
                 favoriteIntervals: favorites,
                 favoriteIntervalColors: favoriteColors,
             });
-            currentFavInterval.set(favoriteIndex);
+
         }
         await tick();
         focused.set(true);
@@ -113,17 +119,17 @@
         }
     }
 
-
-
-    // $: {updateColor($intervalColors)}
-
     const handleKeyDown = async (e) => {
         const key = e.key;
-        if (e.repeat) return;
+        if (e.repeat) {
+            return;
+        }
         switch (key) {
             /// MAIN PAUSE/PLAY CONTROLS
             case " ":
-                if ($runState === "running") pause();
+                if ($runState === "running") {
+                    pause();
+                }
 
                 else if (
                     (
@@ -136,7 +142,9 @@
                 ) {
                     start();
                 }
-                else if ($runState === "paused") resume();
+                else if ($runState === "paused") {
+                    resume()
+                };
                 break;
             case "Enter":
                 if ($focused && (($intervalMode && $intervalDurations.every(v => v)) || $tempDuration)) {
@@ -302,9 +310,6 @@
                 break;
             case "s":
             case "S":
-                // if ($settingsOpen) {
-                //     settingsHeight.set(0);
-                // }
                 settingsOpen.set(!$settingsOpen);
                 break;
             case "b":
@@ -317,6 +322,8 @@
     }
 
     const handleKeyUp = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
         const key = e.key;
         switch (key) {
             case "Shift":

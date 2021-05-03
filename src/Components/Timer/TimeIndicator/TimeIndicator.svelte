@@ -27,7 +27,7 @@
     {#if $focused}
         <TimeInput/>
     {:else}
-        <h1 class="time">{formatTimeMs($remainingTime)}</h1>
+        <h1 class="time">{formatTimeMs($remainingTime, true)}</h1>
     {/if}
 </div>
 

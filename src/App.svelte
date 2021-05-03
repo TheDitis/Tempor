@@ -1,25 +1,25 @@
 <script>
-	import {onMount, tick} from "svelte";
+	import {onMount} from "svelte";
 	import Timer from "./Components/Timer/Timer.svelte";
-	const {ipcRenderer} = require("electron");
 	import {
-		size,
-		hue,
-		width,
-		height,
-		color,
-		stayOnTop,
-		scaledBlur,
 		borderRadius,
-		settings,
-		maxSize,
-		settingsOpen,
-		loadSettings,
-		intervalMode,
-		intervalColors,
-		playSound,
+		color,
+		globalHue,
+		height,
+		hue,
 		inputRef,
-		meme, globalHue, settingsHeight
+		intervalColors,
+		intervalMode,
+		loadSettings,
+		maxSize,
+		meme,
+		playSound,
+		scaledBlur,
+		settings,
+		settingsOpen,
+		size,
+		stayOnTop,
+		width
 	} from "./stores/appState";
 	import ResizeControl from "./Components/Controls/ResizeControl.svelte";
 	import OpenSettingsButton from "./Components/Settings/OpenSettingsButton.svelte";
@@ -31,13 +31,15 @@
 		focused,
 		intervalDurations,
 		intervalIndex,
-		playingIntervalIndex,
 		pausedRemainingTime,
+		playingIntervalIndex,
 		remainingTime,
 		runState,
 		startTime,
 		tempDuration
 	} from "./stores/timerState";
+
+	const {ipcRenderer} = require("electron");
 
 	// TODO: set settings to default
 
@@ -47,8 +49,6 @@
 		ipcRenderer.send("resize", $width, $height);
 	})
 	const resize = async (deps) => {
-		// await tick();
-		console.log("resize called!")
 		ipcRenderer.send("resize", $width, $height)
 	}
 	// any time the window size changes, send the signal to electron

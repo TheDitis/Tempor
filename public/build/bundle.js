@@ -713,7 +713,7 @@ var app = (function () {
             on_disconnect: [],
             before_update: [],
             after_update: [],
-            context: new Map(parent_component ? parent_component.$$.context : []),
+            context: new Map(parent_component ? parent_component.$$.context : options.context || []),
             // everything else
             callbacks: blank_object(),
             dirty,
@@ -782,7 +782,7 @@ var app = (function () {
     }
 
     function dispatch_dev(type, detail) {
-        document.dispatchEvent(custom_event(type, Object.assign({ version: '3.35.0' }, detail)));
+        document.dispatchEvent(custom_event(type, Object.assign({ version: '3.37.0' }, detail)));
     }
     function append_dev(target, node) {
         dispatch_dev('SvelteDOMInsert', { target, node });
@@ -993,7 +993,7 @@ var app = (function () {
     	return fn(module, module.exports), module.exports;
     }
 
-    var colorName$1 = {
+    var colorName = {
     	"aliceblue": [240, 248, 255],
     	"antiquewhite": [250, 235, 215],
     	"aqua": [0, 255, 255],
@@ -1191,9 +1191,9 @@ var app = (function () {
     var reverseNames = {};
 
     // create a list of reverse color names
-    for (var name in colorName$1) {
-    	if (colorName$1.hasOwnProperty(name)) {
-    		reverseNames[colorName$1[name]] = name;
+    for (var name in colorName) {
+    	if (colorName.hasOwnProperty(name)) {
+    		reverseNames[colorName[name]] = name;
     	}
     }
 
@@ -1289,7 +1289,7 @@ var app = (function () {
     			return [0, 0, 0, 0];
     		}
 
-    		rgb = colorName$1[match[1]];
+    		rgb = colorName[match[1]];
 
     		if (!rgb) {
     			return null;
@@ -1419,157 +1419,6 @@ var app = (function () {
     	return (str.length < 2) ? '0' + str : str;
     }
     });
-
-    var colorName = {
-    	"aliceblue": [240, 248, 255],
-    	"antiquewhite": [250, 235, 215],
-    	"aqua": [0, 255, 255],
-    	"aquamarine": [127, 255, 212],
-    	"azure": [240, 255, 255],
-    	"beige": [245, 245, 220],
-    	"bisque": [255, 228, 196],
-    	"black": [0, 0, 0],
-    	"blanchedalmond": [255, 235, 205],
-    	"blue": [0, 0, 255],
-    	"blueviolet": [138, 43, 226],
-    	"brown": [165, 42, 42],
-    	"burlywood": [222, 184, 135],
-    	"cadetblue": [95, 158, 160],
-    	"chartreuse": [127, 255, 0],
-    	"chocolate": [210, 105, 30],
-    	"coral": [255, 127, 80],
-    	"cornflowerblue": [100, 149, 237],
-    	"cornsilk": [255, 248, 220],
-    	"crimson": [220, 20, 60],
-    	"cyan": [0, 255, 255],
-    	"darkblue": [0, 0, 139],
-    	"darkcyan": [0, 139, 139],
-    	"darkgoldenrod": [184, 134, 11],
-    	"darkgray": [169, 169, 169],
-    	"darkgreen": [0, 100, 0],
-    	"darkgrey": [169, 169, 169],
-    	"darkkhaki": [189, 183, 107],
-    	"darkmagenta": [139, 0, 139],
-    	"darkolivegreen": [85, 107, 47],
-    	"darkorange": [255, 140, 0],
-    	"darkorchid": [153, 50, 204],
-    	"darkred": [139, 0, 0],
-    	"darksalmon": [233, 150, 122],
-    	"darkseagreen": [143, 188, 143],
-    	"darkslateblue": [72, 61, 139],
-    	"darkslategray": [47, 79, 79],
-    	"darkslategrey": [47, 79, 79],
-    	"darkturquoise": [0, 206, 209],
-    	"darkviolet": [148, 0, 211],
-    	"deeppink": [255, 20, 147],
-    	"deepskyblue": [0, 191, 255],
-    	"dimgray": [105, 105, 105],
-    	"dimgrey": [105, 105, 105],
-    	"dodgerblue": [30, 144, 255],
-    	"firebrick": [178, 34, 34],
-    	"floralwhite": [255, 250, 240],
-    	"forestgreen": [34, 139, 34],
-    	"fuchsia": [255, 0, 255],
-    	"gainsboro": [220, 220, 220],
-    	"ghostwhite": [248, 248, 255],
-    	"gold": [255, 215, 0],
-    	"goldenrod": [218, 165, 32],
-    	"gray": [128, 128, 128],
-    	"green": [0, 128, 0],
-    	"greenyellow": [173, 255, 47],
-    	"grey": [128, 128, 128],
-    	"honeydew": [240, 255, 240],
-    	"hotpink": [255, 105, 180],
-    	"indianred": [205, 92, 92],
-    	"indigo": [75, 0, 130],
-    	"ivory": [255, 255, 240],
-    	"khaki": [240, 230, 140],
-    	"lavender": [230, 230, 250],
-    	"lavenderblush": [255, 240, 245],
-    	"lawngreen": [124, 252, 0],
-    	"lemonchiffon": [255, 250, 205],
-    	"lightblue": [173, 216, 230],
-    	"lightcoral": [240, 128, 128],
-    	"lightcyan": [224, 255, 255],
-    	"lightgoldenrodyellow": [250, 250, 210],
-    	"lightgray": [211, 211, 211],
-    	"lightgreen": [144, 238, 144],
-    	"lightgrey": [211, 211, 211],
-    	"lightpink": [255, 182, 193],
-    	"lightsalmon": [255, 160, 122],
-    	"lightseagreen": [32, 178, 170],
-    	"lightskyblue": [135, 206, 250],
-    	"lightslategray": [119, 136, 153],
-    	"lightslategrey": [119, 136, 153],
-    	"lightsteelblue": [176, 196, 222],
-    	"lightyellow": [255, 255, 224],
-    	"lime": [0, 255, 0],
-    	"limegreen": [50, 205, 50],
-    	"linen": [250, 240, 230],
-    	"magenta": [255, 0, 255],
-    	"maroon": [128, 0, 0],
-    	"mediumaquamarine": [102, 205, 170],
-    	"mediumblue": [0, 0, 205],
-    	"mediumorchid": [186, 85, 211],
-    	"mediumpurple": [147, 112, 219],
-    	"mediumseagreen": [60, 179, 113],
-    	"mediumslateblue": [123, 104, 238],
-    	"mediumspringgreen": [0, 250, 154],
-    	"mediumturquoise": [72, 209, 204],
-    	"mediumvioletred": [199, 21, 133],
-    	"midnightblue": [25, 25, 112],
-    	"mintcream": [245, 255, 250],
-    	"mistyrose": [255, 228, 225],
-    	"moccasin": [255, 228, 181],
-    	"navajowhite": [255, 222, 173],
-    	"navy": [0, 0, 128],
-    	"oldlace": [253, 245, 230],
-    	"olive": [128, 128, 0],
-    	"olivedrab": [107, 142, 35],
-    	"orange": [255, 165, 0],
-    	"orangered": [255, 69, 0],
-    	"orchid": [218, 112, 214],
-    	"palegoldenrod": [238, 232, 170],
-    	"palegreen": [152, 251, 152],
-    	"paleturquoise": [175, 238, 238],
-    	"palevioletred": [219, 112, 147],
-    	"papayawhip": [255, 239, 213],
-    	"peachpuff": [255, 218, 185],
-    	"peru": [205, 133, 63],
-    	"pink": [255, 192, 203],
-    	"plum": [221, 160, 221],
-    	"powderblue": [176, 224, 230],
-    	"purple": [128, 0, 128],
-    	"rebeccapurple": [102, 51, 153],
-    	"red": [255, 0, 0],
-    	"rosybrown": [188, 143, 143],
-    	"royalblue": [65, 105, 225],
-    	"saddlebrown": [139, 69, 19],
-    	"salmon": [250, 128, 114],
-    	"sandybrown": [244, 164, 96],
-    	"seagreen": [46, 139, 87],
-    	"seashell": [255, 245, 238],
-    	"sienna": [160, 82, 45],
-    	"silver": [192, 192, 192],
-    	"skyblue": [135, 206, 235],
-    	"slateblue": [106, 90, 205],
-    	"slategray": [112, 128, 144],
-    	"slategrey": [112, 128, 144],
-    	"snow": [255, 250, 250],
-    	"springgreen": [0, 255, 127],
-    	"steelblue": [70, 130, 180],
-    	"tan": [210, 180, 140],
-    	"teal": [0, 128, 128],
-    	"thistle": [216, 191, 216],
-    	"tomato": [255, 99, 71],
-    	"turquoise": [64, 224, 208],
-    	"violet": [238, 130, 238],
-    	"wheat": [245, 222, 179],
-    	"white": [255, 255, 255],
-    	"whitesmoke": [245, 245, 245],
-    	"yellow": [255, 255, 0],
-    	"yellowgreen": [154, 205, 50]
-    };
 
     /* MIT license */
 
@@ -3094,6 +2943,8 @@ var app = (function () {
     const fs = require("fs");
     const path = require("path");
 
+
+
     const cloneObj = obj => v8.deserialize(v8.serialize(obj));
 
     const inputRef = writable(null);
@@ -3141,8 +2992,7 @@ var app = (function () {
 
     const settingsHeight = writable(0);
 
-
-    const settingsOpen = writable(true);
+    const settingsOpen = writable(false);
 
     const width = derived(
         [size, scaledBlur, lineThickness],
@@ -3151,24 +3001,15 @@ var app = (function () {
         }
     );
 
-
     const height = derived(
         [settingsHeight, settingsOpen, size, scaledBlur],
         ([$settingsHeight, $settingsOpen, $size, $scaledBlur]) => {
             // main area height is size + blur + draggable-bar
             const mainSectionSize = Math.round($size + ($scaledBlur * 7)) + 20;
-            console.log("settingsOpen: ", $settingsOpen, " settingsHeight: ", $settingsHeight);
-
-            if ($settingsOpen) {
-                const res = mainSectionSize + $settingsHeight + 20;
-                console.log("height: ", res);
-                return res
-            }
+            if ($settingsOpen) return mainSectionSize + $settingsHeight + 20;
             else return mainSectionSize
         }
     );
-
-
 
     const settings = writable({});
 
@@ -3317,7 +3158,7 @@ var app = (function () {
 
     /// USED IN INTERVAL MODE
     // this is used for the temporary durations in interval mode
-    const intervalDurations = writable([25000, 5000]);
+    const intervalDurations = writable([0, 0]);
 
     // the index of the current interval duration
     const intervalIndex = writable(0);
@@ -3331,8 +3172,6 @@ var app = (function () {
         // if not in interval mode
         if (!get_store_value(intervalMode)) {
             runState.set("finished");
-            // const sound = new Audio("file://" + __dirname + "/sounds/sound (1).wav");
-            // sound.play();
             playSound(curSettings.sounds.end);
             focused.set(true);
         }
@@ -10442,9 +10281,12 @@ var app = (function () {
         return duration
     };
 
-    const formatTimeMs = (msTime) => {
+    const formatTimeMs = (msTime, roundUpFormat = false) => {
         if (msTime <= 0) {
             return "00:00:00";
+        }
+        if (roundUpFormat) {
+            msTime += 1000;
         }
         const duration = msToHrsMinsSecs(msTime);
         return formatTime(duration.hours, duration.minutes, duration.seconds)
@@ -27665,7 +27507,7 @@ var app = (function () {
     }.call(commonjsGlobal));
     });
 
-    /* src\Components\Timer\TimeIndicator\TimeInput.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Timer\TimeIndicator\TimeInput.svelte generated by Svelte v3.37.0 */
     const file$p = "src\\Components\\Timer\\TimeIndicator\\TimeInput.svelte";
 
     function create_fragment$q(ctx) {
@@ -28002,13 +27844,13 @@ var app = (function () {
     	}
     }
 
-    /* src\Components\Timer\TimeIndicator\TimeIndicator.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Timer\TimeIndicator\TimeIndicator.svelte generated by Svelte v3.37.0 */
     const file$o = "src\\Components\\Timer\\TimeIndicator\\TimeIndicator.svelte";
 
     // (29:4) {:else}
     function create_else_block$3(ctx) {
     	let h1;
-    	let t_value = formatTimeMs(/*$remainingTime*/ ctx[2]) + "";
+    	let t_value = formatTimeMs(/*$remainingTime*/ ctx[2], true) + "";
     	let t;
 
     	const block = {
@@ -28023,7 +27865,7 @@ var app = (function () {
     			append_dev(h1, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*$remainingTime*/ 4 && t_value !== (t_value = formatTimeMs(/*$remainingTime*/ ctx[2]) + "")) set_data_dev(t, t_value);
+    			if (dirty & /*$remainingTime*/ 4 && t_value !== (t_value = formatTimeMs(/*$remainingTime*/ ctx[2], true) + "")) set_data_dev(t, t_value);
     		},
     		i: noop,
     		o: noop,
@@ -28259,7 +28101,7 @@ var app = (function () {
     	}
     }
 
-    /* node_modules\svelte-fa\src\fa.svelte generated by Svelte v3.35.0 */
+    /* node_modules\svelte-fa\src\fa.svelte generated by Svelte v3.37.0 */
 
     const file$n = "node_modules\\svelte-fa\\src\\fa.svelte";
 
@@ -28991,7 +28833,7 @@ var app = (function () {
       icon: [576, 512, [], "f028", "M215.03 71.05L126.06 160H24c-13.26 0-24 10.74-24 24v144c0 13.25 10.74 24 24 24h102.06l88.97 88.95c15.03 15.03 40.97 4.47 40.97-16.97V88.02c0-21.46-25.96-31.98-40.97-16.97zm233.32-51.08c-11.17-7.33-26.18-4.24-33.51 6.95-7.34 11.17-4.22 26.18 6.95 33.51 66.27 43.49 105.82 116.6 105.82 195.58 0 78.98-39.55 152.09-105.82 195.58-11.17 7.32-14.29 22.34-6.95 33.5 7.04 10.71 21.93 14.56 33.51 6.95C528.27 439.58 576 351.33 576 256S528.27 72.43 448.35 19.97zM480 256c0-63.53-32.06-121.94-85.77-156.24-11.19-7.14-26.03-3.82-33.12 7.46s-3.78 26.21 7.41 33.36C408.27 165.97 432 209.11 432 256s-23.73 90.03-63.48 115.42c-11.19 7.14-14.5 22.07-7.41 33.36 6.51 10.36 21.12 15.14 33.12 7.46C447.94 377.94 480 319.54 480 256zm-141.77-76.87c-11.58-6.33-26.19-2.16-32.61 9.45-6.39 11.61-2.16 26.2 9.45 32.61C327.98 228.28 336 241.63 336 256c0 14.38-8.02 27.72-20.92 34.81-11.61 6.41-15.84 21-9.45 32.61 6.43 11.66 21.05 15.8 32.61 9.45 28.23-15.55 45.77-45 45.77-76.88s-17.54-61.32-45.78-76.86z"]
     };
 
-    /* src\Components\Controls\PlayPauseControl.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Controls\PlayPauseControl.svelte generated by Svelte v3.37.0 */
     const file$m = "src\\Components\\Controls\\PlayPauseControl.svelte";
 
     function create_fragment$n(ctx) {
@@ -29198,7 +29040,7 @@ var app = (function () {
         };
     }
 
-    /* src\Components\Timer\Favorites\Favorites.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Timer\Favorites\Favorites.svelte generated by Svelte v3.37.0 */
     const file$l = "src\\Components\\Timer\\Favorites\\Favorites.svelte";
 
     function get_each_context$3(ctx, list, i) {
@@ -29501,7 +29343,7 @@ var app = (function () {
     	}
     }
 
-    /* src\Components\Icons\TomatoIcon.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Icons\TomatoIcon.svelte generated by Svelte v3.37.0 */
     const file$k = "src\\Components\\Icons\\TomatoIcon.svelte";
 
     function create_fragment$l(ctx) {
@@ -29694,7 +29536,7 @@ var app = (function () {
     	}
     }
 
-    /* src\Components\Timer\IntervalMode\IntervalModeIndicator.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Timer\IntervalMode\IntervalModeIndicator.svelte generated by Svelte v3.37.0 */
     const file$j = "src\\Components\\Timer\\IntervalMode\\IntervalModeIndicator.svelte";
 
     // (21:0) {#if !$meme}
@@ -30068,42 +29910,53 @@ var app = (function () {
     	}
     }
 
-    /* src\Components\Timer\IntervalMode\IntervalNumberIndicator.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Timer\IntervalMode\IntervalNumberIndicator.svelte generated by Svelte v3.37.0 */
     const file$i = "src\\Components\\Timer\\IntervalMode\\IntervalNumberIndicator.svelte";
 
     function get_each_context$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[9] = list[i];
-    	child_ctx[11] = i;
+    	child_ctx[10] = list[i];
+    	child_ctx[12] = i;
     	return child_ctx;
     }
 
-    // (43:4) {#each $intervalDurations as duration, ind}
+    // (49:4) {#each $intervalDurations as duration, ind}
     function create_each_block$2(ctx) {
     	let div;
+    	let mounted;
+    	let dispose;
 
     	const block = {
     		c: function create() {
     			div = element("div");
-    			attr_dev(div, "class", "intervalItem svelte-5f8uxp");
-    			set_style(div, "background", /*colors*/ ctx[1][/*ind*/ ctx[11]]);
-    			toggle_class(div, "current", /*$intervalIndex*/ ctx[3] === /*ind*/ ctx[11]);
-    			add_location(div, file$i, 43, 8, 1264);
+    			attr_dev(div, "class", "intervalItem svelte-1k2oix1");
+    			set_style(div, "background", /*colors*/ ctx[1][/*ind*/ ctx[12]]);
+    			toggle_class(div, "current", /*$intervalIndex*/ ctx[3] === /*ind*/ ctx[12]);
+    			add_location(div, file$i, 49, 8, 1407);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
+
+    			if (!mounted) {
+    				dispose = listen_dev(div, "click", /*navigateToInterval*/ ctx[4](/*ind*/ ctx[12]), false, false, false);
+    				mounted = true;
+    			}
     		},
-    		p: function update(ctx, dirty) {
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+
     			if (dirty & /*colors*/ 2) {
-    				set_style(div, "background", /*colors*/ ctx[1][/*ind*/ ctx[11]]);
+    				set_style(div, "background", /*colors*/ ctx[1][/*ind*/ ctx[12]]);
     			}
 
     			if (dirty & /*$intervalIndex*/ 8) {
-    				toggle_class(div, "current", /*$intervalIndex*/ ctx[3] === /*ind*/ ctx[11]);
+    				toggle_class(div, "current", /*$intervalIndex*/ ctx[3] === /*ind*/ ctx[12]);
     			}
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
+    			mounted = false;
+    			dispose();
     		}
     	};
 
@@ -30111,7 +29964,7 @@ var app = (function () {
     		block,
     		id: create_each_block$2.name,
     		type: "each",
-    		source: "(43:4) {#each $intervalDurations as duration, ind}",
+    		source: "(49:4) {#each $intervalDurations as duration, ind}",
     		ctx
     	});
 
@@ -30138,9 +29991,9 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(div, "class", "IntervalNumberIndicator svelte-5f8uxp");
+    			attr_dev(div, "class", "IntervalNumberIndicator svelte-1k2oix1");
     			set_style(div, "--blink", /*opacity*/ ctx[0]);
-    			add_location(div, file$i, 37, 0, 1089);
+    			add_location(div, file$i, 43, 0, 1232);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -30155,7 +30008,7 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*colors, $intervalIndex, $intervalDurations*/ 14) {
+    			if (dirty & /*colors, $intervalIndex, navigateToInterval, $intervalDurations*/ 30) {
     				each_value = /*$intervalDurations*/ ctx[2];
     				validate_each_argument(each_value);
     				let i;
@@ -30226,13 +30079,13 @@ var app = (function () {
     	let $intervalDurations;
     	let $intervalIndex;
     	validate_store(runState, "runState");
-    	component_subscribe($$self, runState, $$value => $$invalidate(4, $runState = $$value));
+    	component_subscribe($$self, runState, $$value => $$invalidate(5, $runState = $$value));
     	validate_store(time, "time");
-    	component_subscribe($$self, time, $$value => $$invalidate(5, $time = $$value));
+    	component_subscribe($$self, time, $$value => $$invalidate(6, $time = $$value));
     	validate_store(intervalColors, "intervalColors");
-    	component_subscribe($$self, intervalColors, $$value => $$invalidate(6, $intervalColors = $$value));
+    	component_subscribe($$self, intervalColors, $$value => $$invalidate(7, $intervalColors = $$value));
     	validate_store(globalHue, "globalHue");
-    	component_subscribe($$self, globalHue, $$value => $$invalidate(7, $globalHue = $$value));
+    	component_subscribe($$self, globalHue, $$value => $$invalidate(8, $globalHue = $$value));
     	validate_store(intervalDurations, "intervalDurations");
     	component_subscribe($$self, intervalDurations, $$value => $$invalidate(2, $intervalDurations = $$value));
     	validate_store(intervalIndex, "intervalIndex");
@@ -30250,6 +30103,12 @@ var app = (function () {
     			}
     		}));
     	}; // console.log("colors updated: ", colors)
+
+    	const navigateToInterval = ind => () => {
+    		if ($runState !== "running") {
+    			intervalIndex.set(ind);
+    		}
+    	};
 
     	const writable_props = [];
 
@@ -30270,6 +30129,7 @@ var app = (function () {
     		opacity,
     		colors,
     		updateColors,
+    		navigateToInterval,
     		$runState,
     		$time,
     		$intervalColors,
@@ -30288,7 +30148,7 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*$runState, $time*/ 48) {
+    		if ($$self.$$.dirty & /*$runState, $time*/ 96) {
     			{
     				if ($runState === "running") {
     					const oneCycle = 2 * Math.PI;
@@ -30300,7 +30160,7 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty & /*$intervalColors, $globalHue*/ 192) {
+    		if ($$self.$$.dirty & /*$intervalColors, $globalHue*/ 384) {
     			{
     				updateColors();
     			}
@@ -30312,6 +30172,7 @@ var app = (function () {
     		colors,
     		$intervalDurations,
     		$intervalIndex,
+    		navigateToInterval,
     		$runState,
     		$time,
     		$intervalColors,
@@ -30333,7 +30194,7 @@ var app = (function () {
     	}
     }
 
-    /* src\Components\Icons\MemeIndicator.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Icons\MemeIndicator.svelte generated by Svelte v3.37.0 */
     const file$h = "src\\Components\\Icons\\MemeIndicator.svelte";
 
     // (16:4) {#if $meme in faIconMap}
@@ -30513,7 +30374,7 @@ var app = (function () {
     	}
     }
 
-    /* src\Components\Timer\Timer.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Timer\Timer.svelte generated by Svelte v3.37.0 */
     const file$g = "src\\Components\\Timer\\Timer.svelte";
 
     // (57:4) {#if $showFavorites && $settings.favorites}
@@ -31092,7 +30953,7 @@ var app = (function () {
     	}
     }
 
-    /* src\Components\Controls\ResizeControl.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Controls\ResizeControl.svelte generated by Svelte v3.37.0 */
     const file$f = "src\\Components\\Controls\\ResizeControl.svelte";
 
     function create_fragment$g(ctx) {
@@ -31260,7 +31121,7 @@ var app = (function () {
     	}
     }
 
-    /* src\Components\Settings\OpenSettingsButton.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Settings\OpenSettingsButton.svelte generated by Svelte v3.37.0 */
     const file$e = "src\\Components\\Settings\\OpenSettingsButton.svelte";
 
     function create_fragment$f(ctx) {
@@ -33053,7 +32914,7 @@ var app = (function () {
         };
     }
 
-    /* src\Components\Settings\SettingsSection.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Settings\SettingsSection.svelte generated by Svelte v3.37.0 */
 
     const file$d = "src\\Components\\Settings\\SettingsSection.svelte";
     const get_buttons_slot_changes = dirty => ({});
@@ -33241,7 +33102,7 @@ var app = (function () {
     	}
     }
 
-    /* src\Components\Settings\SettingControls\SettingsSlider.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Settings\SettingControls\SettingsSlider.svelte generated by Svelte v3.37.0 */
     const file$c = "src\\Components\\Settings\\SettingControls\\SettingsSlider.svelte";
 
     function create_fragment$d(ctx) {
@@ -33507,7 +33368,7 @@ var app = (function () {
     	}
     }
 
-    /* src\Components\Settings\SettingControls\SettingsOptionButton.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Settings\SettingControls\SettingsOptionButton.svelte generated by Svelte v3.37.0 */
     const file$b = "src\\Components\\Settings\\SettingControls\\SettingsOptionButton.svelte";
 
     // (51:4) {#if showHint}
@@ -33854,17 +33715,17 @@ var app = (function () {
     	}
     }
 
-    /* src\Components\Settings\IntervalSettings\IntervalSettings.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Settings\IntervalSettings\IntervalSettings.svelte generated by Svelte v3.37.0 */
     const file$a = "src\\Components\\Settings\\IntervalSettings\\IntervalSettings.svelte";
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[18] = list[i];
-    	child_ctx[20] = i;
+    	child_ctx[19] = list[i];
+    	child_ctx[21] = i;
     	return child_ctx;
     }
 
-    // (113:12) {#if colors}
+    // (117:12) {#if colors}
     function create_if_block$6(ctx) {
     	let div;
     	let each_value = /*$intervalDurations*/ ctx[5];
@@ -33885,7 +33746,7 @@ var app = (function () {
 
     			attr_dev(div, "class", "intervals svelte-hrv038");
     			attr_dev(div, "style", /*intervalColorVars*/ ctx[4]);
-    			add_location(div, file$a, 113, 16, 3347);
+    			add_location(div, file$a, 117, 16, 3605);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -33895,7 +33756,7 @@ var app = (function () {
     			}
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*$intervalIndex, onNumberClick, $intervalDurations*/ 552) {
+    			if (dirty & /*$intervalIndex, onNumberClick, $intervalDurations*/ 296) {
     				each_value = /*$intervalDurations*/ ctx[5];
     				validate_each_argument(each_value);
     				let i;
@@ -33933,18 +33794,18 @@ var app = (function () {
     		block,
     		id: create_if_block$6.name,
     		type: "if",
-    		source: "(113:12) {#if colors}",
+    		source: "(117:12) {#if colors}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (115:20) {#each $intervalDurations as fav, i}
+    // (119:20) {#each $intervalDurations as fav, i}
     function create_each_block$1(ctx) {
     	let div;
     	let p;
-    	let t0_value = /*i*/ ctx[20] + 1 + "";
+    	let t0_value = /*i*/ ctx[21] + 1 + "";
     	let t0;
     	let t1;
     	let mounted;
@@ -33956,11 +33817,11 @@ var app = (function () {
     			p = element("p");
     			t0 = text(t0_value);
     			t1 = space();
-    			set_style(p, "color", `var(--intervalColor${/*i*/ ctx[20] + 1})`);
-    			add_location(p, file$a, 116, 28, 3605);
+    			set_style(p, "color", `var(--intervalColor${/*i*/ ctx[21] + 1})`);
+    			add_location(p, file$a, 120, 28, 3863);
     			attr_dev(div, "class", "intervalNumber svelte-hrv038");
-    			toggle_class(div, "selected", /*$intervalIndex*/ ctx[3] === /*i*/ ctx[20]);
-    			add_location(div, file$a, 115, 24, 3480);
+    			toggle_class(div, "selected", /*$intervalIndex*/ ctx[3] === /*i*/ ctx[21]);
+    			add_location(div, file$a, 119, 24, 3738);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -33969,7 +33830,7 @@ var app = (function () {
     			append_dev(div, t1);
 
     			if (!mounted) {
-    				dispose = listen_dev(div, "click", /*onNumberClick*/ ctx[9](/*i*/ ctx[20]), false, false, false);
+    				dispose = listen_dev(div, "click", /*onNumberClick*/ ctx[8](/*i*/ ctx[21]), false, false, false);
     				mounted = true;
     			}
     		},
@@ -33977,7 +33838,7 @@ var app = (function () {
     			ctx = new_ctx;
 
     			if (dirty & /*$intervalIndex*/ 8) {
-    				toggle_class(div, "selected", /*$intervalIndex*/ ctx[3] === /*i*/ ctx[20]);
+    				toggle_class(div, "selected", /*$intervalIndex*/ ctx[3] === /*i*/ ctx[21]);
     			}
     		},
     		d: function destroy(detaching) {
@@ -33991,14 +33852,14 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(115:20) {#each $intervalDurations as fav, i}",
+    		source: "(119:20) {#each $intervalDurations as fav, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (103:0) <SettingsSection>
+    // (107:0) <SettingsSection>
     function create_default_slot$2(ctx) {
     	let h3;
     	let t1;
@@ -34089,20 +33950,20 @@ var app = (function () {
     			t8 = space();
     			br2 = element("br");
     			attr_dev(h3, "class", "svelte-hrv038");
-    			add_location(h3, file$a, 104, 4, 3086);
+    			add_location(h3, file$a, 108, 4, 3344);
     			attr_dev(button0, "class", "arrowButton svelte-hrv038");
-    			add_location(button0, file$a, 108, 12, 3192);
+    			add_location(button0, file$a, 112, 12, 3450);
     			attr_dev(button1, "class", "arrowButton svelte-hrv038");
-    			add_location(button1, file$a, 123, 12, 3847);
+    			add_location(button1, file$a, 127, 12, 4105);
     			attr_dev(div0, "class", "titleRow svelte-hrv038");
-    			add_location(div0, file$a, 107, 8, 3156);
+    			add_location(div0, file$a, 111, 8, 3414);
     			attr_dev(button2, "class", "unlinkButton svelte-hrv038");
-    			add_location(button2, file$a, 128, 8, 3985);
-    			add_location(br0, file$a, 134, 8, 4180);
-    			add_location(br1, file$a, 134, 13, 4185);
-    			add_location(br2, file$a, 142, 8, 4417);
+    			add_location(button2, file$a, 132, 8, 4243);
+    			add_location(br0, file$a, 138, 8, 4438);
+    			add_location(br1, file$a, 138, 13, 4443);
+    			add_location(br2, file$a, 146, 8, 4675);
     			attr_dev(div1, "class", "intervalColorSection svelte-hrv038");
-    			add_location(div1, file$a, 106, 4, 3112);
+    			add_location(div1, file$a, 110, 4, 3370);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h3, anchor);
@@ -34132,7 +33993,7 @@ var app = (function () {
     				dispose = [
     					listen_dev(button0, "click", /*prev*/ ctx[6], false, false, false),
     					listen_dev(button1, "click", /*next*/ ctx[7], false, false, false),
-    					listen_dev(button2, "click", /*onUnlinkClick*/ ctx[8], false, false, false)
+    					listen_dev(button2, "click", /*onUnlinkClick*/ ctx[9], false, false, false)
     				];
 
     				mounted = true;
@@ -34197,14 +34058,14 @@ var app = (function () {
     		block,
     		id: create_default_slot$2.name,
     		type: "slot",
-    		source: "(103:0) <SettingsSection>",
+    		source: "(107:0) <SettingsSection>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (145:4) 
+    // (149:4) 
     function create_buttons_slot$1(ctx) {
     	let settingsoptionbutton;
     	let current;
@@ -34246,7 +34107,7 @@ var app = (function () {
     		block,
     		id: create_buttons_slot$1.name,
     		type: "slot",
-    		source: "(145:4) ",
+    		source: "(149:4) ",
     		ctx
     	});
 
@@ -34282,7 +34143,7 @@ var app = (function () {
     		p: function update(ctx, [dirty]) {
     			const settingssection_changes = {};
 
-    			if (dirty & /*$$scope, hueValue, $intervalColors, $intervalIndex, intervalColorVars, $intervalDurations, colors*/ 2097215) {
+    			if (dirty & /*$$scope, hueValue, $intervalColors, $intervalIndex, intervalColorVars, $intervalDurations, colors*/ 4194367) {
     				settingssection_changes.$$scope = { dirty, ctx };
     			}
 
@@ -34315,6 +34176,7 @@ var app = (function () {
 
     function instance$b($$self, $$props, $$invalidate) {
     	let $intervalColors;
+    	let $runState;
     	let $intervalIndex;
     	let $globalHue;
     	let $inputRef;
@@ -34322,12 +34184,14 @@ var app = (function () {
     	let $intervalDurations;
     	validate_store(intervalColors, "intervalColors");
     	component_subscribe($$self, intervalColors, $$value => $$invalidate(2, $intervalColors = $$value));
+    	validate_store(runState, "runState");
+    	component_subscribe($$self, runState, $$value => $$invalidate(13, $runState = $$value));
     	validate_store(intervalIndex, "intervalIndex");
     	component_subscribe($$self, intervalIndex, $$value => $$invalidate(3, $intervalIndex = $$value));
     	validate_store(globalHue, "globalHue");
     	component_subscribe($$self, globalHue, $$value => $$invalidate(10, $globalHue = $$value));
     	validate_store(inputRef, "inputRef");
-    	component_subscribe($$self, inputRef, $$value => $$invalidate(13, $inputRef = $$value));
+    	component_subscribe($$self, inputRef, $$value => $$invalidate(14, $inputRef = $$value));
     	validate_store(hue, "hue");
     	component_subscribe($$self, hue, $$value => $$invalidate(11, $hue = $$value));
     	validate_store(intervalDurations, "intervalDurations");
@@ -34373,6 +34237,20 @@ var app = (function () {
     			});
 
     		document.dispatchEvent(e);
+    	};
+
+    	const onNumberClick = i => e => {
+    		if ($runState !== "running") {
+    			intervalIndex.set(i);
+
+    			if ($intervalColors[$intervalIndex]) {
+    				hue.set($intervalColors[$intervalIndex]);
+    			} else {
+    				hue.set($globalHue);
+    			}
+
+    			if ($inputRef) $inputRef.focus();
+    		}
     	};
 
     	let hueValue;
@@ -34424,11 +34302,6 @@ var app = (function () {
     		$$invalidate(4, intervalColorVars = updateColors().map((val, index) => `--intervalColor${index + 1}:${val.hex()}`).join(";"));
     	};
 
-    	const onNumberClick = i => e => {
-    		intervalIndex.set(i);
-    		if ($inputRef) $inputRef.focus();
-    	};
-
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
@@ -34456,11 +34329,13 @@ var app = (function () {
     		intervalColors,
     		intervalDurations,
     		intervalIndex,
+    		runState,
     		SettingsSlider,
     		SettingsOptionButton,
     		Color: color$1,
     		prev,
     		next,
+    		onNumberClick,
     		hueValue,
     		onUnlinkClick,
     		onColorChange,
@@ -34469,8 +34344,8 @@ var app = (function () {
     		updateColorsTick,
     		updateColors,
     		createCssColorVars,
-    		onNumberClick,
     		$intervalColors,
+    		$runState,
     		$intervalIndex,
     		$globalHue,
     		$inputRef,
@@ -34519,8 +34394,8 @@ var app = (function () {
     		$intervalDurations,
     		prev,
     		next,
-    		onUnlinkClick,
     		onNumberClick,
+    		onUnlinkClick,
     		$globalHue,
     		$hue,
     		settingsslider_value_binding
@@ -34546,7 +34421,7 @@ var app = (function () {
     const range = (size, startAt = 0) =>
       [...Array(size).keys()].map(i => i + startAt);
 
-    /* node_modules\svelte-loading-spinners\src\Jumper.svelte generated by Svelte v3.35.0 */
+    /* node_modules\svelte-loading-spinners\src\Jumper.svelte generated by Svelte v3.37.0 */
     const file$9 = "node_modules\\svelte-loading-spinners\\src\\Jumper.svelte";
 
     function get_each_context(ctx, list, i) {
@@ -34771,7 +34646,7 @@ var app = (function () {
     	}
     }
 
-    /* src\Components\Settings\SaveButton.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Settings\SaveButton.svelte generated by Svelte v3.37.0 */
 
     const { console: console_1$2 } = globals;
     const file$8 = "src\\Components\\Settings\\SaveButton.svelte";
@@ -35023,7 +34898,7 @@ var app = (function () {
     	}
     }
 
-    /* src\Components\Settings\Tabs\SettingsTab.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Settings\Tabs\SettingsTab.svelte generated by Svelte v3.37.0 */
     const file$7 = "src\\Components\\Settings\\Tabs\\SettingsTab.svelte";
 
     function create_fragment$8(ctx) {
@@ -35215,7 +35090,7 @@ var app = (function () {
     	}
     }
 
-    /* src\Components\Settings\Tabs\SettingsTabs.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Settings\Tabs\SettingsTabs.svelte generated by Svelte v3.37.0 */
     const file$6 = "src\\Components\\Settings\\Tabs\\SettingsTabs.svelte";
 
     // (12:4) {#if $intervalMode}
@@ -35399,7 +35274,7 @@ var app = (function () {
     	}
     }
 
-    /* src\Components\Settings\Style\StyleSettings.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Settings\Style\StyleSettings.svelte generated by Svelte v3.37.0 */
     const file$5 = "src\\Components\\Settings\\Style\\StyleSettings.svelte";
 
     // (45:4) {#if $settings.theme !== "transparent"}
@@ -35942,7 +35817,7 @@ var app = (function () {
     	}
     }
 
-    /* src\Components\Settings\SettingControls\SelectOption.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Settings\SettingControls\SelectOption.svelte generated by Svelte v3.37.0 */
     const file$4 = "src\\Components\\Settings\\SettingControls\\SelectOption.svelte";
 
     // (68:8) {#if ind !== null}
@@ -36316,7 +36191,7 @@ var app = (function () {
     	}
     }
 
-    /* src\Components\Settings\Sound\SoundSettings.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Settings\Sound\SoundSettings.svelte generated by Svelte v3.37.0 */
     const file$3 = "src\\Components\\Settings\\Sound\\SoundSettings.svelte";
 
     // (50:4) {:else}
@@ -37018,9 +36893,7 @@ var app = (function () {
     	}
     }
 
-    /* src\Components\Settings\Settings.svelte generated by Svelte v3.35.0 */
-
-    const { console: console_1$1 } = globals;
+    /* src\Components\Settings\Settings.svelte generated by Svelte v3.37.0 */
     const file$2 = "src\\Components\\Settings\\Settings.svelte";
 
     function create_fragment$3(ctx) {
@@ -37058,10 +36931,10 @@ var app = (function () {
     			div0 = element("div");
     			create_component(savebutton.$$.fragment);
     			attr_dev(div0, "class", "bottomRow svelte-ir7wyb");
-    			add_location(div0, file$2, 37, 4, 1109);
+    			add_location(div0, file$2, 36, 4, 1051);
     			attr_dev(div1, "class", "Settings svelte-ir7wyb");
     			set_style(div1, "--color2", /*$color*/ ctx[0].alpha(0.5).hsl().string() + "\r\n    ");
-    			add_location(div1, file$2, 25, 0, 842);
+    			add_location(div1, file$2, 24, 0, 784);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -37172,14 +37045,13 @@ var app = (function () {
     	};
 
     	const handleResize = node => {
-    		console.log("handleResize called. node: ", node);
     		settingsHeight.set(node.clientHeight);
     	};
 
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console_1$1.warn(`<Settings> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Settings> was created with unknown prop '${key}'`);
     	});
 
     	$$self.$capture_state = () => ({
@@ -37216,7 +37088,7 @@ var app = (function () {
     	}
     }
 
-    /* src\Components\Controls\IntervalModeButton.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Controls\IntervalModeButton.svelte generated by Svelte v3.37.0 */
     const file$1 = "src\\Components\\Controls\\IntervalModeButton.svelte";
 
     function create_fragment$2(ctx) {
@@ -37320,7 +37192,9 @@ var app = (function () {
     	}
     }
 
-    /* src\Components\Controls\MasterControls.svelte generated by Svelte v3.35.0 */
+    /* src\Components\Controls\MasterControls.svelte generated by Svelte v3.37.0 */
+
+    const { console: console_1$1 } = globals;
 
     function create_fragment$1(ctx) {
     	let mounted;
@@ -37442,16 +37316,21 @@ var app = (function () {
     		{
     			const favorites = $settings.favoriteIntervals;
     			const favoriteColors = $settings.favoriteIntervalColors;
-    			favorites[favoriteIndex] = $intervalDurations;
-    			favoriteColors[favoriteIndex] = $intervalColors;
+
+    			if ($intervalDurations.some(val => val > 0)) {
+    				favorites[favoriteIndex] = $intervalDurations;
+    				favoriteColors[favoriteIndex] = $intervalColors;
+    				currentFavInterval.set(favoriteIndex);
+    			} else {
+    				favorites[favoriteIndex] = null;
+    				favoriteColors[favoriteIndex] = null;
+    			}
 
     			settings.set({
     				...$settings,
     				favoriteIntervals: favorites,
     				favoriteIntervalColors: favoriteColors
     			});
-
-    			currentFavInterval.set(favoriteIndex);
     		}
 
     		await tick();
@@ -37512,15 +37391,29 @@ var app = (function () {
     	// $: {updateColor($intervalColors)}
     	const handleKeyDown = async e => {
     		const key = e.key;
-    		if (e.repeat) return;
+
+    		if (e.repeat) {
+    			return;
+    		}
+
+    		console.log(e);
 
     		switch (key) {
     			case " ":
-    				if ($runState === "running") pause(); else if ((// not paused or running
+    				console.log("SPACE PRESSED");
+    				if ($runState === "running") {
+    					console.log("pausing on line 138 in MasterControls");
+    					pause();
+    				} else if ((// not paused or running
     				$runState === "finished" || // or you just selected a favorite
     				$currentFavInd !== null && $tempDuration !== $duration) && ($intervalMode || $tempDuration)) {
+    					console.log("starting at line 151 of MasterControls");
     					start();
-    				} else if ($runState === "paused") resume();
+    				} else if ($runState === "paused") {
+    					console.log("resuming at line 155 of MasterControls");
+    					resume();
+    				}
+    				
     				break;
     			case "Enter":
     				if ($focused && ($intervalMode && $intervalDurations.every(v => v) || $tempDuration)) {
@@ -37701,6 +37594,8 @@ var app = (function () {
     	};
 
     	const handleKeyUp = e => {
+    		e.preventDefault();
+    		e.stopPropagation();
     		const key = e.key;
 
     		switch (key) {
@@ -37713,7 +37608,7 @@ var app = (function () {
     	const writable_props = ["makeBigger", "makeSmaller", "start", "pause", "resume"];
 
     	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<MasterControls> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console_1$1.warn(`<MasterControls> was created with unknown prop '${key}'`);
     	});
 
     	$$self.$$set = $$props => {
@@ -37737,7 +37632,6 @@ var app = (function () {
     		settings,
     		settingsOpen,
     		settingsTab,
-    		settingsHeight,
     		showFavorites,
     		duration,
     		focused,
@@ -37811,23 +37705,23 @@ var app = (function () {
     		const props = options.props || {};
 
     		if (/*makeBigger*/ ctx[2] === undefined && !("makeBigger" in props)) {
-    			console.warn("<MasterControls> was created without expected prop 'makeBigger'");
+    			console_1$1.warn("<MasterControls> was created without expected prop 'makeBigger'");
     		}
 
     		if (/*makeSmaller*/ ctx[3] === undefined && !("makeSmaller" in props)) {
-    			console.warn("<MasterControls> was created without expected prop 'makeSmaller'");
+    			console_1$1.warn("<MasterControls> was created without expected prop 'makeSmaller'");
     		}
 
     		if (/*start*/ ctx[4] === undefined && !("start" in props)) {
-    			console.warn("<MasterControls> was created without expected prop 'start'");
+    			console_1$1.warn("<MasterControls> was created without expected prop 'start'");
     		}
 
     		if (/*pause*/ ctx[5] === undefined && !("pause" in props)) {
-    			console.warn("<MasterControls> was created without expected prop 'pause'");
+    			console_1$1.warn("<MasterControls> was created without expected prop 'pause'");
     		}
 
     		if (/*resume*/ ctx[6] === undefined && !("resume" in props)) {
-    			console.warn("<MasterControls> was created without expected prop 'resume'");
+    			console_1$1.warn("<MasterControls> was created without expected prop 'resume'");
     		}
     	}
 
@@ -37872,13 +37766,13 @@ var app = (function () {
     	}
     }
 
-    /* src\App.svelte generated by Svelte v3.35.0 */
+    /* src\App.svelte generated by Svelte v3.37.0 */
 
     const { console: console_1 } = globals;
 
     const file = "src\\App.svelte";
 
-    // (165:2) {#if $settingsOpen}
+    // (168:2) {#if $settingsOpen}
     function create_if_block(ctx) {
     	let settings_1;
     	let current;
@@ -37910,7 +37804,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(165:2) {#if $settingsOpen}",
+    		source: "(168:2) {#if $settingsOpen}",
     		ctx
     	});
 
@@ -37979,11 +37873,11 @@ var app = (function () {
     			t5 = space();
     			create_component(mastercontrols.$$.fragment);
     			attr_dev(div0, "class", "draggableArea svelte-1wq06lp");
-    			add_location(div0, file, 155, 2, 3646);
+    			add_location(div0, file, 158, 2, 3653);
     			attr_dev(div1, "class", "timerSection svelte-1wq06lp");
-    			add_location(div1, file, 157, 2, 3683);
+    			add_location(div1, file, 160, 2, 3690);
     			attr_dev(div2, "class", "App svelte-1wq06lp");
-    			add_location(div2, file, 154, 1, 3626);
+    			add_location(div2, file, 157, 1, 3633);
     			set_style(main, "--size", /*$size*/ ctx[5]);
     			set_style(main, "--width", /*$width*/ ctx[3]);
     			set_style(main, "--color", /*$color*/ ctx[7].hsl().string());
@@ -37996,7 +37890,7 @@ var app = (function () {
     			set_style(main, "--appBg", /*appBg*/ ctx[6]);
     			set_style(main, "--frameRadius", /*$borderRadius*/ ctx[9] * (/*$width*/ ctx[3] / 2) / 100 + "px");
     			attr_dev(main, "class", "svelte-1wq06lp");
-    			add_location(main, file, 139, 0, 3204);
+    			add_location(main, file, 142, 0, 3211);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -38207,13 +38101,11 @@ var app = (function () {
     	});
 
     	const resize = async deps => {
-    		// await tick();
-    		console.log("resize called!");
-
     		ipcRenderer.send("resize", $width, $height);
     	};
 
     	const start = async () => {
+    		console.log("STARTING");
     		let tempDur;
 
     		if (!$intervalMode) {
@@ -38239,12 +38131,15 @@ var app = (function () {
     	};
 
     	const pause = () => {
+    		console.log("PAUSING");
     		playingIntervalIndex.set($intervalIndex);
     		pausedRemainingTime.set($remainingTime);
     		runState.set("paused");
     	};
 
     	const resume = () => {
+    		console.log("RESUMING");
+
     		if ($intervalMode) {
     			intervalIndex.set($playingIntervalIndex);
 
@@ -38291,28 +38186,25 @@ var app = (function () {
 
     	$$self.$capture_state = () => ({
     		onMount,
-    		tick,
     		Timer,
-    		ipcRenderer,
-    		size,
-    		hue,
-    		width,
-    		height,
-    		color,
-    		stayOnTop,
-    		scaledBlur,
     		borderRadius,
-    		settings,
-    		maxSize,
-    		settingsOpen,
-    		loadSettings,
-    		intervalMode,
-    		intervalColors,
-    		playSound,
-    		inputRef,
-    		meme,
+    		color,
     		globalHue,
-    		settingsHeight,
+    		height,
+    		hue,
+    		inputRef,
+    		intervalColors,
+    		intervalMode,
+    		loadSettings,
+    		maxSize,
+    		meme,
+    		playSound,
+    		scaledBlur,
+    		settings,
+    		settingsOpen,
+    		size,
+    		stayOnTop,
+    		width,
     		ResizeControl,
     		OpenSettingsButton,
     		Settings,
@@ -38322,12 +38214,13 @@ var app = (function () {
     		focused,
     		intervalDurations,
     		intervalIndex,
-    		playingIntervalIndex,
     		pausedRemainingTime,
+    		playingIntervalIndex,
     		remainingTime,
     		runState,
     		startTime,
     		tempDuration,
+    		ipcRenderer,
     		resize,
     		start,
     		pause,

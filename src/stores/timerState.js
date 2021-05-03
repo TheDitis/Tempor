@@ -1,5 +1,5 @@
-import {readable, derived, writable, get} from "svelte/store";
-import {settings, intervalMode, playSound, hue, intervalColors, globalHue} from "./appState";
+import {derived, get, readable, writable} from "svelte/store";
+import {globalHue, hue, intervalColors, intervalMode, playSound, settings} from "./appState";
 
 
 export const focused = writable(true);
@@ -46,7 +46,7 @@ export const remainingTime = derived(
 
 /// USED IN INTERVAL MODE
 // this is used for the temporary durations in interval mode
-export const intervalDurations = writable([25000, 5000])
+export const intervalDurations = writable([0, 0])
 
 // the index of the current interval duration
 export const intervalIndex = writable(0);
@@ -60,8 +60,6 @@ export const handleEnd = () => {
     // if not in interval mode
     if (!get(intervalMode)) {
         runState.set("finished");
-        // const sound = new Audio("file://" + __dirname + "/sounds/sound (1).wav");
-        // sound.play();
         playSound(curSettings.sounds.end);
         focused.set(true);
     }

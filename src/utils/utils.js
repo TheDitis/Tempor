@@ -11,9 +11,12 @@ export const msToHrsMinsSecs = (msTime) => {
     return duration
 }
 
-export const formatTimeMs = (msTime) => {
+export const formatTimeMs = (msTime, roundUpFormat = false) => {
     if (msTime <= 0) {
         return "00:00:00";
+    }
+    if (roundUpFormat) {
+        msTime += 1000
     }
     const duration = msToHrsMinsSecs(msTime)
     return formatTime(duration.hours, duration.minutes, duration.seconds)

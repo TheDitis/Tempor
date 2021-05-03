@@ -4,7 +4,7 @@
     import {faCaretLeft, faCaretRight, faSyncAlt} from "@fortawesome/free-solid-svg-icons";
     import SettingsSection from "../SettingsSection.svelte";
     import {globalHue, hue, inputRef, intervalColors} from "../../../stores/appState";
-    import {intervalDurations, intervalIndex} from "../../../stores/timerState";
+    import {intervalDurations, intervalIndex, runState} from "../../../stores/timerState";
     import SettingsSlider from "../SettingControls/SettingsSlider.svelte";
     import SettingsOptionButton from "../SettingControls/SettingsOptionButton.svelte";
     import Color from "color";
@@ -31,9 +31,21 @@
         document.dispatchEvent(e);
     }
 
+    const onNumberClick = (i) => e => {
+        if ($runState !== "running") {
+            intervalIndex.set(i)
+            if ($intervalColors[$intervalIndex]) {
+                hue.set($intervalColors[$intervalIndex])
+            }
+            else {
+                hue.set($globalHue)
+            }
+            if ($inputRef) $inputRef.focus();
+        }
+    }
+
     let hueValue;
     $: hueValue = $intervalColors[$intervalIndex];
-
 
     const onUnlinkClick = (e) => {
         e.preventDefault();
@@ -54,8 +66,6 @@
     const onColorChange = (val) => {
         if (val) hue.set(val);
     }
-
-
 
     let colors, intervalColorVars;
     const updateColorsTick = async (deps) => {
@@ -80,12 +90,6 @@
             .map((val, index) => `--intervalColor${index + 1}:${val.hex()}`)
             .join(';');
     }
-
-    const onNumberClick = (i) => e => {
-        intervalIndex.set(i)
-        if ($inputRef) $inputRef.focus();
-    }
-
 
     $: {
         updateColorsTick();

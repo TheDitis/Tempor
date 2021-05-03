@@ -33,8 +33,6 @@ const createWindow = () => {
       nodeIntegrationInWorker: true
     },
     icon: path.join(__dirname, '../public/favicon.png')
-    // icon: isDev() ? path.join(process.cwd(), 'public/favicon.png') : path.join(__dirname, 'public/favicon.png'),
-
   });
 
   // mainWindow.setMenu(null);
@@ -48,7 +46,6 @@ const createWindow = () => {
 
   ipcMain.on('stayontop', (e, value) => {
     if (typeof value === "boolean") {
-      console.log("setting stayOnTop to ", value);
       mainWindow.setAlwaysOnTop(value);
     }
   })
@@ -63,18 +60,14 @@ const createWindow = () => {
   // mainWindow.setAlwaysOnTop(true)
 
 
-  const devtools = new BrowserWindow();
-
-  mainWindow.webContents.setDevToolsWebContents(devtools.webContents);
-  mainWindow.webContents.openDevTools({ mode: 'detach' });
-  mainWindow.webContents.once('did-finish-load', function () {
-    var windowBounds = mainWindow.getBounds();
-    devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
-    devtools.setSize(windowBounds.width, windowBounds.height);
-  });
-
-
-
+  // const devtools = new BrowserWindow();
+  // mainWindow.webContents.setDevToolsWebContents(devtools.webContents);
+  // mainWindow.webContents.openDevTools({ mode: 'detach' });
+  // mainWindow.webContents.once('did-finish-load', function () {
+  //   var windowBounds = mainWindow.getBounds();
+  //   devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
+  //   devtools.setSize(windowBounds.width, windowBounds.height);
+  // });
 };
 
 // make sound playable

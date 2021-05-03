@@ -25,7 +25,12 @@
                 return Color('rgb(255, 0, 0)').rotate($globalHue)
             }
         })
-        // console.log("colors updated: ", colors)
+    }
+
+    const navigateToInterval = ind => () => {
+        if ($runState !== "running") {
+            intervalIndex.set(ind)
+        }
     }
 
 
@@ -45,6 +50,7 @@
             class="intervalItem"
             style="background: {colors[ind]}"
             class:current={$intervalIndex === ind}
+            on:click={navigateToInterval(ind)}
         ></div>
     {/each}
 </div>
@@ -53,6 +59,7 @@
 <style>
     .IntervalNumberIndicator {
         position: absolute;
+        z-index: 999999999999;
         bottom: calc(var(--size) * 0.38 * 1px);
         display: flex;
         width: calc(var(--size) * 0.65 * 1px);

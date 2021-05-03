@@ -17,7 +17,6 @@
     }
 
     const handleResize = (node) => {
-        console.log("handleResize called. node: ", node)
         settingsHeight.set(node.clientHeight);
     }
 </script>

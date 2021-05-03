@@ -1,10 +1,11 @@
-import {writable, derived, readable, get} from "svelte/store";
+import {derived, get, readable, writable} from "svelte/store";
 import Color from "color";
-import {intervalDurations} from "./timerState";
 
 const v8 = require("v8");
 const fs = require("fs");
 const path = require("path");
+
+
 
 const cloneObj = obj => v8.deserialize(v8.serialize(obj));
 
@@ -53,8 +54,7 @@ export const maxSize = readable(Math.min(window.screen.height, window.screen.wid
 
 export const settingsHeight = writable(0);
 
-
-export const settingsOpen = writable(true);
+export const settingsOpen = writable(false);
 
 export const width = derived(
     [size, scaledBlur, lineThickness],
@@ -63,24 +63,15 @@ export const width = derived(
     }
 );
 
-
 export const height = derived(
     [settingsHeight, settingsOpen, size, scaledBlur],
     ([$settingsHeight, $settingsOpen, $size, $scaledBlur]) => {
         // main area height is size + blur + draggable-bar
         const mainSectionSize = Math.round($size + ($scaledBlur * 7)) + 20;
-        console.log("settingsOpen: ", $settingsOpen, " settingsHeight: ", $settingsHeight);
-
-        if ($settingsOpen) {
-            const res = mainSectionSize + $settingsHeight + 20;
-            console.log("height: ", res)
-            return res
-        }
+        if ($settingsOpen) return mainSectionSize + $settingsHeight + 20;
         else return mainSectionSize
     }
 )
-
-
 
 export const settings = writable({});
 
