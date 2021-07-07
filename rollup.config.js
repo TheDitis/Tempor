@@ -3,6 +3,8 @@ import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
+import sveltePreprocess from 'svelte-preprocess';
+import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
 
 
@@ -30,7 +32,7 @@ function serve() {
 }
 
 export default {
-	input: 'src/svelte.js',
+	input: 'src/svelte.ts',
 	// globals: {
 	// 	electron: electron,
 	// 	fs: "fs"
@@ -49,6 +51,7 @@ export default {
 		// 	preprocess: preprocess()
 		// }),
 		svelte({
+			preprocess: sveltePreprocess({ sourceMap: !production }),
 			compilerOptions: {
 				// enable run-time checks when not in production
 				dev: !production
@@ -70,6 +73,10 @@ export default {
 			// ],
 			// transformMixedEsModules: true,
 		),
+		typescript({
+			sourceMap: !production,
+			inlineSources: !production
+		}),
 
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated
@@ -85,5 +92,14 @@ export default {
 	],
 	watch: {
 		clearScreen: false
+	},
+	// SUPPRESS LUXON WARNING TO MAKE OTHER ISSUES MORE VISIBLE
+	onwarn: (warning, warn) => {
+		if (warning.code === 'CIRCULAR_DEPENDENCY') {
+			if(warning.message.includes('\\luxon\\')) {
+				return;
+			}
+		}
+		warn(warning);
 	}
 };

@@ -30,7 +30,7 @@
 
     <button
         class="plusButton"
-        disabled={$size >= $maxSize}
+        disabled={$size >= maxSize}
         on:click={sizeUp}
     >
         <Fa icon={faPlus}/>

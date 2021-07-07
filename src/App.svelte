@@ -1,5 +1,4 @@
-<script>
-	import {onMount} from "svelte";
+<script lang="ts">
 	import Timer from "./Components/Timer/Timer.svelte";
 	import {
 		borderRadius,
@@ -10,7 +9,6 @@
 		inputRef,
 		intervalColors,
 		intervalMode,
-		loadSettings,
 		maxSize,
 		meme,
 		playSound,
@@ -41,20 +39,8 @@
 
 	const {ipcRenderer} = require("electron");
 
-	// TODO: set settings to default
-
-
-	onMount(() => {
-		loadSettings();
-		ipcRenderer.send("resize", $width, $height);
-	})
-	const resize = async (deps) => {
-		ipcRenderer.send("resize", $width, $height)
-	}
 	// any time the window size changes, send the signal to electron
-	$: {
-		resize([$width, $height])
-	}
+	$: ipcRenderer.send("resize", $width, $height)
 	// tell the window whether to stay on top or not when that setting changes
 	$: { ipcRenderer.send("stayontop", $stayOnTop) }
 
@@ -82,14 +68,12 @@
 		if ($meme) meme.set(null);
 	}
 
-
 	// gets the current remaining time and sets the state to 'paused'
 	export const pause = () => {
 		playingIntervalIndex.set($intervalIndex);
 		pausedRemainingTime.set($remainingTime);
 		runState.set("paused");
 	}
-
 
 	// calculates the new relative start-time based on how much time is remaining and sets the state back to running
 	export const resume = () => {
@@ -108,7 +92,7 @@
 		runState.set("running");
 	}
 
-
+	// scale down the window
 	const makeSmaller = () => {
 		if ($size > 100) {
 			size.update(v => v - 50);
@@ -116,24 +100,22 @@
 		if ($inputRef) $inputRef.focus();
 	}
 
-
+	// scale up the window
 	const makeBigger = () => {
-		if ($size < $maxSize) {
+		if ($size < maxSize) {
 			size.update(v => v + 50)
 		}
 		if ($inputRef) $inputRef.focus();
 	}
 
-
+	// theme color map
 	const themes = {
 		"transparent": "transparent",
 		"dark": "#202020",
 		"light": "white",
 	}
 
-
 	$: appBg = themes[$settings.theme];
-	// $: borderRadius = ($settings.frame === "round") ? `${$width}px` : "40px"
 
 </script>
 

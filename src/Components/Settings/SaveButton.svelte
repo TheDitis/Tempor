@@ -1,9 +1,10 @@
-<script>
+<script lang="ts">
     import Fa from "svelte-fa";
     import {fade} from "svelte/transition";
     import {faSave} from "@fortawesome/free-solid-svg-icons";
     import {color, inputRef, saveSettings, size, width} from "../../stores/appState";
     import {tick} from "svelte";
+    // @ts-ignore
     import {Jumper} from "svelte-loading-spinners";
 
     let saved = true;
@@ -12,11 +13,11 @@
         console.log("saving");
         saved = false;
         await tick();
-        saveSettings()
-            .then(res => {
-                setTimeout(() => saved = true, 1000)
-                console.log("saved");
-            })
+        const res: boolean = await saveSettings()
+        if (res) {
+            setTimeout(() => saved = true, 1000)
+            console.log("saved");
+        }
         if ($inputRef) $inputRef.focus();
     }
 

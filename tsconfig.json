@@ -1,0 +1,12 @@
+{
+  "extends": "@tsconfig/svelte/tsconfig.json",
+
+  "include": [
+    "src/**/*",
+    "node_modules/electron/electron.d.ts"
+  ],
+  "exclude": ["__sapper__/*", "public/*"],
+  "types": ["node"],
+  "typeRoots": [ "../node_modules/@types" ]
+
+}
