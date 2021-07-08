@@ -10240,7 +10240,7 @@ var app = (function () {
             return mainSectionSize;
     });
     //----------------------------------------------------------------------------------------------------------------------
-    //   LOADING & SAVING FUNCTIONS + GENERAL STORES
+    //   GENERAL STORES + LOADING & SAVING FUNCTIONS
     //----------------------------------------------------------------------------------------------------------------------
     // Loads and returns settings.json file and sets individual stores accordingly
     const loadSettings = () => {

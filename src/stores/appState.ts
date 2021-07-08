@@ -6,7 +6,7 @@
  *
  * TYPES:
  *      @type SoundSelectionSetting - selection of 3 sound files by trigger type: 'start', 'next', & 'end'
- *      @type SettingsTabLabel - ('style' | 'sound' | 'intervals'), valid settings tab labels
+ *      @type SettingsTabLabel ('style' | 'sound' | 'intervals') - valid settings tab labels
  *      @type SettingsObject - object containing all fields saved to & loaded from settings.json
  *
  *
@@ -247,7 +247,7 @@ export const height: Readable<number> = derived(
 
 
 //----------------------------------------------------------------------------------------------------------------------
-//   LOADING & SAVING FUNCTIONS + GENERAL STORES
+//   GENERAL STORES + LOADING & SAVING FUNCTIONS
 //----------------------------------------------------------------------------------------------------------------------
 
 // Loads and returns settings.json file and sets individual stores accordingly
