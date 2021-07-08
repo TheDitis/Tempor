@@ -10087,119 +10087,65 @@ var app = (function () {
      * file: appState.ts
      * author: Ryan McKay
      *
-     * This file contains the svelte stores for all app-related state that isn't relevant to time.
+     * This file contains the svelte stores for all app-related state that isn't specifically relevant to time.
      *
      * TYPES:
-     *      @type SoundSelectionSetting - the 3 currently selected sound files by trigger type: 'start', 'next', & 'end'
-     *      @type SettingsTabLabel - ('style' | 'sound' | 'intervals'), representing the settings tab currently selected
-     *      @type SettingsObject - object containing all settings saved to & loaded from settings.json
+     *      @type SoundSelectionSetting - selection of 3 sound files by trigger type: 'start', 'next', & 'end'
+     *      @type SettingsTabLabel - ('style' | 'sound' | 'intervals'), valid settings tab labels
+     *      @type SettingsObject - object containing all fields saved to & loaded from settings.json
+     *
      *
      * STORES:
-     *      inputRef {HTMLElement} - that is bound to the time input
+     *      ----- INTERFACE -----
+     *      inputRef {HTMLElement} - the input element for the timer
      *      showFavorites {boolean} - whether or not the favorites numbers on the ui should be visible
      *      intervalMode {boolean} - whether or not the timer is in interval mode
      *      settingsTab {'style' | 'sound' | 'intervals'} - the label of the settings page currently selected
-     *      settingsHeight {number} - the height of the settings window (bound to the settings container)
+     *      settingsHeight {number} - the height of the settings tray (bound to the settings container)
      *      settingsOpen {boolean} - whether the settings tray is open or not
+     *      currentFavInd {number} - index of the favorite setting currently selected, or null of none is
+     *      currentFavInterval {number} - same as 'currentFavInd' but for interval mode
+     *      volume {number} - volume level of the sounds (between 0 and 1)
+     *
+     *      ----- COLOR -----
      *      hue {number} - the hue value (0 - 360) that should represent what is currently visible
      *      globalHue {number} - the main app color, which is retained even when the visible color changes between intervals
      *      color {Color} - color object of max saturation, derived from the hue store
      *      intervalColors {number[]} - a list of hue values for each of the 5 possible intervals (null if not set by user)
+     *
+     *      ----- SIZE & SHAPE -----
      *      size {number} - the size of the timer circle itself
      *      blur {number} - the amount of stylistic blur applied to the UI
      *      scaledBlur {number} - the blur value scaled with size, so it remains visually consistent when the app is resized
-     *      borderRadius {number} - percentage of borderRadius to apply (100% equivalent to 50vw in css)
+     *      borderRadius {number} - percentage of borderRadius to apply (100% equivalent to 50vw in css) if frame is visible
      *      lineThickness: {number} - the thickness of the countdown circle line
-     *      width {number} - width of the app window, derived from 'size', 'scaledBlur', and 'lineThickness'
+     *      width {number} - width of the app window, derived from 'size', & 'scaledBlur'
      *      height {number} - height of the app window derived from 'size', 'settingsOpen', 'settingsHeight', & 'scaledBlur'
-     *      volume {number} - volume level of the sounds (between 0 and 1)
+     *
+     *      ----- GENERAL -----
      *      settings {SettingsObject} - object loaded and saved to settings.json, populating values for all relevant stores
      *      stayOnTop {boolean} - whether or not the app should stay on top of all other windows
-     *      currentFavInd {number} - index of the favorite setting currently selected, or null of none is
-     *      currentFavInterval {number} - same as 'currentFavInd' but for interval mode
+     *
      *
      * FUNCTIONS:
-     *
+     *      listSoundFileNames (){string[]} - returns array of file names of all .mp3 and .wav files in the sounds folder
+     *      loadSettings (){SettingsObject} - loads and returns settings.json file and sets individual stores accordingly
+     *      saveSettings (){Promise<boolean>} - saves settings and returns resulting status
+     *      playSound (fileName: string){} - plays the sound file given if valid
      */
     const fs = require("fs");
     const path = require("path");
-    const audio = new Audio();
-    const inputRef = writable(null);
-    const showFavorites = writable(false);
-    const intervalMode = writable(false);
-    const settingsTab = writable("style");
-    // Height of the settings tray
-    const settingsHeight = writable(0);
-    // Whether or not the settings tray is opened
-    const settingsOpen = writable(false);
-    /// COLOR STATE ITEMS
-    const hue = writable(180);
-    const globalHue = writable(180);
-    const color = derived(hue, ($hue) => {
-        return color$1("rgb(255, 0, 0)").rotate($hue);
-    });
-    const intervalColors = writable([null, null, null, null, null]);
-    // SIZE-RELATED STORES
-    // maximum size of the window based off the user's screen size
-    const maxSize = Math.min(window.screen.height, window.screen.width);
-    /// Timer Size (circle itself)
-    const size = writable(300);
-    const blur = writable(0);
-    // keeps the blur consistent in style when the window is resized:
-    const scaledBlur = derived([blur, size], ([$blur, $size]) => $blur * ($size / 300));
-    // the roundness of the corners of the frame is (if there is a frame)
-    const borderRadius = writable(0);
-    // how thick the timer circle is
-    const lineThickness = writable(20);
-    // Width of the entire window
-    const width = derived([size, scaledBlur, lineThickness], ([$size, $scaledBlur, $lineThickness]) => {
-        return Math.round($size + ($scaledBlur * 7)) + 20; // + ($lineThickness / 4))
-    });
-    // Height of the entire window
-    const height = derived([settingsHeight, settingsOpen, size, scaledBlur], ([$settingsHeight, $settingsOpen, $size, $scaledBlur]) => {
-        // main area height is size + blur + draggable-bar
-        const mainSectionSize = Math.round($size + ($scaledBlur * 7)) + 20;
-        if ($settingsOpen)
-            return mainSectionSize + $settingsHeight + 20;
-        else
-            return mainSectionSize;
-    });
-    // Volume of the app
-    const volume = writable(0);
-    const listSoundFileNames = () => {
-        const files = fs.readdirSync(path.join(__dirname, "/sounds/"))
-            .filter(name => name.includes(".wav") || name.includes(".mp3"));
-        files.sort(compareNumericStrings);
-        return files;
-    };
-    const getSettings = () => {
-        const settingsData = JSON.parse(fs.readFileSync(path.join(__dirname, "./settings.json")));
-        hue.set(settingsData.hue);
-        globalHue.set(settingsData.hue);
-        size.set(settingsData.size);
-        blur.set(settingsData.blur);
-        borderRadius.set(settingsData.frame);
-        volume.set(settingsData.volume);
-        lineThickness.set(settingsData.lineThickness);
-        // HANDLING MISSING SOUND FILES
-        const soundFiles = listSoundFileNames();
-        for (let soundName of Object.keys(settingsData.sounds)) {
-            const found = soundFiles.includes(settingsData.sounds[soundName]);
-            if (!found) {
-                settingsData.sounds[soundName] = soundFiles[0];
-            }
-        }
-        return cloneObject(settingsData);
-    };
-    const settings = writable(getSettings());
-    const stayOnTop = derived(settings, $settings => $settings.alwaysOnTop);
+    //----------------------------------------------------------------------------------------------------------------------
+    //   CONSTANTS
+    //----------------------------------------------------------------------------------------------------------------------
+    // Keyboard characters that map to an item in favorites
     const favoritesKeyMap = {
         set: {
-            Q: 0,
-            W: 1,
-            E: 2,
-            R: 3,
-            T: 4
+            'Q': 0,
+            'W': 1,
+            'E': 2,
+            'R': 3,
+            'T': 4
         },
         load: {
             "!": 0,
@@ -10209,9 +10155,118 @@ var app = (function () {
             "%": 4
         }
     };
+    //----------------------------------------------------------------------------------------------------------------------
+    //   INTERFACE STORES
+    //----------------------------------------------------------------------------------------------------------------------
+    // Input element for the timer
+    const inputRef = writable(null);
+    // Whether or not the favorites numbers on the ui should be visible
+    const showFavorites = writable(false);
+    // Whether or not the timer is in interval mode
+    const intervalMode = writable(false);
+    // Label of the settings page currently selected
+    const settingsTab = writable("style");
+    // Height of the settings tray (bound to the settings container)
+    const settingsHeight = writable(0);
+    // Whether the settings tray is open or not
+    const settingsOpen = writable(false);
+    // Index of the favorite setting currently selected, or null of none is
     const currentFavInd = writable(null);
+    // index of the favorite interval setting currently selected, or null of none is
     const currentFavInterval = writable(null);
+    // Shhhhh... its for the easter eggs
     const meme = writable(null);
+    //----------------------------------------------------------------------------------------------------------------------
+    //   APP AUDIO
+    //----------------------------------------------------------------------------------------------------------------------
+    // Global app audio instance
+    const audio = new Audio();
+    // Volume of the app
+    const volume = writable(0);
+    // Returns array of file names of all .mp3 and .wav files in the sounds folder
+    const listSoundFileNames = () => {
+        const files = fs.readdirSync(path.join(__dirname, "/sounds/"))
+            .filter(name => name.includes(".wav") || name.includes(".mp3"));
+        files.sort(compareNumericStrings);
+        return files;
+    };
+    // Plays the sound file given if valid
+    const playSound = (filename) => {
+        if (filename && (filename.includes(".wav") || filename.includes(".mp3"))) {
+            audio.pause();
+            audio.src = "file://" + __dirname + "/sounds/" + filename;
+            audio.volume = get_store_value(volume);
+            audio.play();
+        }
+        else {
+            console.error("cannot play sound '", filename, "', it must be a valid .wav or .mp3 file.");
+        }
+    };
+    //----------------------------------------------------------------------------------------------------------------------
+    //   COLOR STORES
+    //----------------------------------------------------------------------------------------------------------------------
+    // Hue value (0 - 360) that should represent what is currently visible
+    const hue = writable(180);
+    // Main app color, which is retained even when the visible color changes between intervals
+    const globalHue = writable(180);
+    // Color object of max saturation, derived from the hue store
+    const color = derived(hue, $hue => color$1("rgb(255, 0, 0)").rotate($hue));
+    // List of hue values for each of the 5 possible intervals (null if not set by user)
+    const intervalColors = writable([null, null, null, null, null]);
+    //----------------------------------------------------------------------------------------------------------------------
+    //   SIZE & SHAPE STORES
+    //----------------------------------------------------------------------------------------------------------------------
+    // Maximum size of the window based off the user's screen size
+    const maxSize = Math.min(window.screen.height, window.screen.width);
+    // Size of the timer circle itself
+    const size = writable(300);
+    // Amount of stylistic blur applied to the UI
+    const blur = writable(0);
+    // Blur value scaled with size, so it remains visually consistent when the app is resized
+    const scaledBlur = derived([blur, size], ([$blur, $size]) => $blur * ($size / 300));
+    // Percentage of borderRadius to apply (100% equivalent to 50vw in css) if frame is visible
+    const borderRadius = writable(0);
+    // The thickness of the countdown circle line
+    const lineThickness = writable(20);
+    // Width of the entire window
+    const width = derived([size, scaledBlur], ([$size, $scaledBlur]) => Math.round($size + ($scaledBlur * 7)) + 20);
+    // Height of the entire window
+    const height = derived([settingsHeight, settingsOpen, size, scaledBlur], ([$settingsHeight, $settingsOpen, $size, $scaledBlur]) => {
+        // main area height is size + blur + draggable-bar
+        const mainSectionSize = Math.round($size + ($scaledBlur * 7)) + 20;
+        if ($settingsOpen)
+            return mainSectionSize + $settingsHeight + 20;
+        else
+            return mainSectionSize;
+    });
+    //----------------------------------------------------------------------------------------------------------------------
+    //   LOADING & SAVING FUNCTIONS + GENERAL STORES
+    //----------------------------------------------------------------------------------------------------------------------
+    // Loads and returns settings.json file and sets individual stores accordingly
+    const loadSettings = () => {
+        const settingsData = JSON.parse(fs.readFileSync(path.join(__dirname, "./settings.json")));
+        // Handling missing sound files
+        const soundFiles = listSoundFileNames();
+        for (let soundName of Object.keys(settingsData.sounds)) {
+            const found = soundFiles.includes(settingsData.sounds[soundName]);
+            if (!found) {
+                settingsData.sounds[soundName] = soundFiles[0];
+            }
+        }
+        const cloned = cloneObject(settingsData);
+        // set all individual stores with loaded values
+        hue.set(cloned.hue);
+        globalHue.set(cloned.hue);
+        size.set(cloned.size);
+        blur.set(cloned.blur);
+        borderRadius.set(cloned.frame);
+        volume.set(cloned.volume);
+        lineThickness.set(cloned.lineThickness);
+        return cloned;
+    };
+    const settings = writable(loadSettings());
+    const stayOnTop = derived(settings, $settings => $settings.alwaysOnTop);
+    // Saves settings and returns resulting status
     const saveSettings = async () => {
         const tempHue = get_store_value(globalHue);
         const tempSize = get_store_value(size);
@@ -10234,14 +10289,6 @@ var app = (function () {
             return false;
         }
         return true;
-    };
-    const playSound = (filename) => {
-        if (filename && filename.includes(".wav")) {
-            audio.pause();
-            audio.src = "file://" + __dirname + "/sounds/" + filename;
-            audio.volume = get_store_value(volume);
-            audio.play();
-        }
     };
 
     const focused = writable(true);
