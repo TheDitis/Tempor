@@ -1,5 +1,9 @@
 # Default ignored files
 /shelf/
-/workspace.xml
+
+# Manually Excluded by Ryan
+/codeStyles/
+/inspectionProfiles/
+
 # Editor-based HTTP Client requests
 /httpRequests/
