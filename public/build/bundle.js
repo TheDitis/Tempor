@@ -8092,9 +8092,73 @@ var app = (function () {
       }
     }
 
+    /**
+     * file: utils.ts
+     * author: Ryan McKay
+     *
+     * This file contains miscellaneous functions used throughout the app
+     *
+     * TYPES:
+     *      @type DurationObject - object representing a duration of time, with 'hours', 'minutes', & 'seconds' fields
+     *
+     * FUNCTIONS:
+     *      ----- GENERAL -----
+     *      cloneObject (obj: object){object} - returns a true, deep clone of obj
+     *      compareNumericStrings = (a: string, b: string){number} - compares numeric strings which contain numbers, so that
+     *          arrays of filenames can be sorted by the numbers, rather than having 1, 10, and 100 all next to each other
+     *      arraysEqual (arr1: [], arr2: []{boolean} - shallow, element-wise equality checking for 2 arrays
+     *
+     *      ----- TIME -----
+     *      msToHrsMinsSecs (msTime: number){DurationObject} - converts time in ms into a DurationObject (see above)
+     *      formatTime (duration: DurationObject){string} - converts duration into string representation in 'hh:mm:ss' form
+     *      formatTimeMs (msTime: number, roundUpFormat: boolean){string} - converts time in ms into a string representation
+     *          of the time to be displayed on the timer UI in the format of 'hh:mm:ss'
+     */
     const v8 = require("v8");
-    const cloneObject = (obj) => v8.deserialize(v8.serialize(obj));
+    //----------------------------------------------------------------------------------------------------------------------
+    //   GENERAL UTILITY FUNCTIONS
+    //----------------------------------------------------------------------------------------------------------------------
+    /**
+     * Deep clone an object
+     * @param obj {object} - the object you want a deep copy of
+     * @return {object} - a true, deep clone of the object
+     */
+    const cloneObject = (obj) => (v8.deserialize(v8.serialize(obj)));
+    /**
+     * Compares strings containing numbers. Passed to sort function for filenames
+     * so that the numbers are sorted correctly, rather than by starting character
+     * @param a {string} - the string to compare with string b
+     * @param b {string} - the other string, to be compared with string a
+     * @return {number} - negative if b should go before a, positive if a should go
+     *      before b, or 0 if they are equivalent
+     */
     const compareNumericStrings = (a, b) => (a.localeCompare(b, navigator.languages[0] || navigator.language, { numeric: true, ignorePunctuation: true }));
+    /**
+     * Shallow equality checking for 2 arrays. Checks shallow equality of each
+     * element of arr1 and arr2 and returns false if any pair is not equal (using
+     * strict equality)
+     * @param arr1 {[]} - array 1, to be compared element-wise with arr2
+     * @param arr2 {[]} - array 2, to be compared element-wise with arr1
+     * @return {boolean} - true if equal length & arr1[i] === arr2[i] for each i
+     */
+    const arraysEqual = (arr1, arr2) => {
+        if (!(arr1.length === arr2.length))
+            return false;
+        for (let i in arr1) {
+            if (arr1[i] !== arr2[i])
+                return false;
+        }
+        return true;
+    };
+    //----------------------------------------------------------------------------------------------------------------------
+    //   TIME UTILITY FUNCTIONS
+    //----------------------------------------------------------------------------------------------------------------------
+    /**
+     * Converts time in ms into a luxon Duration object, normalizes it, and then
+     * returns a DurationObject (contains 'hours', 'minutes', and 'seconds')
+     * @param msTime {number} - the time in milliseconds to convert
+     * @return {DurationObject} - msTime converted to hours, minutes, & seconds
+     */
     const msToHrsMinsSecs = (msTime) => {
         let duration = Duration.fromObject({
             hours: 0,
@@ -8104,30 +8168,35 @@ var app = (function () {
         }).normalize();
         return duration.toObject();
     };
-    const formatTimeMs = (msTime, roundUpFormat = false) => {
-        if (msTime <= 0) {
-            return "00:00:00";
-        }
-        if (roundUpFormat) {
-            msTime += 1000;
-        }
-        const duration = msToHrsMinsSecs(msTime);
-        return formatTime(duration.hours, duration.minutes, duration.seconds);
-    };
-    const formatTime = (hours, minutes, seconds) => {
+    /**
+     * Converts duration into a string representation in 'hh:mm:ss' format
+     * @param duration {DurationObject} - time you want a string representation of
+     * @return {string} a string representation of 'duration' in 'hh:mm:ss' format
+     */
+    const formatTime = (duration) => {
+        const { hours, minutes, seconds } = duration;
         const hoursStr = hours < 10 ? `0${hours}` : hours;
         const minutesStr = minutes < 10 ? `0${minutes}` : minutes;
         const secondsStr = seconds < 10 ? `0${seconds}` : seconds;
         return `${hoursStr}:${minutesStr}:${secondsStr}`;
     };
-    const arraysEqual = (arr1, arr2) => {
-        if (!(arr1.length === arr2.length))
-            return false;
-        for (let i in arr1) {
-            if (arr1[i] !== arr2[i])
-                return false;
+    /**
+     * Converts time in ms into a string representation of the time to be displayed
+     * on the timer UI in the format of 'hh:mm:ss'
+     * @param msTime {number} - time in milliseconds to convert
+     * @param roundUpFormat {boolean} - if true, the time will be rounded up rather
+     *      than down so that 0 time isn't displayed until the time runs out fully
+     * @return {string} - the formatted time in the form of 'hh:mm:ss'
+     */
+    const formatTimeMs = (msTime, roundUpFormat = false) => {
+        if (msTime <= 0) {
+            return "00:00:00";
         }
-        return true;
+        if (roundUpFormat) {
+            msTime += 995; // 5ms less to prevent higher number flashing on start
+        }
+        const duration = msToHrsMinsSecs(msTime);
+        return formatTime(duration);
     };
 
     var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -10091,7 +10160,7 @@ var app = (function () {
      *
      * TYPES:
      *      @type SoundSelectionSetting - selection of 3 sound files by trigger type: 'start', 'next', & 'end'
-     *      @type SettingsTabLabel - ('style' | 'sound' | 'intervals'), valid settings tab labels
+     *      @type SettingsTabLabel ('style' | 'sound' | 'intervals') - valid settings tab labels
      *      @type SettingsObject - object containing all fields saved to & loaded from settings.json
      *
      *
@@ -10291,59 +10360,89 @@ var app = (function () {
         return true;
     };
 
+    /**
+     * file: timerState.ts
+     * author: Ryan McKay
+     *
+     * This file contains the svelte stores relevant to timekeeping.
+     *
+     * TYPES:
+     *      @type RunState ('running' | 'paused' | 'stopped' | 'finished') - represents the state of the timer
+     *          'running' - the timer is (or should be) actively counting down
+     *          'paused' - the timer was running, but has been interrupted by the user
+     *          'stopped' - the initial state, there is no remaining time pending
+     *          'finished' - the timer has run and reached 0, and is ready to run again with the same duration(s)
+     *
+     *
+     * STORES:
+     *      ----- CORE -----
+     *      focused {boolean} - whether the time input is selected or not
+     *      runState {RunState} - the current state of the timer. See options above
+     *      time {number} - the current time in ms, updated every 10ms
+     *      pausedRemainingTime {number} - set and displayed when runState is set to 'paused'
+     *      startTime {number} - set to the value of 'time' at the point the timer starts counting down
+     *      tempDuration {number} - set by the input of the time input ref as an intermediary to 'duration'
+     *      duration {number} - total duration of the timer. Set to value of tempDuration when timer is started
+     *      remainingTime {number} - the time left on the timer, which is displayed on the UI
+     *
+     *      ----- INTERVAL MODE -----
+     *      intervalDurations {number[]} - list of durations for timer intervals. takes place of 'tempDuration'
+     *      intervalIndex {number} - the index of the currently displayed/selected interval
+     *      playingIntervalIndex {number} - the index of the currently playing interval
+     *
+     *
+     * FUNCTIONS:
+     *      handleEnd - called in the 'remainingTime' update handler when the remaining duration reaches 0. Handles cases
+     *          for both standard and interval modes, and dictates what happens next based on the relevant store values
+     */
+    //----------------------------------------------------------------------------------------------------------------------
+    //   CORE TIMER STATE
+    //----------------------------------------------------------------------------------------------------------------------
+    // Whether the time input is selected
     const focused = writable(true);
-
-    // then current time, updated every 10 milliseconds
+    // The string representation of the current state of the timer (running, paused, stopped, or finished)
+    const runState = writable("finished");
+    // The current time in ms, updated every 10 ms
     const time = readable(Date.now(), (set) => {
         const interval = setInterval(() => {
             set(Date.now());
         }, 10);
-
         return () => clearInterval(interval);
     });
-
-    // set when pause is hit and returned by remaining time until resumed
+    // Set and displayed when timer is in paused state
     const pausedRemainingTime = writable(0);
-
-    // running, paused, stopped, finished
-    const runState = writable("finished");
-
-    // set to the time that the counter starts counting down
+    // Set to the time that the counter starts counting down
     const startTime = writable(Date.now());
-
-
-    // this is set when a new time value is entered, so that it is ready to go when play is hit
+    // Set when a new time value is entered, so that it is ready to go when the user hits play
     const tempDuration = writable(0);
-
-    // the desired duration of the timer
+    // Total duration of the timer
     const duration = writable(0);
-
-    // calculates the amount of time left if running, the time remaining when paused if paused, or 0 otherwise
-    const remainingTime = derived(
-        [time, duration, startTime, runState, pausedRemainingTime],
-        ([$time, $duration, $start, $runState, $pausedRemainingTime]) => {
-            if ($runState === "running") {
-                const remTime = $duration - ($time - $start);
-                if (remTime <= 0) handleEnd();
-                return remTime;
-            }
-            else if ($runState === "paused") return $pausedRemainingTime;
-            else return 0;
+    // Time displayed on UI
+    const remainingTime = derived([time, duration, startTime, runState, pausedRemainingTime], ([$time, $duration, $start, $runState, $pausedRemainingTime]) => {
+        if ($runState === "running") {
+            const remTime = $duration - ($time - $start);
+            if (remTime <= 0)
+                handleEnd();
+            return remTime;
         }
-    );
-
-
-    /// USED IN INTERVAL MODE
-    // this is used for the temporary durations in interval mode
+        else if ($runState === "paused")
+            return $pausedRemainingTime;
+        else
+            return 0;
+    });
+    //----------------------------------------------------------------------------------------------------------------------
+    //   INTERVAL MODE STORES
+    //----------------------------------------------------------------------------------------------------------------------
+    // List of 'tempDuration' values for set timer intervals
     const intervalDurations = writable([0, 0]);
-
-    // the index of the current interval duration
+    // Index of the currently displayed/selected interval
     const intervalIndex = writable(0);
-
+    // Index of the currently playing interval
     const playingIntervalIndex = writable(0);
-
-
-    // runs when the time runs out
+    //----------------------------------------------------------------------------------------------------------------------
+    //   STATE CHANGE HANDLERS
+    //----------------------------------------------------------------------------------------------------------------------
+    // Runs when remainingTime reaches 0
     const handleEnd = () => {
         const curSettings = get_store_value(settings);
         // if not in interval mode
@@ -10370,7 +10469,7 @@ var app = (function () {
                 startTime.set(Date.now());
                 duration.set(tempDurations[nextInd]);
                 focused.set(false);
-                playSound(curSettings.sounds[nextInd === 0 ? "end" : "next"] );
+                playSound(curSettings.sounds[nextInd === 0 ? "end" : "next"]);
             }
             else {
                 runState.set("finished");
@@ -27599,12 +27698,12 @@ var app = (function () {
     			t1 = space();
     			input = element("input");
     			attr_dev(h1, "class", "svelte-194xtpq");
-    			add_location(h1, file$p, 123, 0, 4131);
+    			add_location(h1, file$p, 123, 0, 4133);
     			attr_dev(input, "class", "hiddenInput svelte-194xtpq");
     			attr_dev(input, "type", "text");
-    			add_location(input, file$p, 124, 0, 4156);
+    			add_location(input, file$p, 124, 0, 4158);
     			attr_dev(div, "class", "TimeInput svelte-194xtpq");
-    			add_location(div, file$p, 122, 0, 4071);
+    			add_location(div, file$p, 122, 0, 4073);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -27876,7 +27975,7 @@ var app = (function () {
     		}
 
     		if ($$self.$$.dirty & /*hours, minutes, seconds*/ 112) {
-    			$$invalidate(2, readableTime = formatTime(hours, minutes, seconds));
+    			$$invalidate(2, readableTime = formatTime({ hours, minutes, seconds }));
     		}
 
     		if ($$self.$$.dirty & /*hours, minutes, seconds*/ 112) {

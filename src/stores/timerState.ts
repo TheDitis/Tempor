@@ -37,6 +37,7 @@
 import {derived, get, readable, writable, Readable, Writable} from "svelte/store";
 import {globalHue, hue, intervalColors, intervalMode, playSound, settings} from "./appState";
 
+
 //----------------------------------------------------------------------------------------------------------------------
 //   INTERFACES & TYPES
 //----------------------------------------------------------------------------------------------------------------------
@@ -57,13 +58,16 @@ export const focused: Writable<boolean> = writable(true);
 export const runState: Writable<RunState> = writable("finished");
 
 // The current time in ms, updated every 10 ms
-export const time: Readable<number> = readable(Date.now(), (set) => {
-    const interval = setInterval(() => {
-        set(Date.now());
-    }, 10);
+export const time: Readable<number> = readable(
+    Date.now(),
+    (set) => {
+        const interval = setInterval(() => {
+            set(Date.now());
+        }, 10);
 
-    return () => clearInterval(interval);
-})
+        return () => clearInterval(interval);
+    }
+)
 
 // Set and displayed when timer is in paused state
 export const pausedRemainingTime: Writable<number> = writable(0);

@@ -47,7 +47,7 @@
     }
 
     $: { update([$currentFavInd, $currentFavInterval]) }
-    $: readableTime = formatTime(hours, minutes, seconds)
+    $: readableTime = formatTime({hours, minutes, seconds})
 
 
 
