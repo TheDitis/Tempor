@@ -21,7 +21,6 @@
  *          of the time to be displayed on the timer UI in the format of 'hh:mm:ss'
  */
 
-
 import {Duration} from "luxon";
 const v8 = require("v8");
 

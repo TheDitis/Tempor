@@ -87,4 +87,7 @@ typings/
 
 # Electron-Forge
 out/
-/release-builds/
+release-builds/
+
+# build folder
+/public/build/

@@ -6,7 +6,6 @@
     import {Duration} from "luxon";
     import _ from "lodash";
 
-    // let inputRef;
     let hours = 0;
     let minutes = 0;
     let seconds = 0;

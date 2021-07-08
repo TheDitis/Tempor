@@ -7,7 +7,6 @@ import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
 
-
 const production = !process.env.ROLLUP_WATCH;
 
 function serve() {
@@ -33,10 +32,6 @@ function serve() {
 
 export default {
 	input: 'src/svelte.ts',
-	// globals: {
-	// 	electron: electron,
-	// 	fs: "fs"
-	// },
 	external: ['electron', 'fs'],
 	output: {
 		sourcemap: true,
@@ -45,16 +40,12 @@ export default {
 		file: 'public/build/bundle.js'
 	},
 	plugins: [
-		// multiInput(),
-		// svelte({
-		// 	/* ... */
-		// 	preprocess: preprocess()
-		// }),
 		svelte({
 			preprocess: sveltePreprocess({ sourceMap: !production }),
 			compilerOptions: {
 				// enable run-time checks when not in production
-				dev: !production
+				dev: !production,
+				hydratable: true
 			}
 		}),
 		// we'll extract any component CSS out into
