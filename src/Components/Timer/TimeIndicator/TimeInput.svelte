@@ -1,4 +1,8 @@
-<script>
+<script lang="ts">
+    /**
+     * TimeInput.svelte
+     * author: Ryan McKay
+     */
     import {onMount} from "svelte";
     import {arraysEqual, formatTime, formatTimeMs} from "../../../utils/utils";
     import {intervalDurations, intervalIndex, runState, tempDuration} from "../../../stores/timerState";
@@ -11,41 +15,54 @@
     let seconds = 0;
     let numbers = "";
 
-
+    /** ON MOUNT
+     * Run the the update function to set initial values the above variables
+     */
     onMount(() => {
-        if (!$intervalMode && $tempDuration !== 0 && $runState !== "running") {
-            numbers = formatTimeMs($tempDuration).replaceAll(":", "");
-            numsStrToHrsMinsSecs();
-        }
-
-        if ($intervalMode && $intervalDurations[$intervalIndex]) {
-            numbers = formatTimeMs($intervalDurations[$intervalIndex]).replaceAll(":", "");
-            numsStrToHrsMinsSecs();
-        }
-        if ($inputRef) {
-            $inputRef.focus()
-        }
+        update();
+        // if (!$intervalMode && $tempDuration !== 0 && $runState !== "running") {
+        //     numbers = formatTimeMs($tempDuration).replace(/:/g, "");
+        //     numsStrToHrsMinsSecs(numbers);
+        // }
+        //
+        // if ($intervalMode && $intervalDurations[$intervalIndex]) {
+        //     numbers = formatTimeMs($intervalDurations[$intervalIndex]).replace(/:/g, "");
+        //     numsStrToHrsMinsSecs(numbers);
+        // }
+        // if ($inputRef) {
+        //     $inputRef.focus()
+        // }
     });
 
+    /**
+     * Populates number string and the individual duration items, and set focus
+     * on the input element
+     * @param deps - placeholder for svelte reactive expression dependents
+     */
     const update = (deps = null) => {
+        // If in standard mode:
         if (!$intervalMode) {
             if ($tempDuration !== 0 && $runState !== "running") {
-                numbers = formatTimeMs($tempDuration).replaceAll(":", "");
-                numsStrToHrsMinsSecs();
+                numbers = formatTimeMs($tempDuration).replace(/:/g, "");
+                numsStrToHrsMinsSecs(numbers);
             }
         }
+        // If in interval mode:
         else {
             if ($intervalDurations.every(v => v) && $runState !== "running") {
-                numbers = formatTimeMs($intervalDurations[$intervalIndex]).replaceAll(":", "");
-                numsStrToHrsMinsSecs();
+                numbers = formatTimeMs($intervalDurations[$intervalIndex])
+                    .replace(/:/g, "");
+                numsStrToHrsMinsSecs(numbers);
             }
         }
+        // If the inputRef has already been bound successfully, set focus on it
         if ($inputRef) {
             $inputRef.focus()
         }
     };
 
-    $: { update([$currentFavInd, $currentFavInterval]) }
+    // Update component variables if a favorite is selected
+    $: update([$currentFavInd, $currentFavInterval]);
     $: readableTime = formatTime({hours, minutes, seconds});
 
 
@@ -69,6 +86,9 @@
         }
     };
 
+    /** Checks for easter-egg values and updates meme store if it detects one
+     * @param deps - placeholder for svelte reactive expression dependents
+     */
     const memeDetector = (deps) => {
         const secString = seconds.toString();
         if (secString.length === 2 && secString[0] === "6" && secString[1] === "9") {
@@ -83,10 +103,12 @@
         meme.set(null);
     };
 
-    const numsStrToHrsMinsSecs = () => {
+    const numsStrToHrsMinsSecs = (numsStr: string) => {
         /// create 6 digit string, split into pairs (hr, min, sec) and parse each into integers
-        let sixNums = _.padStart(numbers, 6, "0");
-        sixNums = sixNums.match(/.{1,2}/g).map(strNum => parseInt(strNum));
+        let strSixNums: string = _.padStart(numsStr, 6, "0");
+        const sixNums: number[] = strSixNums
+            .match(/.{1,2}/g)
+            .map(strNum => parseInt(strNum));
 
         // assign time values
         hours = sixNums[0];
@@ -105,7 +127,7 @@
             numbers = numbers.substring(0, 6)
         }
 
-        numsStrToHrsMinsSecs();
+        numsStrToHrsMinsSecs(numbers);
 
         if (!$intervalMode) {
             updateTempDuration();

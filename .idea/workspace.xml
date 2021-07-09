@@ -8,8 +8,13 @@
   <component name="ChangeListManager">
     <list default="true" id="2b7b0175-f98d-43b3-b351-86c5c407840e" name="Default Changelist" comment="Did massive cleanup (semicolons and indentation) and made dev tools open&amp;closable with a key command">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Controls/ThemeCycleButton.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/ThemeCycleButton.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Settings/Style/StyleSettings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/Style/StyleSettings.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeInput.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeInput.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/utils.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +99,7 @@
     <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.HTML" />
-    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+    <property name="ts.external.directory.path" value="C:\Users\Ryan\WebstormProjects\electron-timer\node_modules\typescript\lib" />
     <property name="ts.rename.search.for.dynamic.occurrences" value="true" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>

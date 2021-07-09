@@ -16,7 +16,7 @@
     import {intervalIndex} from "../../../stores/timerState";
 
     const onHueUpdate = async (hueVal = null) => {
-        if ($intervalMode && $intervalColors[$intervalIndex]) {
+        if ($intervalMode && $intervalColors[$intervalIndex] !== null) {
             hue.set($intervalColors[$intervalIndex])
         }
         else {

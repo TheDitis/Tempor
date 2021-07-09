@@ -90,12 +90,18 @@
 		runState.set("paused");
 	};
 
+	/** Resets the time state */
+	export const stop = () => {
+		playingIntervalIndex.set(0);
+		pausedRemainingTime.set(0);
+		runState.set('finished')
+	};
 
 	/** Calculates the new relative start-time based on how much time is remaining and sets the state back to running */
 	export const resume = () => {
 		if ($intervalMode) {
 			intervalIndex.set($playingIntervalIndex);
-			if ($intervalColors[$playingIntervalIndex]) {
+			if ($intervalColors[$playingIntervalIndex] !== null) {
 				hue.set($intervalColors[$playingIntervalIndex]);
 			}
 			else {
@@ -170,6 +176,7 @@
 		on:devtools={toggleDevTools}
 		on:start={start}
 		on:pause={pause}
+		on:stop={stop}
 		on:resume={resume}
 		on:makeBigger={makeBigger}
 		on:makeSmaller={makeSmaller}

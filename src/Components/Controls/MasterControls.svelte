@@ -98,7 +98,7 @@
             // loadSounds(favSounds);
             if (!!setting && setting !== $tempDuration) {
                 if ($runState === "running") {
-                    dispatch('pause');
+                    dispatch('stop');
                 }
                 focused.set(true);
                 tempDuration.set(setting);
@@ -106,7 +106,7 @@
             }
         }
         /// IF IN INTERVAL MODE:
-        else {
+        else if (favInd !== $currentFavInterval) {
             const timeSetting = $settings.favoriteIntervals[favInd];
             let colorSetting = $settings.favoriteIntervalColors[favInd];
             // const favSounds = $settings.favoriteIntervalSounds[favInd];
@@ -116,13 +116,14 @@
             console.log("1: ", colorSetting)
             if (!!timeSetting) {
                 focused.set(false);
-                if ($runState !== "running") {
-                    dispatch('pause');
+                if ($runState === "running") {
+                    dispatch('stop');
                 }
                 intervalIndex.set(0);
                 intervalDurations.set(timeSetting);
                 intervalColors.set(colorSetting);
                 currentFavInterval.set(favInd);
+                tempDuration.set(timeSetting[0]);
                 // loadSounds(favSounds);
                 await tick();
                 const intervalColor = $intervalColors[$intervalIndex];
