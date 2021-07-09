@@ -6,15 +6,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b7b0175-f98d-43b3-b351-86c5c407840e" name="Default Changelist" comment="Did massive cleanup (semicolons and indentation) and made dev tools open&amp;closable with a key command">
+    <list default="true" id="2b7b0175-f98d-43b3-b351-86c5c407840e" name="Default Changelist" comment="Fixed a few minor bugs in certain state-change cases, added stop function to App, upgraded TypeScript version, started converting TimeInput to TypeScript, and replaced the DurationObject Type from utils with the luxon DurationObject, which I'm still evaluating.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Settings/Style/StyleSettings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/Style/StyleSettings.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeInput.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeInput.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/utils.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,7 +171,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625795039483</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Fixed a few minor bugs in certain state-change cases, added stop function to App, upgraded TypeScript version, started converting TimeInput to TypeScript, and replaced the DurationObject Type from utils with the luxon DurationObject, which I'm still evaluating.">
+      <created>1625863737764</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1625863737764</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -197,7 +198,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Did massive cleanup (semicolons and indentation) and made dev tools open&amp;closable with a key command" />
-    <option name="LAST_COMMIT_MESSAGE" value="Did massive cleanup (semicolons and indentation) and made dev tools open&amp;closable with a key command" />
+    <MESSAGE value="Fixed a few minor bugs in certain state-change cases, added stop function to App, upgraded TypeScript version, started converting TimeInput to TypeScript, and replaced the DurationObject Type from utils with the luxon DurationObject, which I'm still evaluating." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed a few minor bugs in certain state-change cases, added stop function to App, upgraded TypeScript version, started converting TimeInput to TypeScript, and replaced the DurationObject Type from utils with the luxon DurationObject, which I'm still evaluating." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
