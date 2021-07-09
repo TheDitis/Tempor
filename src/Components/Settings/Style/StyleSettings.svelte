@@ -1,10 +1,15 @@
 <script lang="ts">
+    /**
+     * StyleSettings.svelte
+     * author: Ryan McKay
+     *
+     * The settings page dedicated to app appearance / style
+     */
     import SettingsSection from "../SettingsSection.svelte";
     import SettingsSlider from "../SettingControls/SettingsSlider.svelte";
     import SettingsOptionButton from "../SettingControls/SettingsOptionButton.svelte";
     import {faAdjust, faLayerGroup} from "@fortawesome/free-solid-svg-icons";
     import {
-        THEMES,
         blur,
         borderRadius,
         globalHue,

@@ -5,6 +5,10 @@
  * This file contains the svelte stores for all app-related state that isn't specifically relevant to time.
  *
  * TYPES:
+ *      @type SoundEventLabel ('start' | 'next' | 'end') - valid sound events
+ *          'start' - when the timer starts from the beginning (not resumed from pause)
+ *          'next' - when one interval ends and goes to the next (not including repeating the entire cycle)
+ *          'end' - when 0 remaining time is reached and there is no interval up next
  *      @type SoundSelectionSetting - selection of 3 sound files by trigger type: 'start', 'next', & 'end'
  *      @type SettingsTabLabel ('style' | 'sound' | 'intervals') - valid settings tab labels
  *      @type SettingsObject - object containing all fields saved to & loaded from settings.json
@@ -68,6 +72,8 @@ const path = require("path");
 //----------------------------------------------------------------------------------------------------------------------
 //   INTERFACES & TYPES
 //----------------------------------------------------------------------------------------------------------------------
+
+export type SoundEventLabel = ('start' | 'next' | 'end')
 
 // Selection of 3 sound files by trigger type: 'start', 'next', & 'end'
 export interface SoundSelectionSetting {
