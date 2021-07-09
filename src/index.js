@@ -76,6 +76,8 @@ const createWindow = () => {
     devtools = null;
   };
 
+  launchDevTools();
+
   ipcMain.on('devtools', (e) => {
     if (devtools === null) {
       launchDevTools()

@@ -50,6 +50,12 @@ export const cloneObject = (obj: object): object => (
     v8.deserialize(v8.serialize(obj))
 );
 
+/** Converts degrees to radians
+ * @param deg {number} - number of degrees
+ * @return {number} 'deg' converted into radians
+ */
+export const degToRad = (deg: number): number => (deg * Math.PI / 180);
+
 /**
  * Compares strings containing numbers. Passed to sort function for filenames
  * so that the numbers are sorted correctly, rather than by starting character

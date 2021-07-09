@@ -1,6 +1,7 @@
 <script lang="ts">
 	/**
 	 * file: App.svelte
+	 * author: Ryan McKay
 	 * This is the root component of the app
 	 */
 	import Timer from "./Components/Timer/Timer.svelte";
