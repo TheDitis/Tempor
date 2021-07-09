@@ -1,6 +1,6 @@
 {
-  "name": "electron-timer",
-  "productName": "Ryan's Cool Timer",
+  "name": "tempor",
+  "productName": "Tempor",
   "configuration": {
     "icon": "./public/favicon.png"
   },

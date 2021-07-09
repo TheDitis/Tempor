@@ -36,7 +36,6 @@ const createWindow = () => {
     icon: path.join(__dirname, '../public/favicon.png')
   });
 
-  // mainWindow.setMenu(null);
   Menu.setApplicationMenu(null);
 
   /// custom listeners
@@ -83,7 +82,6 @@ const createWindow = () => {
     else {
       destroyDevTools()
     }
-
   })
 
 

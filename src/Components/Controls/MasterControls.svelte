@@ -1,6 +1,6 @@
 <script lang="ts">
     /**
-     * file: MasterControls.svelte
+     * MasterControls.svelte
      * author: Ryan McKay
      *
      * This file contains all of the keyboard event handling logic

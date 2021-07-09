@@ -89,7 +89,7 @@ export default {
 	// SUPPRESS LUXON WARNING TO MAKE OTHER ISSUES MORE VISIBLE
 	onwarn: (warning, warn) => {
 		if (warning.code === 'CIRCULAR_DEPENDENCY') {
-			if(warning.message.includes('\\luxon\\')) {
+			if(warning.message.includes('\\luxon\\') || warning.message.includes('/luxon/')) {
 				return;
 			}
 		}
