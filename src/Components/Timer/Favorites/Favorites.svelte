@@ -1,5 +1,5 @@
 <script>
-    import {currentFavInd, currentFavInterval, favoritesKeyMap, intervalMode, settings} from "../../../stores/appState";
+    import {currentFavInd, currentFavInterval, FAVORITES_KEY_MAP, intervalMode, settings} from "../../../stores/appState";
     import _ from "lodash";
 
     import {fade} from "svelte/transition";
@@ -8,7 +8,7 @@
 
     const handleClick = (fav, i) => clickEvent => {
         /// Get the key that we need to fake to trigger our setter/getter function
-        const keyMap = !!fav ? favoritesKeyMap.load : favoritesKeyMap.set;
+        const keyMap = !!fav ? FAVORITES_KEY_MAP.load : FAVORITES_KEY_MAP.set;
         const key = _.invert(keyMap)[i];
 
         // stop event so that it doesn't remove focus from the input

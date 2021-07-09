@@ -1,6 +1,6 @@
 <script>
     import {createEventDispatcher} from "svelte";
-    import {maxSize, size} from "../../stores/appState";
+    import {MAX_SIZE, size} from "../../stores/appState";
 
     import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons";
     import Fa from "svelte-fa";
@@ -30,7 +30,7 @@
 
     <button
         class="plusButton"
-        disabled={$size >= maxSize}
+        disabled={$size >= MAX_SIZE}
         on:click={sizeUp}
     >
         <Fa icon={faPlus}/>

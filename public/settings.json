@@ -1,12 +1,12 @@
 {
-  "hue": 179,
+  "hue": 36.3,
   "size": 250,
-  "blur": 2.2,
-  "lineThickness": 36.6,
+  "blur": 0,
+  "lineThickness": 34.5,
   "fontWeight": "Regular",
   "alwaysOnTop": true,
   "theme": "dark",
-  "frame": 100,
+  "frame": 0,
   "volume": 1,
   "sounds": {
     "start": "All The Bells.wav",

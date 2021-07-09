@@ -1,7 +1,7 @@
 <script lang="ts">
 	/**
 	 * file: App.svelte
-	 * This is the root component
+	 * This is the root component of the app
 	 */
 	import Timer from "./Components/Timer/Timer.svelte";
 	import {
@@ -13,14 +13,14 @@
 		inputRef,
 		intervalColors,
 		intervalMode,
-		maxSize,
+		MAX_SIZE,
 		meme,
 		playSound,
 		scaledBlur,
 		settings,
 		settingsOpen,
 		size,
-		stayOnTop,
+		stayOnTop, THEMES,
 		width
 	} from "./stores/appState";
 	import ResizeControl from "./Components/Controls/ResizeControl.svelte";
@@ -43,14 +43,22 @@
 
 	const {ipcRenderer} = require("electron");
 
+	//------------------------------------------------------------------------------------------------------------------
+	//   ELECTRON EVENT TRIGGERS
+	//------------------------------------------------------------------------------------------------------------------
+
 	// any time the window size changes, send the signal to electron
 	$: ipcRenderer.send("resize", $width, $height);
 	// tell the window whether to stay on top or not when that setting changes
-	$: { ipcRenderer.send("stayontop", $stayOnTop) }
+	$: ipcRenderer.send("stay-on-top", $stayOnTop);
 
 
 
-	// sets the duration, start time, and run-state of the timer
+	//------------------------------------------------------------------------------------------------------------------
+	//   PRIMARY TIMER OPERATION FUNCTIONS
+	//------------------------------------------------------------------------------------------------------------------
+
+	/** Sets the duration, start time, and run-state of the timer */
 	export const start = async () => {
 		let tempDur;
 		if (!$intervalMode) {
@@ -73,14 +81,16 @@
 		if ($meme) meme.set(null);
 	};
 
-	// gets the current remaining time and sets the state to 'paused'
+
+	/** Sets the current remaining time and sets the state to 'paused' */
 	export const pause = () => {
 		playingIntervalIndex.set($intervalIndex);
 		pausedRemainingTime.set($remainingTime);
 		runState.set("paused");
 	};
 
-	// calculates the new relative start-time based on how much time is remaining and sets the state back to running
+
+	/** Calculates the new relative start-time based on how much time is remaining and sets the state back to running */
 	export const resume = () => {
 		if ($intervalMode) {
 			intervalIndex.set($playingIntervalIndex);
@@ -97,7 +107,13 @@
 		runState.set("running");
 	};
 
-	// scale down the window
+
+
+	//------------------------------------------------------------------------------------------------------------------
+	//   SIZE CHANGE FUNCTIONS
+	//------------------------------------------------------------------------------------------------------------------
+
+	/** Scales down the window by 50px if it's bigger than 100px */
 	const makeSmaller = () => {
 		if ($size > 100) {
 			size.update(v => v - 50);
@@ -105,24 +121,18 @@
 		if ($inputRef) $inputRef.focus();
 	};
 
-	// scale up the window
+	/** Scales up the window by 50px if it's smaller than their smallest window dimension */
 	const makeBigger = () => {
-		if ($size < maxSize) {
+		if ($size < MAX_SIZE) {
 			size.update(v => v + 50)
 		}
 		if ($inputRef) $inputRef.focus();
 	};
 
-	// theme color map
-	const themes = {
-		"transparent": "transparent",
-		"dark": "#202020",
-		"light": "white",
-	};
-
-	$: appBg = themes[$settings.theme];
-
 </script>
+
+
+
 
 <main
 	style="
@@ -135,7 +145,7 @@
 		--fontFamily: {'Roboto ' + $settings.fontWeight};
 		--buttonBg: {$color.alpha(0.5).hsl().string()};
 		--activeButtonBg: {$color.alpha(0.6).hsl().string()};
-		--appBg: {appBg};
+		--appBg: {THEMES[$settings.theme]};
 		--frameRadius: {$borderRadius  * ($width / 2) / 100}px;
 	"
 >
@@ -155,6 +165,7 @@
 	</div>
 </main>
 <MasterControls start={start} pause={pause} resume={resume} makeBigger={makeBigger} makeSmaller={makeSmaller}/>
+
 
 
 <style>

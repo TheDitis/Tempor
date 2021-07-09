@@ -3,7 +3,7 @@
     import {
         currentFavInd,
         currentFavInterval,
-        favoritesKeyMap,
+        FAVORITES_KEY_MAP,
         globalHue,
         hue,
         inputRef,
@@ -35,7 +35,7 @@
     const setFavorite = async (key) => {
         if (!$focused) return;
 
-        const favoriteIndex = favoritesKeyMap.set[key];
+        const favoriteIndex = FAVORITES_KEY_MAP.set[key];
         focused.set(false);
         // IN NORMAL TIMER MODE
         if (!$intervalMode) {
@@ -77,7 +77,7 @@
     };
 
     const loadFavorite = async (key) => {
-        const favInd = favoritesKeyMap.load[key];
+        const favInd = FAVORITES_KEY_MAP.load[key];
 
         /// IF NOT IN INTERVAL MODE:
         if (!$intervalMode) {

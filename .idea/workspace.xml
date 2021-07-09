@@ -6,34 +6,14 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b7b0175-f98d-43b3-b351-86c5c407840e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="2b7b0175-f98d-43b3-b351-86c5c407840e" name="Default Changelist" comment="Did massive cleanup (semicolons and indentation) and made dev tools open&amp;closable with a key command">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Controls/PlayPauseControl.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/PlayPauseControl.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Controls/ResizeControl.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/ResizeControl.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Icons/TomatoIcon.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Icons/TomatoIcon.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Settings/IntervalSettings/IntervalSettings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/IntervalSettings/IntervalSettings.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Settings/SaveButton.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/SaveButton.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Settings/SettingControls/SelectOption.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/SettingControls/SelectOption.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Settings/SettingControls/SettingsOptionButton.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/SettingControls/SettingsOptionButton.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Settings/SettingControls/SettingsSlider.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/SettingControls/SettingsSlider.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Settings/Settings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/Settings.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Settings/Sound/SoundSettings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/Sound/SoundSettings.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Settings/Style/StyleSettings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/Style/StyleSettings.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Timer/Favorites/Favorites.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/Favorites/Favorites.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Timer/IntervalMode/IntervalModeIndicator.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/IntervalMode/IntervalModeIndicator.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Timer/IntervalMode/IntervalNumberIndicator.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/IntervalMode/IntervalNumberIndicator.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeIndicator.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeIndicator.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeInput.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeInput.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Timer/Timer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/Timer.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/stores/appState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/appState.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stores/timerState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/timerState.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/utils.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,8 +166,16 @@
       <workItem from="1620084086145" duration="21000" />
       <workItem from="1620702045161" duration="666000" />
       <workItem from="1625353184756" duration="6781000" />
-      <workItem from="1625510812704" duration="31880000" />
+      <workItem from="1625510812704" duration="34912000" />
     </task>
+    <task id="LOCAL-00001" summary="Did massive cleanup (semicolons and indentation) and made dev tools open&amp;closable with a key command">
+      <created>1625795039483</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1625795039483</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,6 +192,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Did massive cleanup (semicolons and indentation) and made dev tools open&amp;closable with a key command" />
+    <option name="LAST_COMMIT_MESSAGE" value="Did massive cleanup (semicolons and indentation) and made dev tools open&amp;closable with a key command" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -10,6 +10,14 @@
  *      @type SettingsObject - object containing all fields saved to & loaded from settings.json
  *
  *
+ * CONSTANTS:
+ *      @const MAX_SIZE {number} - the maximum size of the app (smaller of the screens width and height)
+ *      @const FAVORITES_KEY_MAP {{set: object, load: object}} - Keyboard characters that map to the index of the
+ *          corresponding in item in favorites. Each object has 5 characters, each mapped to a number 0 - 4
+ *      @const THEMES {{transparent: string, dark: string, light: string}} - the mapping of theme labels to the color
+ *          string representing the desired color of the background div
+ *
+ *
  * STORES:
  *      ----- INTERFACE -----
  *      inputRef {HTMLElement} - the input element for the timer
@@ -98,8 +106,11 @@ interface SettingsObject {
 //   CONSTANTS
 //----------------------------------------------------------------------------------------------------------------------
 
+// Maximum size of the window based off the user's screen size
+export const MAX_SIZE = Math.min(window.screen.height, window.screen.width);
+
 // Keyboard characters that map to an item in favorites
-export const favoritesKeyMap = {
+export const FAVORITES_KEY_MAP = {
     set: {
         'Q': 0,
         'W': 1,
@@ -114,6 +125,12 @@ export const favoritesKeyMap = {
         "$": 3,
         "%": 4
     }
+};
+
+export const THEMES = {
+    "transparent": "transparent",
+    "dark": "#202020",
+    "light": "white",
 };
 
 
@@ -161,7 +178,7 @@ const audio = new Audio();
 // Volume of the app
 export const volume = writable(0);
 
-// Returns array of file names of all .mp3 and .wav files in the sounds folder
+/** Returns array of file names of all mp3 and wav files in the sounds folder */
 export const listSoundFileNames = (): string[] => {
     const files = fs.readdirSync(path.join(__dirname, "/sounds/"))
         .filter(name => name.includes(".wav") || name.includes(".mp3"));
@@ -169,7 +186,7 @@ export const listSoundFileNames = (): string[] => {
     return files
 };
 
-// Plays the sound file given if valid
+/** Plays the sound file given if valid */
 export const playSound = (filename: string) => {
     if (filename && (filename.includes(".wav") || filename.includes(".mp3"))) {
         audio.pause();
@@ -195,19 +212,20 @@ export const hue: Writable<number> = writable(180);
 export const globalHue: Writable<number> = writable(180);
 
 // Color object of max saturation, derived from the hue store
-export const color: Readable<Color> = derived(hue, $hue => Color("rgb(255, 0, 0)").rotate($hue));
+export const color: Readable<Color> = derived(
+    hue, $hue => Color("rgb(255, 0, 0)").rotate($hue)
+);
 
 // List of hue values for each of the 5 possible intervals (null if not set by user)
-export const intervalColors: Writable<number[]> = writable([null, null, null, null, null]);
+export const intervalColors: Writable<number[]> = writable(
+    [null, null, null, null, null]
+);
 
 
 
 //----------------------------------------------------------------------------------------------------------------------
 //   SIZE & SHAPE STORES
 //----------------------------------------------------------------------------------------------------------------------
-
-// Maximum size of the window based off the user's screen size
-export const maxSize: number = Math.min(window.screen.height, window.screen.width);
 
 // Size of the timer circle itself
 export const size: Writable<number> = writable(300);
@@ -250,9 +268,13 @@ export const height: Readable<number> = derived(
 //   GENERAL STORES + LOADING & SAVING FUNCTIONS
 //----------------------------------------------------------------------------------------------------------------------
 
-// Loads and returns settings.json file and sets individual stores accordingly
+/** Loads & returns settings.json file and sets individual stores accordingly
+ * @return {SettingsObject} - object containing all settings items
+ */
 const loadSettings = (): SettingsObject => {
-    const settingsData = JSON.parse(fs.readFileSync(path.join(__dirname, "./settings.json")));
+    const settingsData = JSON.parse(
+        fs.readFileSync(path.join(__dirname, "./settings.json"))
+    );
 
     // Handling missing sound files
     const soundFiles = listSoundFileNames();
@@ -279,9 +301,14 @@ const loadSettings = (): SettingsObject => {
 
 export const settings: Writable<SettingsObject> = writable(loadSettings());
 
-export const stayOnTop = derived(settings, $settings => $settings.alwaysOnTop);
+export const stayOnTop: Readable<boolean> = derived(
+    settings,
+        $settings => $settings.alwaysOnTop
+);
 
-// Saves settings and returns resulting status
+/** Saves settings and returns resulting status
+ * @return {Promise<boolean>} - status of save attempt
+ */
 export const saveSettings = async (): Promise<boolean> => {
     const tempHue = get(globalHue);
     const tempSize = get(size);
@@ -307,11 +334,15 @@ export const saveSettings = async (): Promise<boolean> => {
     const stringSettings = JSON.stringify(tempSettings, null, 2);
 
     try {
-        await fs.writeFileSync(path.join(__dirname, "./settings.json"), stringSettings)
+        await fs.writeFileSync(
+            path.join(__dirname, "./settings.json"), stringSettings
+        );
     } catch (e) {
         console.error(e);
-        return false
+        return false;
     }
     return true
 };
+
+
 

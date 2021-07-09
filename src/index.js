@@ -45,7 +45,7 @@ const createWindow = () => {
     // mainWindow.webContents.send("size-data", {width, height: height + 20})  // TODO: this is how you send data between windows
   });
 
-  ipcMain.on('stayontop', (e, value) => {
+  ipcMain.on('stay-on-top', (e, value) => {
     if (typeof value === "boolean") {
       mainWindow.setAlwaysOnTop(value);
     }
