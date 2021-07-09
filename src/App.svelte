@@ -165,6 +165,7 @@
 		{/if}
 	</div>
 </main>
+
 <MasterControls
 		on:devtools={toggleDevTools}
 		on:start={start}

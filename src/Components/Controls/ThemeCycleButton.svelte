@@ -1,9 +1,18 @@
-<script>
+<script lang="ts">
+    /**
+     * ThemeCycleButton.svelte
+     * author: Ryan McKay
+     *
+     * This button lives in the style settings page and cycles to the next available theme every click
+     */
     import {faAdjust} from "@fortawesome/free-solid-svg-icons";
     import Fa from "svelte-fa";
 
-    const themeOptions = ["transparent", "dark", "light"];
-
+    /**
+     * Cycles to the next app theme
+     * @event {KeyboardEvent} - keyboard event with key 'b', which is the key
+     *      MasterControls listens for to run the appropriate logic
+     */
     const cycleTheme = () => {
         const e = new KeyboardEvent(
             "keydown",
@@ -14,14 +23,21 @@
 </script>
 
 
+
 <button class="IntervalModeButton" on:click={cycleTheme}>
     <Fa icon={faAdjust}/>
 </button>
 
 
+
 <style>
     .IntervalModeButton {
         position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        opacity: 0;
         top: 5px;
         right: 5px;
         height: calc(var(--size) / 7 * 1px);
@@ -31,12 +47,7 @@
         border: none;
         background: var(--buttonBg);
         color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
         border-radius: 100000px;
-        opacity: 0;
         transition-duration: 700ms;
         transition-delay: 500ms;
     }
