@@ -8,14 +8,14 @@
     const changeSoundFile = eventName => filename => {
         const sounds = $settings.sounds;
         sounds[eventName] = filename;
-        playSound(filename)
+        playSound(filename);
         settings.set({...$settings, sounds})
-    }
+    };
 
     const onClick = (filename) => {
         playSound(filename);
         if ($inputRef) inputRef.focus();
-    }
+    };
 
     let fileList = listSoundFileNames();
     let startVal, nextVal, endVal;
@@ -23,7 +23,7 @@
     $: {
         if ($settings.sounds) {
             startVal = $settings.sounds.start;
-            nextVal = $settings.sounds.next
+            nextVal = $settings.sounds.next;
             endVal = $settings.sounds.end;
         }
     }

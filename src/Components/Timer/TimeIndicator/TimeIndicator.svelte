@@ -5,11 +5,11 @@
 
 
     /// this makes the timer blink when paused
-    const blinkInterval = 1000  // one second blinks
+    const blinkInterval = 1000;  // one second blinks
     $: opacity = $runState === "paused" ? (
         $time % blinkInterval > blinkInterval / 3 ?
             1 : 0.3
-    ) : 1
+    ) : 1;
 
     const handleFocus = (e) => {
         focused.set(true);

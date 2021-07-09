@@ -4,7 +4,7 @@
 
     export let size = 10;
     export let color;
-    export let colors
+    export let colors;
 
     let color1, color2;
     const updateColors = (deps) => {
@@ -21,11 +21,11 @@
             color1 = color;
             color2 = color;
         }
-    }
+    };
 
-    onMount(() => updateColors(colors))
+    onMount(() => updateColors(colors));
 
-    $: updateColors(colors)
+    $: updateColors(colors);
 
     const tomatoRed = "rgb(252, 61, 3)";
     const stemGreen = "rgb(0, 163, 27)";

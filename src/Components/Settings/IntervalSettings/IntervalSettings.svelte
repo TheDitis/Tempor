@@ -15,25 +15,25 @@
             intervalColors.set([null, null, null, null, null]);
         }
         await tick();
-    })
+    });
 
     const prev = (event) => {
         event.stopPropagation();
         event.preventDefault();
         const e = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key : "ArrowLeft", shiftKey : true});
         document.dispatchEvent(e);
-    }
+    };
 
     const next = (event) => {
         event.stopPropagation();
         event.preventDefault();
         const e = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key : "ArrowRight", shiftKey : true});
         document.dispatchEvent(e);
-    }
+    };
 
     const onNumberClick = (i) => e => {
         if ($runState !== "running") {
-            intervalIndex.set(i)
+            intervalIndex.set(i);
             if ($intervalColors[$intervalIndex]) {
                 hue.set($intervalColors[$intervalIndex])
             }
@@ -42,7 +42,7 @@
             }
             if ($inputRef) $inputRef.focus();
         }
-    }
+    };
 
     let hueValue;
     $: hueValue = $intervalColors[$intervalIndex];
@@ -61,17 +61,17 @@
         intervalColors.set(tempIntervalColors);
         // await tick();
         if ($inputRef) $inputRef.focus();
-    }
+    };
 
     const onColorChange = (val) => {
         if (val) hue.set(val);
-    }
+    };
 
     let colors, intervalColorVars;
     const updateColorsTick = async (deps) => {
         // await tick();
         updateColors()
-    }
+    };
     const updateColors = (deps) => {
         // await tick();
         const cols = $intervalColors.map(val => {
@@ -80,16 +80,16 @@
             } else {
                 return new Color('rgb(255, 0, 0)').rotate($globalHue)
             }
-        })
-        colors = cols
+        });
+        colors = cols;
         return colors
-    }
+    };
 
     const createCssColorVars = (deps) => {
         intervalColorVars = updateColors($intervalColors)
             .map((val, index) => `--intervalColor${index + 1}:${val.hex()}`)
             .join(';');
-    }
+    };
 
     $: {
         updateColorsTick();

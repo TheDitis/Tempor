@@ -5,7 +5,7 @@
     import Color from "color";
 
     const blinkRate = 130;
-    let opacity, colors
+    let opacity, colors;
 
     $:{
         if ($runState === "running") {
@@ -25,13 +25,13 @@
                 return Color('rgb(255, 0, 0)').rotate($globalHue)
             }
         })
-    }
+    };
 
     const navigateToInterval = ind => () => {
         if ($runState !== "running") {
             intervalIndex.set(ind)
         }
-    }
+    };
 
 
     $: {

@@ -14,7 +14,7 @@
         "style": StyleSettings,
         "sound": SoundSettings,
         "intervals": IntervalSettings,
-    }
+    };
 
     const handleResize = (node) => {
         settingsHeight.set(node.clientHeight);

@@ -67,7 +67,7 @@ export const time: Readable<number> = readable(
 
         return () => clearInterval(interval);
     }
-)
+);
 
 // Set and displayed when timer is in paused state
 export const pausedRemainingTime: Writable<number> = writable(0);
@@ -87,7 +87,7 @@ export const remainingTime: Readable<number> = derived(
     ([$time, $duration, $start, $runState, $pausedRemainingTime]) => {
         if ($runState === "running") {
             const remTime = $duration - ($time - $start);
-            if (remTime <= 0) handleEnd()
+            if (remTime <= 0) handleEnd();
             return remTime;
         }
         else if ($runState === "paused") return $pausedRemainingTime;
@@ -102,7 +102,7 @@ export const remainingTime: Readable<number> = derived(
 //----------------------------------------------------------------------------------------------------------------------
 
 // List of 'tempDuration' values for set timer intervals
-export const intervalDurations: Writable<number[]> = writable([0, 0])
+export const intervalDurations: Writable<number[]> = writable([0, 0]);
 
 // Index of the currently displayed/selected interval
 export const intervalIndex: Writable<number> = writable(0);
@@ -130,7 +130,7 @@ export const handleEnd = () => {
         const tempDurations = get(intervalDurations);
         const currentInd = get(intervalIndex);
         const nextInd = (currentInd + 1) % tempDurations.length;
-        intervalIndex.set(nextInd)
+        intervalIndex.set(nextInd);
         const intervalColor = get(intervalColors)[nextInd];
         if (intervalColor !== null) {
             hue.set(intervalColor)
@@ -140,7 +140,7 @@ export const handleEnd = () => {
         }
         // if repeatIntervalCycle setting is on or we haven't reached the end of the list:
         if (curSettings.repeatIntervalCycle || nextInd > currentInd) {
-            startTime.set(Date.now())
+            startTime.set(Date.now());
             duration.set(tempDurations[nextInd]);
             focused.set(false);
             playSound(curSettings.sounds[nextInd === 0 ? "end" : "next"] )
@@ -151,6 +151,6 @@ export const handleEnd = () => {
             focused.set(true);
         }
     }
-}
+};
 
 

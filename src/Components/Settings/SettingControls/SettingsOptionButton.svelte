@@ -12,11 +12,11 @@
     let timeout;
 
 
-    const mouseIn = () => timeout = setTimeout(() => showHint = true, 1000)
+    const mouseIn = () => timeout = setTimeout(() => showHint = true, 1000);
     const mouseOut = () => {
         clearTimeout(timeout);
         showHint = false;
-    }
+    };
 
 
     const toggle = (e) => {

@@ -3,7 +3,7 @@
     import Fa from "svelte-fa"
     import {faPause, faPlay} from '@fortawesome/free-solid-svg-icons'
 
-    export let start, pause, resume
+    export let start, pause, resume;
 
 
     $: getRunStateItem = (stoppedResult, runningResult, pausedResult) => {

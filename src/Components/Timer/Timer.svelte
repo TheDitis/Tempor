@@ -16,9 +16,9 @@
         if ($runState === "finished") return 359;
         if ($remainingTime > 0) return $remainingTime * 359 / $duration;
         else return 0;
-    }
+    };
 
-    const degToRad = (deg) => (deg * Math.PI / 180) // π
+    const degToRad = (deg) => (deg * Math.PI / 180); // π
     const convertAngle = (deg) => degToRad(deg - 90);
 
 

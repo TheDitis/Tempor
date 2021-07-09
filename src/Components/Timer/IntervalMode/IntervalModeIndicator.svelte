@@ -10,9 +10,9 @@
         const e = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key: "i", shiftKey : false});
         document.dispatchEvent(e);
 
-    }
+    };
 
-    $: isPomodoro = ($intervalDurations.length === 2 && $intervalDurations[0] === 1500000 && $intervalDurations[1] === 300000)
+    $: isPomodoro = ($intervalDurations.length === 2 && $intervalDurations[0] === 1500000 && $intervalDurations[1] === 300000);
 
     $: intervalCols = [$intervalColors[0], $intervalColors[1]]
 

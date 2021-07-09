@@ -1,4 +1,8 @@
 <script lang="ts">
+	/**
+	 * file: App.svelte
+	 * This is the root component
+	 */
 	import Timer from "./Components/Timer/Timer.svelte";
 	import {
 		borderRadius,
@@ -40,9 +44,10 @@
 	const {ipcRenderer} = require("electron");
 
 	// any time the window size changes, send the signal to electron
-	$: ipcRenderer.send("resize", $width, $height)
+	$: ipcRenderer.send("resize", $width, $height);
 	// tell the window whether to stay on top or not when that setting changes
 	$: { ipcRenderer.send("stayontop", $stayOnTop) }
+
 
 
 	// sets the duration, start time, and run-state of the timer
@@ -59,21 +64,21 @@
 			}
 		}
 		if (tempDur !== 0) {
-			startTime.set(Date.now())
+			startTime.set(Date.now());
 			duration.set(tempDur);
 			focused.set(false);
 			runState.set("running");
 			playSound($settings.sounds.start);
 		}
 		if ($meme) meme.set(null);
-	}
+	};
 
 	// gets the current remaining time and sets the state to 'paused'
 	export const pause = () => {
 		playingIntervalIndex.set($intervalIndex);
 		pausedRemainingTime.set($remainingTime);
 		runState.set("paused");
-	}
+	};
 
 	// calculates the new relative start-time based on how much time is remaining and sets the state back to running
 	export const resume = () => {
@@ -90,7 +95,7 @@
 		if ($meme) meme.set(null);
 		focused.set(false);
 		runState.set("running");
-	}
+	};
 
 	// scale down the window
 	const makeSmaller = () => {
@@ -98,7 +103,7 @@
 			size.update(v => v - 50);
 		}
 		if ($inputRef) $inputRef.focus();
-	}
+	};
 
 	// scale up the window
 	const makeBigger = () => {
@@ -106,14 +111,14 @@
 			size.update(v => v + 50)
 		}
 		if ($inputRef) $inputRef.focus();
-	}
+	};
 
 	// theme color map
 	const themes = {
 		"transparent": "transparent",
 		"dark": "#202020",
 		"light": "white",
-	}
+	};
 
 	$: appBg = themes[$settings.theme];
 

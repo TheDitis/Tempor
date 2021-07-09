@@ -17,7 +17,7 @@
         // Trigger the relevant function in our key listener in MasterControls
         const e = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key, shiftKey : false});
         document.dispatchEvent(e);
-    }
+    };
 
     $: { favsList = $intervalMode ? $settings.favoriteIntervals : $settings.favorites }
     $: { curInd = $intervalMode ? $currentFavInterval : $currentFavInd; }

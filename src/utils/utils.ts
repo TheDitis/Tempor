@@ -64,7 +64,7 @@ export const compareNumericStrings = (a: string, b: string): number => (
         navigator.languages[0] || navigator.language,
         {numeric: true, ignorePunctuation: true}
     )
-)
+);
 
 /**
  * Shallow equality checking for 2 arrays. Checks shallow equality of each
@@ -80,7 +80,7 @@ export const arraysEqual = (arr1: any[], arr2: any[]): boolean => {
         if (arr1[i] !== arr2[i]) return false
     }
     return true
-}
+};
 
 
 
@@ -102,7 +102,7 @@ export const msToHrsMinsSecs = (msTime: number): DurationObject => {
         milliseconds: msTime
     }).normalize();
     return  duration.toObject();
-}
+};
 
 /**
  * Converts duration into a string representation in 'hh:mm:ss' format
@@ -115,7 +115,7 @@ export const formatTime = (duration: DurationObject): string => {
     const minutesStr = minutes < 10 ? `0${minutes}` : minutes;
     const secondsStr = seconds < 10 ? `0${seconds}` : seconds;
     return `${hoursStr}:${minutesStr}:${secondsStr}`;
-}
+};
 
 /**
  * Converts time in ms into a string representation of the time to be displayed
@@ -135,8 +135,8 @@ export const formatTimeMs = (
     if (roundUpFormat) {
         msTime += 995  // 5ms less to prevent higher number flashing on start
     }
-    const duration = msToHrsMinsSecs(msTime)
+    const duration = msToHrsMinsSecs(msTime);
     return formatTime(duration)
-}
+};
 
 

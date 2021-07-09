@@ -18,20 +18,20 @@
 
     onMount(async () => {
         /// ON MOUNT, WAIT FOR VALUE PROP AND FIND ITS INDEX IN THE OPTIONS LIST
-        await tick()
+        await tick();
         if (options && value) {
             let index = options.indexOf(value);
             if (index < 0) ind = 0;
             else ind = index;
         }
-    })
+    });
 
     beforeUpdate(() => {
         /// when the values update, call the change handler
         if (value && callChangeHandler) {
             onChange(value);
         }
-    })
+    });
 
     // update the value when index changes.
     $: value = options[ind];
@@ -40,7 +40,7 @@
     const withoutExtension = (filename) => (
         // strip the file extension
         filename.slice(0, filename.lastIndexOf("."))
-    )
+    );
 
     const next = () => {
         /// GET THE NEXT ITEM, WRAPPING IF NECESSARY
@@ -48,7 +48,7 @@
         if (ind < options.length - 1) ind = ind + 1;
         else ind = 0;
         if ($inputRef) $inputRef.focus()
-    }
+    };
 
     const prev = () => {
         /// GET THE PREVIOUS ITEM, WRAPPING IF NECESSARY

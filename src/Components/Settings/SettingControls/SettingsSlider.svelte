@@ -5,7 +5,7 @@
     export let min = 0;
     export let max = 100;
     export let label;
-    export let step = 0.1
+    export let step = 0.1;
     export let onChange = () => null;
     export let disabled = false;
 

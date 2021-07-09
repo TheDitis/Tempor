@@ -13,9 +13,9 @@
         console.log("saving");
         saved = false;
         await tick();
-        const res: boolean = await saveSettings()
+        const res: boolean = await saveSettings();
         if (res) {
-            setTimeout(() => saved = true, 1000)
+            setTimeout(() => saved = true, 1000);
             console.log("saved");
         }
         if ($inputRef) $inputRef.focus();

@@ -16,6 +16,8 @@
     } from "../../stores/appState";
     import {duration, focused, intervalDurations, intervalIndex, runState, tempDuration} from "../../stores/timerState";
 
+    const {ipcRenderer} = require("electron");
+
     export let makeBigger;
     export let makeSmaller;
     export let start, pause, resume;
@@ -27,7 +29,7 @@
         const nextTheme = themeOptions[(currentInd + 1) % themeOptions.length];
         settings.update(opts => ({...opts, theme: nextTheme}));
         if ($inputRef) $inputRef.focus();
-    }
+    };
 
 
     const setFavorite = async (key) => {
@@ -44,7 +46,7 @@
                 settings.set({
                     ...$settings,
                     favorites: favorites,
-                })
+                });
                 currentFavInd.set(favoriteIndex);
             }
         }
@@ -72,7 +74,7 @@
         await tick();
         focused.set(true);
         if ($inputRef) $inputRef.focus();
-    }
+    };
 
     const loadFavorite = async (key) => {
         const favInd = favoritesKeyMap.load[key];
@@ -117,7 +119,7 @@
                 focused.set(true);
             }
         }
-    }
+    };
 
     const handleKeyDown = async (e) => {
         const key = e.key;
@@ -144,7 +146,7 @@
                 }
                 else if ($runState === "paused") {
                     resume()
-                };
+                }
                 break;
             case "Enter":
                 if ($focused && (($intervalMode && $intervalDurations.every(v => v)) || $tempDuration)) {
@@ -170,23 +172,23 @@
                     // set times and colors to pomodoro values (25 min, 5 min) (red, green)
                     intervalDurations.set([1500000, 300000]);
                     intervalColors.set([18.6, 77.2, null, null, null]);
-                    intervalIndex.set(0)
+                    intervalIndex.set(0);
                     if ($intervalMode) {
                         // if already in interval mode, we don't want to run the 'i' block since it will take us out of interval mode
                         // so we do the basic things we need to do to have it update here and then break.
-                        focused.set(false)
+                        focused.set(false);
                         await tick();
-                        hue.set($intervalColors[$intervalIndex])
+                        hue.set($intervalColors[$intervalIndex]);
                         focused.set(true);
-                        runState.set("finished")
+                        runState.set("finished");
                         break;
                     }
-
                 }
+                break;
             case "I":
             case "i":
                 if (!($runState === "running")) {
-                    runState.set("finished")
+                    runState.set("finished");
                     focused.set(false);
                     if ($intervalMode) {
                         hue.set($globalHue);
@@ -252,7 +254,7 @@
                         let newInd = (ind + direction) % $intervalDurations.length;
                         if (newInd < 0) newInd = $intervalDurations.length - 1;
                         return newInd
-                    })
+                    });
                     await tick();
                     const intervalColor = $intervalColors[$intervalIndex];
                     if (intervalColor !== null) {
@@ -275,8 +277,8 @@
                     if ($currentFavInterval !== null) {
                         currentFavInterval.set(null);
                     }
-                    intervalDurations.set([...$intervalDurations, 0])
-                    intervalIndex.set($intervalDurations.length - 1)
+                    intervalDurations.set([...$intervalDurations, 0]);
+                    intervalIndex.set($intervalDurations.length - 1);
                     hue.set($globalHue);
                     await tick();
                     focused.set(true);
@@ -295,7 +297,7 @@
                     intervalDurations.update(arr => {
                         arr.pop();
                         return arr;
-                    })
+                    });
                     await tick();
                     const intervalColor = $intervalColors[$intervalIndex];
                     if (intervalColor !== null) {
@@ -316,14 +318,22 @@
             case "B":
                 cycleTheme();
                 break;
+            case "d":
+            case "D":
+                console.log(e);
+                if (e.shiftKey && (e.metaKey || e.ctrlKey)) {
+                    ipcRenderer.send('devtools');
+                    showFavorites.set(false);
+                }
+                break;
             default:
                 break;
         }
-    }
+    };
 
     const handleKeyUp = (e) => {
-        e.preventDefault()
-        e.stopPropagation()
+        e.preventDefault();
+        e.stopPropagation();
         const key = e.key;
         switch (key) {
             case "Shift":

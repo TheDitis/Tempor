@@ -22,7 +22,7 @@
         else {
             hue.set($globalHue);
         }
-    }
+    };
 
     const themeOptions = ["transparent", "dark", "light"];
 
@@ -30,7 +30,7 @@
         const currentInd = themeOptions.indexOf($settings.theme);
         const nextTheme = themeOptions[(currentInd + 1) % themeOptions.length];
         settings.update(opts => ({...opts, theme: nextTheme}))
-    }
+    };
 
     $: customColor = $intervalMode && $intervalColors[$intervalIndex] !== null;
 

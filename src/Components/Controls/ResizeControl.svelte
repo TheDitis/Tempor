@@ -10,7 +10,7 @@
     const sizeDown = () => {
         const e = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key: "-", shiftKey : false});
         document.dispatchEvent(e);
-    }
+    };
     const sizeUp = () => {
         const e = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key: "=", shiftKey : false});
         document.dispatchEvent(e);

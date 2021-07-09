@@ -114,7 +114,7 @@ export const favoritesKeyMap = {
         "$": 3,
         "%": 4
     }
-}
+};
 
 
 
@@ -164,10 +164,10 @@ export const volume = writable(0);
 // Returns array of file names of all .mp3 and .wav files in the sounds folder
 export const listSoundFileNames = (): string[] => {
     const files = fs.readdirSync(path.join(__dirname, "/sounds/"))
-        .filter(name => name.includes(".wav") || name.includes(".mp3"))
+        .filter(name => name.includes(".wav") || name.includes(".mp3"));
     files.sort(compareNumericStrings);
     return files
-}
+};
 
 // Plays the sound file given if valid
 export const playSound = (filename: string) => {
@@ -180,7 +180,7 @@ export const playSound = (filename: string) => {
     else {
         console.error("cannot play sound '", filename, "', it must be a valid .wav or .mp3 file.")
     }
-}
+};
 
 
 
@@ -195,10 +195,10 @@ export const hue: Writable<number> = writable(180);
 export const globalHue: Writable<number> = writable(180);
 
 // Color object of max saturation, derived from the hue store
-export const color: Readable<Color> = derived(hue, $hue => Color("rgb(255, 0, 0)").rotate($hue))
+export const color: Readable<Color> = derived(hue, $hue => Color("rgb(255, 0, 0)").rotate($hue));
 
 // List of hue values for each of the 5 possible intervals (null if not set by user)
-export const intervalColors: Writable<number[]> = writable([null, null, null, null, null])
+export const intervalColors: Writable<number[]> = writable([null, null, null, null, null]);
 
 
 
@@ -207,7 +207,7 @@ export const intervalColors: Writable<number[]> = writable([null, null, null, nu
 //----------------------------------------------------------------------------------------------------------------------
 
 // Maximum size of the window based off the user's screen size
-export const maxSize: number = Math.min(window.screen.height, window.screen.width)
+export const maxSize: number = Math.min(window.screen.height, window.screen.width);
 
 // Size of the timer circle itself
 export const size: Writable<number> = writable(300);
@@ -242,7 +242,7 @@ export const height: Readable<number> = derived(
         if ($settingsOpen) return mainSectionSize + $settingsHeight + 20;
         else return mainSectionSize
     }
-)
+);
 
 
 
@@ -263,7 +263,7 @@ const loadSettings = (): SettingsObject => {
         }
     }
 
-    const cloned = cloneObject(settingsData) as SettingsObject
+    const cloned = cloneObject(settingsData) as SettingsObject;
 
     // set all individual stores with loaded values
     hue.set(cloned.hue);
@@ -275,7 +275,7 @@ const loadSettings = (): SettingsObject => {
     lineThickness.set(cloned.lineThickness);
 
     return cloned;
-}
+};
 
 export const settings: Writable<SettingsObject> = writable(loadSettings());
 
@@ -293,7 +293,7 @@ export const saveSettings = async (): Promise<boolean> => {
     /// so that not too much space is taken up by arrays full of null
     const tempFavIntervalColors = tempSettings.favoriteIntervalColors.map( item => {
         return (item !== null && item.length && item.some(val => val !== null)) ? item : null;
-    })
+    });
     tempSettings = {
         ...tempSettings,
         hue: tempHue,
@@ -309,9 +309,9 @@ export const saveSettings = async (): Promise<boolean> => {
     try {
         await fs.writeFileSync(path.join(__dirname, "./settings.json"), stringSettings)
     } catch (e) {
-        console.error(e)
+        console.error(e);
         return false
     }
     return true
-}
+};
 
