@@ -1,6 +1,6 @@
 {
   "hue": 191.8,
-  "size": 100,
+  "size": 200,
   "blur": 0,
   "lineThickness": 16.4,
   "fontWeight": "Regular",
@@ -29,8 +29,8 @@
   ],
   "favoriteIntervals": [
     [
-      20000,
-      10000
+      1500000,
+      300000
     ],
     null,
     null,
@@ -38,7 +38,13 @@
     null
   ],
   "favoriteIntervalColors": [
-    null,
+    [
+      0,
+      89.8,
+      null,
+      null,
+      null
+    ],
     null,
     null,
     null,

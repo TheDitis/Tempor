@@ -9,15 +9,16 @@
     let color1, color2;
     const updateColors = (deps) => {
         if (colors && (colors[0] !== null || colors[1] !== null)) {
-            if (colors[0]) {
-                color1 = Color('rgb(255, 0, 0)').rotate(colors[0]);
-            }
-            if (colors[1]) {
-                color2 = Color('rgb(255, 0, 0)').rotate(colors[1]);
-            }
-            if (!color1) color1 = color2;
-            else if (!color2) color2 = color1
+            color1 = colors[0] !== null ? (
+                Color('rgb(255, 0, 0)').rotate(colors[0])
+            ) : Color('rgb(255, 0, 0)').rotate(colors[1]);
+
+            color2 = colors[1] !== null ? (
+                Color('rgb(255, 0, 0)').rotate(colors[1])
+            ) : Color('rgb(255, 0, 0)').rotate(colors[0]);
+
         } else if (color) {
+            console.log("branch 2")
             color1 = color;
             color2 = color;
         }

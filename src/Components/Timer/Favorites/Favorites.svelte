@@ -1,4 +1,10 @@
 <script lang="ts">
+    /**
+     * Favorites.svelte
+     * author: Ryan McKay
+     *
+     * This is the the row of favorites numbers displayed inside the timer ring when shift is held
+     */
     import {currentFavInd, currentFavInterval, FAVORITES_KEY_MAP, intervalMode, settings} from "../../../stores/appState";
     import {fade} from "svelte/transition";
     import _ from "lodash";

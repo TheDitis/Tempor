@@ -113,6 +113,7 @@
             if (colorSetting === null) {
                 colorSetting = [null, null, null, null, null];
             }
+            console.log("1: ", colorSetting)
             if (!!timeSetting) {
                 focused.set(false);
                 if ($runState !== "running") {
@@ -125,7 +126,7 @@
                 // loadSounds(favSounds);
                 await tick();
                 const intervalColor = $intervalColors[$intervalIndex];
-                if (intervalColor) hue.set(intervalColor);
+                if (intervalColor !== null) hue.set(intervalColor);
                 else hue.set($globalHue);
 
                 focused.set(true);
@@ -335,7 +336,6 @@
                 break;
             case "d":
             case "D":
-                console.log(e);
                 if (e.shiftKey && (e.metaKey || e.ctrlKey)) {
                     dispatch('devtools');
                     showFavorites.set(false);
