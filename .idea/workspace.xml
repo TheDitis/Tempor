@@ -6,10 +6,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b7b0175-f98d-43b3-b351-86c5c407840e" name="Default Changelist" comment="Finished converting TimeInput to TypeScript">
+    <list default="true" id="2b7b0175-f98d-43b3-b351-86c5c407840e" name="Default Changelist" comment="Converted Settings component to TypeScript">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Controls/ThemeCycleButton.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/ThemeCycleButton.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Settings/Settings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/Settings.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Settings/Style/StyleSettings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/Style/StyleSettings.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,7 +187,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625866485743</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Converted Settings component to TypeScript">
+      <created>1625867396434</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1625867396434</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,7 +216,8 @@
     <MESSAGE value="Did massive cleanup (semicolons and indentation) and made dev tools open&amp;closable with a key command" />
     <MESSAGE value="Fixed a few minor bugs in certain state-change cases, added stop function to App, upgraded TypeScript version, started converting TimeInput to TypeScript, and replaced the DurationObject Type from utils with the luxon DurationObject, which I'm still evaluating." />
     <MESSAGE value="Finished converting TimeInput to TypeScript" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished converting TimeInput to TypeScript" />
+    <MESSAGE value="Converted Settings component to TypeScript" />
+    <option name="LAST_COMMIT_MESSAGE" value="Converted Settings component to TypeScript" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

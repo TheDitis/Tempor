@@ -1,4 +1,11 @@
 <script lang="ts">
+    /**
+     * Settings.svelte
+     * author: Ryan McKay
+     *
+     * This is the settings tray component that shows/hides when the settings
+     * button (bottom left) is clicked or the 's' key is pressed.
+     */
     import {color, settingsHeight, settingsTab} from "../../stores/appState";
     import {watchResize} from "svelte-watch-resize";
     import IntervalSettings from "./IntervalSettings/IntervalSettings.svelte"
