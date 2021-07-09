@@ -5,8 +5,10 @@
     const themeOptions = ["transparent", "dark", "light"];
 
     const cycleTheme = () => {
-        // send a background cycle key command to our main listener
-        const e = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key: 'b', shiftKey : false});
+        const e = new KeyboardEvent(
+            "keydown",
+            {bubbles : true, cancelable : true, key: 'b', shiftKey : false}
+        );
         document.dispatchEvent(e);
     }
 </script>

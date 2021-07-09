@@ -52,8 +52,8 @@
 	$: ipcRenderer.send("resize", $width, $height);
 	// tell the window whether to stay on top or not when that setting changes
 	$: ipcRenderer.send("stay-on-top", $stayOnTop);
-
-
+	// tell electron to open/close devtools window
+	const toggleDevTools = () => { ipcRenderer.send('devtools') };
 
 	//------------------------------------------------------------------------------------------------------------------
 	//   PRIMARY TIMER OPERATION FUNCTIONS
@@ -165,7 +165,14 @@
 		{/if}
 	</div>
 </main>
-<MasterControls start={start} pause={pause} resume={resume} makeBigger={makeBigger} makeSmaller={makeSmaller}/>
+<MasterControls
+		on:devtools={toggleDevTools}
+		on:start={start}
+		on:pause={pause}
+		on:resume={resume}
+		on:makeBigger={makeBigger}
+		on:makeSmaller={makeSmaller}
+/>
 
 
 

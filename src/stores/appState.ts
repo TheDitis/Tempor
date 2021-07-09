@@ -65,23 +65,22 @@ const fs = require("fs");
 const path = require("path");
 
 
-
 //----------------------------------------------------------------------------------------------------------------------
 //   INTERFACES & TYPES
 //----------------------------------------------------------------------------------------------------------------------
 
 // Selection of 3 sound files by trigger type: 'start', 'next', & 'end'
-interface SoundSelectionSetting {
+export interface SoundSelectionSetting {
     start: string,
     next: string,
     end: string
 }
 
 // Valid settings tab labels
-type SettingsTabLabel = ('style' | 'sound' | 'intervals');
+export type SettingsTabLabel = ('style' | 'sound' | 'intervals');
 
 // Contains all fields saved to & loaded from settings.json
-interface SettingsObject {
+export interface SettingsObject {
     hue: number,
     size: number,
     blur: number,

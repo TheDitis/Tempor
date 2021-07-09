@@ -1,6 +1,13 @@
-<script>
-    import {tick} from "svelte";
+<script lang="ts">
+    /**
+     * file: MasterControls.svelte
+     * author: Ryan McKay
+     *
+     * This file contains all of the keyboard event handling logic
+     */
+    import {tick, createEventDispatcher} from "svelte";
     import {
+        THEMES,
         currentFavInd,
         currentFavInterval,
         FAVORITES_KEY_MAP,
@@ -12,32 +19,33 @@
         settings,
         settingsOpen,
         settingsTab,
-        showFavorites
+        showFavorites,
     } from "../../stores/appState";
+    import type {SettingsObject} from "../../stores/appState.ts";
     import {duration, focused, intervalDurations, intervalIndex, runState, tempDuration} from "../../stores/timerState";
 
-    const {ipcRenderer} = require("electron");
+    const dispatch = createEventDispatcher();
 
-    export let makeBigger;
-    export let makeSmaller;
-    export let start, pause, resume;
-
-
-    const themeOptions = ["transparent", "dark", "light"];
+    /** Changes the theme of the app to the next in the list of options (see appState.ts) */
     const cycleTheme = () => {
+        const themeOptions = Object.keys(THEMES);
         const currentInd = themeOptions.indexOf($settings.theme);
         const nextTheme = themeOptions[(currentInd + 1) % themeOptions.length];
         settings.update(opts => ({...opts, theme: nextTheme}));
         if ($inputRef) $inputRef.focus();
     };
 
-
-    const setFavorite = async (key) => {
+    /** Saves the current configuration to the favorites slot that corresponds to the given key code
+     * @param key {string} - the char of the key pressed that has a mapping to an item in favorites (see appState.ts)
+     */
+    const setFavorite = async (key: string) => {
         if (!$focused) return;
 
+        // find the index the user is trying to access
         const favoriteIndex = FAVORITES_KEY_MAP.set[key];
         focused.set(false);
-        // IN NORMAL TIMER MODE
+
+        // IF IN NORMAL TIMER MODE
         if (!$intervalMode) {
             const favorites = $settings.favorites;
             // if we don't have a copy of this favorite already:
@@ -46,11 +54,12 @@
                 settings.set({
                     ...$settings,
                     favorites: favorites,
-                });
+                } as SettingsObject);
                 currentFavInd.set(favoriteIndex);
             }
         }
-        // IN INTERVAL MODE
+
+        // IF IN INTERVAL MODE
         else {
             const favorites = $settings.favoriteIntervals;
             const favoriteColors = $settings.favoriteIntervalColors;
@@ -68,15 +77,18 @@
                 ...$settings,
                 favoriteIntervals: favorites,
                 favoriteIntervalColors: favoriteColors,
-            });
-
+            } as SettingsObject);
         }
+
         await tick();
         focused.set(true);
         if ($inputRef) $inputRef.focus();
     };
 
-    const loadFavorite = async (key) => {
+    /** Loads the configuration that 'key' maps to if there is one saved in that slot
+     * @param key {string} - the char of the key pressed that has a mapping to an item in favorites (see appState.ts)
+     */
+    const loadFavorite = async (key: string) => {
         const favInd = FAVORITES_KEY_MAP.load[key];
 
         /// IF NOT IN INTERVAL MODE:
@@ -86,7 +98,7 @@
             // loadSounds(favSounds);
             if (!!setting && setting !== $tempDuration) {
                 if ($runState === "running") {
-                    pause();
+                    dispatch('pause');
                 }
                 focused.set(true);
                 tempDuration.set(setting);
@@ -104,7 +116,7 @@
             if (!!timeSetting) {
                 focused.set(false);
                 if ($runState !== "running") {
-                    pause();
+                    dispatch('pause');
                 }
                 intervalIndex.set(0);
                 intervalDurations.set(timeSetting);
@@ -121,7 +133,10 @@
         }
     };
 
-    const handleKeyDown = async (e) => {
+    /** The primary event handler of the app. Decides what to do based on which key is pressed and in what context
+     * @param e {KeyboardEvent} - the event passed by the listener
+     */
+    const handleKeyDown = async (e: KeyboardEvent) => {
         const key = e.key;
         if (e.repeat) {
             return;
@@ -130,7 +145,7 @@
             /// MAIN PAUSE/PLAY CONTROLS
             case " ":
                 if ($runState === "running") {
-                    pause();
+                    dispatch('pause');
                 }
 
                 else if (
@@ -142,15 +157,15 @@
                     )
                     && ($intervalMode || $tempDuration)
                 ) {
-                    start();
+                    dispatch('start');
                 }
                 else if ($runState === "paused") {
-                    resume()
+                    dispatch('resume');
                 }
                 break;
             case "Enter":
                 if ($focused && (($intervalMode && $intervalDurations.every(v => v)) || $tempDuration)) {
-                    start();
+                    dispatch('start');
                 }
                 break;
             case "Escape":
@@ -234,11 +249,11 @@
             /// WINDOW SIZING CONTROLS:
             case "-":
             case "_":
-                makeSmaller();
+                dispatch('makeSmaller');
                 break;
             case "+":
             case "=":
-                makeBigger();
+                dispatch('makeBigger');
                 break;
 
             /// INTERVAL MODE CONTROLS:
@@ -322,7 +337,7 @@
             case "D":
                 console.log(e);
                 if (e.shiftKey && (e.metaKey || e.ctrlKey)) {
-                    ipcRenderer.send('devtools');
+                    dispatch('devtools');
                     showFavorites.set(false);
                 }
                 break;
@@ -331,7 +346,10 @@
         }
     };
 
-    const handleKeyUp = (e) => {
+    /** Keyup listener. Currently only used to hide favorites
+     * @param e {KeyboardEvent} - the event passed by the window listener
+     */
+    const handleKeyUp = (e: KeyboardEvent) => {
         e.preventDefault();
         e.stopPropagation();
         const key = e.key;
