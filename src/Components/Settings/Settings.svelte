@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import {color, settingsHeight, settingsTab} from "../../stores/appState";
     import {watchResize} from "svelte-watch-resize";
     import IntervalSettings from "./IntervalSettings/IntervalSettings.svelte"
@@ -6,17 +6,19 @@
     import {fade} from "svelte/transition";
     import SettingsTabs from "./Tabs/SettingsTabs.svelte";
     import StyleSettings from "./Style/StyleSettings.svelte";
-    import SoundSettings from "./Sound/SoundSettings.svelte"
+    import SoundSettings from "./Sound/SoundSettings.svelte";
+    import type Component from "svelte/types/compiler/compile/Component";
+    import type {SettingsTabLabel} from "../../stores/appState";
 
-    // let settingsRef;
-
-    const settingsPages = {
+    // map of page labels to their corresponding content-component
+    const settingsPages: {[SettingsTabLabel: Component]} = {
         "style": StyleSettings,
         "sound": SoundSettings,
         "intervals": IntervalSettings,
     };
 
-    const handleResize = (node) => {
+    /** Updates settingsHeight store based on size of tab content */
+    const handleResize = (node: Element) => {
         settingsHeight.set(node.clientHeight);
     }
 </script>
@@ -26,9 +28,7 @@
     use:watchResize={handleResize}
     transition:fade={{duration: 0}}
     class="Settings"
-    style="
-        --color2: {$color.alpha(0.5).hsl().string()}
-    "
+    style="--color2: {$color.alpha(0.5).hsl().string()};"
 >
     <SettingsTabs/>
 

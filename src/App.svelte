@@ -42,11 +42,12 @@
 		tempDuration
 	} from "./stores/timerState";
 
-	const {ipcRenderer} = require("electron");
 
 	//------------------------------------------------------------------------------------------------------------------
 	//   ELECTRON EVENT TRIGGERS
 	//------------------------------------------------------------------------------------------------------------------
+
+	const {ipcRenderer} = require("electron");
 
 	// any time the window size changes, send the signal to electron
 	$: ipcRenderer.send("resize", $width, $height);
@@ -54,6 +55,8 @@
 	$: ipcRenderer.send("stay-on-top", $stayOnTop);
 	// tell electron to open/close devtools window
 	const toggleDevTools = () => { ipcRenderer.send('devtools') };
+
+
 
 	//------------------------------------------------------------------------------------------------------------------
 	//   PRIMARY TIMER OPERATION FUNCTIONS
@@ -82,7 +85,6 @@
 		if ($meme) meme.set(null);
 	};
 
-
 	/** Sets the current remaining time and sets the state to 'paused' */
 	export const pause = () => {
 		playingIntervalIndex.set($intervalIndex);
@@ -97,7 +99,8 @@
 		runState.set('finished')
 	};
 
-	/** Calculates the new relative start-time based on how much time is remaining and sets the state back to running */
+	/** Calculates the new relative start-time based on how much time is
+	 * remaining and sets the state back to running */
 	export const resume = () => {
 		if ($intervalMode) {
 			intervalIndex.set($playingIntervalIndex);
@@ -128,7 +131,8 @@
 		if ($inputRef) $inputRef.focus();
 	};
 
-	/** Scales up the window by 50px if it's smaller than their smallest window dimension */
+	/** Scales up the window by 50px if it's smaller than their smallest window
+	 * dimension */
 	const makeBigger = () => {
 		if ($size < MAX_SIZE) {
 			size.update(v => v + 50)
