@@ -200,7 +200,8 @@
                         break;
                     }
                 }
-                break;
+                else break;
+                // don't break here!
             case "I":
             case "i":
                 if (!($runState === "running")) {
@@ -228,11 +229,25 @@
                 showFavorites.set(true);
                 break;
             // keys for setting favorites
-            case "Q":
-            case "W":
-            case "E":
-            case "R":
+            case "t":
             case "T":
+                // T also toggles stay-on-top if shift isn't pressed
+                if (!e.shiftKey) {
+                    settings.update(settings => ({
+                        ...settings,
+                        alwaysOnTop: !settings.alwaysOnTop
+                    }));
+                    break
+                }
+                // Don't add break!
+            case "q":
+            case "Q":
+            case "w":
+            case "W":
+            case "e":
+            case "E":
+            case "r":
+            case "R":
                 // prevent accidental favorite setting with caps lock on
                 if (e.shiftKey) {
                     setFavorite(key);
