@@ -4,7 +4,7 @@
 Tempor is an Electron.js timer app that offers a high degree of customization. It's ideal for streamers, presenters,
 coaches, & project leaders with its stylistic customization and flexible favorites
 
-![Style demo](./assets/StyleDemo2.png)
+![Style demo](./assets/IntroImageBlue.png)
 
 ## Features:
 
@@ -21,19 +21,19 @@ coaches, & project leaders with its stylistic customization and flexible favorit
 ### Favorites
 
 - Save up to 5 favorites in each mode
-- Easily load and set favorites with easy key commands
+- Easily load and set favorites quickly with key commands
 - Set temporary favorites for the current session only, or save them permanently
 
 ### Interval Mode
 
 - Add up to 5 custom intervals
 - Choose a unique color for each interval
-- Ability to repeat entire interval cycle for a continuous loop
+- Option to repeat entire interval cycle for a continuous loop
 
 ### Sound Customization
 
 - Choose your own sounds
-- Select a different sound for different event types
+- Select different sounds for different event types
 - Set volume independent from OS
 
 ### Usability
@@ -41,3 +41,8 @@ coaches, & project leaders with its stylistic customization and flexible favorit
 - Full set of key-commands for effortless operation
 - Save your configuration, so it's always ready to go when you need it
 - Easily move the window around with the hidden drag bar
+
+
+
+## Styling & Configuration Examples:
+![Style demo](./assets/StyleDemo2.png)
