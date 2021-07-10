@@ -6,16 +6,23 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="22d7a1f6-2682-491d-88e9-d75e755e8d9b" name="Hide Unused Units" comment="Successfully updated TimeIndicator to not show leading 0's (dont show hours if there aren't any, etc) including the scaling up of the font when with fewer units to display. Only does this in standard mode. It didn't look good in interval mode. I will probably add this as a style setting in the future.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Icons/TomatoIcon.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Icons/TomatoIcon.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeIndicator.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeIndicator.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeInput.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeInput.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/utils.ts" afterDir="false" />
+    <list default="true" id="c6b408d6-7f6b-4b3d-b941-7b4421c45206" name="ReadMe" comment="Started Readme!">
+      <change afterPath="$PROJECT_DIR$/assets/DarkRound&amp;Blue.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/DarkRound&amp;BlueBig_Raw.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/DarkRound&amp;Green.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/DarkRound&amp;Purple.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/DarkRound&amp;RedThin_WithFavorites_Raw.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/LightRound&amp;PurpleBig_WithFavorites_Raw.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/LightRound&amp;RedThikBlurry_Raw.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/LightRound&amp;RedThik_Raw.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/RoundClosed.psd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Screenshot 2021-07-09 192409.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Screenshot 2021-07-09 192700.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Style_Demo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Style_Demo2.png" afterDir="false" />
     </list>
     <list id="2b7b0175-f98d-43b3-b351-86c5c407840e" name="Default Changelist" comment="Did some more TypeScript Conversion and a bit of file re-organization" />
-    <list id="c6b408d6-7f6b-4b3d-b941-7b4421c45206" name="ReadMe" comment="ReadMe">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    <list id="22d7a1f6-2682-491d-88e9-d75e755e8d9b" name="Hide Unused Units" comment="Successfully updated TimeIndicator to not show leading 0's (dont show hours if there aren't any, etc) including the scaling up of the font when with fewer units to display. Only does this in standard mode. It didn't look good in interval mode. I will probably add this as a style setting in the future.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,18 +81,13 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/.idea/workspace.xml">
-      <ranges>
-        <range start1="8" end1="9" start2="8" end2="9" changelist="22d7a1f6-2682-491d-88e9-d75e755e8d9b" />
-        <range start1="10" end1="19" start2="10" end2="11" changelist="22d7a1f6-2682-491d-88e9-d75e755e8d9b" />
-        <range start1="20" end1="21" start2="12" end2="19" changelist="22d7a1f6-2682-491d-88e9-d75e755e8d9b" />
-        <range start1="63" end1="63" start2="61" end2="66" changelist="22d7a1f6-2682-491d-88e9-d75e755e8d9b" />
-        <range start1="73" end1="73" start2="76" end2="89" changelist="22d7a1f6-2682-491d-88e9-d75e755e8d9b" />
-        <range start1="225" end1="226" start2="241" end2="271" changelist="22d7a1f6-2682-491d-88e9-d75e755e8d9b" />
-        <range start1="251" end1="252" start2="296" end2="298" changelist="c6b408d6-7f6b-4b3d-b941-7b4421c45206" />
-      </ranges>
-    </file>
+  <component name="GithubPullRequestsUISettings">
+    <option name="recentNewPullRequestHead">
+      <RepoCoordinatesHolder>
+        <option name="owner" value="TheDitis" />
+        <option name="repository" value="Tempor" />
+      </RepoCoordinatesHolder>
+    </option>
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="dm4og5g5" />
@@ -105,8 +107,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="javascript.nodejs.core.library.configured.version" value="14.16.1" />
-    <property name="javascript.nodejs.core.library.typings.version" value="14.17.5" />
+    <property name="javascript.nodejs.core.library.configured.version" value="12.19.0" />
+    <property name="javascript.nodejs.core.library.typings.version" value="12.19.0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/scripts" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -139,11 +141,21 @@
       <recent name="C:\Users\Ryan\WebstormProjects\electron-timer\src\utils" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="npm.make">
     <configuration name="Electron" type="NodeJSConfigurationType" path-to-node="$PROJECT_DIR$/node_modules/.bin/electron" node-parameters="./src" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
     <configuration name="setupTypeScript.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/scripts/setupTypeScript.js" working-dir="$PROJECT_DIR$/scripts">
+      <method v="2" />
+    </configuration>
+    <configuration name="make" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="make" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
       <method v="2" />
     </configuration>
     <configuration name="start" type="js.build_tools.npm" nameIsGenerated="true">
@@ -160,16 +172,19 @@
       <item itemvalue="Node.js.Electron" />
       <item itemvalue="Node.js.setupTypeScript.js" />
       <item itemvalue="npm.start" />
+      <item itemvalue="npm.make" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.make" />
+        <item itemvalue="Node.js.setupTypeScript.js" />
         <item itemvalue="Node.js.setupTypeScript.js" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
+    <task id="Default" summary="Default task">
       <changelist id="2b7b0175-f98d-43b3-b351-86c5c407840e" name="Default Changelist" comment="" />
       <created>1616465887199</created>
       <option name="number" value="Default" />
@@ -191,11 +206,13 @@
       <workItem from="1625850908361" duration="3185000" />
     </task>
     <task id="LOCAL-00001" summary="Did massive cleanup (semicolons and indentation) and made dev tools open&amp;closable with a key command">
+      <changelist id="22d7a1f6-2682-491d-88e9-d75e755e8d9b" name="Hide Unused Units" comment="Successfully updated TimeIndicator to not show leading 0's (dont show hours if there aren't any, etc) including the scaling up of the font when with fewer units to display. Only does this in standard mode. It didn't look good in interval mode. I will probably add this as a style setting in the future." />
       <created>1625795039483</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1625795039483</updated>
+      <updated>1625891027496</updated>
+      <workItem from="1625891021080" duration="7000" />
     </task>
     <task id="LOCAL-00002" summary="Fixed a few minor bugs in certain state-change cases, added stop function to App, upgraded TypeScript version, started converting TimeInput to TypeScript, and replaced the DurationObject Type from utils with the luxon DurationObject, which I'm still evaluating.">
       <created>1625863737764</created>
@@ -246,7 +263,7 @@
       <option name="project" value="LOCAL" />
       <updated>1625878309510</updated>
     </task>
-    <task id="LOCAL-00009" summary="ReadMe">
+    <task active="true" id="LOCAL-00009" summary="ReadMe">
       <branch name="master" repository="C:\Users\Ryan\WebstormProjects\electron-timer" original="true" />
       <branch name="ReadMe" repository="C:\Users\Ryan\WebstormProjects\electron-timer" />
       <changelist id="c6b408d6-7f6b-4b3d-b941-7b4421c45206" name="ReadMe" comment="" />
@@ -254,10 +271,12 @@
       <option name="number" value="00009" />
       <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1625880812016</updated>
+      <updated>1625891027496</updated>
       <workItem from="1625878632282" duration="1759000" />
+      <workItem from="1625891028121" duration="1116000" />
+      <workItem from="1625893137138" duration="1337000" />
     </task>
-    <task active="true" id="LOCAL-00010" summary="Hide Unused Units">
+    <task id="LOCAL-00010" summary="Hide Unused Units">
       <branch name="ReadMe" repository="C:\Users\Ryan\WebstormProjects\electron-timer" original="true" />
       <branch name="Hide-Unused" repository="C:\Users\Ryan\WebstormProjects\electron-timer" />
       <changelist id="22d7a1f6-2682-491d-88e9-d75e755e8d9b" name="Hide Unused Units" comment="" />
@@ -265,10 +284,24 @@
       <option name="number" value="00010" />
       <option name="presentableId" value="LOCAL-00010" />
       <option name="project" value="LOCAL" />
-      <updated>1625880812016</updated>
-      <workItem from="1625880812898" duration="9722000" />
+      <updated>1625891020191</updated>
+      <workItem from="1625880812898" duration="10121000" />
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Successfully updated TimeIndicator to not show leading 0's (dont show hours if there aren't any, etc) including the scaling up of the font when with fewer units to display. Only does this in standard mode. It didn't look good in interval mode. I will probably add this as a style setting in the future.">
+      <created>1625890797366</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1625890797366</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Started Readme!">
+      <created>1625896727496</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1625896727496</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -296,7 +329,8 @@
     <MESSAGE value="Did massive refactoring/simplification of the IntervalSettings component and converted it to TypeScript." />
     <MESSAGE value="Did some more TypeScript Conversion and a bit of file re-organization" />
     <MESSAGE value="Successfully updated TimeIndicator to not show leading 0's (dont show hours if there aren't any, etc) including the scaling up of the font when with fewer units to display. Only does this in standard mode. It didn't look good in interval mode. I will probably add this as a style setting in the future." />
-    <option name="LAST_COMMIT_MESSAGE" value="Successfully updated TimeIndicator to not show leading 0's (dont show hours if there aren't any, etc) including the scaling up of the font when with fewer units to display. Only does this in standard mode. It didn't look good in interval mode. I will probably add this as a style setting in the future." />
+    <MESSAGE value="Started Readme!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Started Readme!" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
