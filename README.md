@@ -61,7 +61,7 @@ coaches, & project leaders with its stylistic customization and flexible favorit
 | **Open/Close Settings** | Opens the tray where you will find style and audio settings, and interval settings when in interval mode | <kbd>s</kbd>  | ![Style demo](./assets/Open-Close2.gif)  |
 | **Cycle Themes** | Cycle between light, dark, and transparent themes | <kbd>b</kbd>  | ![Style demo](./assets/ChangeTheme.gif)  |
 | **Always On Top** | When in always-on-top mode, you can interact with any window below without covering up the timer. You can't click through the timer, so you'll have to move it if you need to access a control below the window | <kbd>t</kbd>  | ![Style demo](./assets/AlwaysOnTop.gif)  |
-| **Settings Tabs** | You can navigate between settings <br/> tabs by clicking  the relevant icon. <br/><br/>*note*: Interval settings tab doesn't <br/> show up in standard mode  | <kbd>ctrl/⌘</kbd> + <kbd>←</kbd>/<kbd>→</kbd>  | ![Style demo](./assets/SwitchingTabs.gif)  |
+| **Settings Tabs** | You can navigate between settings tabs by clicking  the relevant icon. <br/><br/>*note*: Interval settings tab doesn't show up in standard mode  | <kbd>ctrl/⌘</kbd> + <kbd>←</kbd>/<kbd>→</kbd>  | ![Style demo](./assets/SwitchingTabs.gif)  |
 
 
 [comment]: <> (<table style="width:100%;">)
