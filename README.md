@@ -53,11 +53,45 @@ coaches, & project leaders with its stylistic customization and flexible favorit
 ## General Usage
 
 
+
 | Action  | Explanation | Key Command  | With Mouse |
 | :---: | ---  | :-----: | :-------------: |
-| Positioning | There's a hidden bar between the top of the progress circle and the top edge of the app. Click just above the timer circle and drag to position |  None | ![Style demo](./assets/MovingTheApp.gif)  |
-| Sizing | Hovering over the top-left corner of the app will reveal the size control buttons.  | <kbd>-</kbd> or <kbd>+</kbd> (no<kbd>shift</kbd>) | ![Style demo](./assets/ChangingSize.gif)  |
-| Open/Close Settings | Opens the tray where you will find style and audio settings, and interval settings when in interval mode | <kbd>s</kbd>  | ![Style demo](./assets/Open-Close2.gif)  |
-| Cycle Themes | Cycle between light, dark, and transparent themes | <kbd>b</kbd>  | ![Style demo](./assets/ChangeTheme.gif)  |
-| Always On Top | When in always-on-top mode, you can interact with any window below without covering up the timer. You can't click through the timer, so you'll have to move it if you need to access a control below the window | <kbd>t</kbd>  | ![Style demo](./assets/AlwaysOnTop.gif)  |
-| 
+| **Positioning** | There's a hidden bar between the top of the progress circle and the top edge of the app. Click just above the timer circle and drag to position |  None | ![Style demo](./assets/MovingTheApp.gif) |
+| **Sizing** | Hovering over the top-left corner of the app will reveal the size control buttons.  | <kbd>-</kbd> or <kbd>+</kbd> <br/> (no<kbd>shift</kbd>) | ![Style demo](./assets/ChangingSize.gif)  |
+| **Open/Close** Settings | Opens the tray where you will find style and audio settings, and interval settings when in interval mode | <kbd>s</kbd>  | ![Style demo](./assets/Open-Close2.gif)  |
+| **Cycle Themes** | Cycle between light, dark, and transparent themes | <kbd>b</kbd>  | ![Style demo](./assets/ChangeTheme.gif)  |
+| **Always On Top** | When in always-on-top mode, you can interact with <br/> any window below without covering up the timer. You <br/> can't click through the timer, so you'll have to move <br/> it if you need to access a control below the window | <kbd>t</kbd>  | ![Style demo](./assets/AlwaysOnTop.gif)  |
+| **Settings Tabs** | You can navigate between settings tabs by <br/> clicking  the relevant icon. <br/><br/>*note*: Interval settings tab doesn't show up <br/> in standard mode  | <kbd>ctrl/⌘</kbd> + <kbd>←</kbd>/<kbd>→</kbd>  | ![Style demo](./assets/SwitchingTabs.gif)  |
+
+
+[comment]: <> (<table style="width:100%;">)
+
+[comment]: <> (  <tr>)
+
+[comment]: <> (    <th width="100px">Action</th>)
+
+[comment]: <> (    <th width="300px">Description</th>)
+
+[comment]: <> (    <th width="100px">Keyboard Shortcut</th>)
+
+[comment]: <> (    <th>Age</th>)
+
+[comment]: <> (  </tr>)
+
+[comment]: <> (  <tr>)
+
+[comment]: <> (    <td>Positioning</td>)
+
+[comment]: <> (    <td>There's a hidden bar between the top of the progress circle and the top edge of the app. Click just above the timer circle and drag to position</td>)
+
+[comment]: <> (    <td>None</td>)
+
+[comment]: <> (    <td height="500px">)
+
+[comment]: <> (        <img src="./assets/AlwaysOnTop.gif" height="300px"/>)
+
+[comment]: <> (    </td>)
+
+[comment]: <> (  </tr>)
+
+[comment]: <> (</table>)
