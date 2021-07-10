@@ -6,7 +6,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c6b408d6-7f6b-4b3d-b941-7b4421c45206" name="ReadMe" comment="Started Readme!">
+    <list default="true" id="c6b408d6-7f6b-4b3d-b941-7b4421c45206" name="ReadMe" comment="Added keyboard shortcut for switching between settings tabs (ctrl/cmd + leftArrow to go left a tab, ctrl/cmd + rightArrow to go right a tab)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" afterDir="false" />
     </list>
@@ -288,7 +288,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625896727496</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Added keyboard shortcut for switching between settings tabs (ctrl/cmd + leftArrow to go left a tab, ctrl/cmd + rightArrow to go right a tab)">
+      <created>1625948278417</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1625948278417</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -317,7 +324,8 @@
     <MESSAGE value="Did some more TypeScript Conversion and a bit of file re-organization" />
     <MESSAGE value="Successfully updated TimeIndicator to not show leading 0's (dont show hours if there aren't any, etc) including the scaling up of the font when with fewer units to display. Only does this in standard mode. It didn't look good in interval mode. I will probably add this as a style setting in the future." />
     <MESSAGE value="Started Readme!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Started Readme!" />
+    <MESSAGE value="Added keyboard shortcut for switching between settings tabs (ctrl/cmd + leftArrow to go left a tab, ctrl/cmd + rightArrow to go right a tab)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added keyboard shortcut for switching between settings tabs (ctrl/cmd + leftArrow to go left a tab, ctrl/cmd + rightArrow to go right a tab)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

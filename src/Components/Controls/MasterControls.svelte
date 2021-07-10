@@ -94,7 +94,7 @@
         /// IF NOT IN INTERVAL MODE:
         if (!$intervalMode) {
             const setting = $settings.favorites[favInd];
-            const favSounds = $settings.favoritesSounds[favInd];
+            // const favSounds = $settings.favoritesSounds[favInd];
             // loadSounds(favSounds);
             if (!!setting && setting !== $tempDuration) {
                 if ($runState === "running") {
@@ -113,7 +113,6 @@
             if (colorSetting === null) {
                 colorSetting = [null, null, null, null, null];
             }
-            console.log("1: ", colorSetting)
             if (!!timeSetting) {
                 focused.set(false);
                 if ($runState === "running") {
@@ -269,9 +268,11 @@
                 // If holding ctrl / cmd and settings are open, change tabs
                 if (e.ctrlKey || e.metaKey) {
                     if ($settingsOpen) {
-                        const tabLabels = [
-                            'style', 'sound', 'intervals', 'style', 'sound'
+                        let tabLabels = [
+                            'style', 'sound'
                         ];
+                        if ($intervalMode) tabLabels.push('intervals');
+                        tabLabels = tabLabels.concat(tabLabels);
                         // go to the next or previous tab depending on key
                         settingsTab.update(tab => {
                             const index = direction > 0 ? (
