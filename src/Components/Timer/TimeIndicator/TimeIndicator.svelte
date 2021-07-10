@@ -1,19 +1,20 @@
-<script>
+<script lang="ts">
+    /**
+     * TimeIndicator.svelte
+     * author: Ryan McKay
+     *
+     * This is the displayed time, which contains TimeInput component
+     */
     import {focused, remainingTime, runState, time} from "../../../stores/timerState";
     import TimeInput from "./TimeInput.svelte";
     import {formatTimeMs} from "../../../utils/utils";
 
-
     /// this makes the timer blink when paused
     const blinkInterval = 1000;  // one second blinks
+    let opacity: number;
     $: opacity = $runState === "paused" ? (
-        $time % blinkInterval > blinkInterval / 3 ?
-            1 : 0.3
+        ($time % blinkInterval) > (blinkInterval / 3) ? 1 : 0.3
     ) : 1;
-
-    const handleFocus = (e) => {
-        focused.set(true);
-    }
 
 </script>
 
@@ -22,7 +23,7 @@
 <div
     class="TimeIndicator"
     style="--opacity: {opacity}"
-    on:click|stopPropagation={handleFocus}
+    on:click|stopPropagation|preventDefault={() => focused.set(true)}
 >
     {#if $focused}
         <TimeInput/>

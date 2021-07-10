@@ -6,12 +6,19 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b7b0175-f98d-43b3-b351-86c5c407840e" name="Default Changelist" comment="Converted SoundSettings to TypeScript">
+    <list default="true" id="2b7b0175-f98d-43b3-b351-86c5c407840e" name="Default Changelist" comment="Did massive refactoring/simplification of the IntervalSettings component and converted it to TypeScript.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Settings/IntervalSettings/IntervalSettings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/IntervalSettings/IntervalSettings.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Timer/IntervalMode/IntervalNumberIndicator.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/IntervalMode/IntervalNumberIndicator.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Settings/OpenSettingsButton.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/OpenSettingsButton.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Settings/SaveButton.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/SaveButton.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Settings/SettingControls/SettingsOptionButton.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/SettingControls/SettingsOptionButton.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Settings/SettingControls/SettingsSlider.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/SettingControls/SettingsSlider.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Settings/Settings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/Settings.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Settings/Sound/AudioSettingsButton.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Timer/IntervalMode/IntervalModeIndicator.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/IntervalMode/IntervalModeIndicator.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeIndicator.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeIndicator.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Timer/Timer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/Timer.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,8 +116,8 @@
       <recent name="C:\Users\Ryan\WebstormProjects\electron-timer\public\fonts\roboto" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Ryan\WebstormProjects\electron-timer\public\build" />
       <recent name="C:\Users\Ryan\WebstormProjects\electron-timer\src\Components\Controls" />
+      <recent name="C:\Users\Ryan\WebstormProjects\electron-timer\public\build" />
       <recent name="C:\Users\Ryan\WebstormProjects\electron-timer\src\Components\Settings\SettingControls" />
       <recent name="C:\Users\Ryan\WebstormProjects\electron-timer\src\Components\Timer" />
       <recent name="C:\Users\Ryan\WebstormProjects\electron-timer\src\utils" />
@@ -209,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625870022185</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Did massive refactoring/simplification of the IntervalSettings component and converted it to TypeScript.">
+      <created>1625873661143</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1625873661143</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -234,7 +248,8 @@
     <MESSAGE value="Converted Settings component to TypeScript" />
     <MESSAGE value="Converted StyleSettings component to TypeScript and deleted ThemeCycleButton (I had replaced it with the more general SettingsOptionButton component)" />
     <MESSAGE value="Converted SoundSettings to TypeScript" />
-    <option name="LAST_COMMIT_MESSAGE" value="Converted SoundSettings to TypeScript" />
+    <MESSAGE value="Did massive refactoring/simplification of the IntervalSettings component and converted it to TypeScript." />
+    <option name="LAST_COMMIT_MESSAGE" value="Did massive refactoring/simplification of the IntervalSettings component and converted it to TypeScript." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

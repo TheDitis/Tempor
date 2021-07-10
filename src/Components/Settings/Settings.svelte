@@ -9,7 +9,7 @@
     import {color, settingsHeight, settingsTab} from "../../stores/appState";
     import {watchResize} from "svelte-watch-resize";
     import IntervalSettings from "./IntervalSettings/IntervalSettings.svelte"
-    import SaveButton from "./SaveButton.svelte";
+    import SaveButton from "../Controls/SaveButton.svelte";
     import {fade} from "svelte/transition";
     import SettingsTabs from "./Tabs/SettingsTabs.svelte";
     import StyleSettings from "./Style/StyleSettings.svelte";

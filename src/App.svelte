@@ -25,7 +25,7 @@
 		width
 	} from "./stores/appState";
 	import ResizeControl from "./Components/Controls/ResizeControl.svelte";
-	import OpenSettingsButton from "./Components/Settings/OpenSettingsButton.svelte";
+	import OpenSettingsButton from "./Components/Controls/OpenSettingsButton.svelte";
 	import Settings from "./Components/Settings/Settings.svelte";
 	import IntervalModeButton from "./Components/Controls/IntervalModeButton.svelte";
 	import MasterControls from "./Components/Controls/MasterControls.svelte";

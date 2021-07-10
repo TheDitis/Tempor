@@ -6,7 +6,7 @@
      */
     // @ts-ignore
     import partialCircle from "svg-partial-circle";
-    import TimeIndicatorInput from "./TimeIndicator/TimeIndicator.svelte"
+    import TimeIndicator from "./TimeIndicator/TimeIndicator.svelte"
     import {duration, focused, remainingTime, runState,} from "../../stores/timerState";
     import {color, intervalMode, lineThickness, meme, settings, showFavorites, size} from "../../stores/appState";
     import PlayPauseControl from "../Controls/PlayPauseControl.svelte";
@@ -85,7 +85,7 @@
         <IntervalNumberIndicator/>
     {/if}
 
-    <TimeIndicatorInput/>
+    <TimeIndicator/>
     <PlayPauseControl  start={start} pause={pause} resume={resume}/>
 </div>
 

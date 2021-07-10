@@ -27,13 +27,10 @@
     });
 
     /** Select the previous interval
-     * @param event {MouseEvent} - Button click event. Not used, but halted
      * @event {KeyboardEvent} - an 'ArrowLeft' keyboard event with shift marked
      *      true (the combination MasterControls listens to cycle intervals -1)
      */
-    const prev = (event: MouseEvent) => {
-        event.stopPropagation();
-        event.preventDefault();
+    const prev = () => {
         const e = new KeyboardEvent(
             "keydown",
             {bubbles : true, cancelable : true, key : "ArrowLeft", shiftKey : true}
@@ -42,13 +39,10 @@
     };
 
     /** Select the next interval
-     * @param event {MouseEvent} - Button click event. Not used, but halted
      * @event {KeyboardEvent} - an 'ArrowRight' keyboard event with shift marked
      *      true (the combination MasterControls listens to cycle intervals +1)
      */
-    const next = (event) => {
-        event.stopPropagation();
-        event.preventDefault();
+    const next = () => {
         const e = new KeyboardEvent(
             "keydown",
             {bubbles : true, cancelable : true, key : "ArrowRight", shiftKey : true}
@@ -140,22 +134,31 @@
 
     <div class="intervalColorSection">
         <div class="titleRow">
-            <button class="arrowButton" on:click={prev}>
+            <button
+                class="arrowButton"
+                on:click|stopPropagation|preventDefault={prev}
+            >
                 <Fa icon={faCaretLeft}/>
             </button>
 
             {#if colors}
                 <div class="intervals" style={cssColorVars}>
                     {#each $intervalDurations as fav, i}
-                        <div class="intervalNumber"  class:selected={$intervalIndex === i} on:click={onNumberClick(i)}>
+                        <div
+                            class="intervalNumber"
+                            class:selected={$intervalIndex === i}
+                            on:click|stopPropagation|preventDefault={onNumberClick(i)}
+                        >
                             <p style="color: {`var(--intervalColor${i + 1})`};">{i + 1}</p>
                         </div>
                     {/each}
                 </div>
             {/if}
 
-<!--            <h4>Interval {$intervalIndex + 1}</h4>-->
-            <button class="arrowButton" on:click={next}>
+            <button
+                class="arrowButton"
+                on:click|stopPropagation|preventDefault={next}
+            >
                 <Fa icon={faCaretRight}/>
             </button>
 
