@@ -21,7 +21,7 @@
         settingsTab,
         showFavorites,
     } from "../../stores/appState";
-    import type {SettingsObject} from "../../stores/appState.ts";
+    import type {SettingsTabLabel, SettingsObject} from "../../stores/appState.ts";
     import {duration, focused, intervalDurations, intervalIndex, runState, tempDuration} from "../../stores/timerState";
 
     const dispatch = createEventDispatcher();
@@ -262,11 +262,28 @@
             // navigating between existing cycles
             case "ArrowLeft":
             case "ArrowRight":
+                // keep this from moving the cursor in the time input
                 e.preventDefault();
                 e.stopPropagation();
-                if ($intervalMode && $runState !== "running") {
+                const direction = key === "ArrowLeft" ? -1 : 1;
+                // If holding ctrl / cmd and settings are open, change tabs
+                if (e.ctrlKey || e.metaKey) {
+                    if ($settingsOpen) {
+                        const tabLabels = [
+                            'style', 'sound', 'intervals', 'style', 'sound'
+                        ];
+                        // go to the next or previous tab depending on key
+                        settingsTab.update(tab => {
+                            const index = direction > 0 ? (
+                                tabLabels.indexOf(tab) + 1
+                            ) : tabLabels.lastIndexOf(tab) - 1;
+                            return tabLabels[index] as SettingsTabLabel;
+                        })
+                    }
+                }
+                // If no modifier keys and it's not running, change interval
+                else if ($intervalMode && $runState !== "running") {
                     focused.set(false);
-                    const direction = key === "ArrowLeft" ? -1 : 1;
                     intervalIndex.update(ind => {
                         let newInd = (ind + direction) % $intervalDurations.length;
                         if (newInd < 0) newInd = $intervalDurations.length - 1;

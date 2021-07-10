@@ -8,7 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c6b408d6-7f6b-4b3d-b941-7b4421c45206" name="ReadMe" comment="Started Readme!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" afterDir="false" />
     </list>
     <list id="2b7b0175-f98d-43b3-b351-86c5c407840e" name="Default Changelist" comment="Did some more TypeScript Conversion and a bit of file re-organization" />
     <list id="22d7a1f6-2682-491d-88e9-d75e755e8d9b" name="Hide Unused Units" comment="Successfully updated TimeIndicator to not show leading 0's (dont show hours if there aren't any, etc) including the scaling up of the font when with fewer units to display. Only does this in standard mode. It didn't look good in interval mode. I will probably add this as a style setting in the future." />
@@ -128,7 +128,7 @@
       <recent name="C:\Users\Ryan\WebstormProjects\electron-timer\src\utils" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.make">
+  <component name="RunManager" selected="npm.start">
     <configuration name="Electron" type="NodeJSConfigurationType" path-to-node="$PROJECT_DIR$/node_modules/.bin/electron" node-parameters="./src" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
