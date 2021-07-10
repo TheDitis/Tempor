@@ -9,10 +9,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c6b408d6-7f6b-4b3d-b941-7b4421c45206" name="ReadMe" comment="Updated settings tab navigation shortcut logic.">
+    <list default="true" id="c6b408d6-7f6b-4b3d-b941-7b4421c45206" name="ReadMe" comment="Added keyboard shortcut to toggle always-on-top mode ('t')">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/MasterControls.svelte" afterDir="false" />
     </list>
     <list id="2b7b0175-f98d-43b3-b351-86c5c407840e" name="Default Changelist" comment="Did some more TypeScript Conversion and a bit of file re-organization" />
     <list id="22d7a1f6-2682-491d-88e9-d75e755e8d9b" name="Hide Unused Units" comment="Successfully updated TimeIndicator to not show leading 0's (dont show hours if there aren't any, etc) including the scaling up of the font when with fewer units to display. Only does this in standard mode. It didn't look good in interval mode. I will probably add this as a style setting in the future." />
@@ -306,7 +305,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625949166737</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Added keyboard shortcut to toggle always-on-top mode ('t')">
+      <created>1625952725867</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1625952725868</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -337,7 +343,8 @@
     <MESSAGE value="Started Readme!" />
     <MESSAGE value="Added keyboard shortcut for switching between settings tabs (ctrl/cmd + leftArrow to go left a tab, ctrl/cmd + rightArrow to go right a tab)" />
     <MESSAGE value="Updated settings tab navigation shortcut logic." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated settings tab navigation shortcut logic." />
+    <MESSAGE value="Added keyboard shortcut to toggle always-on-top mode ('t')" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added keyboard shortcut to toggle always-on-top mode ('t')" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
