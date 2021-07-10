@@ -46,3 +46,13 @@ coaches, & project leaders with its stylistic customization and flexible favorit
 
 ## Styling & Configuration Examples:
 ![Style demo](./assets/StyleDemo2.png)
+
+
+# Instructions:
+
+## General Usage
+
+
+| Action  | Key Command  | Second Header |
+| ------------- | ------------- | ------------- |
+| Open/Close Settings  | Content Cell  | ![Style demo](./assets/Open-Close2.gif)  |
