@@ -6,19 +6,17 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b7b0175-f98d-43b3-b351-86c5c407840e" name="Default Changelist" comment="Did massive refactoring/simplification of the IntervalSettings component and converted it to TypeScript.">
+    <list default="true" id="22d7a1f6-2682-491d-88e9-d75e755e8d9b" name="Hide Unused Units" comment="Successfully updated TimeIndicator to not show leading 0's (dont show hours if there aren't any, etc) including the scaling up of the font when with fewer units to display. Only does this in standard mode. It didn't look good in interval mode. I will probably add this as a style setting in the future.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Settings/IntervalSettings/IntervalSettings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/IntervalSettings/IntervalSettings.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Settings/OpenSettingsButton.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/OpenSettingsButton.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Settings/SaveButton.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Controls/SaveButton.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Settings/SettingControls/SettingsOptionButton.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/SettingControls/SettingsOptionButton.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Settings/SettingControls/SettingsSlider.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/SettingControls/SettingsSlider.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Settings/Settings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Settings/Settings.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Settings/Sound/AudioSettingsButton.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Timer/IntervalMode/IntervalModeIndicator.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/IntervalMode/IntervalModeIndicator.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Icons/TomatoIcon.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Icons/TomatoIcon.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeIndicator.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeIndicator.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Timer/Timer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/Timer.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeInput.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Timer/TimeIndicator/TimeInput.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/utils.ts" afterDir="false" />
+    </list>
+    <list id="2b7b0175-f98d-43b3-b351-86c5c407840e" name="Default Changelist" comment="Did some more TypeScript Conversion and a bit of file re-organization" />
+    <list id="c6b408d6-7f6b-4b3d-b941-7b4421c45206" name="ReadMe" comment="ReadMe">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +59,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="ReadMe" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -70,6 +73,19 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/.idea/workspace.xml">
+      <ranges>
+        <range start1="8" end1="9" start2="8" end2="9" changelist="22d7a1f6-2682-491d-88e9-d75e755e8d9b" />
+        <range start1="10" end1="19" start2="10" end2="11" changelist="22d7a1f6-2682-491d-88e9-d75e755e8d9b" />
+        <range start1="20" end1="21" start2="12" end2="19" changelist="22d7a1f6-2682-491d-88e9-d75e755e8d9b" />
+        <range start1="63" end1="63" start2="61" end2="66" changelist="22d7a1f6-2682-491d-88e9-d75e755e8d9b" />
+        <range start1="73" end1="73" start2="76" end2="89" changelist="22d7a1f6-2682-491d-88e9-d75e755e8d9b" />
+        <range start1="225" end1="226" start2="241" end2="271" changelist="22d7a1f6-2682-491d-88e9-d75e755e8d9b" />
+        <range start1="251" end1="252" start2="296" end2="298" changelist="c6b408d6-7f6b-4b3d-b941-7b4421c45206" />
+      </ranges>
+    </file>
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="dm4og5g5" />
@@ -223,7 +239,36 @@
       <option name="project" value="LOCAL" />
       <updated>1625873661143</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Did some more TypeScript Conversion and a bit of file re-organization">
+      <created>1625878309510</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1625878309510</updated>
+    </task>
+    <task id="LOCAL-00009" summary="ReadMe">
+      <branch name="master" repository="C:\Users\Ryan\WebstormProjects\electron-timer" original="true" />
+      <branch name="ReadMe" repository="C:\Users\Ryan\WebstormProjects\electron-timer" />
+      <changelist id="c6b408d6-7f6b-4b3d-b941-7b4421c45206" name="ReadMe" comment="" />
+      <created>1625878622056</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1625880812016</updated>
+      <workItem from="1625878632282" duration="1759000" />
+    </task>
+    <task active="true" id="LOCAL-00010" summary="Hide Unused Units">
+      <branch name="ReadMe" repository="C:\Users\Ryan\WebstormProjects\electron-timer" original="true" />
+      <branch name="Hide-Unused" repository="C:\Users\Ryan\WebstormProjects\electron-timer" />
+      <changelist id="22d7a1f6-2682-491d-88e9-d75e755e8d9b" name="Hide Unused Units" comment="" />
+      <created>1625880808447</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1625880812016</updated>
+      <workItem from="1625880812898" duration="9722000" />
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -249,7 +294,9 @@
     <MESSAGE value="Converted StyleSettings component to TypeScript and deleted ThemeCycleButton (I had replaced it with the more general SettingsOptionButton component)" />
     <MESSAGE value="Converted SoundSettings to TypeScript" />
     <MESSAGE value="Did massive refactoring/simplification of the IntervalSettings component and converted it to TypeScript." />
-    <option name="LAST_COMMIT_MESSAGE" value="Did massive refactoring/simplification of the IntervalSettings component and converted it to TypeScript." />
+    <MESSAGE value="Did some more TypeScript Conversion and a bit of file re-organization" />
+    <MESSAGE value="Successfully updated TimeIndicator to not show leading 0's (dont show hours if there aren't any, etc) including the scaling up of the font when with fewer units to display. Only does this in standard mode. It didn't look good in interval mode. I will probably add this as a style setting in the future." />
+    <option name="LAST_COMMIT_MESSAGE" value="Successfully updated TimeIndicator to not show leading 0's (dont show hours if there aren't any, etc) including the scaling up of the font when with fewer units to display. Only does this in standard mode. It didn't look good in interval mode. I will probably add this as a style setting in the future." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

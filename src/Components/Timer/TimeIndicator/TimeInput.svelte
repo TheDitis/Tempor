@@ -10,6 +10,7 @@
     import {intervalDurations, intervalIndex, runState, tempDuration} from "../../../stores/timerState";
     import {currentFavInd, currentFavInterval, inputRef, intervalMode, meme, settings} from "../../../stores/appState";
     import {Duration} from "luxon";
+    import type {DurationObject} from "luxon";
     import _ from "lodash";
 
 
@@ -91,15 +92,15 @@
 
     /**
      * Checks for easter-egg values and updates meme store if it detects one
-     * @param deps - placeholder for svelte reactive expression dependents
+     * @param time {DurationObject} - the time to check
      */
-    const memeDetector = (deps) => {
-        const secString = seconds.toString();
+    const memeDetector = (time: DurationObject) => {
+        const secString = time.seconds.toString();
         if (secString.length === 2 && secString[0] === "6" && secString[1] === "9") {
             meme.set("wink");
             return;
         }
-        const minString = minutes.toString();
+        const minString = time.minutes.toString();
         if (minString[minString.length - 1] === "4" && secString === "20") {
             meme.set("leaf");
             return;
@@ -163,7 +164,7 @@
     $: readableTime = formatTime({hours, minutes, seconds});
 
     // Check for easter-egg states when entered time changes
-    $: memeDetector([hours, minutes, seconds])
+    $: memeDetector({hours, minutes, seconds})
 
 </script>
 

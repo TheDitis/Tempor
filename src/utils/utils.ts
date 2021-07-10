@@ -24,6 +24,7 @@
 
 import {Duration} from "luxon";
 import type {DurationObject} from "luxon";
+import _ from "lodash";
 
 const v8 = require("v8");
 
@@ -132,11 +133,14 @@ export const formatTime = (duration: DurationObject): string => {
  * @param msTime {number} - time in milliseconds to convert
  * @param roundUpFormat {boolean} - if true, the time will be rounded up rather
  *      than down so that 0 time isn't displayed until the time runs out fully
+ * @param dropUnused {boolean} - if true, the output will not contain any
+ *      leading 0's, and will drop hours altogether if the time is less than 1h
  * @return {string} - the formatted time in the form of 'hh:mm:ss'
  */
 export const formatTimeMs = (
     msTime: number,
-    roundUpFormat: boolean = false
+    roundUpFormat: boolean = false,
+    dropUnused: boolean = false
 ): string => {
     if (msTime <= 0) {
         return "00:00:00";
@@ -145,7 +149,14 @@ export const formatTimeMs = (
         msTime += 995  // 5ms less to prevent higher number flashing on start
     }
     const duration = msToHrsMinsSecs(msTime);
-    return formatTime(duration)
+    let strTime = formatTime(duration);
+    if (dropUnused) {
+        // if (duration.hours === 0) strTime = strTime.slice(3);
+        strTime = _.dropWhile(strTime, c => '0:'.includes(c)).join('')
+    }
+
+    return strTime
+
 };
 
 

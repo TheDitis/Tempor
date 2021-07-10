@@ -1,35 +1,53 @@
-<script>
-    import {onMount} from "svelte"
+<script lang="ts">
+    /**
+     * TomatoIcon.svelte
+     * author: Ryan McKay
+     *
+     * This takes the place of the interval mode indicator when pomodoro times are set
+     */
     import Color from "color";
 
     export let size = 10;
-    export let color;
-    export let colors;
-
-    let color1, color2;
-    const updateColors = (deps) => {
-        if (colors && (colors[0] !== null || colors[1] !== null)) {
-            color1 = colors[0] !== null ? (
-                Color('rgb(255, 0, 0)').rotate(colors[0])
-            ) : Color('rgb(255, 0, 0)').rotate(colors[1]);
-
-            color2 = colors[1] !== null ? (
-                Color('rgb(255, 0, 0)').rotate(colors[1])
-            ) : Color('rgb(255, 0, 0)').rotate(colors[0]);
-
-        } else if (color) {
-            console.log("branch 2")
-            color1 = color;
-            color2 = color;
-        }
-    };
-
-    onMount(() => updateColors(colors));
-
-    $: updateColors(colors);
+    export let color: string | Color = null;
+    export let colors: number[] = null;
 
     const tomatoRed = "rgb(252, 61, 3)";
     const stemGreen = "rgb(0, 163, 27)";
+
+    /** Decides the colors of the stem and fruit based on the passed props
+     * @param singleColor - the single color prop, which may be undefined
+     * @param colorArr - the array of colors which may be undefined
+     */
+    const updateColors = (
+        singleColor: string | Color | null,
+        colorArr: number[] | null
+    ) => {
+        let color1: Color | string;
+        let color2: Color | string;
+        if (colorArr && (colorArr[0] !== null || colorArr[1] !== null)) {
+            color1 = colorArr[0] !== null ? (
+                Color('rgb(255, 0, 0)').rotate(colorArr[0])
+            ) : Color('rgb(255, 0, 0)').rotate(colorArr[1]);
+
+            color2 = colorArr[1] !== null ? (
+                Color('rgb(255, 0, 0)').rotate(colorArr[1])
+            ) : Color('rgb(255, 0, 0)').rotate(colorArr[0]);
+
+        } else if (singleColor) {
+            color1 = color2 = singleColor;
+        } else {
+            color1 = tomatoRed;
+            color2 = stemGreen;
+        }
+        return [color1, color2]
+    };
+
+    // Reactively assign the color values when the color props change
+    let color1: Color | string;
+    let color2: Color | string;
+    $: [color1, color2] = updateColors(color, colors);
+
+
 </script>
 
 <svg height={size} width={size} viewBox="0 0 595.3 593.1">
