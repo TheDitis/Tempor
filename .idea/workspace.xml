@@ -171,8 +171,8 @@
     <list>
       <item itemvalue="Node.js.Electron" />
       <item itemvalue="Node.js.setupTypeScript.js" />
-      <item itemvalue="npm.start" />
       <item itemvalue="npm.make" />
+      <item itemvalue="npm.start" />
     </list>
     <recent_temporary>
       <list>
