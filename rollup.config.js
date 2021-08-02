@@ -2,97 +2,99 @@ import svelte from 'rollup-plugin-svelte';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
-import { terser } from 'rollup-plugin-terser';
+import {terser} from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
 
 const production = !process.env.ROLLUP_WATCH;
 
+
 function serve() {
-	let server;
+    let server;
 
-	function toExit() {
-		if (server) server.kill(0);
-	}
+    function toExit() {
+        if (server) server.kill(0);
+    }
 
-	return {
-		writeBundle() {
-			if (server) return;
-			server = require('child_process').spawn('npm', ['run', 'svelte-start', '--', '--dev'], {
-				stdio: ['ignore', 'inherit', 'inherit'],
-				shell: true
-			});
+    return {
+        writeBundle() {
+            if (server) return;
+            server = require('child_process').spawn('npm', ['run', 'svelte-start', '--', '--dev'], {
+                stdio: ['ignore', 'inherit', 'inherit'],
+                shell: true
+            });
 
-			process.on('SIGTERM', toExit);
-			process.on('exit', toExit);
-		}
-	};
+            process.on('SIGTERM', toExit);
+            process.on('exit', toExit);
+        }
+    };
 }
 
+
 export default {
-	input: 'src/svelte.ts',
-	external: ['electron', 'fs'],
-	output: {
-		sourcemap: true,
-		format: 'iife',
-		name: 'app',
-		file: 'public/build/bundle.js'
-	},
-	plugins: [
-		svelte({
-			preprocess: sveltePreprocess({sourceMap: !production}),
-			compilerOptions: {
-				// enable run-time checks when not in production
-				dev: !production,
-				hydratable: true
-			}
-		}),
+    input: 'src/svelte.ts',
+    external: ['electron', 'fs'],
+    output: {
+        sourcemap: true,
+        format: 'iife',
+        name: 'app',
+        file: 'public/build/bundle.js'
+    },
+    plugins: [
+        svelte({
+            preprocess: sveltePreprocess({sourceMap: !production}),
+            compilerOptions: {
+                // enable run-time checks when not in production
+                dev: !production,
+                hydratable: true
+            }
+        }),
 
-		// nodePolyfills(),
-		// we'll extract any component CSS out into
-		// a separate file - better for performance
-		css({output: 'bundle.css'}),
+        // nodePolyfills(),
+        // we'll extract any component CSS out into
+        // a separate file - better for performance
+        css({output: 'bundle.css'}),
 
-		// If you have external dependencies installed from
-		// npm, you'll most likely need these plugins. In
-		// some cases you'll need additional configuration -
-		// consult the documentation for details:
-		// https://github.com/rollup/plugins/tree/master/packages/commonjs
-		resolve(),
-		commonjs(
-			// dynamicRequireTargets: [
-			// 	'node_modules/electron/electron.d.ts'
-			// ],
-			// transformMixedEsModules: true,
-		),
-		typescript({
-			sourceMap: !production,
-			inlineSources: !production
-		}),
+        // If you have external dependencies installed from
+        // npm, you'll most likely need these plugins. In
+        // some cases you'll need additional configuration -
+        // consult the documentation for details:
+        // https://github.com/rollup/plugins/tree/master/packages/commonjs
+        resolve(),
+        commonjs(
+            // dynamicRequireTargets: [
+            // 	'node_modules/electron/electron.d.ts'
+            // ],
+            // transformMixedEsModules: true,
+        ),
+        typescript({
+            sourceMap: !production,
+            inlineSources: !production
+        }),
 
-		// In dev mode, call `npm run start` once
-		// the bundle has been generated
-		!production && serve(),
+        // In dev mode, call `npm run start` once
+        // the bundle has been generated
+        !production && serve(),
 
-		// Watch the `public` directory and refresh the
-		// browser on changes when not in production
-		!production && livereload('public'),
+        // Watch the `public` directory and refresh the
+        // browser on changes when not in production
+        !production && livereload('public'),
 
-		// If we're building for production (npm run build
-		// instead of npm run dev), minify
-		production && terser()
-	],
-	watch: {
-		clearScreen: false
-	},
-	// SUPPRESS LUXON WARNING TO MAKE OTHER ISSUES MORE VISIBLE
-	onwarn: (warning, warn) => {
-		if (warning.code === 'CIRCULAR_DEPENDENCY') {
-			if(warning.message.includes('\\luxon\\') || warning.message.includes('/luxon/')) {
-				return;
-			}
-		}
-		warn(warning);
-	}
+        // If we're building for production (npm run build
+        // instead of npm run dev), minify
+        production && terser()
+    ],
+    watch: {
+        clearScreen: false
+    },
+    // SUPPRESS LUXON WARNING TO MAKE OTHER ISSUES MORE VISIBLE
+    onwarn: (warning, warn) => {
+        if (warning.code === 'CIRCULAR_DEPENDENCY') {
+            if (warning.message.includes('\\luxon\\') || warning.message.includes('/luxon/')) {
+                return;
+            }
+        }
+        warn(warning);
+    }
 };

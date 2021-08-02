@@ -4,6 +4,13 @@
   "configuration": {
     "icon": "./public/favicon.png"
   },
+  "build": {
+    "icon": "./public/favicon.png",
+    "extraResources": [
+      "./sounds",
+      "./settings.json"
+    ]
+  },
   "icon": "./public/favicon.png",
   "version": "1.0.0",
   "description": "A timer application for working, presenting, streaming, or anything else.",
@@ -17,13 +24,14 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\"",
     "svelte-build": "rollup -c",
     "svelte-dev": "rollup -c -w",
     "svelte-start": "sirv public",
     "electron-dev": "concurrently \"yarn run dev\" \"yarn run electron\"",
     "preelectron-pack": "yarn run build",
     "electron-pack": "electron-builder",
+    "electron-build-all": "electron-builder build --mac --win --publish never",
+    "electron-build-mac": "electron-builder build --mac --publish never",
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=public/build/icon.icns --prune=true --out=release-builds",
     "package-win32": "electron-packager . \"Ryan's Cool Timer\" --overwrite --asar --platform=win32 --arch=ia32 --icon=public/build/icon.ico --prune=true --out=release-builds",
     "package-win": "electron-packager . \"Ryan's Cool Timer\" --overwrite --asar --platform=win32 --arch=x64 --icon=public/build/icon.ico --prune=true --out=release-builds",
@@ -55,8 +63,7 @@
   },
   "dependencies": {
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
-    "electron-serve": "^1.1.0",
-    "sound-play": "^1.1.0"
+    "electron-serve": "^1.1.0"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.54",

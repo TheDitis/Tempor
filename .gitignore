@@ -89,5 +89,9 @@ typings/
 out/
 release-builds/
 
-# build folder
+# build folders
 /public/build/
+/dist/
+
+# idea sonarLint
+.idea/sonarlint/

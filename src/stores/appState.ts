@@ -11,6 +11,7 @@
  *
  *
  * CONSTANTS:
+ *      @const PATH {string} - the root directory for the app resources (different in dev vs production)
  *      @const MAX_SIZE {number} - the maximum size of the app (smaller of the screens width and height)
  *      @const FAVORITES_KEY_MAP {{set: object, load: object}} - Keyboard characters that map to the index of the
  *          corresponding in item in favorites. Each object has 5 characters, each mapped to a number 0 - 4
@@ -105,6 +106,11 @@ export interface SettingsObject {
 //   CONSTANTS
 //----------------------------------------------------------------------------------------------------------------------
 
+// for filepath is different in packaged vs development versions
+const PATH = path.join(
+    __dirname, process.env.IS_DEV === "1" ? "../" : "../../"
+);
+
 // Maximum size of the window based off the user's screen size
 export const MAX_SIZE = Math.min(window.screen.height, window.screen.width);
 
@@ -179,7 +185,7 @@ export const volume = writable(0);
 
 /** Returns array of file names of all mp3 and wav files in the sounds folder */
 export const listSoundFileNames = (): string[] => {
-    const files = fs.readdirSync(path.join(__dirname, "/sounds/"))
+    const files = fs.readdirSync(path.join(PATH, "/sounds/"))
         .filter(name => name.includes(".wav") || name.includes(".mp3"));
     files.sort(compareNumericStrings);
     return files
@@ -189,11 +195,10 @@ export const listSoundFileNames = (): string[] => {
 export const playSound = (filename: string) => {
     if (filename && (filename.includes(".wav") || filename.includes(".mp3"))) {
         audio.pause();
-        audio.src = "file://" + __dirname + "/sounds/" + filename;
+        audio.src = path.join("file://", PATH, "sounds", filename);
         audio.volume = get(volume);
         audio.play();
-    }
-    else {
+    } else {
         console.error("cannot play sound '", filename, "', it must be a valid .wav or .mp3 file.")
     }
 };
@@ -272,7 +277,7 @@ export const height: Readable<number> = derived(
  */
 const loadSettings = (): SettingsObject => {
     const settingsData = JSON.parse(
-        fs.readFileSync(path.join(__dirname, "./settings.json"))
+        fs.readFileSync(path.join(PATH, "settings.json"))
     );
 
     // Handling missing sound files
@@ -302,7 +307,7 @@ export const settings: Writable<SettingsObject> = writable(loadSettings());
 
 export const stayOnTop: Readable<boolean> = derived(
     settings,
-        $settings => $settings.alwaysOnTop
+    $settings => $settings.alwaysOnTop
 );
 
 /** Saves settings and returns resulting status
@@ -317,7 +322,7 @@ export const saveSettings = async (): Promise<boolean> => {
     const lineThikniss = get(lineThickness);
     let tempSettings = get(settings);
     /// so that not too much space is taken up by arrays full of null
-    const tempFavIntervalColors = tempSettings.favoriteIntervalColors.map( item => {
+    const tempFavIntervalColors = tempSettings.favoriteIntervalColors.map(item => {
         return (item !== null && item.length && item.some(val => val !== null)) ? item : null;
     });
     tempSettings = {
@@ -334,7 +339,7 @@ export const saveSettings = async (): Promise<boolean> => {
 
     try {
         await fs.writeFileSync(
-            path.join(__dirname, "./settings.json"), stringSettings
+            path.join(PATH, "settings.json"), stringSettings
         );
     } catch (e) {
         console.error(e);
@@ -342,6 +347,4 @@ export const saveSettings = async (): Promise<boolean> => {
     }
     return true
 };
-
-
 
