@@ -10,7 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6b408d6-7f6b-4b3d-b941-7b4421c45206" name="ReadMe" comment="Added keyboard shortcut to toggle always-on-top mode ('t')">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <list id="2b7b0175-f98d-43b3-b351-86c5c407840e" name="Default Changelist" comment="Did some more TypeScript Conversion and a bit of file re-organization" />
     <list id="22d7a1f6-2682-491d-88e9-d75e755e8d9b" name="Hide Unused Units" comment="Successfully updated TimeIndicator to not show leading 0's (dont show hours if there aren't any, etc) including the scaling up of the font when with fewer units to display. Only does this in standard mode. It didn't look good in interval mode. I will probably add this as a style setting in the future." />
@@ -158,16 +158,12 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Node.js.Electron" />
-      <item itemvalue="Node.js.setupTypeScript.js" />
       <item itemvalue="npm.start" />
       <item itemvalue="npm.make" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="npm.make" />
-        <item itemvalue="Node.js.setupTypeScript.js" />
-        <item itemvalue="Node.js.setupTypeScript.js" />
       </list>
     </recent_temporary>
   </component>
@@ -264,6 +260,9 @@
       <workItem from="1625878632282" duration="1759000" />
       <workItem from="1625891028121" duration="1116000" />
       <workItem from="1625893137138" duration="1337000" />
+      <workItem from="1625971641189" duration="293000" />
+      <workItem from="1626045845652" duration="647000" />
+      <workItem from="1627421609989" duration="110000" />
     </task>
     <task id="LOCAL-00010" summary="Hide Unused Units">
       <branch name="ReadMe" repository="C:\Users\Ryan\WebstormProjects\electron-timer" original="true" />
