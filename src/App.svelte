@@ -1,136 +1,144 @@
 <script lang="ts">
-    /**
-     * file: App.svelte
-     * author: Ryan McKay
-     * This is the root component of the app
-     */
-    import Timer from "./Components/Timer/Timer.svelte";
-    import {
-        borderRadius,
-        color,
-        globalHue,
-        height,
-        hue,
-        inputRef,
-        intervalColors,
-        intervalMode,
-        MAX_SIZE,
-        meme,
-        playSound,
-        scaledBlur,
-        settings,
-        settingsOpen,
-        size,
-        stayOnTop,
-        THEMES,
-        width
-    } from "./stores/appState";
-    import ResizeControl from "./Components/Controls/ResizeControl.svelte";
-    import OpenSettingsButton from "./Components/Settings/OpenSettingsButton.svelte";
-    import Settings from "./Components/Settings/Settings.svelte";
-    import IntervalModeButton from "./Components/Controls/IntervalModeButton.svelte";
-    import MasterControls from "./Components/Controls/MasterControls.svelte";
-    import {
-        duration,
-        focused,
-        intervalDurations,
-        intervalIndex,
-        pausedRemainingTime,
-        playingIntervalIndex,
-        remainingTime,
-        runState,
-        startTime,
-        tempDuration
-    } from "./stores/timerState";
-
-    const {ipcRenderer} = require("electron");
+	/**
+	 * file: App.svelte
+	 * author: Ryan McKay
+	 * This is the root component of the app
+	 */
+	import Timer from "./Components/Timer/Timer.svelte";
+	import {
+		borderRadius,
+		color,
+		globalHue,
+		height,
+		hue,
+		inputRef,
+		intervalColors,
+		intervalMode,
+		MAX_SIZE,
+		meme,
+		playSound,
+		scaledBlur,
+		settings,
+		settingsOpen,
+		size,
+		stayOnTop, THEMES,
+		width
+	} from "./stores/appState";
+	import ResizeControl from "./Components/Controls/ResizeControl.svelte";
+	import OpenSettingsButton from "./Components/Controls/OpenSettingsButton.svelte";
+	import Settings from "./Components/Settings/Settings.svelte";
+	import IntervalModeButton from "./Components/Controls/IntervalModeButton.svelte";
+	import MasterControls from "./Components/Controls/MasterControls.svelte";
+	import {
+		duration,
+		focused,
+		intervalDurations,
+		intervalIndex,
+		pausedRemainingTime,
+		playingIntervalIndex,
+		remainingTime,
+		runState,
+		startTime,
+		tempDuration
+	} from "./stores/timerState";
 
 
-    //------------------------------------------------------------------------------------------------------------------
-    //   ELECTRON EVENT TRIGGERS
-    //------------------------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------------------
+	//   ELECTRON EVENT TRIGGERS
+	//------------------------------------------------------------------------------------------------------------------
 
-    // any time the window size changes, send the signal to electron
-    $: ipcRenderer.send("resize", $width, $height);
-    // tell the window whether to stay on top or not when that setting changes
-    $: ipcRenderer.send("stay-on-top", $stayOnTop);
-    // tell electron to open/close devtools window
-    const toggleDevTools = () => {
-        ipcRenderer.send('devtools')
-    };
+	const {ipcRenderer} = require("electron");
 
-
-    //------------------------------------------------------------------------------------------------------------------
-    //   PRIMARY TIMER OPERATION FUNCTIONS
-    //------------------------------------------------------------------------------------------------------------------
-
-    /** Sets the duration, start time, and run-state of the timer */
-    export const start = async () => {
-        let tempDur;
-        if (!$intervalMode) {
-            tempDur = $tempDuration;
-        } else {
-            intervalIndex.set(0);
-            tempDur = $intervalDurations[0];
-            if ($intervalColors[0]) {
-                hue.set($intervalColors[0])
-            }
-        }
-        if (tempDur !== 0) {
-            startTime.set(Date.now());
-            duration.set(tempDur);
-            focused.set(false);
-            runState.set("running");
-            playSound($settings.sounds.start);
-        }
-        if ($meme) meme.set(null);
-    };
+	// any time the window size changes, send the signal to electron
+	$: ipcRenderer.send("resize", $width, $height);
+	// tell the window whether to stay on top or not when that setting changes
+	$: ipcRenderer.send("stay-on-top", $stayOnTop);
+	// tell electron to open/close devtools window
+	const toggleDevTools = () => { ipcRenderer.send('devtools') };
 
 
-    /** Sets the current remaining time and sets the state to 'paused' */
-    export const pause = () => {
-        playingIntervalIndex.set($intervalIndex);
-        pausedRemainingTime.set($remainingTime);
-        runState.set("paused");
-    };
+
+	//------------------------------------------------------------------------------------------------------------------
+	//   PRIMARY TIMER OPERATION FUNCTIONS
+	//------------------------------------------------------------------------------------------------------------------
+
+	/** Sets the duration, start time, and run-state of the timer */
+	export const start = async () => {
+		let tempDur;
+		if (!$intervalMode) {
+			tempDur = $tempDuration;
+		}
+		else {
+			intervalIndex.set(0);
+			tempDur = $intervalDurations[0];
+			if ($intervalColors[0]) {
+				hue.set($intervalColors[0])
+			}
+		}
+		if (tempDur !== 0) {
+			startTime.set(Date.now());
+			duration.set(tempDur);
+			focused.set(false);
+			runState.set("running");
+			playSound($settings.sounds.start);
+		}
+		if ($meme) meme.set(null);
+	};
+
+	/** Sets the current remaining time and sets the state to 'paused' */
+	export const pause = () => {
+		playingIntervalIndex.set($intervalIndex);
+		pausedRemainingTime.set($remainingTime);
+		runState.set("paused");
+	};
+
+	/** Resets the time state */
+	export const stop = () => {
+		playingIntervalIndex.set(0);
+		pausedRemainingTime.set(0);
+		runState.set('finished')
+	};
+
+	/** Calculates the new relative start-time based on how much time is
+	 * remaining and sets the state back to running */
+	export const resume = () => {
+		if ($intervalMode) {
+			intervalIndex.set($playingIntervalIndex);
+			if ($intervalColors[$playingIntervalIndex] !== null) {
+				hue.set($intervalColors[$playingIntervalIndex]);
+			}
+			else {
+				hue.set($globalHue)
+			}
+		}
+		startTime.set(Date.now() - ($duration - $pausedRemainingTime));
+		if ($meme) meme.set(null);
+		focused.set(false);
+		runState.set("running");
+	};
 
 
-    /** Calculates the new relative start-time based on how much time is remaining and sets the state back to running */
-    export const resume = () => {
-        if ($intervalMode) {
-            intervalIndex.set($playingIntervalIndex);
-            if ($intervalColors[$playingIntervalIndex]) {
-                hue.set($intervalColors[$playingIntervalIndex]);
-            } else {
-                hue.set($globalHue)
-            }
-        }
-        startTime.set(Date.now() - ($duration - $pausedRemainingTime));
-        if ($meme) meme.set(null);
-        focused.set(false);
-        runState.set("running");
-    };
 
+	//------------------------------------------------------------------------------------------------------------------
+	//   SIZE CHANGE FUNCTIONS
+	//------------------------------------------------------------------------------------------------------------------
 
-    //------------------------------------------------------------------------------------------------------------------
-    //   SIZE CHANGE FUNCTIONS
-    //------------------------------------------------------------------------------------------------------------------
+	/** Scales down the window by 50px if it's bigger than 100px */
+	const makeSmaller = () => {
+		if ($size > 100) {
+			size.update(v => v - 50);
+		}
+		if ($inputRef) $inputRef.focus();
+	};
 
-    /** Scales down the window by 50px if it's bigger than 100px */
-    const makeSmaller = () => {
-        if ($size > 100) {
-            size.update(v => v - 50);
-        }
-        if ($inputRef) $inputRef.focus();
-    };
-
-    /** Scales up the window by 50px if it's smaller than their smallest window dimension */
-    const makeBigger = () => {
-        if ($size < MAX_SIZE) {
-            size.update(v => v + 50)
-        }
-        if ($inputRef) $inputRef.focus();
-    };
+	/** Scales up the window by 50px if it's smaller than their smallest window
+	 * dimension */
+	const makeBigger = () => {
+		if ($size < MAX_SIZE) {
+			size.update(v => v + 50)
+		}
+		if ($inputRef) $inputRef.focus();
+	};
 
 </script>
 
@@ -165,13 +173,15 @@
         {/if}
     </div>
 </main>
+
 <MasterControls
-        on:devtools={toggleDevTools}
-        on:start={start}
-        on:pause={pause}
-        on:resume={resume}
-        on:makeBigger={makeBigger}
-        on:makeSmaller={makeSmaller}
+		on:devtools={toggleDevTools}
+		on:start={start}
+		on:pause={pause}
+		on:stop={stop}
+		on:resume={resume}
+		on:makeBigger={makeBigger}
+		on:makeSmaller={makeSmaller}
 />
 
 

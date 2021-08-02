@@ -5,6 +5,7 @@
  * This file contains miscellaneous functions used throughout the app
  *
  * TYPES:
+ *      // TODO: Remove this if the DurationObject from luxon ends up being compatible throughout the app
  *      @type DurationObject - object representing a duration of time, with 'hours', 'minutes', & 'seconds' fields
  *
  * FUNCTIONS:
@@ -22,6 +23,8 @@
  */
 
 import {Duration} from "luxon";
+import type {DurationObject} from "luxon";
+
 const v8 = require("v8");
 
 
@@ -29,11 +32,11 @@ const v8 = require("v8");
 //   INTERFACES & TYPES
 //----------------------------------------------------------------------------------------------------------------------
 
-export interface DurationObject {
-    hours: number,
-    minutes: number,
-    seconds: number
-}
+// export interface DurationObject {
+//     hours: number,
+//     minutes: number,
+//     seconds: number
+// }
 
 
 
@@ -107,7 +110,7 @@ export const msToHrsMinsSecs = (msTime: number): DurationObject => {
         seconds: 0,
         milliseconds: msTime
     }).normalize();
-    return  duration.toObject();
+    return  duration.toObject() as DurationObject;
 };
 
 /**

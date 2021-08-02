@@ -13,7 +13,7 @@
     import {faSyncAlt} from "@fortawesome/free-solid-svg-icons";
 
     /** Exits interval mode
-     * @event {KeyboardEvent} - an event with the key-code that MasterControls listens for to toggle interval mode
+     * @event {KeyboardEvent} - an event with the key-code that MasterControls listens for to handleChange interval mode
      */
     const turnOff = async () => {
         const e = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key: "i", shiftKey : false});

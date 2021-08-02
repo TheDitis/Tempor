@@ -7,7 +7,6 @@
      * when in interval mode, that indicate the currently selected/running
      * interval, and allow users to select a given interval (when not running)
      */
-    // @ts-ignore
     import Color from "color";
     import {
         intervalDurations,
@@ -33,7 +32,7 @@
             return (Math.sin(curTime / oneCycle) + 1) / 2 + 0.2;
         }
         else return 1;
-    }
+    };
 
 
     /**

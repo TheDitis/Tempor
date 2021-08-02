@@ -21,7 +21,7 @@
         settingsTab,
         showFavorites,
     } from "../../stores/appState";
-    import type {SettingsObject} from "../../stores/appState.ts";
+    import type {SettingsTabLabel, SettingsObject} from "../../stores/appState.ts";
     import {duration, focused, intervalDurations, intervalIndex, runState, tempDuration} from "../../stores/timerState";
 
     const dispatch = createEventDispatcher();
@@ -94,11 +94,11 @@
         /// IF NOT IN INTERVAL MODE:
         if (!$intervalMode) {
             const setting = $settings.favorites[favInd];
-            const favSounds = $settings.favoritesSounds[favInd];
+            // const favSounds = $settings.favoritesSounds[favInd];
             // loadSounds(favSounds);
             if (!!setting && setting !== $tempDuration) {
                 if ($runState === "running") {
-                    dispatch('pause');
+                    dispatch('stop');
                 }
                 focused.set(true);
                 tempDuration.set(setting);
@@ -106,23 +106,23 @@
             }
         }
         /// IF IN INTERVAL MODE:
-        else {
+        else if (favInd !== $currentFavInterval) {
             const timeSetting = $settings.favoriteIntervals[favInd];
             let colorSetting = $settings.favoriteIntervalColors[favInd];
             // const favSounds = $settings.favoriteIntervalSounds[favInd];
             if (colorSetting === null) {
                 colorSetting = [null, null, null, null, null];
             }
-            console.log("1: ", colorSetting)
             if (!!timeSetting) {
                 focused.set(false);
-                if ($runState !== "running") {
-                    dispatch('pause');
+                if ($runState === "running") {
+                    dispatch('stop');
                 }
                 intervalIndex.set(0);
                 intervalDurations.set(timeSetting);
                 intervalColors.set(colorSetting);
                 currentFavInterval.set(favInd);
+                tempDuration.set(timeSetting[0]);
                 // loadSounds(favSounds);
                 await tick();
                 const intervalColor = $intervalColors[$intervalIndex];
@@ -200,7 +200,8 @@
                         break;
                     }
                 }
-                break;
+                else break;
+                // don't break here!
             case "I":
             case "i":
                 if (!($runState === "running")) {
@@ -228,11 +229,25 @@
                 showFavorites.set(true);
                 break;
             // keys for setting favorites
-            case "Q":
-            case "W":
-            case "E":
-            case "R":
+            case "t":
             case "T":
+                // T also toggles stay-on-top if shift isn't pressed
+                if (!e.shiftKey) {
+                    settings.update(settings => ({
+                        ...settings,
+                        alwaysOnTop: !settings.alwaysOnTop
+                    }));
+                    break
+                }
+                // Don't add break!
+            case "q":
+            case "Q":
+            case "w":
+            case "W":
+            case "e":
+            case "E":
+            case "r":
+            case "R":
                 // prevent accidental favorite setting with caps lock on
                 if (e.shiftKey) {
                     setFavorite(key);
@@ -261,11 +276,30 @@
             // navigating between existing cycles
             case "ArrowLeft":
             case "ArrowRight":
+                // keep this from moving the cursor in the time input
                 e.preventDefault();
                 e.stopPropagation();
-                if ($intervalMode && $runState !== "running") {
+                const direction = key === "ArrowLeft" ? -1 : 1;
+                // If holding ctrl / cmd and settings are open, change tabs
+                if (e.ctrlKey || e.metaKey) {
+                    if ($settingsOpen) {
+                        let tabLabels = [
+                            'style', 'sound'
+                        ];
+                        if ($intervalMode) tabLabels.push('intervals');
+                        tabLabels = tabLabels.concat(tabLabels);
+                        // go to the next or previous tab depending on key
+                        settingsTab.update(tab => {
+                            const index = direction > 0 ? (
+                                tabLabels.indexOf(tab) + 1
+                            ) : tabLabels.lastIndexOf(tab) - 1;
+                            return tabLabels[index] as SettingsTabLabel;
+                        })
+                    }
+                }
+                // If no modifier keys and it's not running, change interval
+                else if ($intervalMode && $runState !== "running") {
                     focused.set(false);
-                    const direction = key === "ArrowLeft" ? -1 : 1;
                     intervalIndex.update(ind => {
                         let newInd = (ind + direction) % $intervalDurations.length;
                         if (newInd < 0) newInd = $intervalDurations.length - 1;

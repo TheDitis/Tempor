@@ -1,4 +1,10 @@
-<script>
+<script lang="ts">
+    /**
+     * StyleSettings.svelte
+     * author: Ryan McKay
+     *
+     * The settings page dedicated to app appearance / style
+     */
     import SettingsSection from "../SettingsSection.svelte";
     import SettingsSlider from "../SettingControls/SettingsSlider.svelte";
     import SettingsOptionButton from "../SettingControls/SettingsOptionButton.svelte";
@@ -15,26 +21,24 @@
     } from "../../../stores/appState";
     import {intervalIndex} from "../../../stores/timerState";
 
-    const onHueUpdate = async (hueVal = null) => {
-        if ($intervalMode && $intervalColors[$intervalIndex]) {
-            hue.set($intervalColors[$intervalIndex])
-        }
-        else {
-            hue.set($globalHue);
-        }
-    };
-
-    const themeOptions = ["transparent", "dark", "light"];
-
+    /**
+     * Cycles to the next app theme
+     * @event {KeyboardEvent} - keyboard event with key 'b', which is the key
+     *      MasterControls listens for to run the appropriate logic
+     */
     const cycleTheme = () => {
-        const currentInd = themeOptions.indexOf($settings.theme);
-        const nextTheme = themeOptions[(currentInd + 1) % themeOptions.length];
-        settings.update(opts => ({...opts, theme: nextTheme}))
+        const e = new KeyboardEvent(
+            "keydown",
+            {bubbles : true, cancelable : true, key: 'b', shiftKey : false}
+        );
+        document.dispatchEvent(e);
     };
 
+    // true is in interval mode and the current interval has a set color
+    let customColor: boolean;
     $: customColor = $intervalMode && $intervalColors[$intervalIndex] !== null;
-
-    $: {onHueUpdate($globalHue)}
+    // if current color isn't a custom interval color, update hue with global
+    $: { if (!customColor) hue.set($globalHue) }
 </script>
 
 

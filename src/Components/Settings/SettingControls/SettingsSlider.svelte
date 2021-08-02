@@ -9,7 +9,7 @@
     export let onChange = () => null;
     export let disabled = false;
 
-    const handleChange = (e) => {
+    const handleChange = () => {
         onChange();
         if ($inputRef) $inputRef.focus();
     }
@@ -35,6 +35,7 @@
 
     p {
         color: var(--color);
+        font-size: calc(var(--size) / 15 * 1px);
         margin: 0;
         padding: 0 0 0 3px;
         user-select: none;
@@ -56,17 +57,22 @@
         outline: none;
         width: calc(var(--size) / 15 * 1px);
         height: calc(var(--size) / 15 * 1px);
-        border-radius: 20px;
-
-        margin-top:calc(var(--size) / -54.5 * 1px);;
+        border-radius: 100%;
+        margin-top: calc(var(--size) / -54.5 * 1px);
     }
 
     input[type=range]::-webkit-slider-runnable-track {
         width: 100%;
-        height: 8px;
+        height: calc(var(--size) / 40 * 1px);
         cursor: pointer;
         background: var(--color2);
         border-radius: 10px;
+    }
+
+    @media (max-width: 250px) {
+        p {
+            font-size: 8pt;
+        }
     }
 
 </style>

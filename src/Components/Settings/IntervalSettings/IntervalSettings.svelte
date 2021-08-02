@@ -1,4 +1,10 @@
-<script>
+<script lang="ts">
+    /**
+     * IntervalSettings.svelte
+     * author: Ryan McKay
+     *
+     * Settings page dedicated to interval mode
+     */
     import {onMount, tick} from "svelte";
     import Fa from "svelte-fa";
     import {faCaretLeft, faCaretRight, faSyncAlt} from "@fortawesome/free-solid-svg-icons";
@@ -9,6 +15,9 @@
     import SettingsOptionButton from "../SettingControls/SettingsOptionButton.svelte";
     import Color from "color";
 
+
+    /** ON MOUNT
+     * Make sure null intervalColors setting is converted to a null array */
     onMount(async () => {
         await tick();
         if ($intervalColors === null) {
@@ -17,89 +26,104 @@
         await tick();
     });
 
-    const prev = (event) => {
-        event.stopPropagation();
-        event.preventDefault();
-        const e = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key : "ArrowLeft", shiftKey : true});
+    /** Select the previous interval
+     * @event {KeyboardEvent} - an 'ArrowLeft' keyboard event with shift marked
+     *      true (the combination MasterControls listens to cycle intervals -1)
+     */
+    const prev = () => {
+        const e = new KeyboardEvent(
+            "keydown",
+            {bubbles : true, cancelable : true, key : "ArrowLeft", shiftKey : true}
+        );
         document.dispatchEvent(e);
     };
 
-    const next = (event) => {
-        event.stopPropagation();
-        event.preventDefault();
-        const e = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key : "ArrowRight", shiftKey : true});
+    /** Select the next interval
+     * @event {KeyboardEvent} - an 'ArrowRight' keyboard event with shift marked
+     *      true (the combination MasterControls listens to cycle intervals +1)
+     */
+    const next = () => {
+        const e = new KeyboardEvent(
+            "keydown",
+            {bubbles : true, cancelable : true, key : "ArrowRight", shiftKey : true}
+        );
         document.dispatchEvent(e);
     };
 
-    const onNumberClick = (i) => e => {
-        if ($runState !== "running") {
-            intervalIndex.set(i);
-            if ($intervalColors[$intervalIndex]) {
-                hue.set($intervalColors[$intervalIndex])
+    /** Generates a select-handler for the given interval index
+     * @param i {number} - the index of the interval to get a select-handler for
+     * @return {Function} - click event handler with i bound
+     */
+    const onNumberClick = (i: number) => (
+        /** Navigates to interval at index i if state allows it
+         * @param e {MouseEvent} - the click event. Unused
+         */
+        (e: MouseEvent) => {
+            if ($runState !== "running") {
+                intervalIndex.set(i);
+                if ($intervalColors[$intervalIndex]) {
+                    hue.set($intervalColors[$intervalIndex])
+                }
+                else {
+                    hue.set($globalHue)
+                }
+                if ($inputRef) $inputRef.focus();
             }
-            else {
-                hue.set($globalHue)
-            }
-            if ($inputRef) $inputRef.focus();
         }
-    };
+    );
 
-    let hueValue;
-    $: hueValue = $intervalColors[$intervalIndex];
-
-    const onUnlinkClick = (e) => {
+    /**
+     * Sets a separate color for the current interval if it doesn't have one,
+     * and removes it if it does
+     * @param e {MouseEvent} - not used, only halted
+     */
+    const toggleCustomColor = (e: MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
         const tempIntervalColors = [...$intervalColors];
+        // remove the custom color if there is one
         if (hueValue === null) {
             tempIntervalColors[$intervalIndex] = $globalHue
         }
+        // or create a custom color if there isn't one
         else {
             tempIntervalColors[$intervalIndex] = null;
             hue.set($globalHue)
         }
         intervalColors.set(tempIntervalColors);
-        // await tick();
-        if ($inputRef) $inputRef.focus();
+        if ($inputRef) $inputRef.focus();  // keep focus on the time input
     };
 
-    const onColorChange = (val) => {
-        if (val) hue.set(val);
-    };
-
-    let colors, intervalColorVars;
-    const updateColorsTick = async (deps) => {
-        // await tick();
-        updateColors()
-    };
-    const updateColors = (deps) => {
-        // await tick();
-        const cols = $intervalColors.map(val => {
+    /** Generates an array of colors, one for each interval
+     * @param deps - placeholder for svelte reactive expression dependents
+     * @return {Color[]} - an array of Color objects, one for each interval
+     */
+    const generateUpdatedColors = (deps = null): Color[] => (
+        $intervalColors.map((val: number | null): Color => {
             if (val !== null) {
                 return new Color('rgb(255, 0, 0)').rotate(val)
             } else {
                 return new Color('rgb(255, 0, 0)').rotate($globalHue)
             }
-        });
-        colors = cols;
-        return colors
-    };
+        })
+    );
 
-    const createCssColorVars = (deps) => {
-        intervalColorVars = updateColors($intervalColors)
-            .map((val, index) => `--intervalColor${index + 1}:${val.hex()}`)
-            .join(';');
-    };
 
-    $: {
-        updateColorsTick();
-    }
+    // The custom hue value for the current interval if one is set
+    let hueValue: (number | null);
+    $: hueValue = $intervalColors[$intervalIndex];
+    // set the actual app color if there is a hue value
+    $: if (hueValue) hue.set(hueValue);
 
-    $: {
-        createCssColorVars([colors, $intervalColors, $hue, $globalHue])
-    }
+    // array of colors for each interval
+    let colors: Color[];
+    $: colors = generateUpdatedColors($intervalColors);
 
-    $: { onColorChange(hueValue) }
+    // format the colors into a block of css variables
+    let cssColorVars: string;
+    $: cssColorVars = colors.map((val: Color, index: number) => (
+        `--intervalColor${index + 1}:${val.hex()}`)
+    ).join(';');
 
 </script>
 
@@ -110,29 +134,38 @@
 
     <div class="intervalColorSection">
         <div class="titleRow">
-            <button class="arrowButton" on:click={prev}>
+            <button
+                class="arrowButton"
+                on:click|stopPropagation|preventDefault={prev}
+            >
                 <Fa icon={faCaretLeft}/>
             </button>
 
             {#if colors}
-                <div class="intervals" style={intervalColorVars}>
+                <div class="intervals" style={cssColorVars}>
                     {#each $intervalDurations as fav, i}
-                        <div class="intervalNumber"  class:selected={$intervalIndex === i} on:click={onNumberClick(i)}>
+                        <div
+                            class="intervalNumber"
+                            class:selected={$intervalIndex === i}
+                            on:click|stopPropagation|preventDefault={onNumberClick(i)}
+                        >
                             <p style="color: {`var(--intervalColor${i + 1})`};">{i + 1}</p>
                         </div>
                     {/each}
                 </div>
             {/if}
 
-<!--            <h4>Interval {$intervalIndex + 1}</h4>-->
-            <button class="arrowButton" on:click={next}>
+            <button
+                class="arrowButton"
+                on:click|stopPropagation|preventDefault={next}
+            >
                 <Fa icon={faCaretRight}/>
             </button>
 
         </div>
         <button
             class="unlinkButton"
-            on:click={onUnlinkClick}
+            on:click={toggleCustomColor}
         >
             {hueValue === null ? "Use Custom Color" : "Use Default Color"}
         </button>
