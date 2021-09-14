@@ -66,36 +66,3 @@ coaches, & project leaders with its stylistic customization and flexible favorit
 | **Settings Tabs** | You can navigate between settings tabs by clicking  the relevant icon. <br/><br/>*note*: Interval settings tab doesn't show up in standard mode  | <kbd>ctrl/⌘</kbd> + <kbd>←</kbd>/<kbd>→</kbd>  | ![Style demo](./assets/SwitchingTabs.gif)  |
 
 
-[comment]: <> (<table style="width:100%;">)
-
-[comment]: <> (  <tr>)
-
-[comment]: <> (    <th width="100px">Action</th>)
-
-[comment]: <> (    <th width="300px">Description</th>)
-
-[comment]: <> (    <th width="100px">Keyboard Shortcut</th>)
-
-[comment]: <> (    <th>Age</th>)
-
-[comment]: <> (  </tr>)
-
-[comment]: <> (  <tr>)
-
-[comment]: <> (    <td>Positioning</td>)
-
-[comment]: <> (    <td>There's a hidden bar between the top of the progress circle and the top edge of the app. Click just above the timer circle and drag to position</td>)
-
-[comment]: <> (    <td>None</td>)
-
-[comment]: <> (    <td height="500px">)
-
-[comment]: <> (        <img src="./assets/AlwaysOnTop.gif" height="300px"/>)
-
-[comment]: <> (    </td>)
-
-[comment]: <> (  </tr>)
-
-[comment]: <> (</table>)
-
-# More info coming soon...
