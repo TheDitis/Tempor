@@ -1,7 +1,7 @@
 # Tempor
 ### A high utility, highly customizable, simple desktop timer app
 
-Tempor is an Electron.js timer app build with Svelte and Typescript that offers a high degree of customization. It's ideal for streamers, presenters,
+Tempor is an Electron.js timer app built with Svelte and Typescript that offers a high degree of customization. It's ideal for streamers, presenters,
 coaches, & project leaders with its stylistic customization and flexible favorites
 
 ### Version 1.0 has been released! [Download Tempor for Mac and Windows Here!](https://github.com/TheDitis/Tempor/releases/tag/v1.0)
